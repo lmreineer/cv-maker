@@ -1,8 +1,12 @@
-import Heading from "./form/HeadingForm.js";
+import Heading from './form/HeadingForm.js';
+import Preview from './preview/CVPreview.js';
 
 const Main = () => {
     return (
-        <Heading />
+        <div className='flex justify-around'>
+            <Heading />
+            <Preview />
+        </div>
     );
 };
 
