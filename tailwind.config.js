@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         "josefin-sans": ["Josefin Sans", "sans-serif"],
       },
+      boxShadow: {
+        "all-sides-light": "0 0 4px rgba(0, 0, 0, 0.25)",
+      }
     },
   },
   plugins: [],

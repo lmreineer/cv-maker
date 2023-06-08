@@ -1,17 +1,27 @@
+import { useState } from "react";
+import Modal from "./CVModal.js";
+import Content from "./CVContent.js";
+
 const Preview = () => {
+    const [isClicked, setIsClicked] = useState(false);
+
+    const toggleClick = () => {
+        setIsClicked(!isClicked);
+    }
+
     return (
         <div>
-            <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-josefin-sans">
-                Preview
-            </h1>
-            <div className="border-2 w-[30rem] flex justify-column h-3/4 mt-[3.3rem]">
-                <div className="border-r-2 border-black bg-gray-300 text-center w-28">
-                    <p className="my-1 font-bold">Full Name</p>
-                </div>
-                <div className="w-fit">
-                    <p className="ml-5 my-1">asd</p>
-                </div>
+            <div className="shadow-all-sides-light w-[30rem] h-[87%] mt-[4rem] p-10 hover:cursor-pointer select-none" onClick={toggleClick}>
+                <Content />
             </div>
+
+            {!isClicked && (
+                <div className="modal">
+                    <div className="overlay" onClick={toggleClick}></div>
+                    <Modal />
+                </div>
+            )}
+
         </div>
     );
 };
