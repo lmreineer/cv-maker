@@ -17,7 +17,7 @@ const Control = () => {
             >
                 <Content
                     fullName="text-3xl font-bold"
-                    profession="text-md"
+                    profession="text-base"
                     address="mt-5 text-xs font-medium"
                     previewContactHeading="text-xs font-medium"
                     previewContactInput="font-normal ml-1"
