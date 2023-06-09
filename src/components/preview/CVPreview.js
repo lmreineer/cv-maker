@@ -16,19 +16,22 @@ const Control = () => {
                 onClick={toggleClick}
             >
                 <Content
-                    fullName="text-3xl font-bold"
-                    profession="text-base"
+                    fullName="text-2xl font-bold"
+                    profession="text-sm"
                     address="mt-5 text-xs font-medium"
-                    previewContactHeading="text-xs font-medium"
-                    previewContactInput="font-normal ml-1"
-                    previewSummary="text-sm"
+                    contactHeading="text-xs font-medium"
+                    contactInput="font-normal ml-1"
+                    summary="text-xs"
+                    skills="font-bold italic border-b-2"
+                    skillsList="list-disc ml-10 text-xs"
+                    workHistory="mt-5 font-bold italic border-b-2"
                 />
             </div>
 
             {isClicked && (
                 <div>
                     <div
-                        className="inset-0 fixed bg-[rgba(0,0,0,0.4)]"
+                        className="inset-0 fixed bg-modal-overlay"
                         onClick={toggleClick}
                     ></div>
                     <Modal />

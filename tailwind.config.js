@@ -9,12 +9,13 @@ module.exports = {
         "light-yellow": "#F4F6EF",
         "yellow-green": "#CDE4A2",
         "dark-yellow-green": "#7B8B5E",
+        "modal-overlay": "rgba(0,0,0,0.4)",
       },
       fontFamily: {
         "josefin-sans": ["Josefin Sans", "sans-serif"],
       },
       boxShadow: {
-        "all-sides-light": "0 0 4px rgba(0, 0, 0, 0.25)",
+        "all-sides-light": "0 0 4px rgba(0, 0, 0, 0.2)",
       }
     },
   },
