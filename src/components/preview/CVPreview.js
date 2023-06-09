@@ -21,8 +21,8 @@ const Control = () => {
             )}
 
             {isClicked && (
-                <div className="modal">
-                    <div className="overlay" onClick={toggleClick}></div>
+                <div>
+                    <div className="inset-0 fixed bg-[rgba(0,0,0,0.4)]" onClick={toggleClick}></div>
                     <Modal />
                 </div>
             )}
