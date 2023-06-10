@@ -16,15 +16,24 @@ const Control = () => {
                 onClick={toggleClick}
             >
                 <Content
-                    fullName="text-2xl font-bold"
+                    fullName="text-xl font-bold"
                     profession="text-sm"
-                    address="mt-5 text-xs font-medium"
-                    contactHeading="text-xs font-medium"
+                    address="mt-3 text-[0.65rem] font-medium"
+                    contactContainer="leading-normal"
+                    contactHeading="text-[0.65rem] font-medium"
                     contactInput="font-normal ml-1"
+                    summaryContainer="mt-3"
                     summary="text-xs"
-                    skills="font-bold italic border-b-2"
-                    skillsList="list-disc ml-10 text-xs"
-                    workHistory="mt-5 font-bold italic border-b-2"
+                    mainBackgroundContainer="mt-5"
+                    mainBackgroundHeading="font-bold italic border-b-2 text-sm mt-3"
+                    skillsList="list-disc ml-10 mt-2 text-[0.65rem]"
+                    stayPeriodContainer="flex mt-3"
+                    workTimePeriodContainer="text-xs w-24"
+                    stayDetailContainer="ml-20 text-xs"
+                    institution="mt-1 italic font-light"
+                    workDescriptionContainer="list-disc ml-5 mt-2"
+                    workDescriptionList="font-light"
+                    educationTimePeriodContainer="text-xs"
                 />
             </div>
 
