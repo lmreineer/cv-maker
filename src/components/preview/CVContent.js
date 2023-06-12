@@ -6,6 +6,7 @@ const Content = ({
     contactHeading,
     contactInput,
     summaryContainer,
+    summaryHeading,
     summary,
     mainBackgroundContainer,
     mainBackgroundHeading,
@@ -38,6 +39,7 @@ const Content = ({
                 </h6>
             </div>
             <div className={summaryContainer}>
+                <h6 className={summaryHeading}>Summary</h6>
                 <h6 className={summary}>
                     Highly motivated Sales Associate with extensive customer service and
                     sales experience. Outgoing sales professional with track record of
