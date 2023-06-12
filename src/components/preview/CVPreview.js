@@ -19,7 +19,6 @@ const Control = () => {
                     fullName="text-xl font-bold"
                     profession="text-sm"
                     address="mt-3 text-[0.65rem] font-medium"
-                    contactContainer="leading-normal"
                     contactHeading="text-[0.65rem] font-medium"
                     contactInput="font-normal ml-1"
                     summaryContainer="mt-3"
@@ -28,12 +27,13 @@ const Control = () => {
                     mainBackgroundHeading="font-bold italic border-b-2 text-sm mt-3"
                     skillsList="list-disc ml-10 mt-2 text-[0.65rem]"
                     stayPeriodContainer="flex mt-3"
-                    workTimePeriodContainer="text-xs w-24"
-                    stayDetailContainer="ml-20 text-xs"
+                    workTimePeriodContainer="text-[0.65rem] w-24"
+                    stayDetailContainer="ml-20 text-[0.65rem]"
+                    stayDetailHeading="text-sm"
                     institution="mt-1 italic font-light"
                     workDescriptionContainer="list-disc ml-5 mt-2"
                     workDescriptionList="font-light"
-                    educationTimePeriodContainer="text-xs"
+                    educationTimePeriodContainer="text-[0.65rem]"
                 />
             </div>
 

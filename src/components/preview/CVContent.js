@@ -3,7 +3,6 @@ const Content = ({
     fullName,
     profession,
     address,
-    contactContainer,
     contactHeading,
     contactInput,
     summaryContainer,
@@ -14,6 +13,7 @@ const Content = ({
     stayPeriodContainer,
     workTimePeriodContainer,
     stayDetailContainer,
+    stayDetailHeading,
     institution,
     workDescriptionContainer,
     workDescriptionList,
@@ -23,7 +23,7 @@ const Content = ({
         <div className={textContainer}>
             <h1 className={fullName}>John Smith</h1>
             <h6 className={profession}>Profession</h6>
-            <div className={contactContainer}>
+            <div>
                 <h6 className={address}>
                     Address:{" "}
                     <span className={contactInput}>
@@ -58,7 +58,7 @@ const Content = ({
                         <h6>2023-02 - Current</h6>
                     </div>
                     <div className={stayDetailContainer}>
-                        <div>Manager</div>
+                        <div className={stayDetailHeading}>Manager</div>
                         <div>
                             <h6 className={institution}>Company</h6>
                             <ul className={workDescriptionContainer}>
@@ -74,7 +74,7 @@ const Content = ({
                         <h6>2009-04 - 2022</h6>
                     </div>
                     <div className={stayDetailContainer}>
-                        <div>Associate Manager</div>
+                        <div className={stayDetailHeading}>Associate Manager</div>
                         <div>
                             <h6 className={institution}>Company</h6>
                             <ul className={workDescriptionContainer}>
@@ -91,7 +91,7 @@ const Content = ({
                         <h6>2023 - 2024</h6>
                     </div>
                     <div className={stayDetailContainer}>
-                        <h6>Degree</h6>
+                        <h6 className={stayDetailHeading}>Degree</h6>
                         <h6 className={institution}>School</h6>
                     </div>
                 </div>
