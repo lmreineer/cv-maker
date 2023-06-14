@@ -2,10 +2,12 @@ const Content = ({
     textContainer,
     fullName,
     firstNameInput,
+    lastNameInput,
     profession,
     address,
     contactHeading,
     contactInput,
+    emailInput,
     summaryContainer,
     mainBackgroundHeading,
     summary,
@@ -23,7 +25,8 @@ const Content = ({
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
-                <span>{firstNameInput || "Afonso"}</span> Santos
+                <span>{firstNameInput || "Afonso"} </span>
+                <span>{lastNameInput || "Santos"}</span>
             </h1>
             <h6 className={profession}>Profession</h6>
             <div>
@@ -37,7 +40,9 @@ const Content = ({
                     Phone:<span className={contactInput}>(238) 513-57521</span>
                 </h6>
                 <h6 className={contactHeading}>
-                    Email:<span className={contactInput}>afonsofrancisco@yahoo.com</span>
+                    Email:<span className={contactInput}>
+                        <span>{emailInput || "afonsofrancisco@yahoo.com"}</span>
+                    </span>
                 </h6>
             </div>
             <div className={summaryContainer}>

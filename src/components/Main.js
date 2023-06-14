@@ -3,21 +3,26 @@ import Heading from "./form/HeadingForm.js";
 import Control from "./preview/CVPreview.js";
 
 const Main = () => {
-    const [lastName, setLastName] = useState("");
-    const [errors, setErrors] = useState({});
     const [firstNameInput, setFirstNameInput] = useState("");
+    const [lastNameInput, setLastNameInput] = useState("");
+    const [emailInput, setEmailInput] = useState("");
 
-    const handleInputChange = (e) => {
+    const handleFirstNameInput = (e) => {
         setFirstNameInput(e.target.value);
+    };
 
-        setLastName(e.target.value);
-        errors.lastName = false;
+    const handleLastNameInput = (e) => {
+        setLastNameInput(e.target.value);
+    };
+
+    const handleEmailInput = (e) => {
+        setEmailInput(e.target.value);
     };
 
     return (
         <div className="flex justify-around px-40">
-            <Heading onInputChange={handleInputChange} />
-            <Control firstNameInput={firstNameInput} />
+            <Heading handleFirstNameInput={handleFirstNameInput} handleLastNameInput={handleLastNameInput} handleEmailInput={handleEmailInput} />
+            <Control firstNameInput={firstNameInput} lastNameInput={lastNameInput} emailInput={emailInput} />
         </div>
     );
 };

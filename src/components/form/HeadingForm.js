@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const Heading = ({ onInputChange }) => {
+const Heading = ({
+    handleFirstNameInput,
+    handleLastNameInput,
+    handleEmailInput,
+}) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -60,7 +64,7 @@ const Heading = ({ onInputChange }) => {
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
-                                onChange={onInputChange}
+                                onChange={handleFirstNameInput}
                             />
                             {errors.firstName && (
                                 <p className="ml-4 text-red-800">{errors.firstName}</p>
@@ -76,10 +80,7 @@ const Heading = ({ onInputChange }) => {
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
-                                onChange={(e) => {
-                                    setLastName(e.target.value);
-                                    errors.lastName = false;
-                                }}
+                                onChange={handleLastNameInput}
                             />
                             {errors.lastName && (
                                 <p className="ml-4 text-red-800">{errors.lastName}</p>
@@ -154,10 +155,7 @@ const Heading = ({ onInputChange }) => {
                                         ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
                                 }
-                                onChange={(e) => {
-                                    setEmail(e.target.value);
-                                    errors.email = false;
-                                }}
+                                onChange={handleEmailInput}
                             />
                         </label>
                         {errors.email && (
