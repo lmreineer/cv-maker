@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "./CVModal.js";
 import Content from "./CVContent.js";
 
-const Control = () => {
+const Control = ({ firstNameInput }) => {
     const [isClicked, setIsClicked] = useState(false);
 
     const toggleClick = () => {
@@ -17,6 +17,7 @@ const Control = () => {
             >
                 <Content
                     fullName="text-2xl font-bold"
+                    firstNameInput={firstNameInput}
                     profession="text-base"
                     address="mt-3 text-xs font-medium"
                     contactHeading="text-xs font-medium"

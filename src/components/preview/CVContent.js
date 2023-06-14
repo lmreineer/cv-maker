@@ -1,6 +1,7 @@
 const Content = ({
     textContainer,
     fullName,
+    firstNameInput,
     profession,
     address,
     contactHeading,
@@ -21,7 +22,9 @@ const Content = ({
 }) => {
     return (
         <div className={textContainer}>
-            <h1 className={fullName}>Antonio Santos</h1>
+            <h1 className={fullName}>
+                <span>{firstNameInput || "Afonso"}</span> Santos
+            </h1>
             <h6 className={profession}>Profession</h6>
             <div>
                 <h6 className={address}>
