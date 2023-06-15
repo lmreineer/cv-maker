@@ -1,15 +1,28 @@
 import Content from "./CVContent";
 
-const Modal = () => {
+const Modal = ({
+    firstNameInput,
+    lastNameInput,
+    professionInput,
+    addressInput,
+    phoneInput,
+    emailInput,
+}) => {
     return (
         <div className="select-none absolute top-2/4 left-2/4 translate-y-[-50%] translate-x-[-50%] bg-white p-10 rounded h-5/6 w-7/12 bg-zinc-200">
             <Content
                 textContainer="h-full shadow-lg rounded p-10 overflow-auto bg-white"
                 fullName="font-bold text-5xl"
+                firstNameInput={firstNameInput}
+                lastNameInput={lastNameInput}
                 profession="text-2xl"
+                professionInput={professionInput}
                 address="mt-5 text-lg font-medium"
                 contactHeading="text-lg font-medium"
                 contactInput="font-normal ml-1"
+                addressInput={addressInput}
+                phoneInput={phoneInput}
+                emailInput={emailInput}
                 summaryContainer="mt-10"
                 mainBackgroundHeading="font-bold italic border-b-2 text-xl mt-10"
                 summary="text-xl mt-5"

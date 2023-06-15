@@ -5,7 +5,10 @@ import Content from "./CVContent.js";
 const Control = ({
     firstNameInput,
     lastNameInput,
-    emailInput
+    professionInput,
+    addressInput,
+    phoneInput,
+    emailInput,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
 
@@ -16,7 +19,7 @@ const Control = ({
     return (
         <div>
             <div
-                className="shadow-all-sides-light max-w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto"
+                className="shadow-all-sides-light w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto"
                 onClick={toggleClick}
             >
                 <Content
@@ -24,9 +27,12 @@ const Control = ({
                     firstNameInput={firstNameInput}
                     lastNameInput={lastNameInput}
                     profession="text-base"
+                    professionInput={professionInput}
                     address="mt-3 text-xs font-medium"
                     contactHeading="text-xs font-medium"
                     contactInput="font-normal ml-1"
+                    addressInput={addressInput}
+                    phoneInput={phoneInput}
                     emailInput={emailInput}
                     summaryContainer="mt-5"
                     mainBackgroundHeading="font-bold italic border-b-2 text-base mt-3"
@@ -50,7 +56,14 @@ const Control = ({
                         className="inset-0 fixed bg-modal-overlay"
                         onClick={toggleClick}
                     ></div>
-                    <Modal />
+                    <Modal
+                        firstNameInput={firstNameInput}
+                        lastNameInput={lastNameInput}
+                        professionInput={professionInput}
+                        addressInput={addressInput}
+                        phoneInput={phoneInput}
+                        emailInput={emailInput}
+                    />
                 </div>
             )}
         </div>

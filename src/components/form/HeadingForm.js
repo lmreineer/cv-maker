@@ -1,14 +1,17 @@
 const Heading = ({
     disabled,
-    preventRedirect,
+    validateInputs,
     errors,
-    handleFirstNameInput,
-    handleLastNameInput,
-    handleEmailInput,
+    inputFirstName,
+    inputLastName,
+    inputProfession,
+    inputAddress,
+    inputPhone,
+    inputEmail,
 }) => {
     return (
         <>
-            <form disabled={disabled} onSubmit={preventRedirect}>
+            <form disabled={disabled} onSubmit={validateInputs}>
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-josefin-sans">
                     Contact Information:
                 </h1>
@@ -25,7 +28,7 @@ const Heading = ({
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
-                                onChange={handleFirstNameInput}
+                                onChange={inputFirstName}
                                 maxLength={15}
                             />
                             {errors.firstName && (
@@ -42,7 +45,7 @@ const Heading = ({
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
-                                onChange={handleLastNameInput}
+                                onChange={inputLastName}
                                 maxLength={15}
                             />
                             {errors.lastName && (
@@ -57,6 +60,8 @@ const Heading = ({
                                 name="profession"
                                 placeholder="Profession"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
+                                onChange={inputProfession}
+                                maxLength={40}
                             />
                         </label>
                     </div>
@@ -97,13 +102,21 @@ const Heading = ({
                         </label>
                     </div>
                     <div>
-                        <label className="flex">
+                        <label className={errors.phone ? "flex flex-col" : "flex"}>
                             <input
                                 type="tel"
                                 name="phone-number"
                                 placeholder="Phone"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
+                                className={
+                                    errors.phone
+                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
+                                }
+                                onChange={inputPhone}
                             />
+                            {errors.phone && (
+                                <p className="ml-4 text-red-800">{errors.phone}</p>
+                            )}
                         </label>
                     </div>
                     <div>
@@ -118,7 +131,7 @@ const Heading = ({
                                         ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
                                 }
-                                onChange={handleEmailInput}
+                                onChange={inputEmail}
                                 maxLength={40}
                             />
                         </label>

@@ -4,9 +4,12 @@ const Content = ({
     firstNameInput,
     lastNameInput,
     profession,
+    professionInput,
     address,
     contactHeading,
     contactInput,
+    addressInput,
+    phoneInput,
     emailInput,
     summaryContainer,
     mainBackgroundHeading,
@@ -28,16 +31,19 @@ const Content = ({
                 <span>{firstNameInput || "Afonso"} </span>
                 <span>{lastNameInput || "Santos"}</span>
             </h1>
-            <h6 className={profession}>Profession</h6>
+            <h6 className={profession}>{professionInput}</h6>
             <div>
                 <h6 className={address}>
                     Address:
                     <span className={contactInput}>
-                        Rampa São Januário, Praia, Cabo Verde
+                        {addressInput || "Rampa São Januário, Praia, Cabo Verde"}
                     </span>
                 </h6>
                 <h6 className={contactHeading}>
-                    Phone:<span className={contactInput}>(238) 513-57521</span>
+                    Phone:
+                    <span className={contactInput}>
+                        {phoneInput || "(238) 513-57521"}
+                    </span>
                 </h6>
                 <h6 className={contactHeading}>
                     Email:
