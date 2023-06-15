@@ -5,7 +5,7 @@ import Content from "./CVContent.js";
 const Control = ({
     firstNameInput,
     lastNameInput,
-    emailInput,
+    emailInput
 }) => {
     const [isClicked, setIsClicked] = useState(false);
 
@@ -16,7 +16,7 @@ const Control = ({
     return (
         <div>
             <div
-                className="shadow-all-sides-light w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto"
+                className="shadow-all-sides-light max-w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto"
                 onClick={toggleClick}
             >
                 <Content

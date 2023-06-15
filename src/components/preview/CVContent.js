@@ -40,7 +40,8 @@ const Content = ({
                     Phone:<span className={contactInput}>(238) 513-57521</span>
                 </h6>
                 <h6 className={contactHeading}>
-                    Email:<span className={contactInput}>
+                    Email:
+                    <span className={contactInput}>
                         <span>{emailInput || "afonsofrancisco@yahoo.com"}</span>
                     </span>
                 </h6>

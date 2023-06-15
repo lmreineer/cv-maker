@@ -1,50 +1,11 @@
-import React, { useState } from "react";
-
 const Heading = ({
+    disabled,
+    preventRedirect,
+    errors,
     handleFirstNameInput,
     handleLastNameInput,
     handleEmailInput,
 }) => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [errors, setErrors] = useState({});
-    let disabled = false;
-
-    const preventRedirect = (e) => {
-        e.preventDefault();
-
-        const validationErrors = {};
-
-        if (firstName.trim() === "") {
-            validationErrors.firstName = "First name is required";
-        }
-
-        if (lastName.trim() === "") {
-            validationErrors.lastName = "Last name is required";
-        }
-
-        const validEmail =
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        validEmail.test(String(email).toLowerCase());
-
-        const beforeAtSign = email.substring(0, email.lastIndexOf("@"));
-
-        if (email === "") {
-            validationErrors.email = "Email is required";
-        } else if (!validEmail.test(email) || !beforeAtSign) {
-            validationErrors.email = "Email is invalid";
-        }
-
-        // if there are any errors, disable the button
-        Object.keys(validationErrors).length > 0
-            ? (disabled = true)
-            : (disabled = false);
-
-        // Set the validation errors
-        setErrors(validationErrors);
-    };
-
     return (
         <>
             <form disabled={disabled} onSubmit={preventRedirect}>
@@ -65,6 +26,7 @@ const Heading = ({
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
                                 onChange={handleFirstNameInput}
+                                maxLength={15}
                             />
                             {errors.firstName && (
                                 <p className="ml-4 text-red-800">{errors.firstName}</p>
@@ -81,6 +43,7 @@ const Heading = ({
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
                                 onChange={handleLastNameInput}
+                                maxLength={15}
                             />
                             {errors.lastName && (
                                 <p className="ml-4 text-red-800">{errors.lastName}</p>
@@ -156,6 +119,7 @@ const Heading = ({
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
                                 }
                                 onChange={handleEmailInput}
+                                maxLength={40}
                             />
                         </label>
                         {errors.email && (
