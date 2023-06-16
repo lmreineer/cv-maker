@@ -19,7 +19,7 @@ const Control = ({
     return (
         <div>
             <div
-                className="shadow-all-sides-light w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto"
+                className="shadow-all-sides-light w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto break-all"
                 onClick={toggleClick}
             >
                 <Content

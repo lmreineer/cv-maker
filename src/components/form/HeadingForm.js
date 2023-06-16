@@ -1,17 +1,99 @@
+import { useState } from "react";
+
 const Heading = ({
-    disabled,
-    validateInputs,
-    errors,
-    inputFirstName,
-    inputLastName,
-    inputProfession,
-    inputAddress,
-    inputPhone,
-    inputEmail,
+    setFirstNameInput,
+    setLastNameInput,
+    setProfessionInput,
+    setAddressInput,
+    setPhoneInput,
+    setEmailInput,
 }) => {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [errors, setErrors] = useState({});
+    let disabled = false;
+
+    const validateInput = (e) => {
+        e.preventDefault();
+
+        const validationErrors = {};
+
+        const letters = /[a-zA-Z]/;
+
+        if (firstName.trim() === "") {
+            validationErrors.firstName = "First name is required";
+        } else if (!letters.test(firstName)) {
+            validationErrors.firstName = "First name is invalid";
+        }
+
+        if (lastName.trim() === "") {
+            validationErrors.lastName = "Last name is required";
+        } else if (!letters.test(lastName)) {
+            validationErrors.lastName = "Last name is invalid";
+        }
+
+        const validEmail =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        validEmail.test(String(email).toLowerCase());
+
+        const beforeAtSign = email.substring(0, email.lastIndexOf("@"));
+
+        if (email === "") {
+            validationErrors.email = "Email is required";
+        } else if (!validEmail.test(email) || !beforeAtSign) {
+            validationErrors.email = "Email is invalid";
+        }
+
+        if (letters.test(phone)) {
+            validationErrors.phone = "Phone is invalid";
+        }
+
+        // if there are any errors, disable the button
+        Object.keys(validationErrors).length > 0
+            ? (disabled = true)
+            : (disabled = false);
+
+        // Set the validation errors
+        setErrors(validationErrors);
+    };
+
+    const inputFirstName = (e) => {
+        setFirstNameInput(e.target.value);
+        setFirstName(e.target.value);
+        errors.firstName = false;
+    };
+
+    const inputLastName = (e) => {
+        setLastNameInput(e.target.value);
+        setLastName(e.target.value);
+        errors.lastName = false;
+    };
+
+    const inputProfession = (e) => {
+        setProfessionInput(e.target.value);
+    };
+
+    // const inputAddress = (e) => {
+    //     setAddressInput(e.target.value);
+    // };
+
+    const inputPhone = (e) => {
+        setPhoneInput(e.target.value);
+        setPhone(e.target.value);
+        errors.phone = false;
+    };
+
+    const inputEmail = (e) => {
+        setEmailInput(e.target.value);
+        setEmail(e.target.value);
+        errors.email = false;
+    };
+
     return (
         <>
-            <form disabled={disabled} onSubmit={validateInputs}>
+            <form disabled={disabled} onSubmit={validateInput}>
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-josefin-sans">
                     Contact Information:
                 </h1>
