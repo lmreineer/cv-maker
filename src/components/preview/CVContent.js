@@ -6,9 +6,12 @@ const Content = ({
     profession,
     professionInput,
     address,
-    contactHeading,
     contactInput,
-    addressInput,
+    countryInput,
+    cityInput,
+    stateProvinceInput,
+    zipCodeInput,
+    contactHeading,
     phoneInput,
     emailInput,
     summaryContainer,
@@ -25,6 +28,8 @@ const Content = ({
     workDescriptionList,
     educationTimePeriodContainer,
 }) => {
+    const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
+
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
@@ -36,7 +41,23 @@ const Content = ({
                 <h6 className={address}>
                     Address:
                     <span className={contactInput}>
-                        {addressInput || "Rampa São Januário, Praia, Cabo Verde"}
+                        <span>
+                            {cityInput ||
+                                stateProvinceInput ||
+                                countryInput ||
+                                zipCodeInput ||
+                                defaultAddress}
+
+                            {cityInput &&
+                                (stateProvinceInput || countryInput || zipCodeInput) &&
+                                `, ${stateProvinceInput || countryInput || zipCodeInput}`}
+
+                            {stateProvinceInput &&
+                                (countryInput || zipCodeInput) &&
+                                `, ${countryInput || zipCodeInput}`}
+
+                            {countryInput && zipCodeInput && `, ${zipCodeInput}`}
+                        </span>
                     </span>
                 </h6>
                 <h6 className={contactHeading}>

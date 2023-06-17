@@ -6,7 +6,10 @@ const Control = ({
     firstNameInput,
     lastNameInput,
     professionInput,
-    addressInput,
+    countryInput,
+    cityInput,
+    stateProvinceInput,
+    zipCodeInput,
     phoneInput,
     emailInput,
 }) => {
@@ -31,7 +34,10 @@ const Control = ({
                     address="mt-3 text-xs font-medium"
                     contactHeading="text-xs font-medium"
                     contactInput="font-normal ml-1"
-                    addressInput={addressInput}
+                    countryInput={countryInput}
+                    cityInput={cityInput}
+                    stateProvinceInput={stateProvinceInput}
+                    zipCodeInput={zipCodeInput}
                     phoneInput={phoneInput}
                     emailInput={emailInput}
                     summaryContainer="mt-5"
@@ -60,7 +66,7 @@ const Control = ({
                         firstNameInput={firstNameInput}
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
-                        addressInput={addressInput}
+                        countryInput={countryInput}
                         phoneInput={phoneInput}
                         emailInput={emailInput}
                     />

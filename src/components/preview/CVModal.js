@@ -4,7 +4,7 @@ const Modal = ({
     firstNameInput,
     lastNameInput,
     professionInput,
-    addressInput,
+    countryInput,
     phoneInput,
     emailInput,
 }) => {
@@ -20,7 +20,7 @@ const Modal = ({
                 address="mt-5 text-lg font-medium"
                 contactHeading="text-lg font-medium"
                 contactInput="font-normal ml-1"
-                addressInput={addressInput}
+                countryInput={countryInput}
                 phoneInput={phoneInput}
                 emailInput={emailInput}
                 summaryContainer="mt-10"

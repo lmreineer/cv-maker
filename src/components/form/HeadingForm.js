@@ -4,7 +4,10 @@ const Heading = ({
     setFirstNameInput,
     setLastNameInput,
     setProfessionInput,
-    setAddressInput,
+    setCountryInput,
+    setCityInput,
+    setStateProvinceInput,
+    setZipCodeInput,
     setPhoneInput,
     setEmailInput,
 }) => {
@@ -75,9 +78,21 @@ const Heading = ({
         setProfessionInput(e.target.value);
     };
 
-    // const inputAddress = (e) => {
-    //     setAddressInput(e.target.value);
-    // };
+    const inputCountry = (e) => {
+        setCountryInput(e.target.value);
+    };
+
+    const inputCity = (e) => {
+        setCityInput(e.target.value);
+    };
+
+    const inputStateProvince = (e) => {
+        setStateProvinceInput(e.target.value);
+    };
+
+    const inputZipCode = (e) => {
+        setZipCodeInput(e.target.value);
+    };
 
     const inputPhone = (e) => {
         setPhoneInput(e.target.value);
@@ -154,6 +169,7 @@ const Heading = ({
                                 name="country"
                                 placeholder="Country"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                onChange={inputCountry}
                             />
                         </label>
                         <label>
@@ -162,6 +178,7 @@ const Heading = ({
                                 name="city"
                                 placeholder="City"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                onChange={inputCity}
                             />
                         </label>
                     </div>
@@ -172,6 +189,7 @@ const Heading = ({
                                 name="state-province"
                                 placeholder="State / Province"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                onChange={inputStateProvince}
                             />
                         </label>
                         <label>
@@ -180,6 +198,7 @@ const Heading = ({
                                 name="zip-code"
                                 placeholder="ZIP Code"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                onChange={inputZipCode}
                             />
                         </label>
                     </div>
