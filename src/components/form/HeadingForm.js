@@ -1,111 +1,17 @@
-import { useState } from "react";
-
-const Heading = ({
-    setFirstNameInput,
-    setLastNameInput,
-    setProfessionInput,
-    setCountryInput,
-    setCityInput,
-    setStateProvinceInput,
-    setZipCodeInput,
-    setPhoneInput,
-    setEmailInput,
+const HeadingForm = ({
+    disabled,
+    validateInput,
+    errors,
+    inputFirstName,
+    inputLastName,
+    inputProfession,
+    inputCountry,
+    inputCity,
+    inputStateProvince,
+    inputZipCode,
+    inputPhone,
+    inputEmail,
 }) => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [errors, setErrors] = useState({});
-    let disabled = false;
-
-    const validateInput = (e) => {
-        e.preventDefault();
-
-        const validationErrors = {};
-
-        const letters = /[a-zA-Z]/;
-
-        if (firstName.trim() === "") {
-            validationErrors.firstName = "First name is required";
-        } else if (!letters.test(firstName)) {
-            validationErrors.firstName = "First name is invalid";
-        }
-
-        if (lastName.trim() === "") {
-            validationErrors.lastName = "Last name is required";
-        } else if (!letters.test(lastName)) {
-            validationErrors.lastName = "Last name is invalid";
-        }
-
-        const validEmail =
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        validEmail.test(String(email).toLowerCase());
-
-        const beforeAtSign = email.substring(0, email.lastIndexOf("@"));
-
-        if (email === "") {
-            validationErrors.email = "Email is required";
-        } else if (!validEmail.test(email) || !beforeAtSign) {
-            validationErrors.email = "Email is invalid";
-        }
-
-        if (letters.test(phone)) {
-            validationErrors.phone = "Phone is invalid";
-        }
-
-        // if there are any errors, disable the button
-        Object.keys(validationErrors).length > 0
-            ? (disabled = true)
-            : (disabled = false);
-
-        // Set the validation errors
-        setErrors(validationErrors);
-    };
-
-    const inputFirstName = (e) => {
-        setFirstNameInput(e.target.value);
-        setFirstName(e.target.value);
-        errors.firstName = false;
-    };
-
-    const inputLastName = (e) => {
-        setLastNameInput(e.target.value);
-        setLastName(e.target.value);
-        errors.lastName = false;
-    };
-
-    const inputProfession = (e) => {
-        setProfessionInput(e.target.value);
-    };
-
-    const inputCountry = (e) => {
-        setCountryInput(e.target.value);
-    };
-
-    const inputCity = (e) => {
-        setCityInput(e.target.value);
-    };
-
-    const inputStateProvince = (e) => {
-        setStateProvinceInput(e.target.value);
-    };
-
-    const inputZipCode = (e) => {
-        setZipCodeInput(e.target.value);
-    };
-
-    const inputPhone = (e) => {
-        setPhoneInput(e.target.value);
-        setPhone(e.target.value);
-        errors.phone = false;
-    };
-
-    const inputEmail = (e) => {
-        setEmailInput(e.target.value);
-        setEmail(e.target.value);
-        errors.email = false;
-    };
-
     return (
         <>
             <form disabled={disabled} onSubmit={validateInput}>
@@ -257,4 +163,4 @@ const Heading = ({
     );
 };
 
-export default Heading;
+export default HeadingForm;

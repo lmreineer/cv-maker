@@ -1,6 +1,6 @@
-import Content from "./CVContent";
+import CVContent from "./CVContent";
 
-const Modal = ({
+const CVModal = ({
     firstNameInput,
     lastNameInput,
     professionInput,
@@ -10,7 +10,7 @@ const Modal = ({
 }) => {
     return (
         <div className="select-none absolute top-2/4 left-2/4 translate-y-[-50%] translate-x-[-50%] bg-white p-10 rounded h-5/6 w-7/12 bg-zinc-200 break-all">
-            <Content
+            <CVContent
                 textContainer="h-full shadow-lg rounded p-10 overflow-auto bg-white"
                 fullName="font-bold text-5xl"
                 firstNameInput={firstNameInput}
@@ -41,4 +41,4 @@ const Modal = ({
     );
 };
 
-export default Modal;
+export default CVModal;

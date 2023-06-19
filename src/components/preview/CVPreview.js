@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Modal from "./CVModal.js";
-import Content from "./CVContent.js";
+import CVModal from "./CVModal";
+import CVContent from "./CVContent";
 
-const Control = ({
+const CVPreview = ({
     firstNameInput,
     lastNameInput,
     professionInput,
@@ -25,7 +25,7 @@ const Control = ({
                 className="shadow-all-sides-light w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto break-all"
                 onClick={toggleClick}
             >
-                <Content
+                <CVContent
                     fullName="text-2xl font-bold"
                     firstNameInput={firstNameInput}
                     lastNameInput={lastNameInput}
@@ -62,7 +62,7 @@ const Control = ({
                         className="inset-0 fixed bg-modal-overlay"
                         onClick={toggleClick}
                     ></div>
-                    <Modal
+                    <CVModal
                         firstNameInput={firstNameInput}
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
@@ -76,4 +76,4 @@ const Control = ({
     );
 };
 
-export default Control;
+export default CVPreview;

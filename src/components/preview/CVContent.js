@@ -1,4 +1,4 @@
-const Content = ({
+const CVContent = ({
     textContainer,
     fullName,
     firstNameInput,
@@ -28,6 +28,7 @@ const Content = ({
     workDescriptionList,
     educationTimePeriodContainer,
 }) => {
+
     const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
     return (
@@ -172,4 +173,4 @@ const Content = ({
     );
 };
 
-export default Content;
+export default CVContent;
