@@ -1,14 +1,15 @@
 import { useState } from "react";
-import CVPreview from "../preview/CVPreview";
-import HeadingForm from "./HeadingForm";
+import HeadingForm from "../HeadingForm";
+import SkillsForm from "../SkillsForm";
+import CVPreview from "../../preview/CVPreview";
 
-const ValidateForm = () => {
+const FormValidation = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState({});
-    let disabled = false;
+    const [disabled, setDisabled] = useState(true);
 
     const validateInput = (e) => {
         e.preventDefault();
@@ -19,13 +20,13 @@ const ValidateForm = () => {
 
         if (firstName.trim() === "") {
             validationErrors.firstName = "First name is required";
-        } else if (!letters.test(firstName)) {
+        } else if (letters.test(firstName) === false) {
             validationErrors.firstName = "First name is invalid";
         }
 
         if (lastName.trim() === "") {
             validationErrors.lastName = "Last name is required";
-        } else if (!letters.test(lastName)) {
+        } else if (letters.test(lastName) === false) {
             validationErrors.lastName = "Last name is invalid";
         }
 
@@ -36,7 +37,7 @@ const ValidateForm = () => {
 
         if (email === "") {
             validationErrors.email = "Email is required";
-        } else if (!validEmail.test(email) || !beforeAtSign) {
+        } else if (validEmail.test(email) === false || beforeAtSign === false) {
             validationErrors.email = "Email is invalid";
         }
 
@@ -46,11 +47,8 @@ const ValidateForm = () => {
 
         // if there are any errors, disable the button
         Object.keys(validationErrors).length > 0
-            ? (disabled = true)
-            : (disabled = false);
-
-        if (!disabled) {
-        }
+            ? setDisabled(true)
+            : setDisabled(false);
 
         // Set the validation errors
         setErrors(validationErrors);
@@ -110,6 +108,25 @@ const ValidateForm = () => {
         errors.email = false;
     };
 
+    const conditionalComponent = disabled ? (
+        <HeadingForm
+            disabled={disabled}
+            validateInput={validateInput}
+            errors={errors}
+            inputFirstName={inputFirstName}
+            inputLastName={inputLastName}
+            inputProfession={inputProfession}
+            inputCountry={inputCountry}
+            inputCity={inputCity}
+            inputStateProvince={inputStateProvince}
+            inputZipCode={inputZipCode}
+            inputPhone={inputPhone}
+            inputEmail={inputEmail}
+        />
+    ) : (
+        <SkillsForm />
+    );
+
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
     };
@@ -123,21 +140,7 @@ const ValidateForm = () => {
 
     return (
         <>
-            <HeadingForm
-                disabled={disabled}
-                validateInput={validateInput}
-                errors={errors}
-                inputFirstName={inputFirstName}
-                inputLastName={inputLastName}
-                inputProfession={inputProfession}
-                inputCountry={inputCountry}
-                inputCity={inputCity}
-                inputStateProvince={inputStateProvince}
-                inputZipCode={inputZipCode}
-                inputPhone={inputPhone}
-                inputEmail={inputEmail}
-            />
-
+            {conditionalComponent}
             <CVPreview
                 firstNameInput={capitaliseFirstLetter(firstNameInput)}
                 lastNameInput={capitaliseFirstLetter(lastNameInput)}
@@ -153,4 +156,4 @@ const ValidateForm = () => {
     );
 };
 
-export default ValidateForm;
+export default FormValidation;

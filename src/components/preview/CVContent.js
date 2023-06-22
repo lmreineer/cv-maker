@@ -28,7 +28,6 @@ const CVContent = ({
     workDescriptionList,
     educationTimePeriodContainer,
 }) => {
-
     const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
     return (
