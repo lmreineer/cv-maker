@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import HeadingForm from "../HeadingForm";
 import SkillsForm from "../SkillsForm";
 import CVPreview from "../../preview/CVPreview";
@@ -10,6 +11,7 @@ const FormValidation = () => {
     const [email, setEmail] = useState("");
     const [errors, setErrors] = useState({});
     const [disabled, setDisabled] = useState(true);
+    const navigate = useNavigate();
 
     const validateInput = (e) => {
         e.preventDefault();
@@ -49,6 +51,10 @@ const FormValidation = () => {
         Object.keys(validationErrors).length > 0
             ? setDisabled(true)
             : setDisabled(false);
+
+        if (disabled === false) {
+            navigate("/skills");
+        }
 
         // Set the validation errors
         setErrors(validationErrors);
@@ -108,25 +114,6 @@ const FormValidation = () => {
         errors.email = false;
     };
 
-    const conditionalComponent = disabled ? (
-        <HeadingForm
-            disabled={disabled}
-            validateInput={validateInput}
-            errors={errors}
-            inputFirstName={inputFirstName}
-            inputLastName={inputLastName}
-            inputProfession={inputProfession}
-            inputCountry={inputCountry}
-            inputCity={inputCity}
-            inputStateProvince={inputStateProvince}
-            inputZipCode={inputZipCode}
-            inputPhone={inputPhone}
-            inputEmail={inputEmail}
-        />
-    ) : (
-        <SkillsForm />
-    );
-
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
     };
@@ -140,7 +127,28 @@ const FormValidation = () => {
 
     return (
         <>
-            {conditionalComponent}
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <HeadingForm
+                            disabled={disabled}
+                            validateInput={validateInput}
+                            errors={errors}
+                            inputFirstName={inputFirstName}
+                            inputLastName={inputLastName}
+                            inputProfession={inputProfession}
+                            inputCountry={inputCountry}
+                            inputCity={inputCity}
+                            inputStateProvince={inputStateProvince}
+                            inputZipCode={inputZipCode}
+                            inputPhone={inputPhone}
+                            inputEmail={inputEmail}
+                        />
+                    }
+                />
+                <Route path="/skills" element={<SkillsForm />} />
+            </Routes>
             <CVPreview
                 firstNameInput={capitaliseFirstLetter(firstNameInput)}
                 lastNameInput={capitaliseFirstLetter(lastNameInput)}
