@@ -5,6 +5,9 @@ const CVModal = ({
     lastNameInput,
     professionInput,
     countryInput,
+    cityInput,
+    stateProvinceInput,
+    zipCodeInput,
     phoneInput,
     emailInput,
 }) => {
@@ -21,6 +24,9 @@ const CVModal = ({
                 contactHeading="text-lg font-medium"
                 contactInput="font-normal ml-1"
                 countryInput={countryInput}
+                cityInput={cityInput}
+                stateProvinceInput={stateProvinceInput}
+                zipCodeInput={zipCodeInput}
                 phoneInput={phoneInput}
                 emailInput={emailInput}
                 summaryContainer="mt-10"

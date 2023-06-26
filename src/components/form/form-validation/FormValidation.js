@@ -1,118 +1,48 @@
-import { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import HeadingForm from "../HeadingForm";
 import SkillsForm from "../SkillsForm";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [errors, setErrors] = useState({});
-    const [disabled, setDisabled] = useState(true);
-    const navigate = useNavigate();
+    const formik = useFormik({
+        initialValues: {
+            firstName: "",
+            lastName: "",
+            profession: "",
+            country: "",
+            city: "",
+            stateProvince: "",
+            zipCode: "",
+            phone: "",
+            email: "",
+        },
 
-    const validateInput = (e) => {
-        e.preventDefault();
+        validationSchema: Yup.object({
+            firstName: Yup.string().required("First name is required"),
+            lastName: Yup.string().required("Last name is required"),
+            email: Yup.string()
+                .required("Email is required")
+                .email("Email is invalid"),
+        }),
 
-        const validationErrors = {};
+        onSubmit: (values, { setSubmitting }) => {
+            console.log(values);
+            setSubmitting(false);
+        },
+    });
 
-        const letters = /[a-zA-Z]/;
-
-        if (firstName.trim() === "") {
-            validationErrors.firstName = "First name is required";
-        } else if (letters.test(firstName) === false) {
-            validationErrors.firstName = "First name is invalid";
-        }
-
-        if (lastName.trim() === "") {
-            validationErrors.lastName = "Last name is required";
-        } else if (letters.test(lastName) === false) {
-            validationErrors.lastName = "Last name is invalid";
-        }
-
-        const validEmail =
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        validEmail.test(String(email).toLowerCase());
-        const beforeAtSign = email.substring(0, email.lastIndexOf("@"));
-
-        if (email === "") {
-            validationErrors.email = "Email is required";
-        } else if (validEmail.test(email) === false || beforeAtSign === false) {
-            validationErrors.email = "Email is invalid";
-        }
-
-        if (letters.test(phone)) {
-            validationErrors.phone = "Phone is invalid";
-        }
-
-        // if there are any errors, disable the button
-        Object.keys(validationErrors).length > 0
-            ? setDisabled(true)
-            : setDisabled(false);
-
-        if (disabled === false) {
-            navigate("/skills");
-        }
-
-        // Set the validation errors
-        setErrors(validationErrors);
-    };
-
-    const [firstNameInput, setFirstNameInput] = useState("");
-    const [lastNameInput, setLastNameInput] = useState("");
-    const [professionInput, setProfessionInput] = useState("");
-    const [countryInput, setCountryInput] = useState("");
-    const [cityInput, setCityInput] = useState("");
-    const [stateProvinceInput, setStateProvinceInput] = useState("");
-    const [zipCodeInput, setZipCodeInput] = useState("");
-    const [phoneInput, setPhoneInput] = useState("");
-    const [emailInput, setEmailInput] = useState("");
-
-    const inputFirstName = (e) => {
-        setFirstNameInput(e.target.value);
-        setFirstName(e.target.value);
-        errors.firstName = false;
-    };
-
-    const inputLastName = (e) => {
-        setLastNameInput(e.target.value);
-        setLastName(e.target.value);
-        errors.lastName = false;
-    };
-
-    const inputProfession = (e) => {
-        setProfessionInput(e.target.value);
-    };
-
-    const inputCountry = (e) => {
-        setCountryInput(e.target.value);
-    };
-
-    const inputCity = (e) => {
-        setCityInput(e.target.value);
-    };
-
-    const inputStateProvince = (e) => {
-        setStateProvinceInput(e.target.value);
-    };
-
-    const inputZipCode = (e) => {
-        setZipCodeInput(e.target.value);
-    };
-
-    const inputPhone = (e) => {
-        setPhoneInput(e.target.value);
-        setPhone(e.target.value);
-        errors.phone = false;
-    };
-
-    const inputEmail = (e) => {
-        setEmailInput(e.target.value);
-        setEmail(e.target.value);
-        errors.email = false;
-    };
+    const {
+        firstName,
+        lastName,
+        profession,
+        country,
+        city,
+        stateProvince,
+        zipCode,
+        phone,
+        email,
+    } = formik.values;
 
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
@@ -127,38 +57,31 @@ const FormValidation = () => {
 
     return (
         <>
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <HeadingForm
-                            disabled={disabled}
-                            validateInput={validateInput}
-                            errors={errors}
-                            inputFirstName={inputFirstName}
-                            inputLastName={inputLastName}
-                            inputProfession={inputProfession}
-                            inputCountry={inputCountry}
-                            inputCity={inputCity}
-                            inputStateProvince={inputStateProvince}
-                            inputZipCode={inputZipCode}
-                            inputPhone={inputPhone}
-                            inputEmail={inputEmail}
-                        />
-                    }
-                />
-                <Route path="/skills" element={<SkillsForm />} />
-            </Routes>
+            <HeadingForm
+                firstNameValues={firstName}
+                lastNameValues={lastName}
+                professionValues={profession}
+                countryValues={country}
+                cityValues={city}
+                stateProvinceValues={stateProvince}
+                zipCodeValues={zipCode}
+                phoneValues={phone}
+                emailValues={email}
+                handleChange={formik.handleChange}
+                handleSubmit={formik.handleSubmit}
+                formikErrors={formik.errors}
+                formikTouched={formik.touched}
+            />
             <CVPreview
-                firstNameInput={capitaliseFirstLetter(firstNameInput)}
-                lastNameInput={capitaliseFirstLetter(lastNameInput)}
-                professionInput={capitaliseFirstLetter(professionInput)}
-                countryInput={capitalizeFirstLetterOfEachWord(countryInput)}
-                cityInput={capitalizeFirstLetterOfEachWord(cityInput)}
-                stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvinceInput)}
-                zipCodeInput={capitalizeFirstLetterOfEachWord(zipCodeInput)}
-                phoneInput={capitaliseFirstLetter(phoneInput)}
-                emailInput={emailInput}
+                firstNameInput={capitaliseFirstLetter(firstName)}
+                lastNameInput={capitaliseFirstLetter(lastName)}
+                professionInput={capitalizeFirstLetterOfEachWord(profession)}
+                countryInput={capitalizeFirstLetterOfEachWord(country)}
+                cityInput={capitalizeFirstLetterOfEachWord(city)}
+                stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
+                zipCodeInput={zipCode}
+                phoneInput={phone}
+                emailInput={email}
             />
         </>
     );

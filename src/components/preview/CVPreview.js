@@ -67,6 +67,9 @@ const CVPreview = ({
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
                         countryInput={countryInput}
+                        cityInput={cityInput}
+                        stateProvinceInput={stateProvinceInput}
+                        zipCodeInput={zipCodeInput}
                         phoneInput={phoneInput}
                         emailInput={emailInput}
                     />

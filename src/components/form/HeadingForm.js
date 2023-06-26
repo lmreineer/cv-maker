@@ -1,20 +1,21 @@
 const HeadingForm = ({
-    disabled,
-    validateInput,
-    errors,
-    inputFirstName,
-    inputLastName,
-    inputProfession,
-    inputCountry,
-    inputCity,
-    inputStateProvince,
-    inputZipCode,
-    inputPhone,
-    inputEmail,
+    firstNameValues,
+    lastNameValues,
+    professionValues,
+    countryValues,
+    cityValues,
+    stateProvinceValues,
+    zipCodeValues,
+    phoneValues,
+    emailValues,
+    handleChange,
+    handleSubmit,
+    formikErrors,
+    formikTouched,
 }) => {
     return (
         <>
-            <form disabled={disabled} onSubmit={validateInput}>
+            <form onSubmit={handleSubmit}>
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-josefin-sans">
                     Contact Information:
                 </h1>
@@ -23,36 +24,37 @@ const HeadingForm = ({
                         <label>
                             <input
                                 type="text"
-                                name="first-name"
+                                name="firstName"
                                 placeholder="First name"
-                                id="first-name"
                                 className={
-                                    errors.firstName
+                                    formikErrors.firstName
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
-                                onChange={inputFirstName}
+                                value={firstNameValues}
+                                onChange={handleChange}
                                 maxLength={15}
                             />
-                            {errors.firstName && (
-                                <p className="ml-4 text-red-800">{errors.firstName}</p>
+                            {formikErrors.firstName && (
+                                <p className="ml-4 text-red-800">{formikErrors.firstName}</p>
                             )}
                         </label>
                         <label>
                             <input
                                 type="text"
-                                name="last-name"
+                                name="lastName"
                                 placeholder="Last name"
                                 className={
-                                    errors.lastName
+                                    formikErrors.lastName
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
                                 }
-                                onChange={inputLastName}
+                                value={lastNameValues}
+                                onChange={handleChange}
                                 maxLength={15}
                             />
-                            {errors.lastName && (
-                                <p className="ml-4 text-red-800">{errors.lastName}</p>
+                            {formikErrors.lastName && (
+                                <p className="ml-4 text-red-800">{formikErrors.lastName}</p>
                             )}
                         </label>
                     </div>
@@ -63,7 +65,8 @@ const HeadingForm = ({
                                 name="profession"
                                 placeholder="Profession"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
-                                onChange={inputProfession}
+                                value={professionValues}
+                                onChange={handleChange}
                                 maxLength={40}
                             />
                         </label>
@@ -75,7 +78,8 @@ const HeadingForm = ({
                                 name="country"
                                 placeholder="Country"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
-                                onChange={inputCountry}
+                                value={countryValues}
+                                onChange={handleChange}
                             />
                         </label>
                         <label>
@@ -84,7 +88,8 @@ const HeadingForm = ({
                                 name="city"
                                 placeholder="City"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
-                                onChange={inputCity}
+                                value={cityValues}
+                                onChange={handleChange}
                             />
                         </label>
                     </div>
@@ -92,37 +97,40 @@ const HeadingForm = ({
                         <label>
                             <input
                                 type="text"
-                                name="state-province"
+                                name="stateProvince"
                                 placeholder="State / Province"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
-                                onChange={inputStateProvince}
+                                value={stateProvinceValues}
+                                onChange={handleChange}
                             />
                         </label>
                         <label>
                             <input
                                 type="tel"
-                                name="zip-code"
+                                name="zipCode"
                                 placeholder="ZIP Code"
                                 className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
-                                onChange={inputZipCode}
+                                value={zipCodeValues}
+                                onChange={handleChange}
                             />
                         </label>
                     </div>
                     <div>
-                        <label className={errors.phone ? "flex flex-col" : "flex"}>
+                        <label className={formikErrors.phone ? "flex flex-col" : "flex"}>
                             <input
                                 type="tel"
-                                name="phone-number"
+                                name="phone"
                                 placeholder="Phone"
                                 className={
-                                    errors.phone
+                                    formikErrors.phone
                                         ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
                                 }
-                                onChange={inputPhone}
+                                value={phoneValues}
+                                onChange={handleChange}
                             />
-                            {errors.phone && (
-                                <p className="ml-4 text-red-800">{errors.phone}</p>
+                            {formikErrors.phone && (
+                                <p className="ml-4 text-red-800">{formikErrors.phone}</p>
                             )}
                         </label>
                     </div>
@@ -134,16 +142,17 @@ const HeadingForm = ({
                                 placeholder="Email"
                                 id="email"
                                 className={
-                                    errors.email
+                                    formikErrors.email
                                         ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
                                 }
-                                onChange={inputEmail}
+                                value={emailValues}
+                                onChange={handleChange}
                                 maxLength={40}
                             />
                         </label>
-                        {errors.email && (
-                            <p className="ml-4 text-red-800">{errors.email}</p>
+                        {formikErrors.email && (
+                            <p className="ml-4 text-red-800">{formikErrors.email}</p>
                         )}
                     </div>
                     <div className="flex justify-around">
