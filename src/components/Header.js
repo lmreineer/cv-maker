@@ -1,15 +1,16 @@
 import logo from "../logo.svg";
 
-const Header = (props) => {
+const Header = () => {
     return (
         <header className="flex justify-around items-center p-3 shadow-lg bg-light-yellow">
             <img src={logo} alt="CV Maker" className="w-40 pointer-events-none" />
             <div className="flex">
                 <div
                     className={
-                        !props.nextPage
-                            ? "m-5 text-dark-yellow-green border-b-2 border-dark-yellow-green"
-                            : "m-5 opacity-50"
+                        "m-5 text-dark-yellow-green border-b-2 border-dark-yellow-green"
+                        // !props.nextPage
+                        // ? "m-5 text-dark-yellow-green border-b-2 border-dark-yellow-green"
+                        // : "m-5 opacity-50"
                     }
                 >
                     1. Heading
@@ -17,9 +18,10 @@ const Header = (props) => {
                 <div className="mt-5 opacity-50 font-bold">—</div>
                 <div
                     className={
-                        props.nextPage
-                            ? "m-5 text-dark-yellow-green border-b-2 border-dark-yellow-green"
-                            : "m-5 opacity-50"
+                        "m-5 opacity-50"
+                        // props.nextPage
+                        // ? "m-5 text-dark-yellow-green border-b-2 border-dark-yellow-green"
+                        // : "m-5 opacity-50"
                     }
                 >
                     2. Skills

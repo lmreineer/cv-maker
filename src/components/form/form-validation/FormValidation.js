@@ -1,13 +1,15 @@
-import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 import Header from "../../Header";
 import HeadingForm from "../HeadingForm";
 import SkillsForm from "../SkillsForm";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
-    const [nextPage, setNextPage] = useState(false);
+    const pathname = { useLocation };
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -30,7 +32,13 @@ const FormValidation = () => {
         }),
 
         onSubmit: () => {
-            setNextPage(true);
+            switch (pathname) {
+                case "/":
+                    navigate("/skills");
+                    break;
+                default:
+                    navigate("/skills");
+            }
         },
     });
 
@@ -46,23 +54,6 @@ const FormValidation = () => {
         email,
     } = formik.values;
 
-    const conditionalComponent = !nextPage ? <HeadingForm
-        firstNameValues={firstName}
-        lastNameValues={lastName}
-        professionValues={profession}
-        countryValues={country}
-        cityValues={city}
-        stateProvinceValues={stateProvince}
-        zipCodeValues={zipCode}
-        phoneValues={phone}
-        emailValues={email}
-        handleChange={formik.handleChange}
-        handleSubmit={formik.handleSubmit}
-        formikErrors={formik.errors}
-        formikTouched={formik.touched}
-    /> : <SkillsForm />
-
-
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
     };
@@ -76,20 +67,43 @@ const FormValidation = () => {
 
     return (
         <>
-            <Header nextPage={nextPage} />
+            <Header />
             <div className="flex justify-around px-40">
-            {conditionalComponent}
-            <CVPreview
-                firstNameInput={capitaliseFirstLetter(firstName)}
-                lastNameInput={capitaliseFirstLetter(lastName)}
-                professionInput={capitalizeFirstLetterOfEachWord(profession)}
-                countryInput={capitalizeFirstLetterOfEachWord(country)}
-                cityInput={capitalizeFirstLetterOfEachWord(city)}
-                stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
-                zipCodeInput={zipCode}
-                phoneInput={phone}
-                emailInput={email}
-            />
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <HeadingForm
+                                firstNameValues={firstName}
+                                lastNameValues={lastName}
+                                professionValues={profession}
+                                countryValues={country}
+                                cityValues={city}
+                                stateProvinceValues={stateProvince}
+                                zipCodeValues={zipCode}
+                                phoneValues={phone}
+                                emailValues={email}
+                                handleChange={formik.handleChange}
+                                handleSubmit={formik.handleSubmit}
+                                formikErrors={formik.errors}
+                                formikTouched={formik.touched}
+                            />
+                        }
+                    />
+                    <Route path="/skills" element={<SkillsForm />} />
+                </Routes>
+
+                <CVPreview
+                    firstNameInput={capitaliseFirstLetter(firstName)}
+                    lastNameInput={capitaliseFirstLetter(lastName)}
+                    professionInput={capitalizeFirstLetterOfEachWord(profession)}
+                    countryInput={capitalizeFirstLetterOfEachWord(country)}
+                    cityInput={capitalizeFirstLetterOfEachWord(city)}
+                    stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
+                    zipCodeInput={zipCode}
+                    phoneInput={phone}
+                    emailInput={email}
+                />
             </div>
         </>
     );
