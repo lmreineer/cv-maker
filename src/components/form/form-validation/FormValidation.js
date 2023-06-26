@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Header from "../../Header";
 import HeadingForm from "../HeadingForm";
 import SkillsForm from "../SkillsForm";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
+    const [nextPage, setNextPage] = useState(false);
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -26,9 +29,8 @@ const FormValidation = () => {
                 .email("Email is invalid"),
         }),
 
-        onSubmit: (values, { setSubmitting }) => {
-            console.log(values);
-            setSubmitting(false);
+        onSubmit: () => {
+            setNextPage(true);
         },
     });
 
@@ -44,6 +46,23 @@ const FormValidation = () => {
         email,
     } = formik.values;
 
+    const conditionalComponent = !nextPage ? <HeadingForm
+        firstNameValues={firstName}
+        lastNameValues={lastName}
+        professionValues={profession}
+        countryValues={country}
+        cityValues={city}
+        stateProvinceValues={stateProvince}
+        zipCodeValues={zipCode}
+        phoneValues={phone}
+        emailValues={email}
+        handleChange={formik.handleChange}
+        handleSubmit={formik.handleSubmit}
+        formikErrors={formik.errors}
+        formikTouched={formik.touched}
+    /> : <SkillsForm />
+
+
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
     };
@@ -57,21 +76,9 @@ const FormValidation = () => {
 
     return (
         <>
-            <HeadingForm
-                firstNameValues={firstName}
-                lastNameValues={lastName}
-                professionValues={profession}
-                countryValues={country}
-                cityValues={city}
-                stateProvinceValues={stateProvince}
-                zipCodeValues={zipCode}
-                phoneValues={phone}
-                emailValues={email}
-                handleChange={formik.handleChange}
-                handleSubmit={formik.handleSubmit}
-                formikErrors={formik.errors}
-                formikTouched={formik.touched}
-            />
+            <Header nextPage={nextPage} />
+            <div className="flex justify-around px-40">
+            {conditionalComponent}
             <CVPreview
                 firstNameInput={capitaliseFirstLetter(firstName)}
                 lastNameInput={capitaliseFirstLetter(lastName)}
@@ -83,6 +90,7 @@ const FormValidation = () => {
                 phoneInput={phone}
                 emailInput={email}
             />
+            </div>
         </>
     );
 };
