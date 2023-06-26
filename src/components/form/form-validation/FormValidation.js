@@ -7,7 +7,7 @@ import SkillsForm from "../SkillsForm";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
-    const pathname = { useLocation };
+    const pathname = useLocation().pathname;
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -67,44 +67,41 @@ const FormValidation = () => {
 
     return (
         <>
-            <Header />
-            <div className="flex justify-around px-40">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <HeadingForm
-                                firstNameValues={firstName}
-                                lastNameValues={lastName}
-                                professionValues={profession}
-                                countryValues={country}
-                                cityValues={city}
-                                stateProvinceValues={stateProvince}
-                                zipCodeValues={zipCode}
-                                phoneValues={phone}
-                                emailValues={email}
-                                handleChange={formik.handleChange}
-                                handleSubmit={formik.handleSubmit}
-                                formikErrors={formik.errors}
-                                formikTouched={formik.touched}
-                            />
-                        }
-                    />
-                    <Route path="/skills" element={<SkillsForm />} />
-                </Routes>
-
-                <CVPreview
-                    firstNameInput={capitaliseFirstLetter(firstName)}
-                    lastNameInput={capitaliseFirstLetter(lastName)}
-                    professionInput={capitalizeFirstLetterOfEachWord(profession)}
-                    countryInput={capitalizeFirstLetterOfEachWord(country)}
-                    cityInput={capitalizeFirstLetterOfEachWord(city)}
-                    stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
-                    zipCodeInput={zipCode}
-                    phoneInput={phone}
-                    emailInput={email}
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <HeadingForm
+                            firstNameValues={firstName}
+                            lastNameValues={lastName}
+                            professionValues={profession}
+                            countryValues={country}
+                            cityValues={city}
+                            stateProvinceValues={stateProvince}
+                            zipCodeValues={zipCode}
+                            phoneValues={phone}
+                            emailValues={email}
+                            handleChange={formik.handleChange}
+                            handleSubmit={formik.handleSubmit}
+                            formikErrors={formik.errors}
+                            formikTouched={formik.touched}
+                        />
+                    }
                 />
-            </div>
+                <Route path="/skills" element={<SkillsForm />} />
+            </Routes>
+
+            <CVPreview
+                firstNameInput={capitaliseFirstLetter(firstName)}
+                lastNameInput={capitaliseFirstLetter(lastName)}
+                professionInput={capitalizeFirstLetterOfEachWord(profession)}
+                countryInput={capitalizeFirstLetterOfEachWord(country)}
+                cityInput={capitalizeFirstLetterOfEachWord(city)}
+                stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
+                zipCodeInput={zipCode}
+                phoneInput={phone}
+                emailInput={email}
+            />
         </>
     );
 };
