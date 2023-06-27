@@ -15,7 +15,7 @@ const Header = () => {
                             : "m-2 p-3 text-gray-400"
                     }
                 >
-                    1. Heading
+                    Heading
                 </div>
                 <div
                     className={
@@ -24,11 +24,11 @@ const Header = () => {
                             : "m-2 p-3 text-gray-400"
                     }
                 >
-                    2. Skills
+                    Skills
                 </div>
-                <div className="m-2 p-3 text-gray-400">3. Summary</div>
-                <div className="m-2 p-3 text-gray-400">4. Work History</div>
-                <div className="m-2 p-3 text-gray-400">5. Education</div>
+                <div className="m-2 p-3 text-gray-400">Summary</div>
+                <div className="m-2 p-3 text-gray-400">Work History</div>
+                <div className="m-2 p-3 text-gray-400">Education</div>
             </div>
         </header>
     );
