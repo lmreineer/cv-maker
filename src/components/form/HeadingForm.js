@@ -16,7 +16,7 @@ const HeadingForm = ({
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-josefin-sans">
+                <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-almiri tracking-wider text-[#3D462F]">
                     Contact Information:
                 </h1>
                 <div>

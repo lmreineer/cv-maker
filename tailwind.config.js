@@ -12,7 +12,7 @@ module.exports = {
         "modal-overlay": "rgba(0,0,0,0.4)",
       },
       fontFamily: {
-        "josefin-sans": ["Josefin Sans", "sans-serif"],
+        "almiri": ["Cabin", "serif"]
       },
       boxShadow: {
         "all-sides-light": "0 0 4px rgba(0, 0, 0, 0.2)",

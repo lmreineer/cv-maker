@@ -6,7 +6,7 @@ const Header = () => {
 
     return (
         <header className="flex justify-around items-center p-5">
-            <img src={logo} alt="CV Maker" className="w-52 pointer-events-none" />
+            <img src={logo} alt="CV Maker" className="w-48 pointer-events-none" />
             <div className="flex rounded-lg">
                 <div
                     className={
