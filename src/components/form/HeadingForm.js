@@ -28,8 +28,8 @@ const HeadingForm = ({
                                 placeholder="First name"
                                 className={
                                     formikErrors.firstName
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 }
                                 value={firstNameValues}
                                 onChange={handleChange}
@@ -46,8 +46,8 @@ const HeadingForm = ({
                                 placeholder="Last name"
                                 className={
                                     formikErrors.lastName
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 }
                                 value={lastNameValues}
                                 onChange={handleChange}
@@ -64,7 +64,7 @@ const HeadingForm = ({
                                 type="text"
                                 name="profession"
                                 placeholder="Profession"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
+                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                                 value={professionValues}
                                 onChange={handleChange}
                                 maxLength={40}
@@ -77,7 +77,7 @@ const HeadingForm = ({
                                 type="text"
                                 name="country"
                                 placeholder="Country"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 value={countryValues}
                                 onChange={handleChange}
                             />
@@ -87,7 +87,7 @@ const HeadingForm = ({
                                 type="text"
                                 name="city"
                                 placeholder="City"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 value={cityValues}
                                 onChange={handleChange}
                             />
@@ -99,7 +99,7 @@ const HeadingForm = ({
                                 type="text"
                                 name="stateProvince"
                                 placeholder="State / Province"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 value={stateProvinceValues}
                                 onChange={handleChange}
                             />
@@ -109,7 +109,7 @@ const HeadingForm = ({
                                 type="tel"
                                 name="zipCode"
                                 placeholder="ZIP Code"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md"
+                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 value={zipCodeValues}
                                 onChange={handleChange}
                             />
@@ -123,8 +123,8 @@ const HeadingForm = ({
                                 placeholder="Phone"
                                 className={
                                     formikErrors.phone
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
+                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                                 }
                                 value={phoneValues}
                                 onChange={handleChange}
@@ -143,8 +143,8 @@ const HeadingForm = ({
                                 id="email"
                                 className={
                                     formikErrors.email
-                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700 focus:shadow-inner focus:shadow-md"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green focus:shadow-inner focus:shadow-md w-full"
+                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                                 }
                                 value={emailValues}
                                 onChange={handleChange}

@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
-import Header from "../../Header";
 import HeadingForm from "../HeadingForm";
 import SkillsForm from "../SkillsForm";
 import CVPreview from "../../preview/CVPreview";
@@ -65,6 +64,10 @@ const FormValidation = () => {
         );
     };
 
+    const lowerCaseEachLetter = (input) => {
+        return input.toLowerCase();
+    };
+
     return (
         <>
             <Routes>
@@ -100,7 +103,7 @@ const FormValidation = () => {
                 stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
-                emailInput={email}
+                emailInput={lowerCaseEachLetter(email)}
             />
         </>
     );

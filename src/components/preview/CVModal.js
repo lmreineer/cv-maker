@@ -14,7 +14,7 @@ const CVModal = ({
     return (
         <div className="select-none absolute top-2/4 left-2/4 translate-y-[-50%] translate-x-[-50%] bg-white p-10 rounded h-5/6 w-7/12 bg-zinc-200 break-all">
             <CVContent
-                textContainer="h-full shadow-lg rounded p-10 overflow-auto bg-white"
+                textContainer="h-full rounded p-10 overflow-auto bg-white"
                 fullName="font-bold text-5xl"
                 firstNameInput={firstNameInput}
                 lastNameInput={lastNameInput}
