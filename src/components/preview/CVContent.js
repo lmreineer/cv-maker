@@ -1,3 +1,5 @@
+import { useLocation } from "react-router-dom";
+
 const CVContent = ({
     textContainer,
     fullName,
@@ -28,7 +30,9 @@ const CVContent = ({
     workDescriptionList,
     educationTimePeriodContainer,
 }) => {
-    const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
+    const pathname = useLocation().pathname;
+
+    let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
     return (
         <div className={textContainer}>
@@ -39,26 +43,30 @@ const CVContent = ({
             <h6 className={profession}>{professionInput}</h6>
             <div>
                 <h6 className={address}>
-                    Address:
-                    <span className={contactInput}>
-                        <span>
-                            {cityInput ||
-                                stateProvinceInput ||
-                                countryInput ||
-                                zipCodeInput ||
-                                defaultAddress}
+                    {pathname === "/skills" && <span>Address:</span> ? (
+                        ""
+                    ) : (
+                        <span>Address:</span>
+                    )}
+                    {cityInput ||
+                        stateProvinceInput ||
+                        countryInput ||
+                        zipCodeInput ||
+                        (pathname === "/skills" && <span>{defaultAddress}</span> ? (
+                            ""
+                        ) : (
+                            <span className={contactInput}>{defaultAddress}</span>
+                        ))}
 
-                            {cityInput &&
-                                (stateProvinceInput || countryInput || zipCodeInput) &&
-                                `, ${stateProvinceInput || countryInput || zipCodeInput}`}
+                    {cityInput &&
+                        (stateProvinceInput || countryInput || zipCodeInput) &&
+                        `, ${stateProvinceInput || countryInput || zipCodeInput}`}
 
-                            {stateProvinceInput &&
-                                (countryInput || zipCodeInput) &&
-                                `, ${countryInput || zipCodeInput}`}
+                    {stateProvinceInput &&
+                        (countryInput || zipCodeInput) &&
+                        `, ${countryInput || zipCodeInput}`}
 
-                            {countryInput && zipCodeInput && `, ${zipCodeInput}`}
-                        </span>
-                    </span>
+                    {countryInput && zipCodeInput && `, ${zipCodeInput}`}
                 </h6>
                 <h6 className={contactHeading}>
                     Phone:

@@ -87,7 +87,6 @@ const FormValidation = () => {
                             handleChange={formik.handleChange}
                             handleSubmit={formik.handleSubmit}
                             formikErrors={formik.errors}
-                            formikTouched={formik.touched}
                         />
                     }
                 />

@@ -11,12 +11,11 @@ const HeadingForm = ({
     handleChange,
     handleSubmit,
     formikErrors,
-    formikTouched,
 }) => {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-almiri tracking-wider text-[#3D462F]">
+                <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Contact Information:
                 </h1>
                 <div>
@@ -149,6 +148,7 @@ const HeadingForm = ({
                                 value={emailValues}
                                 onChange={handleChange}
                                 maxLength={40}
+                                spellCheck="false"
                             />
                         </label>
                         {formikErrors.email && (
