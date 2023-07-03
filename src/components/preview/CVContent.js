@@ -43,30 +43,39 @@ const CVContent = ({
             <h6 className={profession}>{professionInput}</h6>
             <div>
                 <h6 className={address}>
-                    {pathname === "/skills" && <span>Address:</span> ? (
+                    {pathname === "/skills" &&
+                        (cityInput || stateProvinceInput || countryInput || zipCodeInput) ===
+                        "" ? (
                         ""
                     ) : (
                         <span>Address:</span>
                     )}
-                    {cityInput ||
-                        stateProvinceInput ||
-                        countryInput ||
-                        zipCodeInput ||
-                        (pathname === "/skills" && <span>{defaultAddress}</span> ? (
-                            ""
-                        ) : (
-                            <span className={contactInput}>{defaultAddress}</span>
-                        ))}
 
-                    {cityInput &&
-                        (stateProvinceInput || countryInput || zipCodeInput) &&
-                        `, ${stateProvinceInput || countryInput || zipCodeInput}`}
+                    {pathname === "/skills" &&
+                        (cityInput || stateProvinceInput || countryInput || zipCodeInput) ===
+                        "" ? (
+                        ""
+                    ) : (
+                        <span className={contactInput}>
+                            {cityInput ||
+                                stateProvinceInput ||
+                                countryInput ||
+                                zipCodeInput ||
+                                (defaultAddress && pathname === "/skills"
+                                    ? ""
+                                    : defaultAddress)}
 
-                    {stateProvinceInput &&
-                        (countryInput || zipCodeInput) &&
-                        `, ${countryInput || zipCodeInput}`}
+                            {cityInput &&
+                                (stateProvinceInput || countryInput || zipCodeInput) &&
+                                `, ${stateProvinceInput || countryInput || zipCodeInput}`}
 
-                    {countryInput && zipCodeInput && `, ${zipCodeInput}`}
+                            {stateProvinceInput &&
+                                (countryInput || zipCodeInput) &&
+                                `, ${countryInput || zipCodeInput}`}
+
+                            {countryInput && zipCodeInput && `, ${zipCodeInput}`}
+                        </span>
+                    )}
                 </h6>
                 <h6 className={contactHeading}>
                     Phone:
