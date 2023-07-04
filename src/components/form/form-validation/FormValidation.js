@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 import HeadingForm from "../HeadingForm";
-import SummaryForm from "../SummaryForm";
+import WorkHistoryForm from "../WorkHistoryForm";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
@@ -16,7 +16,7 @@ const FormValidation = () => {
             profession: "",
             country: "",
             city: "",
-            stateProvince: "",
+            state: "",
             zipCode: "",
             phone: "",
             email: "",
@@ -33,10 +33,10 @@ const FormValidation = () => {
         onSubmit: () => {
             switch (pathname) {
                 case "/":
-                    navigate("/summary");
+                    navigate("/work-history");
                     break;
                 default:
-                    navigate("/summary");
+                    navigate("/work-history");
             }
         },
     });
@@ -47,7 +47,7 @@ const FormValidation = () => {
         profession,
         country,
         city,
-        stateProvince,
+        state,
         zipCode,
         phone,
         email,
@@ -80,7 +80,7 @@ const FormValidation = () => {
                             professionValues={profession}
                             countryValues={country}
                             cityValues={city}
-                            stateProvinceValues={stateProvince}
+                            stateValues={state}
                             zipCodeValues={zipCode}
                             phoneValues={phone}
                             emailValues={email}
@@ -90,7 +90,7 @@ const FormValidation = () => {
                         />
                     }
                 />
-                <Route path="/summary" element={<SummaryForm />} />
+                <Route path="/work-history" element={<WorkHistoryForm />} />
             </Routes>
 
             <CVPreview
@@ -99,7 +99,7 @@ const FormValidation = () => {
                 professionInput={capitalizeFirstLetterOfEachWord(profession)}
                 countryInput={capitalizeFirstLetterOfEachWord(country)}
                 cityInput={capitalizeFirstLetterOfEachWord(city)}
-                stateProvinceInput={capitalizeFirstLetterOfEachWord(stateProvince)}
+                stateInput={capitalizeFirstLetterOfEachWord(state)}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
                 emailInput={lowerCaseEachLetter(email)}

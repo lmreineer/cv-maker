@@ -4,7 +4,7 @@ const HeadingForm = ({
     professionValues,
     countryValues,
     cityValues,
-    stateProvinceValues,
+    stateValues,
     zipCodeValues,
     phoneValues,
     emailValues,
@@ -20,42 +20,38 @@ const HeadingForm = ({
                 </h1>
                 <div>
                     <div className="flex">
-                        <label>
-                            <input
-                                type="text"
-                                name="firstName"
-                                placeholder="First name"
-                                className={
-                                    formikErrors.firstName
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                                }
-                                value={firstNameValues}
-                                onChange={handleChange}
-                                maxLength={15}
-                            />
-                            {formikErrors.firstName && (
-                                <p className="ml-4 text-red-800">{formikErrors.firstName}</p>
-                            )}
-                        </label>
-                        <label>
-                            <input
-                                type="text"
-                                name="lastName"
-                                placeholder="Last name"
-                                className={
-                                    formikErrors.lastName
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                                }
-                                value={lastNameValues}
-                                onChange={handleChange}
-                                maxLength={15}
-                            />
-                            {formikErrors.lastName && (
-                                <p className="ml-4 text-red-800">{formikErrors.lastName}</p>
-                            )}
-                        </label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            placeholder="First Name"
+                            className={
+                                formikErrors.firstName
+                                    ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                            }
+                            value={firstNameValues}
+                            onChange={handleChange}
+                            maxLength={15}
+                        />
+                        {formikErrors.firstName && (
+                            <p className="ml-4 text-red-800">{formikErrors.firstName}</p>
+                        )}
+                        <input
+                            type="text"
+                            name="lastName"
+                            placeholder="Last Name"
+                            className={
+                                formikErrors.lastName
+                                    ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                            }
+                            value={lastNameValues}
+                            onChange={handleChange}
+                            maxLength={15}
+                        />
+                        {formikErrors.lastName && (
+                            <p className="ml-4 text-red-800">{formikErrors.lastName}</p>
+                        )}
                     </div>
                     <div>
                         <label className="flex">
@@ -71,48 +67,40 @@ const HeadingForm = ({
                         </label>
                     </div>
                     <div>
-                        <label>
-                            <input
-                                type="text"
-                                name="country"
-                                placeholder="Country"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                                value={countryValues}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            <input
-                                type="text"
-                                name="city"
-                                placeholder="City"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                                value={cityValues}
-                                onChange={handleChange}
-                            />
-                        </label>
+                        <input
+                            type="text"
+                            name="country"
+                            placeholder="Country"
+                            className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                            value={countryValues}
+                            onChange={handleChange}
+                        />
+                        <input
+                            type="text"
+                            name="city"
+                            placeholder="City"
+                            className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                            value={cityValues}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div>
-                        <label>
-                            <input
-                                type="text"
-                                name="stateProvince"
-                                placeholder="State / Province"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                                value={stateProvinceValues}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            <input
-                                type="tel"
-                                name="zipCode"
-                                placeholder="ZIP Code"
-                                className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                                value={zipCodeValues}
-                                onChange={handleChange}
-                            />
-                        </label>
+                        <input
+                            type="text"
+                            name="state"
+                            placeholder="State"
+                            className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                            value={stateValues}
+                            onChange={handleChange}
+                        />
+                        <input
+                            type="tel"
+                            name="zipCode"
+                            placeholder="ZIP Code"
+                            className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                            value={zipCodeValues}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div>
                         <label className={formikErrors.phone ? "flex flex-col" : "flex"}>
@@ -150,10 +138,10 @@ const HeadingForm = ({
                                 maxLength={40}
                                 spellCheck="false"
                             />
+                            {formikErrors.email && (
+                                <p className="ml-4 text-red-800">{formikErrors.email}</p>
+                            )}
                         </label>
-                        {formikErrors.email && (
-                            <p className="ml-4 text-red-800">{formikErrors.email}</p>
-                        )}
                     </div>
                     <div className="flex justify-around">
                         <button className="bg-gray-300 hover:bg-gray-400 transition p-5 w-56 rounded-lg my-10">

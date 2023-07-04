@@ -11,7 +11,7 @@ const CVContent = ({
     contactInput,
     countryInput,
     cityInput,
-    stateProvinceInput,
+    stateInput,
     zipCodeInput,
     contactHeading,
     phoneInput,
@@ -33,10 +33,10 @@ const CVContent = ({
     const pathname = useLocation().pathname;
 
     const hasNoAddress =
-        pathname === "/summary" &&
-        (cityInput || stateProvinceInput || countryInput || zipCodeInput) === "";
+        pathname === "/work-history" &&
+        (cityInput || stateInput || countryInput || zipCodeInput) === "";
 
-    const hasNoPhone = pathname === "/summary" && phoneInput === "";
+    const hasNoPhone = pathname === "/work-history" && phoneInput === "";
 
     let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
@@ -55,18 +55,18 @@ const CVContent = ({
                     ) : (
                         <span className={contactInput}>
                             {cityInput ||
-                                stateProvinceInput ||
+                                stateInput ||
                                 countryInput ||
                                 zipCodeInput ||
-                                (defaultAddress && pathname === "/summary"
+                                (defaultAddress && pathname === "/work-history"
                                     ? ""
                                     : defaultAddress)}
 
                             {cityInput &&
-                                (stateProvinceInput || countryInput || zipCodeInput) &&
-                                `, ${stateProvinceInput || countryInput || zipCodeInput}`}
+                                (stateInput || countryInput || zipCodeInput) &&
+                                `, ${stateInput || countryInput || zipCodeInput}`}
 
-                            {stateProvinceInput &&
+                            {stateInput &&
                                 (countryInput || zipCodeInput) &&
                                 `, ${countryInput || zipCodeInput}`}
 

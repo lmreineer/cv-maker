@@ -8,7 +8,7 @@ const CVPreview = ({
     professionInput,
     countryInput,
     cityInput,
-    stateProvinceInput,
+    stateInput,
     zipCodeInput,
     phoneInput,
     emailInput,
@@ -36,7 +36,7 @@ const CVPreview = ({
                     contactInput="font-normal ml-1"
                     countryInput={countryInput}
                     cityInput={cityInput}
-                    stateProvinceInput={stateProvinceInput}
+                    stateInput={stateInput}
                     zipCodeInput={zipCodeInput}
                     phoneInput={phoneInput}
                     emailInput={emailInput}
@@ -68,7 +68,7 @@ const CVPreview = ({
                         professionInput={professionInput}
                         countryInput={countryInput}
                         cityInput={cityInput}
-                        stateProvinceInput={stateProvinceInput}
+                        stateInput={stateInput}
                         zipCodeInput={zipCodeInput}
                         phoneInput={phoneInput}
                         emailInput={emailInput}
