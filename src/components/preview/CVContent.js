@@ -32,6 +32,12 @@ const CVContent = ({
 }) => {
     const pathname = useLocation().pathname;
 
+    const hasNoAddress =
+        pathname === "/skills" &&
+        (cityInput || stateProvinceInput || countryInput || zipCodeInput) === "";
+
+    const hasNoPhone = pathname === "/skills" && phoneInput === "";
+
     let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
     return (
@@ -43,17 +49,8 @@ const CVContent = ({
             <h6 className={profession}>{professionInput}</h6>
             <div>
                 <h6 className={address}>
-                    {pathname === "/skills" &&
-                        (cityInput || stateProvinceInput || countryInput || zipCodeInput) ===
-                        "" ? (
-                        ""
-                    ) : (
-                        <span>Address:</span>
-                    )}
-
-                    {pathname === "/skills" &&
-                        (cityInput || stateProvinceInput || countryInput || zipCodeInput) ===
-                        "" ? (
+                    {hasNoAddress ? "" : "Address:"}
+                    {hasNoAddress ? (
                         ""
                     ) : (
                         <span className={contactInput}>
@@ -78,10 +75,14 @@ const CVContent = ({
                     )}
                 </h6>
                 <h6 className={contactHeading}>
-                    Phone:
-                    <span className={contactInput}>
-                        {phoneInput || "(238) 513-57521"}
-                    </span>
+                    {hasNoPhone ? "" : "Phone:"}
+                    {hasNoPhone ? (
+                        ""
+                    ) : (
+                        <span className={contactInput}>
+                            {phoneInput || "(238) 513-57521"}
+                        </span>
+                    )}
                 </h6>
                 <h6 className={contactHeading}>
                     Email:
