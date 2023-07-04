@@ -33,10 +33,10 @@ const CVContent = ({
     const pathname = useLocation().pathname;
 
     const hasNoAddress =
-        pathname === "/skills" &&
+        pathname === "/summary" &&
         (cityInput || stateProvinceInput || countryInput || zipCodeInput) === "";
 
-    const hasNoPhone = pathname === "/skills" && phoneInput === "";
+    const hasNoPhone = pathname === "/summary" && phoneInput === "";
 
     let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
@@ -58,7 +58,7 @@ const CVContent = ({
                                 stateProvinceInput ||
                                 countryInput ||
                                 zipCodeInput ||
-                                (defaultAddress && pathname === "/skills"
+                                (defaultAddress && pathname === "/summary"
                                     ? ""
                                     : defaultAddress)}
 

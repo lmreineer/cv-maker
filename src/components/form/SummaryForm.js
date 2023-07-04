@@ -1,4 +1,4 @@
-const SkillsForm = () => {
+const SummaryForm = () => {
     return (
         <>
             <h1>Asd</h1>
@@ -6,4 +6,4 @@ const SkillsForm = () => {
     );
 };
 
-export default SkillsForm;
+export default SummaryForm;

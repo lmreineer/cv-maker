@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 import HeadingForm from "../HeadingForm";
-import SkillsForm from "../SkillsForm";
+import SummaryForm from "../SummaryForm";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
@@ -33,10 +33,10 @@ const FormValidation = () => {
         onSubmit: () => {
             switch (pathname) {
                 case "/":
-                    navigate("/skills");
+                    navigate("/summary");
                     break;
                 default:
-                    navigate("/skills");
+                    navigate("/summary");
             }
         },
     });
@@ -90,7 +90,7 @@ const FormValidation = () => {
                         />
                     }
                 />
-                <Route path="/skills" element={<SkillsForm />} />
+                <Route path="/summary" element={<SummaryForm />} />
             </Routes>
 
             <CVPreview

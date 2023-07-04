@@ -19,14 +19,14 @@ const Header = () => {
             </div>
             <div
                 className={
-                    pathname === "/skills"
+                    pathname === "/summary"
                         ? "m-2 p-4 rounded-xl text-very-dark-yellow-green bg-yellow-green"
                         : "m-2 p-4 text-gray-400"
                 }
             >
-                Skills
+                Summary
             </div>
-            <div className="m-2 p-4 text-gray-400">Summary</div>
+            <div className="m-2 p-4 text-gray-400">Skills</div>
             <div className="m-2 p-4 text-gray-400">Work History</div>
             <div className="m-2 p-4 text-gray-400">Education</div>
         </div>
