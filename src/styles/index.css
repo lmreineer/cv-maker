@@ -4,7 +4,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
-/* Date drop-down with search input placeholder text color */
+/* Date drop-down with search input's placeholder text color */
 .css-1jqq78o-placeholder {
     color: #9ca3af !important;
+}
+
+/* Date drop-down with search input's container */
+.css-b62m3t-container {
+    width: 100% !important;
+}
+
+/* Date drop-down with search input's value or input container */
+.css-1fdsijx-ValueContainer {
+    padding: 0 !important;
 }

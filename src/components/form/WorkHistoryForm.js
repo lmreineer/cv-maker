@@ -19,6 +19,7 @@ const WorkHistoryForm = () => {
             border: "2px solid #E5E7EB",
             boxShadow: "none",
             margin: "0.75rem",
+            paddingLeft: "1rem",
             height: "3.75rem",
             borderRadius: "0.5rem",
             "&:hover": {
@@ -29,7 +30,7 @@ const WorkHistoryForm = () => {
 
     return (
         <>
-            <form className="flex flex-col justify-center w-3/4">
+            <form className="flex flex-col justify-center w-1/2">
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
@@ -38,14 +39,14 @@ const WorkHistoryForm = () => {
                         type="text"
                         name="jobTitle"
                         placeholder="Job Title"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-1/3"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
                         maxLength={40}
                     />
                     <input
                         type="text"
                         name="company"
                         placeholder="Company"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-1/3"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
                         maxLength={40}
                     />
                 </div>
@@ -54,18 +55,18 @@ const WorkHistoryForm = () => {
                         type="text"
                         name="city"
                         placeholder="City"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-1/3"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
                         maxLength={40}
                     />
                     <input
                         type="text"
                         name="state"
                         placeholder="State / Country"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-1/3"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
                         maxLength={40}
                     />
                 </div>
-                <div className="flex justify-evenly">
+                <div className="flex justify-center">
                     <Select
                         name="yearStart"
                         placeholder="Year Start"
@@ -80,7 +81,7 @@ const WorkHistoryForm = () => {
                     />
                 </div>
 
-                <div className="flex justify-evenly">
+                <div className="flex justify-around">
                     <button
                         className="bg-gray-300 hover:bg-gray-400 transition p-5 w-56 rounded-lg my-10"
                         onClick={navigateBack}
