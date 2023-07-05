@@ -4,4 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
-@import "react-widgets/styles.css";
+/* Date drop-down with search input placeholder text color */
+.css-1jqq78o-placeholder {
+    color: #9ca3af !important;
+}

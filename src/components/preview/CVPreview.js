@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import CVModal from "./CVModal";
+
 import CVContent from "./CVContent";
 
 const CVPreview = ({
@@ -14,7 +16,7 @@ const CVPreview = ({
     emailInput,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
-
+    
     const toggleClick = () => {
         setIsClicked(!isClicked);
     };
