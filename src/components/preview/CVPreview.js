@@ -9,11 +9,15 @@ const CVPreview = ({
     lastNameInput,
     professionInput,
     countryInput,
-    cityInput,
-    stateInput,
+    cityContactInput,
+    stateContactInput,
     zipCodeInput,
     phoneInput,
     emailInput,
+    jobTitleInput,
+    companyInput,
+    cityWorkInput,
+    stateWorkInput,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     
@@ -37,8 +41,8 @@ const CVPreview = ({
                     contactHeading="text-xs font-medium"
                     contactInput="font-normal ml-1"
                     countryInput={countryInput}
-                    cityInput={cityInput}
-                    stateInput={stateInput}
+                    cityContactInput={cityContactInput}
+                    stateContactInput={stateContactInput}
                     zipCodeInput={zipCodeInput}
                     phoneInput={phoneInput}
                     emailInput={emailInput}
@@ -51,7 +55,11 @@ const CVPreview = ({
                     workTimePeriodContainer="text-xs w-44"
                     stayDetailContainer="ml-20 text-xs w-full"
                     stayDetailHeading="text-base"
+                    jobTitleInput={jobTitleInput}
                     institution="mt-1 italic font-light"
+                    companyInput={companyInput}
+                    cityWorkInput={cityWorkInput}
+                    stateWorkInput={stateWorkInput}
                     workDescriptionContainer="list-disc ml-5 mt-2"
                     workDescriptionList="font-light"
                     educationTimePeriodContainer="text-xs w-20"
@@ -69,8 +77,8 @@ const CVPreview = ({
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
                         countryInput={countryInput}
-                        cityInput={cityInput}
-                        stateInput={stateInput}
+                        cityContactInput={cityContactInput}
+                        stateContactInput={stateContactInput}
                         zipCodeInput={zipCodeInput}
                         phoneInput={phoneInput}
                         emailInput={emailInput}

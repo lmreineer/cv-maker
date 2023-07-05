@@ -10,8 +10,8 @@ const CVContent = ({
     address,
     contactInput,
     countryInput,
-    cityInput,
-    stateInput,
+    cityContactInput,
+    stateContactInput,
     zipCodeInput,
     contactHeading,
     phoneInput,
@@ -25,7 +25,11 @@ const CVContent = ({
     workTimePeriodContainer,
     stayDetailContainer,
     stayDetailHeading,
+    jobTitleInput,
     institution,
+    companyInput,
+    cityWorkInput,
+    stateWorkInput,
     workDescriptionContainer,
     workDescriptionList,
     educationTimePeriodContainer,
@@ -34,7 +38,8 @@ const CVContent = ({
 
     const hasNoAddress =
         pathname === "/work-history" &&
-        (cityInput || stateInput || countryInput || zipCodeInput) === "";
+        (cityContactInput || stateContactInput || countryInput || zipCodeInput) ===
+        "";
 
     const hasNoPhone = pathname === "/work-history" && phoneInput === "";
 
@@ -54,19 +59,19 @@ const CVContent = ({
                         ""
                     ) : (
                         <span className={contactInput}>
-                            {cityInput ||
-                                stateInput ||
+                            {cityContactInput ||
+                                stateContactInput ||
                                 countryInput ||
                                 zipCodeInput ||
                                 (defaultAddress && pathname === "/work-history"
                                     ? ""
                                     : defaultAddress)}
 
-                            {cityInput &&
-                                (stateInput || countryInput || zipCodeInput) &&
-                                `, ${stateInput || countryInput || zipCodeInput}`}
+                            {cityContactInput &&
+                                (stateContactInput || countryInput || zipCodeInput) &&
+                                `, ${stateContactInput || countryInput || zipCodeInput}`}
 
-                            {stateInput &&
+                            {stateContactInput &&
                                 (countryInput || zipCodeInput) &&
                                 `, ${countryInput || zipCodeInput}`}
 
@@ -119,9 +124,17 @@ const CVContent = ({
                         <h6>2023-04 - Current</h6>
                     </div>
                     <div className={stayDetailContainer}>
-                        <div className={stayDetailHeading}>Marketing Intern</div>
+                        <div className={stayDetailHeading}>
+                            {jobTitleInput || "Marketing Intern"}
+                        </div>
                         <div>
-                            <h6 className={institution}>XYZ Company, City, State</h6>
+                            <h6 className={institution}>
+                                <span>{`${companyInput || "XYZ Company, "}, `}</span>
+
+                                {cityWorkInput || stateWorkInput || "City, State"}
+
+                                {cityWorkInput && `, ${stateWorkInput}`}
+                            </h6>
                             <ul className={workDescriptionContainer}>
                                 <li className={workDescriptionList}>
                                     Assisted the marketing team in developing and implementing

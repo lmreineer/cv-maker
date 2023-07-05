@@ -1,16 +1,16 @@
 const HeadingForm = ({
+    handleSubmit,
+    formikErrors,
     firstNameValues,
     lastNameValues,
     professionValues,
     countryValues,
-    cityValues,
-    stateValues,
+    cityContactValues,
+    stateContactValues,
     zipCodeValues,
     phoneValues,
     emailValues,
     handleChange,
-    handleSubmit,
-    formikErrors,
 }) => {
     return (
         <>
@@ -84,7 +84,7 @@ const HeadingForm = ({
                             name="city"
                             placeholder="City"
                             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                            value={cityValues}
+                            value={cityContactValues}
                             onChange={handleChange}
                         />
                     </div>
@@ -94,7 +94,7 @@ const HeadingForm = ({
                             name="state"
                             placeholder="State"
                             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
-                            value={stateValues}
+                            value={stateContactValues}
                             onChange={handleChange}
                         />
                         <input

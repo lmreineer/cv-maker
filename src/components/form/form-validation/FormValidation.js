@@ -19,11 +19,15 @@ const FormValidation = () => {
             lastName: "",
             profession: "",
             country: "",
-            city: "",
-            state: "",
+            cityContact: "",
+            stateContact: "",
             zipCode: "",
             phone: "",
             email: "",
+            jobTitle: "",
+            company: "",
+            cityWork: "",
+            stateWork: "",
         },
 
         validationSchema: Yup.object({
@@ -53,11 +57,15 @@ const FormValidation = () => {
         lastName,
         profession,
         country,
-        city,
-        state,
+        cityContact,
+        stateContact,
         zipCode,
         phone,
         email,
+        jobTitle,
+        company,
+        cityWork,
+        stateWork,
     } = formik.values;
 
     const capitaliseFirstLetter = (input) => {
@@ -86,8 +94,8 @@ const FormValidation = () => {
                             lastNameValues={lastName}
                             professionValues={profession}
                             countryValues={country}
-                            cityValues={city}
-                            stateValues={state}
+                            cityContactValues={cityContact}
+                            stateContactValues={stateContact}
                             zipCodeValues={zipCode}
                             phoneValues={phone}
                             emailValues={email}
@@ -97,7 +105,19 @@ const FormValidation = () => {
                         />
                     }
                 />
-                <Route path="/work-history" element={<WorkHistoryForm handleSubmit={formik.handleSubmit} />} />
+                <Route
+                    path="/work-history"
+                    element={
+                        <WorkHistoryForm
+                            jobTitleValues={jobTitle}
+                            companyValues={company}
+                            cityWorkValues={cityWork}
+                            stateWorkValues={stateWork}
+                            handleChange={formik.handleChange}
+                            handleSubmit={formik.handleSubmit}
+                        />
+                    }
+                />
                 <Route path="/education" element={<EducationForm />} />
             </Routes>
 
@@ -106,11 +126,15 @@ const FormValidation = () => {
                 lastNameInput={capitaliseFirstLetter(lastName)}
                 professionInput={capitalizeFirstLetterOfEachWord(profession)}
                 countryInput={capitalizeFirstLetterOfEachWord(country)}
-                cityInput={capitalizeFirstLetterOfEachWord(city)}
-                stateInput={capitalizeFirstLetterOfEachWord(state)}
+                cityContactInput={capitalizeFirstLetterOfEachWord(cityContact)}
+                stateContactInput={capitalizeFirstLetterOfEachWord(stateContact)}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
                 emailInput={lowerCaseEachLetter(email)}
+                jobTitleInput={capitalizeFirstLetterOfEachWord(jobTitle)}
+                companyInput={capitalizeFirstLetterOfEachWord(company)}
+                cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
+                stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
             />
         </>
     );

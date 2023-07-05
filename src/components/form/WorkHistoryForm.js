@@ -2,7 +2,14 @@ import { useNavigate } from "react-router-dom";
 
 import Select from "react-select";
 
-const WorkHistoryForm = ({handleSubmit}) => {
+const WorkHistoryForm = ({
+    handleSubmit,
+    jobTitleValues,
+    companyValues,
+    cityWorkValues,
+    stateWorkValues,
+    handleChange,
+}) => {
     const navigate = useNavigate();
 
     const navigateBack = () => navigate("/");
@@ -30,7 +37,10 @@ const WorkHistoryForm = ({handleSubmit}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="flex flex-col justify-center w-1/2">
+            <form
+                onSubmit={handleSubmit}
+                className="flex flex-col justify-center w-1/2"
+            >
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
@@ -40,6 +50,8 @@ const WorkHistoryForm = ({handleSubmit}) => {
                         name="jobTitle"
                         placeholder="Job Title"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        value={jobTitleValues}
+                        onChange={handleChange}
                         maxLength={40}
                     />
                     <input
@@ -47,22 +59,28 @@ const WorkHistoryForm = ({handleSubmit}) => {
                         name="company"
                         placeholder="Company"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        value={companyValues}
+                        onChange={handleChange}
                         maxLength={40}
                     />
                 </div>
                 <div className="flex justify-center">
                     <input
                         type="text"
-                        name="city"
+                        name="cityWork"
                         placeholder="City"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        value={cityWorkValues}
+                        onChange={handleChange}
                         maxLength={40}
                     />
                     <input
                         type="text"
-                        name="state"
+                        name="stateWork"
                         placeholder="State / Country"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        value={stateWorkValues}
+                        onChange={handleChange}
                         maxLength={40}
                     />
                 </div>
