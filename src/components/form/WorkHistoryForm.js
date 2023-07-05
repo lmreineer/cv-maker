@@ -39,14 +39,14 @@ const WorkHistoryForm = () => {
                         type="text"
                         name="jobTitle"
                         placeholder="Job Title"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                     <input
                         type="text"
                         name="company"
                         placeholder="Company"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                 </div>
@@ -55,14 +55,14 @@ const WorkHistoryForm = () => {
                         type="text"
                         name="city"
                         placeholder="City"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                     <input
                         type="text"
                         name="state"
                         placeholder="State / Country"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-screen"
+                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                 </div>
