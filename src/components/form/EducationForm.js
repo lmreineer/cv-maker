@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 import Select from "react-select";
 
-const WorkHistoryForm = ({handleSubmit}) => {
+const EducationForm = () => {
     const navigate = useNavigate();
 
-    const navigateBack = () => navigate("/");
+    const navigateBack = () => navigate("/work-history");
 
     const options = [
         { value: "Chocolate", label: "Chocolate" },
@@ -30,22 +30,22 @@ const WorkHistoryForm = ({handleSubmit}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="flex flex-col justify-center w-1/2">
+            <form className="flex flex-col justify-center w-1/2">
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
-                    Work History:
+                    Education:
                 </h1>
                 <div className="flex justify-center">
                     <input
                         type="text"
-                        name="jobTitle"
-                        placeholder="Job Title"
+                        name="schoolName"
+                        placeholder="School Name"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                     <input
                         type="text"
-                        name="company"
-                        placeholder="Company"
+                        name="schoolLocation"
+                        placeholder="School Location"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
@@ -53,29 +53,29 @@ const WorkHistoryForm = ({handleSubmit}) => {
                 <div className="flex justify-center">
                     <input
                         type="text"
-                        name="city"
-                        placeholder="City"
+                        name="degree"
+                        placeholder="Degree"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                     <input
                         type="text"
-                        name="state"
-                        placeholder="State / Country"
+                        name="fieldOfStudy"
+                        placeholder="Field of Study"
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         maxLength={40}
                     />
                 </div>
                 <div className="flex justify-center">
                     <Select
-                        name="yearStart"
-                        placeholder="Year Start"
+                        name="graduationStart"
+                        placeholder="Graduation Start Year"
                         options={options}
                         styles={customStyles}
                     />
                     <Select
-                        name="yearStart"
-                        placeholder="Month Start"
+                        name="graduation"
+                        placeholder="Graduation Start Month"
                         options={options}
                         styles={customStyles}
                     />
@@ -100,4 +100,4 @@ const WorkHistoryForm = ({handleSubmit}) => {
     );
 };
 
-export default WorkHistoryForm;
+export default EducationForm;

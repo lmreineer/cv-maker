@@ -5,6 +5,7 @@ import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 
 import HeadingForm from "../HeadingForm";
 import WorkHistoryForm from "../WorkHistoryForm";
+import EducationForm from "../EducationForm";
 
 import CVPreview from "../../preview/CVPreview";
 
@@ -37,6 +38,9 @@ const FormValidation = () => {
             switch (pathname) {
                 case "/":
                     navigate("/work-history");
+                    break;
+                case "/work-history":
+                    navigate("/education");
                     break;
                 default:
                     navigate("/work-history");
@@ -93,7 +97,8 @@ const FormValidation = () => {
                         />
                     }
                 />
-                <Route path="/work-history" element={<WorkHistoryForm />} />
+                <Route path="/work-history" element={<WorkHistoryForm handleSubmit={formik.handleSubmit} />} />
+                <Route path="/education" element={<EducationForm />} />
             </Routes>
 
             <CVPreview
