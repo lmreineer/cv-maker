@@ -28,6 +28,8 @@ const FormValidation = () => {
             company: "",
             cityWork: "",
             stateWork: "",
+            yearStartWork: "",
+            monthStartWork: "",
         },
 
         validationSchema: Yup.object({
@@ -66,6 +68,8 @@ const FormValidation = () => {
         company,
         cityWork,
         stateWork,
+        yearStartWork,
+        monthStartWork,
     } = formik.values;
 
     const capitaliseFirstLetter = (input) => {
@@ -109,12 +113,15 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
+                            handleSubmit={formik.handleSubmit}
                             jobTitleValues={jobTitle}
                             companyValues={company}
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
                             handleChange={formik.handleChange}
-                            handleSubmit={formik.handleSubmit}
+                            yearStartWorkValues={yearStartWork}
+                            monthStartWorkValues={monthStartWork}
+                            setFieldValue={formik.setFieldValue}
                         />
                     }
                 />
@@ -135,6 +142,8 @@ const FormValidation = () => {
                 companyInput={capitalizeFirstLetterOfEachWord(company)}
                 cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
                 stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
+                yearStartWorkInput={yearStartWork}
+                monthStartWorkInput={monthStartWork}
             />
         </>
     );

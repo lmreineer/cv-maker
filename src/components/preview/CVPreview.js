@@ -18,6 +18,8 @@ const CVPreview = ({
     companyInput,
     cityWorkInput,
     stateWorkInput,
+    yearStartWorkInput,
+    monthStartWorkInput,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     
@@ -53,6 +55,8 @@ const CVPreview = ({
                     skillsList="list-disc ml-10 mt-2 text-xs"
                     stayPeriodContainer="flex mt-3"
                     workTimePeriodContainer="text-xs w-44"
+                    yearStartWorkInput={yearStartWorkInput}
+                    monthStartWorkInput={monthStartWorkInput}
                     stayDetailContainer="ml-20 text-xs w-full"
                     stayDetailHeading="text-base"
                     jobTitleInput={jobTitleInput}

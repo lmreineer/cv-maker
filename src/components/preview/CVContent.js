@@ -23,6 +23,8 @@ const CVContent = ({
     skillsList,
     stayPeriodContainer,
     workTimePeriodContainer,
+    yearStartWorkInput,
+    monthStartWorkInput,
     stayDetailContainer,
     stayDetailHeading,
     jobTitleInput,
@@ -121,7 +123,10 @@ const CVContent = ({
                 <h6 className={mainBackgroundHeading}>Work History</h6>
                 <div className={stayPeriodContainer}>
                     <div className={workTimePeriodContainer}>
-                        <h6>2023-04 - Current</h6>
+                        <h6>
+                            {yearStartWorkInput || "2023"}-{monthStartWorkInput || "04"} -
+                            Current
+                        </h6>
                     </div>
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>

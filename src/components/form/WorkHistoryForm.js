@@ -9,10 +9,15 @@ const WorkHistoryForm = ({
     cityWorkValues,
     stateWorkValues,
     handleChange,
+    yearStartWorkValues,
+    monthStartWorkValues,
+    setFieldValue,
 }) => {
     const navigate = useNavigate();
 
-    const navigateBack = () => navigate("/");
+    const navigateBack = () => {
+        navigate("/");
+    };
 
     const options = [
         { value: "Chocolate", label: "Chocolate" },
@@ -86,16 +91,24 @@ const WorkHistoryForm = ({
                 </div>
                 <div className="flex justify-center">
                     <Select
-                        name="yearStart"
+                        name="yearStartWork"
                         placeholder="Year Start"
                         options={options}
                         styles={customStyles}
+                        value={yearStartWorkValues}
+                        onChange={(e) => {
+                            setFieldValue("yearStartWork", e.value);
+                        }}
                     />
                     <Select
-                        name="yearStart"
+                        name="monthStartWork"
                         placeholder="Month Start"
                         options={options}
                         styles={customStyles}
+                        value={monthStartWorkValues}
+                        onChange={(e) => {
+                            setFieldValue("monthStartWork", e.value);
+                        }}
                     />
                 </div>
 
