@@ -9,8 +9,6 @@ const WorkHistoryForm = ({
     cityWorkValues,
     stateWorkValues,
     handleChange,
-    yearStartWorkValues,
-    monthStartWorkValues,
     setFieldValue,
 }) => {
     const navigate = useNavigate();
@@ -95,7 +93,6 @@ const WorkHistoryForm = ({
                         placeholder="Year Start"
                         options={options}
                         styles={customStyles}
-                        value={yearStartWorkValues}
                         onChange={(e) => {
                             setFieldValue("yearStartWork", e.value);
                         }}
@@ -105,7 +102,6 @@ const WorkHistoryForm = ({
                         placeholder="Month Start"
                         options={options}
                         styles={customStyles}
-                        value={monthStartWorkValues}
                         onChange={(e) => {
                             setFieldValue("monthStartWork", e.value);
                         }}

@@ -28,8 +28,6 @@ const FormValidation = () => {
             company: "",
             cityWork: "",
             stateWork: "",
-            yearStartWork: "",
-            monthStartWork: "",
         },
 
         validationSchema: Yup.object({
@@ -94,6 +92,8 @@ const FormValidation = () => {
                     path="/"
                     element={
                         <HeadingForm
+                            handleSubmit={formik.handleSubmit}
+                            formikErrors={formik.errors}
                             firstNameValues={firstName}
                             lastNameValues={lastName}
                             professionValues={profession}
@@ -104,8 +104,6 @@ const FormValidation = () => {
                             phoneValues={phone}
                             emailValues={email}
                             handleChange={formik.handleChange}
-                            handleSubmit={formik.handleSubmit}
-                            formikErrors={formik.errors}
                         />
                     }
                 />
