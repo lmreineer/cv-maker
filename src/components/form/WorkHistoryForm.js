@@ -17,11 +17,23 @@ const WorkHistoryForm = ({
         navigate("/");
     };
 
-    const options = [
-        { value: "Chocolate", label: "Chocolate" },
-        { value: "Strawberry", label: "Strawberry" },
-        { value: "Vanilla", label: "Vanilla" },
-    ];
+    const yearStartList = [];
+    for (let i = 0; i <= 70; i += 1) {
+        const year = 2023 - i;
+        yearStartList.push({ value: year.toString(), label: year.toString() });
+    }
+
+    const monthStartList = [];
+    for (let i = 1; i <= 12; i += 1) {
+        monthStartList.push({ value: i.toString(), label: i.toString() });
+    }
+
+    monthStartList.forEach((el) => {
+        if (el.value.length === 1) {
+            el.value = `0${el.value}`;
+            el.label = `0${el.label}`;
+        }
+    });
 
     const customStyles = {
         control: (base) => ({
@@ -91,7 +103,7 @@ const WorkHistoryForm = ({
                     <Select
                         name="yearStartWork"
                         placeholder="Year Start"
-                        options={options}
+                        options={yearStartList}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("yearStartWork", e.value);
@@ -100,7 +112,7 @@ const WorkHistoryForm = ({
                     <Select
                         name="monthStartWork"
                         placeholder="Month Start"
-                        options={options}
+                        options={monthStartList}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("monthStartWork", e.value);
