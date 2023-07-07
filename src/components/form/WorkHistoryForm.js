@@ -153,7 +153,7 @@ const WorkHistoryForm = ({
           <label className="m-3 spacing-wide text-lg select-none hover:cursor-pointer">
             <input
               type="checkbox"
-              className="ml-1 mr-3 scale-150"
+              className="ml-1 mr-3 scale-150 w-3 h-3"
               onClick={handleCheckedState}
             />
             I currently work here
