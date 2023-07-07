@@ -20,6 +20,8 @@ const CVPreview = ({
     stateWorkInput,
     yearStartWorkInput,
     monthStartWorkInput,
+    yearEndWorkInput,
+    monthEndWorkInput,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     
@@ -57,6 +59,8 @@ const CVPreview = ({
                     workTimePeriodContainer="text-xs w-44"
                     yearStartWorkInput={yearStartWorkInput}
                     monthStartWorkInput={monthStartWorkInput}
+                    yearEndWorkInputWorkInput={yearEndWorkInput}
+                    monthEndWorkInput={monthEndWorkInput}
                     stayDetailContainer="ml-20 text-xs w-full"
                     stayDetailHeading="text-base"
                     jobTitleInput={jobTitleInput}

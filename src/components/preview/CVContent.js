@@ -25,6 +25,8 @@ const CVContent = ({
     workTimePeriodContainer,
     yearStartWorkInput,
     monthStartWorkInput,
+    yearEndWorkInput,
+    monthEndWorkInput,
     stayDetailContainer,
     stayDetailHeading,
     jobTitleInput,
@@ -124,8 +126,8 @@ const CVContent = ({
                 <div className={stayPeriodContainer}>
                     <div className={workTimePeriodContainer}>
                         <h6>
-                            {yearStartWorkInput || "2023"}-{monthStartWorkInput || "04"} -
-                            Current
+                            {yearStartWorkInput || "2020"}-{monthStartWorkInput || "04"} -
+                            {yearEndWorkInput || "2023"}-{monthEndWorkInput || "06"}
                         </h6>
                     </div>
                     <div className={stayDetailContainer}>
@@ -162,7 +164,7 @@ const CVContent = ({
                         </div>
                     </div>
                 </div>
-                <div className={stayPeriodContainer}>
+                {/* <div className={stayPeriodContainer}>
                     <div className={workTimePeriodContainer}>
                         <h6>2020-07 - 2022</h6>
                     </div>
@@ -190,7 +192,7 @@ const CVContent = ({
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <h6 className={mainBackgroundHeading}>Education</h6>
                 <div className={stayPeriodContainer}>
                     <div className={educationTimePeriodContainer}>
