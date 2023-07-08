@@ -10,6 +10,7 @@ const WorkHistoryForm = ({
   companyValues,
   cityWorkValues,
   stateWorkValues,
+  currentlyWorkingCheckbox,
   handleChange,
   setFieldValue,
 }) => {
@@ -33,8 +34,9 @@ const WorkHistoryForm = ({
 
   const [checked, setChecked] = useState(false);
 
-  const handleCheckedState = () => {
+  const handleCheckedState = (e) => {
     checked === false ? setChecked(true) : setChecked(false);
+    console.log(currentlyWorkingCheckbox)
   };
 
   const navigate = useNavigate();
@@ -144,7 +146,7 @@ const WorkHistoryForm = ({
             options={monthList}
             styles={customStyles}
             onChange={(e) => {
-              setFieldValue("yearEndwork", e.value);
+              setFieldValue("monthEndWork", e.value);
             }}
             isDisabled={checked}
           />
@@ -153,8 +155,11 @@ const WorkHistoryForm = ({
           <label className="m-3 spacing-wide text-lg select-none hover:cursor-pointer">
             <input
               type="checkbox"
+              name="currentlyWorkingCheckbox"
               className="ml-1 mr-3 scale-150 w-3 h-3"
               onClick={handleCheckedState}
+              value={currentlyWorkingCheckbox}
+              onChange={handleChange}
             />
             I currently work here
           </label>

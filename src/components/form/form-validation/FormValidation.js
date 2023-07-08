@@ -70,6 +70,7 @@ const FormValidation = () => {
         monthStartWork,
         yearEndWork,
         monthEndWork,
+        currentlyWorkingCheckbox,
     } = formik.values;
 
     const capitaliseFirstLetter = (input) => {
@@ -118,6 +119,7 @@ const FormValidation = () => {
                             companyValues={company}
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
+                            currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                             handleChange={formik.handleChange}
                             setFieldValue={formik.setFieldValue}
                         />
@@ -143,7 +145,8 @@ const FormValidation = () => {
                 yearStartWorkInput={yearStartWork}
                 monthStartWorkInput={monthStartWork}
                 yearEndWorkInput={yearEndWork}
-                monthEndWorkWorkInput={yearEndWork}
+                monthEndWorkInput={monthEndWork}
+                currentlyWorkingCheckboxState={currentlyWorkingCheckbox}
             />
         </>
     );

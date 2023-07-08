@@ -22,6 +22,7 @@ const CVPreview = ({
     monthStartWorkInput,
     yearEndWorkInput,
     monthEndWorkInput,
+    currentlyWorkingCheckboxState,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     
@@ -59,8 +60,9 @@ const CVPreview = ({
                     workTimePeriodContainer="text-xs w-44"
                     yearStartWorkInput={yearStartWorkInput}
                     monthStartWorkInput={monthStartWorkInput}
-                    yearEndWorkInputWorkInput={yearEndWorkInput}
+                    yearEndWorkInput={yearEndWorkInput}
                     monthEndWorkInput={monthEndWorkInput}
+                    currentlyWorkingCheckboxState={currentlyWorkingCheckboxState}
                     stayDetailContainer="ml-20 text-xs w-full"
                     stayDetailHeading="text-base"
                     jobTitleInput={jobTitleInput}

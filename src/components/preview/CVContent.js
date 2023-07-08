@@ -27,6 +27,7 @@ const CVContent = ({
     monthStartWorkInput,
     yearEndWorkInput,
     monthEndWorkInput,
+    currentlyWorkingCheckboxState,
     stayDetailContainer,
     stayDetailHeading,
     jobTitleInput,
@@ -127,7 +128,9 @@ const CVContent = ({
                     <div className={workTimePeriodContainer}>
                         <h6>
                             {yearStartWorkInput || "2020"}-{monthStartWorkInput || "04"} -
-                            {yearEndWorkInput || "2023"}-{monthEndWorkInput || "06"}
+                            {currentlyWorkingCheckboxState === true
+                                ? "Current"
+                                : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`}
                         </h6>
                     </div>
                     <div className={stayDetailContainer}>
