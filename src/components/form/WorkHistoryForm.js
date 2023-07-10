@@ -13,6 +13,7 @@ const WorkHistoryForm = ({
   currentlyWorkingCheckbox,
   handleChange,
   setFieldValue,
+  setAsd,
 }) => {
   const yearList = [];
   for (let i = 0; i <= 70; i += 1) {
@@ -34,9 +35,8 @@ const WorkHistoryForm = ({
 
   const [checked, setChecked] = useState(false);
 
-  const handleCheckedState = (e) => {
+  const handleCheckedState = () => {
     checked === false ? setChecked(true) : setChecked(false);
-    console.log(currentlyWorkingCheckbox)
   };
 
   const navigate = useNavigate();
@@ -60,6 +60,11 @@ const WorkHistoryForm = ({
     }),
   };
 
+  const asd = (e) => {
+    handleChange(e);
+    setAsd(true);
+  };
+
   return (
     <>
       <form
@@ -76,7 +81,7 @@ const WorkHistoryForm = ({
             placeholder="Job Title"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={jobTitleValues}
-            onChange={handleChange}
+            onChange={(e) => asd(e)}
             maxLength={40}
           />
           <input
@@ -85,7 +90,7 @@ const WorkHistoryForm = ({
             placeholder="Company"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={companyValues}
-            onChange={handleChange}
+            onChange={(e) => asd(e)}
             maxLength={40}
           />
         </div>
@@ -96,7 +101,7 @@ const WorkHistoryForm = ({
             placeholder="City"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={cityWorkValues}
-            onChange={handleChange}
+            onChange={(e) => asd(e)}
             maxLength={40}
           />
           <input
@@ -105,7 +110,7 @@ const WorkHistoryForm = ({
             placeholder="State / Country"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={stateWorkValues}
-            onChange={handleChange}
+            onChange={(e) => asd(e)}
             maxLength={40}
           />
         </div>
@@ -129,7 +134,7 @@ const WorkHistoryForm = ({
             }}
           />
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-around">
           <Select
             name="yearEndWork"
             placeholder="Year End"
@@ -152,14 +157,14 @@ const WorkHistoryForm = ({
           />
         </div>
         <div className="flex">
-          <label className="m-3 spacing-wide text-lg select-none hover:cursor-pointer">
+          <label className="flex m-4 text-base select-none hover:cursor-pointer">
             <input
               type="checkbox"
               name="currentlyWorkingCheckbox"
-              className="ml-1 mr-3 scale-150 w-3 h-3"
+              className="mr-3 w-4 hover:cursor-pointer"
               onClick={handleCheckedState}
               value={currentlyWorkingCheckbox}
-              onChange={handleChange}
+              onChange={(e) => asd(e)}
             />
             I currently work here
           </label>

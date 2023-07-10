@@ -25,7 +25,7 @@ const CVPreview = ({
     currentlyWorkingCheckboxState,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
-    
+
     const toggleClick = () => {
         setIsClicked(!isClicked);
     };

@@ -1,17 +1,23 @@
+import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
+
+import { useState } from "react";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
 
 import HeadingForm from "../HeadingForm";
 import WorkHistoryForm from "../WorkHistoryForm";
 import EducationForm from "../EducationForm";
+import Asd from "../Asd";
 
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
     const pathname = useLocation().pathname;
+
     const navigate = useNavigate();
+
+    const [asd, setAsd] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -38,16 +44,20 @@ const FormValidation = () => {
                 .email("Email is invalid"),
         }),
 
+
         onSubmit: () => {
+            // eslint-disable-next-line default-case
             switch (pathname) {
                 case "/":
                     navigate("/work-history");
                     break;
                 case "/work-history":
-                    navigate("/education");
+                    if (asd === true) {
+                        navigate("/education");
+                    } else if (asd === false) {
+                        navigate("/asd");
+                    }
                     break;
-                default:
-                    navigate("/work-history");
             }
         },
     });
@@ -122,10 +132,12 @@ const FormValidation = () => {
                             currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                             handleChange={formik.handleChange}
                             setFieldValue={formik.setFieldValue}
+                            setAsd={setAsd}
                         />
                     }
                 />
                 <Route path="/education" element={<EducationForm />} />
+                <Route path="/asd" element={<Asd />} />
             </Routes>
 
             <CVPreview
