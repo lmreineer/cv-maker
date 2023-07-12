@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import HeadingForm from "../HeadingForm";
 import WorkHistoryForm from "../WorkHistoryForm";
 import EducationForm from "../EducationForm";
-import Asd from "../Asd";
+import SkipWorkHistoryModal from "../modal/SkipWorkHistoryModal";
 
 import CVPreview from "../../preview/CVPreview";
 
@@ -17,7 +17,7 @@ const FormValidation = () => {
 
     const navigate = useNavigate();
 
-    const [asd, setAsd] = useState(false);
+    const [showWorkHistoryModal, setShowWorkHistoryModal] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -52,10 +52,10 @@ const FormValidation = () => {
                     navigate("/work-history");
                     break;
                 case "/work-history":
-                    if (asd === true) {
+                    if (showWorkHistoryModal === true) {
                         navigate("/education");
-                    } else if (asd === false) {
-                        navigate("/asd");
+                    } else if (showWorkHistoryModal === false) {
+                        navigate("/showWorkHistoryModal");
                     }
                     break;
             }
@@ -132,12 +132,12 @@ const FormValidation = () => {
                             currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                             handleChange={formik.handleChange}
                             setFieldValue={formik.setFieldValue}
-                            setAsd={setAsd}
+                            setShowWorkHistoryModal={setShowWorkHistoryModal}
                         />
                     }
                 />
                 <Route path="/education" element={<EducationForm />} />
-                <Route path="/asd" element={<Asd />} />
+                <Route path="/showWorkHistoryModal" element={<SkipWorkHistoryModal />} />
             </Routes>
 
             <CVPreview

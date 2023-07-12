@@ -13,7 +13,7 @@ const WorkHistoryForm = ({
   currentlyWorkingCheckbox,
   handleChange,
   setFieldValue,
-  setAsd,
+  setShowWorkHistoryModal,
 }) => {
   const yearList = [];
   for (let i = 0; i <= 70; i += 1) {
@@ -60,9 +60,11 @@ const WorkHistoryForm = ({
     }),
   };
 
-  const asd = (e) => {
+  const handleChangeAndModal = (e) => {
     handleChange(e);
-    setAsd(true);
+    e.target.value !== ""
+      ? setShowWorkHistoryModal(true)
+      : setShowWorkHistoryModal(false);
   };
 
   return (
@@ -81,7 +83,7 @@ const WorkHistoryForm = ({
             placeholder="Job Title"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={jobTitleValues}
-            onChange={(e) => asd(e)}
+            onChange={(e) => handleChangeAndModal(e)}
             maxLength={40}
           />
           <input
@@ -90,7 +92,7 @@ const WorkHistoryForm = ({
             placeholder="Company"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={companyValues}
-            onChange={(e) => asd(e)}
+            onChange={(e) => handleChangeAndModal(e)}
             maxLength={40}
           />
         </div>
@@ -101,7 +103,7 @@ const WorkHistoryForm = ({
             placeholder="City"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={cityWorkValues}
-            onChange={(e) => asd(e)}
+            onChange={(e) => handleChangeAndModal(e)}
             maxLength={40}
           />
           <input
@@ -110,7 +112,7 @@ const WorkHistoryForm = ({
             placeholder="State / Country"
             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
             value={stateWorkValues}
-            onChange={(e) => asd(e)}
+            onChange={(e) => handleChangeAndModal(e)}
             maxLength={40}
           />
         </div>
@@ -164,7 +166,7 @@ const WorkHistoryForm = ({
               className="mr-3 w-4 hover:cursor-pointer"
               onClick={handleCheckedState}
               value={currentlyWorkingCheckbox}
-              onChange={(e) => asd(e)}
+              onChange={(e) => handleChangeAndModal(e)}
             />
             I currently work here
           </label>
