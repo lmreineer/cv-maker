@@ -9,8 +9,9 @@
     color: #9ca3af !important;
 }
 
-/* Date drop-down with search input's container */
-.css-b62m3t-container {
+/* Date drop-down with search input's disabled and non-disabled container */
+.css-b62m3t-container,
+.css-3iigni-container {
     width: 100% !important;
 }
 

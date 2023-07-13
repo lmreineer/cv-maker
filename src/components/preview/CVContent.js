@@ -45,8 +45,8 @@ const CVContent = ({
         pathname === "/work-history" &&
         (cityContactInput || stateContactInput || countryInput || zipCodeInput) ===
         "";
-
     const hasNoPhone = pathname === "/work-history" && phoneInput === "";
+    const hasNoCompany = pathname === "/education" && jobTitleInput !== "" && companyInput === "";
 
     let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
@@ -139,7 +139,11 @@ const CVContent = ({
                         </div>
                         <div>
                             <h6 className={institution}>
-                                <span>{`${companyInput || "XYZ Company, "}, `}</span>
+                                {hasNoCompany ? (
+                                    ""
+                                ) :
+                                    <span>{`${companyInput || "XYZ Company, "}, `}</span>
+                                }
 
                                 {cityWorkInput || stateWorkInput || "City, State"}
 
