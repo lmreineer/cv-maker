@@ -15,6 +15,22 @@ import CVPreview from "../../preview/CVPreview";
 const FormValidation = () => {
     const pathname = useLocation().pathname;
 
+    const getCorrectSchema = () => {
+        if (pathname === "/") {
+            return {
+                firstName: Yup.string().required("First name is required"),
+                lastName: Yup.string().required("Last name is required"),
+                email: Yup.string()
+                    .required("Email is required")
+                    .email("Email is invalid"),
+            };
+        } else if (pathname === "/work-history") {
+            return {
+                jobTitle: Yup.string().required("Job title is required"),
+            };
+        }
+    };
+
     const navigate = useNavigate();
 
     const [showWorkHistoryModal, setShowWorkHistoryModal] = useState(false);
@@ -35,14 +51,7 @@ const FormValidation = () => {
             cityWork: "",
             stateWork: "",
         },
-        validationSchema: Yup.object({
-            firstName: Yup.string().required("First name is required"),
-            lastName: Yup.string().required("Last name is required"),
-            email: Yup.string()
-                .required("Email is required")
-                .email("Email is invalid"),
-        }),
-
+        validationSchema: Yup.object(getCorrectSchema()),
         onSubmit: () => {
             // eslint-disable-next-line default-case
             switch (pathname) {
