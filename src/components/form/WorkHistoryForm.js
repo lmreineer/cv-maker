@@ -69,6 +69,13 @@ const WorkHistoryForm = ({
             : setShowWorkHistoryModal(false);
     };
 
+    const asd = () => {
+        return (
+            jobTitleValues === "" &&
+            (companyValues !== "" || cityWorkValues !== "" || stateWorkValues !== "")
+        );
+    };
+
     return (
         <>
             <form
@@ -81,7 +88,7 @@ const WorkHistoryForm = ({
                 <div className="flex justify-center">
                     <div
                         className={
-                            formikErrors.jobTitle && touched.jobTitle
+                            asd() && formikErrors.jobTitle && touched.jobTitle
                                 ? "flex flex-col justify-center w-full"
                                 : "flex justify-center w-full"
                         }
@@ -91,7 +98,7 @@ const WorkHistoryForm = ({
                             name="jobTitle"
                             placeholder="Job Title"
                             className={
-                                formikErrors.jobTitle && touched.jobTitle
+                                asd() && formikErrors.jobTitle && touched.jobTitle
                                     ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
                                     : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                             }
@@ -99,7 +106,7 @@ const WorkHistoryForm = ({
                             onChange={(e) => handleChangeAndModal(e)}
                             maxLength={40}
                         />
-                        {formikErrors.jobTitle && touched.jobTitle && (
+                        {asd() && formikErrors.jobTitle && touched.jobTitle && (
                             <p className="ml-4 text-red-800">{formikErrors.jobTitle}</p>
                         )}
                     </div>
