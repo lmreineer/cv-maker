@@ -35,7 +35,6 @@ const FormValidation = () => {
             cityWork: "",
             stateWork: "",
         },
-
         validationSchema: Yup.object({
             firstName: Yup.string().required("First name is required"),
             lastName: Yup.string().required("Last name is required"),
@@ -43,7 +42,6 @@ const FormValidation = () => {
                 .required("Email is required")
                 .email("Email is invalid"),
         }),
-
 
         onSubmit: () => {
             // eslint-disable-next-line default-case
@@ -117,6 +115,7 @@ const FormValidation = () => {
                             phoneValues={phone}
                             emailValues={email}
                             handleChange={formik.handleChange}
+                            touched={formik.touched}
                         />
                     }
                 />
@@ -125,19 +124,24 @@ const FormValidation = () => {
                     element={
                         <WorkHistoryForm
                             handleSubmit={formik.handleSubmit}
+                            formikErrors={formik.errors}
                             jobTitleValues={jobTitle}
                             companyValues={company}
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
                             currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                             handleChange={formik.handleChange}
+                            touched={formik.touched}
                             setFieldValue={formik.setFieldValue}
                             setShowWorkHistoryModal={setShowWorkHistoryModal}
                         />
                     }
                 />
                 <Route path="/education" element={<EducationForm />} />
-                <Route path="/showWorkHistoryModal" element={<SkipWorkHistoryModal />} />
+                <Route
+                    path="/showWorkHistoryModal"
+                    element={<SkipWorkHistoryModal />}
+                />
             </Routes>
 
             <CVPreview

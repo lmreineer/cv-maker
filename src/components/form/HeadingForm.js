@@ -11,6 +11,7 @@ const HeadingForm = ({
     phoneValues,
     emailValues,
     handleChange,
+    touched,
 }) => {
     return (
         <>
@@ -26,15 +27,15 @@ const HeadingForm = ({
                                 name="firstName"
                                 placeholder="First Name"
                                 className={
-                                    formikErrors.firstName
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    formikErrors.firstName && touched.firstName
+                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 }
                                 value={firstNameValues}
                                 onChange={handleChange}
                                 maxLength={15}
                             />
-                            {formikErrors.firstName && (
+                            {formikErrors.firstName && touched.firstName && (
                                 <p className="ml-4 text-red-800">{formikErrors.firstName}</p>
                             )}
                         </div>
@@ -44,15 +45,15 @@ const HeadingForm = ({
                                 name="lastName"
                                 placeholder="Last Name"
                                 className={
-                                    formikErrors.lastName
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    formikErrors.lastName && touched.lastName
+                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                                 }
                                 value={lastNameValues}
                                 onChange={handleChange}
                                 maxLength={15}
                             />
-                            {formikErrors.lastName && (
+                            {formikErrors.lastName && touched.lastName && (
                                 <p className="ml-4 text-red-800">{formikErrors.lastName}</p>
                             )}
                         </div>
@@ -78,6 +79,7 @@ const HeadingForm = ({
                             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                             value={countryValues}
                             onChange={handleChange}
+                            
                         />
                         <input
                             type="text"
@@ -86,6 +88,7 @@ const HeadingForm = ({
                             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                             value={cityContactValues}
                             onChange={handleChange}
+                            
                         />
                     </div>
                     <div>
@@ -96,6 +99,7 @@ const HeadingForm = ({
                             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                             value={stateContactValues}
                             onChange={handleChange}
+                            
                         />
                         <input
                             type="tel"
@@ -104,23 +108,24 @@ const HeadingForm = ({
                             className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                             value={zipCodeValues}
                             onChange={handleChange}
+                            
                         />
                     </div>
                     <div>
-                        <div className={formikErrors.phone ? "flex flex-col" : "flex"}>
+                        <div className={formikErrors.phone && touched.phone ? "flex flex-col": "flex"}>
                             <input
                                 type="tel"
                                 name="phone"
                                 placeholder="Phone"
                                 className={
-                                    formikErrors.phone
-                                        ? " border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    formikErrors.phone && touched.phone
+                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                                 }
                                 value={phoneValues}
                                 onChange={handleChange}
                             />
-                            {formikErrors.phone && (
+                            {formikErrors.phone && touched.phone && (
                                 <p className="ml-4 text-red-800">{formikErrors.phone}</p>
                             )}
                         </div>
@@ -133,7 +138,7 @@ const HeadingForm = ({
                                 placeholder="Email"
                                 id="email"
                                 className={
-                                    formikErrors.email
+                                    formikErrors.email && touched.email
                                         ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700"
                                         : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                                 }
@@ -143,7 +148,7 @@ const HeadingForm = ({
                                 spellCheck="false"
                             />
                         </div>
-                        {formikErrors.email && (
+                        {formikErrors.email && touched.email && (
                             <p className="ml-4 text-red-800">{formikErrors.email}</p>
                         )}
                     </div>

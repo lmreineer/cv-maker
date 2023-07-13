@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 
 const WorkHistoryForm = ({
     handleSubmit,
+    formikErrors,
     jobTitleValues,
     companyValues,
     cityWorkValues,
     stateWorkValues,
     currentlyWorkingCheckbox,
     handleChange,
+    touched,
     setFieldValue,
     setShowWorkHistoryModal,
 }) => {
@@ -77,24 +79,41 @@ const WorkHistoryForm = ({
                     Work History:
                 </h1>
                 <div className="flex justify-center">
-                    <input
-                        type="text"
-                        name="jobTitle"
-                        placeholder="Job Title"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
-                        value={jobTitleValues}
-                        onChange={(e) => handleChangeAndModal(e)}
-                        maxLength={40}
-                    />
-                    <input
-                        type="text"
-                        name="company"
-                        placeholder="Company"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
-                        value={companyValues}
-                        onChange={(e) => handleChangeAndModal(e)}
-                        maxLength={40}
-                    />
+                    <div
+                        className={
+                            formikErrors.jobTitle && touched.jobTitle
+                                ? "flex flex-col justify-center w-full"
+                                : "flex justify-center w-full"
+                        }
+                    >
+                        <input
+                            type="text"
+                            name="jobTitle"
+                            placeholder="Job Title"
+                            className={
+                                formikErrors.jobTitle && touched.jobTitle
+                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                            }
+                            value={jobTitleValues}
+                            onChange={(e) => handleChangeAndModal(e)}
+                            maxLength={40}
+                        />
+                        {formikErrors.jobTitle && touched.jobTitle && (
+                            <p className="ml-4 text-red-800">{formikErrors.jobTitle}</p>
+                        )}
+                    </div>
+                    <div className="flex justify-center w-full h-[5.25rem]">
+                        <input
+                            type="text"
+                            name="company"
+                            placeholder="Company"
+                            className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                            value={companyValues}
+                            onChange={(e) => handleChangeAndModal(e)}
+                            maxLength={40}
+                        />
+                    </div>
                 </div>
                 <div className="flex justify-center">
                     <input
@@ -176,7 +195,7 @@ const WorkHistoryForm = ({
                         className="bg-gray-300 hover:bg-gray-400 transition p-5 w-56 rounded-lg my-10"
                         onClick={navigateBack}
                     >
-                        navigateBack
+                        Back
                     </button>
                     <input
                         type="submit"
