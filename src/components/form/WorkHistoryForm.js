@@ -1,21 +1,21 @@
-import Select from "react-select";
-
 import { useState } from "react";
+
+import Select from "react-select";
 
 import { useNavigate } from "react-router-dom";
 
 const WorkHistoryForm = ({
+    setShowWorkHistoryModal,
+    handleChange,
     handleSubmit,
     formikErrors,
+    touched,
     jobTitleValues,
     companyValues,
     cityWorkValues,
     stateWorkValues,
-    currentlyWorkingCheckbox,
-    handleChange,
-    touched,
     setFieldValue,
-    setShowWorkHistoryModal,
+    currentlyWorkingCheckbox,
 }) => {
     const handleChangeAndModal = (e) => {
         handleChange(e);
@@ -27,8 +27,8 @@ const WorkHistoryForm = ({
     const getOptions = (loop, n) => {
         const options = [];
         for (let i = 0; i <= loop; i += 1) {
-            const time = n - i;
-            options.push({ value: time.toString(), label: time.toString() });
+            const year = n - i;
+            options.push({ value: year.toString(), label: year.toString() });
         }
 
         options.forEach((month) => {
@@ -62,46 +62,37 @@ const WorkHistoryForm = ({
     };
 
     const navigate = useNavigate();
+
     const navigateBack = () => {
         navigate("/");
     };
 
     return (
         <>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col justify-center w-1/2"
-            >
+            <form onSubmit={handleSubmit} className="w-2/4">
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
-                <div className="flex justify-center">
-                    <div
-                        className={
-                            jobTitleValues === "" &&
-                                companyValues !== "" &&
-                                formikErrors.jobTitle &&
-                                touched.jobTitle
-                                ? "flex flex-col justify-center w-full"
-                                : "flex justify-center w-full h-[5.25rem]"
-                        }
-                    >
-                        <input
-                            type="text"
-                            name="jobTitle"
-                            placeholder="Job Title"
-                            className={
-                                jobTitleValues === "" &&
-                                    companyValues !== "" &&
-                                    formikErrors.jobTitle &&
-                                    touched.jobTitle
-                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
-                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
-                            }
-                            value={jobTitleValues}
-                            onChange={(e) => handleChangeAndModal(e)}
-                            maxLength={40}
-                        />
+                <div className="flex">
+                    <div className="w-full">
+                        <div className="flex">
+                            <input
+                                type="text"
+                                name="jobTitle"
+                                placeholder="Job Title"
+                                className={
+                                    jobTitleValues === "" &&
+                                        companyValues !== "" &&
+                                        formikErrors.jobTitle &&
+                                        touched.jobTitle
+                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 w-full"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                                }
+                                value={jobTitleValues}
+                                onChange={(e) => handleChangeAndModal(e)}
+                                maxLength={40}
+                            />
+                        </div>
                         {jobTitleValues === "" &&
                             companyValues !== "" &&
                             formikErrors.jobTitle &&
@@ -109,32 +100,25 @@ const WorkHistoryForm = ({
                                 <p className="ml-4 text-red-800">{formikErrors.jobTitle}</p>
                             )}
                     </div>
-                    <div
-                        className={
-                            companyValues === "" &&
-                                jobTitleValues !== "" &&
-                                formikErrors.company &&
-                                touched.company
-                                ? "flex flex-col justify-center w-full"
-                                : "flex justify-center w-full h-[5.25rem]"
-                        }
-                    >
-                        <input
-                            type="text"
-                            name="company"
-                            placeholder="Company"
-                            className={
-                                companyValues === "" &&
-                                    jobTitleValues !== "" &&
-                                    formikErrors.company &&
-                                    touched.company
-                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
-                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
-                            }
-                            value={companyValues}
-                            onChange={(e) => handleChangeAndModal(e)}
-                            maxLength={40}
-                        />
+                    <div className="w-full">
+                        <div className="flex">
+                            <input
+                                type="text"
+                                name="company"
+                                placeholder="Company"
+                                className={
+                                    companyValues === "" &&
+                                        jobTitleValues !== "" &&
+                                        formikErrors.company &&
+                                        touched.company
+                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 w-full"
+                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                                }
+                                value={companyValues}
+                                onChange={(e) => handleChangeAndModal(e)}
+                                maxLength={40}
+                            />
+                        </div>
                         {companyValues === "" &&
                             jobTitleValues !== "" &&
                             formikErrors.company &&
@@ -143,7 +127,7 @@ const WorkHistoryForm = ({
                             )}
                     </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex">
                     <input
                         type="text"
                         name="cityWork"
@@ -163,14 +147,14 @@ const WorkHistoryForm = ({
                         maxLength={40}
                     />
                 </div>
-                <div className="flex justify-center">
+                <div className="flex">
                     <Select
-                        name="timeStartWork"
+                        name="yearStartWork"
                         placeholder="Year Start"
                         options={getOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("timeStartWork", e.value);
+                            setFieldValue("yearStartWork", e.value);
                         }}
                     />
                     <Select
@@ -183,14 +167,14 @@ const WorkHistoryForm = ({
                         }}
                     />
                 </div>
-                <div className="flex justify-around">
+                <div className="flex">
                     <Select
-                        name="timeEndWork"
+                        name="yearEndWork"
                         placeholder="Year End"
                         options={getOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("timeEndWork", e.value);
+                            setFieldValue("yearEndWork", e.value);
                         }}
                         isDisabled={checked}
                     />

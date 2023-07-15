@@ -115,7 +115,9 @@ const FormValidation = () => {
                         <HeadingForm
                             handleSubmit={formik.handleSubmit}
                             formikErrors={formik.errors}
+                            touched={formik.touched}
                             firstNameValues={firstName}
+                            handleChange={formik.handleChange}
                             lastNameValues={lastName}
                             professionValues={profession}
                             countryValues={country}
@@ -124,8 +126,6 @@ const FormValidation = () => {
                             zipCodeValues={zipCode}
                             phoneValues={phone}
                             emailValues={email}
-                            handleChange={formik.handleChange}
-                            touched={formik.touched}
                         />
                     }
                 />
@@ -133,17 +133,17 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
+                            setShowWorkHistoryModal={setShowWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
                             formikErrors={formik.errors}
+                            touched={formik.touched}
                             jobTitleValues={jobTitle}
+                            handleChange={formik.handleChange}
                             companyValues={company}
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
                             currentlyWorkingCheckbox={currentlyWorkingCheckbox}
-                            handleChange={formik.handleChange}
-                            touched={formik.touched}
                             setFieldValue={formik.setFieldValue}
-                            setShowWorkHistoryModal={setShowWorkHistoryModal}
                         />
                     }
                 />
@@ -155,8 +155,8 @@ const FormValidation = () => {
             </Routes>
 
             <CVPreview
-                firstNameInput={capitaliseFirstLetter(firstName)}
-                lastNameInput={capitaliseFirstLetter(lastName)}
+                firstNameInput={capitalizeFirstLetterOfEachWord(firstName)}
+                lastNameInput={capitalizeFirstLetterOfEachWord(lastName)}
                 professionInput={capitalizeFirstLetterOfEachWord(profession)}
                 countryInput={capitalizeFirstLetterOfEachWord(country)}
                 cityContactInput={capitalizeFirstLetterOfEachWord(cityContact)}
