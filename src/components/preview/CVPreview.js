@@ -33,7 +33,7 @@ const CVPreview = ({
     return (
         <div>
             <div
-                className="border-2 rounded-lg w-[30rem] h-[43.3rem] mt-[4rem] p-10 hover:cursor-pointer select-none overflow-auto break-all bg-white"
+                className="border-2 rounded-lg w-[30rem] h-[43.3rem] my-[3rem] p-10 hover:cursor-pointer select-none overflow-auto break-all bg-white"
                 onClick={toggleClick}
             >
                 <CVContent

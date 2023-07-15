@@ -127,6 +127,7 @@ const CVContent = ({
                     <div className={workTimePeriodContainer}>
                         <h6>
                             {yearStartWorkInput || "2020"}-{monthStartWorkInput || "04"} -
+
                             {currentlyWorkingCheckboxState === true
                                 ? "Current"
                                 : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`}
@@ -144,9 +145,9 @@ const CVContent = ({
                                         stateWorkInput ||
                                         "XYZ Company, City, State"}
 
-                                {companyInput && cityWorkInput && `, ${cityWorkInput}`}
-
-                                {cityWorkInput && stateWorkInput && `, ${stateWorkInput}`}
+                                    {companyInput && cityWorkInput && `, ${cityWorkInput}`}
+                                    
+                                    {cityWorkInput && stateWorkInput && `, ${stateWorkInput}`}
                                 </span>
                             </h6>
                             <ul className={workDescriptionContainer}>

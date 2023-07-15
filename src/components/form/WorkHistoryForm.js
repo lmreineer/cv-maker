@@ -17,34 +17,28 @@ const WorkHistoryForm = ({
     setFieldValue,
     setShowWorkHistoryModal,
 }) => {
-    const yearList = [];
-    for (let i = 0; i <= 70; i += 1) {
-        const year = 2023 - i;
-        yearList.push({ value: year.toString(), label: year.toString() });
-    }
-
-    const monthList = [];
-    for (let i = 1; i <= 12; i += 1) {
-        monthList.push({ value: i.toString(), label: i.toString() });
-    }
-
-    monthList.forEach((el) => {
-        if (el.value.length === 1) {
-            el.value = `0${el.value}`;
-            el.label = `0${el.label}`;
-        }
-    });
-
-    const [checked, setChecked] = useState(false);
-
-    const handleCheckedState = () => {
-        checked === false ? setChecked(true) : setChecked(false);
+    const handleChangeAndModal = (e) => {
+        handleChange(e);
+        e.target.value !== ""
+            ? setShowWorkHistoryModal(false)
+            : setShowWorkHistoryModal(true);
     };
 
-    const navigate = useNavigate();
+    const getOptions = (loop, n) => {
+        const options = [];
+        for (let i = 0; i <= loop; i += 1) {
+            const time = n - i;
+            options.push({ value: time.toString(), label: time.toString() });
+        }
 
-    const navigateBack = () => {
-        navigate("/");
+        options.forEach((month) => {
+            if (month.value.length === 1) {
+                month.value = `0${month.value}`;
+                month.label = `0${month.label}`;
+            }
+        });
+
+        return options;
     };
 
     const customStyles = {
@@ -62,16 +56,15 @@ const WorkHistoryForm = ({
         }),
     };
 
-    const handleChangeAndModal = (e) => {
-        handleChange(e);
-        e.target.value !== ""
-            ? setShowWorkHistoryModal(true)
-            : setShowWorkHistoryModal(false);
+    const [checked, setChecked] = useState(false);
+    const handleCheckedState = () => {
+        checked === false ? setChecked(true) : setChecked(false);
     };
 
-    const jobTitleInputIsLeftOut =
-        jobTitleValues === "" &&
-        (companyValues !== "" || cityWorkValues !== "" || stateWorkValues !== "");
+    const navigate = useNavigate();
+    const navigateBack = () => {
+        navigate("/");
+    };
 
     return (
         <>
@@ -85,11 +78,12 @@ const WorkHistoryForm = ({
                 <div className="flex justify-center">
                     <div
                         className={
-                            jobTitleInputIsLeftOut &&
+                            jobTitleValues === "" &&
+                                companyValues !== "" &&
                                 formikErrors.jobTitle &&
                                 touched.jobTitle
                                 ? "flex flex-col justify-center w-full"
-                                : "flex justify-center w-full"
+                                : "flex justify-center w-full h-[5.25rem]"
                         }
                     >
                         <input
@@ -97,7 +91,8 @@ const WorkHistoryForm = ({
                             name="jobTitle"
                             placeholder="Job Title"
                             className={
-                                jobTitleInputIsLeftOut &&
+                                jobTitleValues === "" &&
+                                    companyValues !== "" &&
                                     formikErrors.jobTitle &&
                                     touched.jobTitle
                                     ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
@@ -107,22 +102,45 @@ const WorkHistoryForm = ({
                             onChange={(e) => handleChangeAndModal(e)}
                             maxLength={40}
                         />
-                        {jobTitleInputIsLeftOut &&
+                        {jobTitleValues === "" &&
+                            companyValues !== "" &&
                             formikErrors.jobTitle &&
                             touched.jobTitle && (
                                 <p className="ml-4 text-red-800">{formikErrors.jobTitle}</p>
                             )}
                     </div>
-                    <div className="flex justify-center w-full h-[5.25rem]">
+                    <div
+                        className={
+                            companyValues === "" &&
+                                jobTitleValues !== "" &&
+                                formikErrors.company &&
+                                touched.company
+                                ? "flex flex-col justify-center w-full"
+                                : "flex justify-center w-full h-[5.25rem]"
+                        }
+                    >
                         <input
                             type="text"
                             name="company"
                             placeholder="Company"
-                            className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                            className={
+                                companyValues === "" &&
+                                    jobTitleValues !== "" &&
+                                    formikErrors.company &&
+                                    touched.company
+                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
+                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                            }
                             value={companyValues}
                             onChange={(e) => handleChangeAndModal(e)}
                             maxLength={40}
                         />
+                        {companyValues === "" &&
+                            jobTitleValues !== "" &&
+                            formikErrors.company &&
+                            touched.company && (
+                                <p className="ml-4 text-red-800">{formikErrors.company}</p>
+                            )}
                     </div>
                 </div>
                 <div className="flex justify-center">
@@ -147,18 +165,18 @@ const WorkHistoryForm = ({
                 </div>
                 <div className="flex justify-center">
                     <Select
-                        name="yearStartWork"
+                        name="timeStartWork"
                         placeholder="Year Start"
-                        options={yearList}
+                        options={getOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("yearStartWork", e.value);
+                            setFieldValue("timeStartWork", e.value);
                         }}
                     />
                     <Select
                         name="monthStartWork"
                         placeholder="Month Start"
-                        options={monthList}
+                        options={getOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("monthStartWork", e.value);
@@ -167,19 +185,19 @@ const WorkHistoryForm = ({
                 </div>
                 <div className="flex justify-around">
                     <Select
-                        name="yearEndWork"
+                        name="timeEndWork"
                         placeholder="Year End"
-                        options={yearList}
+                        options={getOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("yearEndWork", e.value);
+                            setFieldValue("timeEndWork", e.value);
                         }}
                         isDisabled={checked}
                     />
                     <Select
                         name="monthEndWork"
                         placeholder="Month End"
-                        options={monthList}
+                        options={getOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("monthEndWork", e.value);

@@ -13,9 +13,9 @@ import SkipWorkHistoryModal from "../modal/SkipWorkHistoryModal";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
-    const pathname = useLocation().pathname;
+    const [showWorkHistoryModal, setShowWorkHistoryModal] = useState(true);
 
-    const getCorrectSchema = () => {
+    const generateSchema = () => {
         if (pathname === "/") {
             return {
                 firstName: Yup.string().required("First name is required"),
@@ -24,16 +24,17 @@ const FormValidation = () => {
                     .required("Email is required")
                     .email("Email is invalid"),
             };
-        } else if (pathname === "/work-history") {
+        } else if (pathname === "/work-history" && showWorkHistoryModal === false) {
             return {
                 jobTitle: Yup.string().required("Job title is required"),
+                company: Yup.string().required("Company is required"),
             };
         }
     };
 
-    const navigate = useNavigate();
+    const pathname = useLocation().pathname;
 
-    const [showWorkHistoryModal, setShowWorkHistoryModal] = useState(false);
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -51,7 +52,7 @@ const FormValidation = () => {
             cityWork: "",
             stateWork: "",
         },
-        validationSchema: Yup.object(getCorrectSchema()),
+        validationSchema: Yup.object(generateSchema()),
         onSubmit: () => {
             // eslint-disable-next-line default-case
             switch (pathname) {
@@ -59,9 +60,9 @@ const FormValidation = () => {
                     navigate("/work-history");
                     break;
                 case "/work-history":
-                    if (showWorkHistoryModal === true) {
+                    if (showWorkHistoryModal === false) {
                         navigate("/education");
-                    } else if (showWorkHistoryModal === false) {
+                    } else if (showWorkHistoryModal === true) {
                         navigate("/showWorkHistoryModal");
                     }
                     break;
