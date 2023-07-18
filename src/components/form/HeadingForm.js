@@ -15,7 +15,7 @@ const HeadingForm = ({
 }) => {
     return (
         <>
-            <form onSubmit={(e) => { handleSubmit(e); console.log("submitted"); }} className="flex flex-col justify-center">
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center">
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Contact Information:
                 </h1>
@@ -76,6 +76,7 @@ const HeadingForm = ({
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
                         value={countryValues}
                         onChange={handleChange}
+                        autoComplete="on"
                     />
                     <input
                         type="text"
@@ -112,6 +113,7 @@ const HeadingForm = ({
                         className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
                         value={phoneValues}
                         onChange={handleChange}
+                        autoComplete="on"
                     />
                 </div>
                 <div>
@@ -129,7 +131,7 @@ const HeadingForm = ({
                             value={emailValues}
                             onChange={handleChange}
                             maxLength={40}
-                            spellCheck="false"
+                            autoComplete="on"
                         />
                     </div>
                     {formikErrors.email && touched.email && (

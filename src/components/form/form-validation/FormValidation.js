@@ -129,10 +129,10 @@ const FormValidation = () => {
                             handleChange={formik.handleChange}
                             setShowWorkHistoryModal={setShowWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
-                            formikErrors={formik.errors}
-                            touched={formik.touched}
                             jobTitleValues={jobTitle}
                             companyValues={company}
+                            formikErrors={formik.errors}
+                            touched={formik.touched}
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
                             setFieldValue={formik.setFieldValue}
