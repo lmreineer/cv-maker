@@ -82,12 +82,12 @@ const EducationForm = () => {
                 </div>
 
                 <div className="flex justify-around">
-                    <button
+                    <input
+                        type="button"
                         className="bg-gray-300 hover:bg-gray-400 transition p-5 w-56 rounded-lg my-10"
                         onClick={navigateBack}
-                    >
-                        Back
-                    </button>
+                        value="Back"
+                    />
                     <input
                         type="submit"
                         id="continue-button"

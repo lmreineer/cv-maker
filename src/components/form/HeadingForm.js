@@ -15,7 +15,7 @@ const HeadingForm = ({
 }) => {
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => { handleSubmit(e); console.log("submitted"); }} className="flex flex-col justify-center">
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Contact Information:
                 </h1>
@@ -136,13 +136,9 @@ const HeadingForm = ({
                         <p className="ml-4 text-red-800">{formikErrors.email}</p>
                     )}
                 </div>
-                <div className="flex justify-around">
-                    <button className="bg-gray-300 hover:bg-gray-400 transition p-5 w-56 rounded-lg my-10">
-                        Back
-                    </button>
+                <div className="flex justify-end w-11/12">
                     <input
                         type="submit"
-                        id="continue-button"
                         className="bg-yellow-green hover:bg-dark-yellow-green hover:cursor-pointer transition p-5 w-56 rounded-lg my-10"
                         value="Continue"
                     />

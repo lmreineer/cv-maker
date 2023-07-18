@@ -13,26 +13,19 @@ import SkipWorkHistoryModal from "../modal/SkipWorkHistoryModal";
 import CVPreview from "../../preview/CVPreview";
 
 const FormValidation = () => {
+    const pathname = useLocation().pathname;
+
     const [showWorkHistoryModal, setShowWorkHistoryModal] = useState(true);
 
     const generateSchema = () => {
-        if (pathname === "/") {
-            return {
-                firstName: Yup.string().required("First name is required"),
-                lastName: Yup.string().required("Last name is required"),
-                email: Yup.string()
-                    .required("Email is required")
-                    .email("Email is invalid"),
-            };
-        } else if (pathname === "/work-history" && showWorkHistoryModal === false) {
-            return {
-                jobTitle: Yup.string().required("Job title is required"),
-                company: Yup.string().required("Company is required"),
-            };
-        }
+        return {
+            firstName: Yup.string().required("First name is required"),
+            lastName: Yup.string().required("Last name is required"),
+            email: Yup.string()
+                .required("Email is required")
+                .email("Email is invalid"),
+        };
     };
-
-    const pathname = useLocation().pathname;
 
     const navigate = useNavigate();
 
@@ -133,17 +126,17 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
+                            handleChange={formik.handleChange}
                             setShowWorkHistoryModal={setShowWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
                             formikErrors={formik.errors}
                             touched={formik.touched}
                             jobTitleValues={jobTitle}
-                            handleChange={formik.handleChange}
                             companyValues={company}
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
-                            currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                             setFieldValue={formik.setFieldValue}
+                            currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                         />
                     }
                 />

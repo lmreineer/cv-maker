@@ -126,11 +126,21 @@ const CVContent = ({
                 <div className={stayPeriodContainer}>
                     <div className={workTimePeriodContainer}>
                         <h6>
-                            {yearStartWorkInput || "2020"}-{monthStartWorkInput || "04"} -
-
-                            {currentlyWorkingCheckboxState === true
-                                ? "Current"
-                                : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`}
+                            {pathname === "/education" && yearEndWorkInput === ""
+                                ? ""
+                                : yearStartWorkInput || "2020"}
+                            -
+                            {pathname === "/education" && monthStartWorkInput === ""
+                                ? ""
+                                : monthStartWorkInput || "04"}{" "}
+                            -
+                            {pathname === "/education" &&
+                                yearEndWorkInput === "" &&
+                                monthEndWorkInput === ""
+                                ? ""
+                                : currentlyWorkingCheckboxState === true
+                                    ? "Current"
+                                    : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`}
                         </h6>
                     </div>
                     <div className={stayDetailContainer}>
@@ -146,7 +156,7 @@ const CVContent = ({
                                         "XYZ Company, City, State"}
 
                                     {companyInput && cityWorkInput && `, ${cityWorkInput}`}
-                                    
+
                                     {cityWorkInput && stateWorkInput && `, ${stateWorkInput}`}
                                 </span>
                             </h6>

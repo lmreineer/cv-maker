@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import Select from "react-select";
-
 import { useNavigate } from "react-router-dom";
 
+import Select from "react-select";
+
 const WorkHistoryForm = ({
-    setShowWorkHistoryModal,
     handleChange,
+    setShowWorkHistoryModal,
     handleSubmit,
     formikErrors,
     touched,
@@ -69,7 +69,10 @@ const WorkHistoryForm = ({
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="w-2/4">
+            <form
+                onSubmit={handleSubmit}
+                className="w-2/4 flex flex-col justify-center"
+            >
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
@@ -203,15 +206,14 @@ const WorkHistoryForm = ({
                     </label>
                 </div>
                 <div className="flex justify-around">
-                    <button
+                    <input
+                        type="button"
                         className="bg-gray-300 hover:bg-gray-400 transition p-5 w-56 rounded-lg my-10"
                         onClick={navigateBack}
-                    >
-                        Back
-                    </button>
+                        value="Back"
+                    />
                     <input
                         type="submit"
-                        id="continue-button"
                         className="bg-yellow-green hover:bg-dark-yellow-green hover:cursor-pointer transition p-5 w-56 rounded-lg my-10"
                         value="Continue"
                     />
