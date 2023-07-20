@@ -22,7 +22,7 @@ const CVContent = ({
     mainBackgroundContainer,
     skillsList,
     stayPeriodContainer,
-    workTimePeriodContainer,
+    workDatePeriodContainer,
     yearStartWorkInput,
     monthStartWorkInput,
     yearEndWorkInput,
@@ -37,7 +37,7 @@ const CVContent = ({
     stateWorkInput,
     workDescriptionContainer,
     workDescriptionList,
-    educationTimePeriodContainer,
+    educationDatePeriodContainer,
 }) => {
     const pathname = useLocation().pathname;
 
@@ -46,6 +46,12 @@ const CVContent = ({
         (cityContactInput || stateContactInput || countryInput || zipCodeInput) ===
         "";
     const hasNoPhone = pathname === "/work-history" && phoneInput === "";
+    const hasNoWorkDatePeriod =
+        pathname === "/education" &&
+        (yearStartWorkInput &&
+            monthStartWorkInput &&
+            yearEndWorkInput &&
+            monthEndWorkInput) === "";
 
     let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
 
@@ -124,25 +130,31 @@ const CVContent = ({
                 </ul>
                 <h6 className={mainBackgroundHeading}>Work History</h6>
                 <div className={stayPeriodContainer}>
-                    <div className={workTimePeriodContainer}>
-                        <h6>
-                            {pathname === "/education" && yearEndWorkInput === ""
-                                ? ""
-                                : yearStartWorkInput || "2020"}
-                            -
-                            {pathname === "/education" && monthStartWorkInput === ""
-                                ? ""
-                                : monthStartWorkInput || "04"}{" "}
-                            -
-                            {pathname === "/education" &&
-                                yearEndWorkInput === "" &&
-                                monthEndWorkInput === ""
-                                ? ""
-                                : currentlyWorkingCheckboxState === true
-                                    ? "Current"
-                                    : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`}
-                        </h6>
-                    </div>
+                    {hasNoWorkDatePeriod ? (
+                        ""
+                    ) : (
+                        <div className={workDatePeriodContainer}>
+                            <h6>
+                                {pathname === "/education" && yearEndWorkInput === ""
+                                    ? ""
+                                    : yearStartWorkInput || "2020"}
+                                -
+                                {pathname === "/education" && monthStartWorkInput === ""
+                                    ? ""
+                                    : monthStartWorkInput || "04"}
+                                -
+                                {pathname === "/education" &&
+                                    yearEndWorkInput === "" &&
+                                    monthEndWorkInput === ""
+                                    ? ""
+                                    : currentlyWorkingCheckboxState === true
+                                        ? "Current"
+                                        : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"
+                                        }`}
+                            </h6>
+                        </div>
+                    )}
+
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>
                             {jobTitleInput || "Marketing Intern"}
@@ -183,7 +195,7 @@ const CVContent = ({
                     </div>
                 </div>
                 {/* <div className={stayPeriodContainer}>
-                    <div className={workTimePeriodContainer}>
+                    <div className={workDatePeriodContainer}>
                         <h6>2020-07 - 2022</h6>
                     </div>
                     <div className={stayDetailContainer}>
@@ -213,7 +225,7 @@ const CVContent = ({
                 </div> */}
                 <h6 className={mainBackgroundHeading}>Education</h6>
                 <div className={stayPeriodContainer}>
-                    <div className={educationTimePeriodContainer}>
+                    <div className={educationDatePeriodContainer}>
                         <h6>2022 - 06</h6>
                     </div>
                     <div className={stayDetailContainer}>

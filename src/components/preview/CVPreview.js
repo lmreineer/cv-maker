@@ -57,22 +57,22 @@ const CVPreview = ({
                     mainBackgroundContainer="mt-5"
                     skillsList="list-disc ml-10 mt-2 text-xs"
                     stayPeriodContainer="flex mt-3"
-                    workTimePeriodContainer="text-xs w-44"
+                    workDatePeriodContainer="w-56 text-xs"
                     yearStartWorkInput={yearStartWorkInput}
                     monthStartWorkInput={monthStartWorkInput}
                     yearEndWorkInput={yearEndWorkInput}
                     monthEndWorkInput={monthEndWorkInput}
                     currentlyWorkingCheckboxState={currentlyWorkingCheckboxState}
-                    stayDetailContainer="ml-20 text-xs w-full"
+                    stayDetailContainer="text-xs w-full"
                     stayDetailHeading="text-base"
                     jobTitleInput={jobTitleInput}
                     institution="mt-1 italic font-light"
                     companyInput={companyInput}
                     cityWorkInput={cityWorkInput}
                     stateWorkInput={stateWorkInput}
-                    workDescriptionContainer="list-disc ml-5 mt-2"
+                    workDescriptionContainer="list-disc ml-10 mt-2"
                     workDescriptionList="font-light"
-                    educationTimePeriodContainer="text-xs w-20"
+                    educationDatePeriodContainer="text-xs w-20"
                 />
             </div>
 

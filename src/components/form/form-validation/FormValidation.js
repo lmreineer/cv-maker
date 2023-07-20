@@ -15,21 +15,37 @@ import CVPreview from "../../preview/CVPreview";
 const FormValidation = () => {
     const pathname = useLocation().pathname;
 
-    const [showWorkHistoryModal, setShowWorkHistoryModal] = useState(true);
+    const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] = useState(true);
+
+    const handleValidateOnChangeMode = () => {
+        if (pathname === "/") {
+            return true;
+        } else if (pathname === "/work-history") {
+            return false;
+        }
+    };
 
     const generateSchema = () => {
-        return {
-            firstName: Yup.string().required("First name is required"),
-            lastName: Yup.string().required("Last name is required"),
-            email: Yup.string()
-                .required("Email is required")
-                .email("Email is invalid"),
-        };
+        if (pathname === "/") {
+            return {
+                firstName: Yup.string().required("First name is required"),
+                lastName: Yup.string().required("Last name is required"),
+                email: Yup.string()
+                    .required("Email is required")
+                    .email("Email is invalid"),
+            };
+        } else if (pathname === "/work-history" && showSkipWorkHistoryModal === false) {
+            return {
+                jobTitle: Yup.string().required("Job title is required"),
+                company: Yup.string().required("Company is required"),
+            };
+        }
     };
 
     const navigate = useNavigate();
 
     const formik = useFormik({
+        validateOnChange: handleValidateOnChangeMode(),
         initialValues: {
             firstName: "",
             lastName: "",
@@ -44,6 +60,10 @@ const FormValidation = () => {
             company: "",
             cityWork: "",
             stateWork: "",
+            yearStartWork: "",
+            monthStartWork: "",
+            yearEndWork: "",
+            monthEndWork: "",
         },
         validationSchema: Yup.object(generateSchema()),
         onSubmit: () => {
@@ -53,10 +73,10 @@ const FormValidation = () => {
                     navigate("/work-history");
                     break;
                 case "/work-history":
-                    if (showWorkHistoryModal === false) {
+                    if (showSkipWorkHistoryModal === false) {
                         navigate("/education");
-                    } else if (showWorkHistoryModal === true) {
-                        navigate("/showWorkHistoryModal");
+                    } else if (showSkipWorkHistoryModal === true) {
+                        navigate("/showSkipWorkHistoryModal");
                     }
                     break;
             }
@@ -127,7 +147,7 @@ const FormValidation = () => {
                     element={
                         <WorkHistoryForm
                             handleChange={formik.handleChange}
-                            setShowWorkHistoryModal={setShowWorkHistoryModal}
+                            setShowSkipWorkHistoryModal={setShowSkipWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
                             jobTitleValues={jobTitle}
                             companyValues={company}
@@ -136,13 +156,17 @@ const FormValidation = () => {
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
                             setFieldValue={formik.setFieldValue}
+                            yearStartWorkInput={yearStartWork}
+                            monthStartWorkInput={monthStartWork}
+                            yearEndWorkInput={yearEndWork}
+                            monthEndWorkInput={monthEndWork}
                             currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                         />
                     }
                 />
                 <Route path="/education" element={<EducationForm />} />
                 <Route
-                    path="/showWorkHistoryModal"
+                    path="/showSkipWorkHistoryModal"
                     element={<SkipWorkHistoryModal />}
                 />
             </Routes>
