@@ -17,7 +17,7 @@ const FormValidation = () => {
 
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] = useState(true);
 
-    const handleValidateOnChangeMode = () => {
+    const handleValidateOnChangeValue = () => {
         if (pathname === "/") {
             return true;
         } else if (pathname === "/work-history") {
@@ -25,7 +25,7 @@ const FormValidation = () => {
         }
     };
 
-    const generateSchema = () => {
+    const handleSchema = () => {
         if (pathname === "/") {
             return {
                 firstName: Yup.string().required("First name is required"),
@@ -45,7 +45,7 @@ const FormValidation = () => {
     const navigate = useNavigate();
 
     const formik = useFormik({
-        validateOnChange: handleValidateOnChangeMode(),
+        validateOnChange: handleValidateOnChangeValue(),
         initialValues: {
             firstName: "",
             lastName: "",
@@ -65,7 +65,7 @@ const FormValidation = () => {
             yearEndWork: "",
             monthEndWork: "",
         },
-        validationSchema: Yup.object(generateSchema()),
+        validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
             // eslint-disable-next-line default-case
             switch (pathname) {
@@ -76,7 +76,7 @@ const FormValidation = () => {
                     if (showSkipWorkHistoryModal === false) {
                         navigate("/education");
                     } else if (showSkipWorkHistoryModal === true) {
-                        navigate("/showSkipWorkHistoryModal");
+                        navigate("/skip-work-history");
                     }
                     break;
             }
@@ -101,8 +101,9 @@ const FormValidation = () => {
         monthStartWork,
         yearEndWork,
         monthEndWork,
-        currentlyWorkingCheckbox,
     } = formik.values;
+
+    const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] = useState(false);
 
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
@@ -146,8 +147,11 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
+                            currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
+                            setCurrentlyWorkingCheckboxValue={setCurrentlyWorkingCheckboxValue}
                             handleChange={formik.handleChange}
                             setShowSkipWorkHistoryModal={setShowSkipWorkHistoryModal}
+                            showSkipWorkHistoryModal={showSkipWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
                             jobTitleValues={jobTitle}
                             companyValues={company}
@@ -156,17 +160,12 @@ const FormValidation = () => {
                             cityWorkValues={cityWork}
                             stateWorkValues={stateWork}
                             setFieldValue={formik.setFieldValue}
-                            yearStartWorkInput={yearStartWork}
-                            monthStartWorkInput={monthStartWork}
-                            yearEndWorkInput={yearEndWork}
-                            monthEndWorkInput={monthEndWork}
-                            currentlyWorkingCheckbox={currentlyWorkingCheckbox}
                         />
                     }
                 />
                 <Route path="/education" element={<EducationForm />} />
                 <Route
-                    path="/showSkipWorkHistoryModal"
+                    path="/skip-work-history"
                     element={<SkipWorkHistoryModal />}
                 />
             </Routes>
@@ -189,7 +188,7 @@ const FormValidation = () => {
                 monthStartWorkInput={monthStartWork}
                 yearEndWorkInput={yearEndWork}
                 monthEndWorkInput={monthEndWork}
-                currentlyWorkingCheckboxState={currentlyWorkingCheckbox}
+                currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
             />
         </>
     );

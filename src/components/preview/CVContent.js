@@ -27,7 +27,7 @@ const CVContent = ({
     monthStartWorkInput,
     yearEndWorkInput,
     monthEndWorkInput,
-    currentlyWorkingCheckboxState,
+    currentlyWorkingCheckboxValue,
     stayDetailContainer,
     stayDetailHeading,
     jobTitleInput,
@@ -48,8 +48,8 @@ const CVContent = ({
     const hasNoPhone = pathname === "/work-history" && phoneInput === "";
     const hasNoWorkDatePeriod =
         pathname === "/education" &&
-        (yearStartWorkInput &&
-            monthStartWorkInput &&
+        ((yearStartWorkInput &&
+            monthStartWorkInput) &&
             yearEndWorkInput &&
             monthEndWorkInput) === "";
 
@@ -147,7 +147,7 @@ const CVContent = ({
                                     yearEndWorkInput === "" &&
                                     monthEndWorkInput === ""
                                     ? ""
-                                    : currentlyWorkingCheckboxState === true
+                                    : currentlyWorkingCheckboxValue === true
                                         ? "Current"
                                         : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"
                                         }`}

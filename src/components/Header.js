@@ -22,11 +22,13 @@ const Header = () => {
                     Heading
                 </div>
                 <div
-                    className={`${pathname === "/work-history"
+                    className={`${pathname === "/work-history" || pathname === "/skip-work-history"
                             ? "m-2 p-4 rounded-xl text-very-dark-yellow-green bg-yellow-green"
                             : "m-2 p-4 text-gray-400"
                         }
-                        ${pathname !== "/work-history" && pathname !== "/"
+                        ${(pathname !== "/work-history" ||
+                            pathname === "/skip-work-history") &&
+                            pathname !== "/"
                             ? "text-very-dark-yellow-green"
                             : "m-2 p-4 text-gray-400"
                         }

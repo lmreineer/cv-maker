@@ -1,12 +1,13 @@
-import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import Select from "react-select";
 
 const WorkHistoryForm = ({
+    currentlyWorkingCheckboxValue,
+    setCurrentlyWorkingCheckboxValue,
     handleChange,
     setShowSkipWorkHistoryModal,
+    showSkipWorkHistoryModal,
     handleSubmit,
     jobTitleValues,
     companyValues,
@@ -15,29 +16,17 @@ const WorkHistoryForm = ({
     cityWorkValues,
     stateWorkValues,
     setFieldValue,
-    yearStartWorkInput,
-    monthStartWorkInput,
-    yearEndWorkInput,
-    monthEndWorkInput,
-    currentlyWorkingCheckbox,
 }) => {
-    const [checked, setChecked] = useState("");
     const handleCheckedState = () => {
-        checked === "" ? setChecked(true) : setChecked("");
+        currentlyWorkingCheckboxValue === true
+            ? setCurrentlyWorkingCheckboxValue(false)
+            : setCurrentlyWorkingCheckboxValue(true);
     };
 
-    const inputIsLeftOut = (leftOutInput, inputted) => {
-        return (
-            leftOutInput === "" &&
-            (inputted ||
-                cityWorkValues ||
-                stateWorkValues ||
-                yearStartWorkInput ||
-                monthStartWorkInput ||
-                yearEndWorkInput ||
-                monthEndWorkInput ||
-                checked) !== ""
-        );
+    // check if main input is omitted after inputting other non-main input
+    const inputIsOmitted = (omittedInput) => {
+        // main input is omitted but the state is false already
+        return omittedInput === "" && showSkipWorkHistoryModal === false;
     };
 
     const handleSkipWorkHistoryModal = (e) => {
@@ -46,13 +35,15 @@ const WorkHistoryForm = ({
             : setShowSkipWorkHistoryModal(true);
     };
 
-    const getOptions = (loop, n) => {
+    // generate options for react-select inputs
+    const generateOptions = (loop, n) => {
         const options = [];
         for (let i = 0; i <= loop; i += 1) {
             const year = n - i;
             options.push({ value: year.toString(), label: year.toString() });
         }
 
+        // adjust numbering for month options
         options.forEach((month) => {
             if (month.value.length === 1) {
                 month.value = `0${month.value}`;
@@ -63,6 +54,7 @@ const WorkHistoryForm = ({
         return options;
     };
 
+    // adjust styles of react-select inputs
     const customStyles = {
         control: (base) => ({
             ...base,
@@ -79,7 +71,6 @@ const WorkHistoryForm = ({
     };
 
     const navigate = useNavigate();
-
     const navigateBack = () => {
         navigate("/");
     };
@@ -87,7 +78,10 @@ const WorkHistoryForm = ({
     return (
         <>
             <form
-                onSubmit={handleSubmit}
+                onSubmit={(e) => {
+                    handleSubmit(e);
+                    setCurrentlyWorkingCheckboxValue(false);
+                }}
                 className="w-2/4 flex flex-col justify-center"
             >
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
@@ -101,7 +95,7 @@ const WorkHistoryForm = ({
                                 name="jobTitle"
                                 placeholder="Job Title"
                                 className={
-                                    inputIsLeftOut(jobTitleValues, companyValues) &&
+                                    inputIsOmitted(jobTitleValues) &&
                                         formikErrors.jobTitle &&
                                         touched.jobTitle
                                         ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 w-full"
@@ -115,7 +109,7 @@ const WorkHistoryForm = ({
                                 maxLength={40}
                             />
                         </div>
-                        {inputIsLeftOut(jobTitleValues, companyValues) &&
+                        {inputIsOmitted(jobTitleValues) &&
                             formikErrors.jobTitle &&
                             touched.jobTitle && (
                                 <p className="ml-4 text-red-800">{formikErrors.jobTitle}</p>
@@ -128,7 +122,7 @@ const WorkHistoryForm = ({
                                 name="company"
                                 placeholder="Company"
                                 className={
-                                    inputIsLeftOut(companyValues, jobTitleValues) &&
+                                    inputIsOmitted(companyValues) &&
                                         formikErrors.company &&
                                         touched.company
                                         ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 w-full"
@@ -142,7 +136,7 @@ const WorkHistoryForm = ({
                                 maxLength={40}
                             />
                         </div>
-                        {inputIsLeftOut(companyValues, jobTitleValues) &&
+                        {inputIsOmitted(companyValues) &&
                             formikErrors.company &&
                             touched.company && (
                                 <p className="ml-4 text-red-800">{formikErrors.company}</p>
@@ -179,7 +173,7 @@ const WorkHistoryForm = ({
                     <Select
                         name="yearStartWork"
                         placeholder="Year Start"
-                        options={getOptions(70, 2023)}
+                        options={generateOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("yearStartWork", e.value);
@@ -189,7 +183,7 @@ const WorkHistoryForm = ({
                     <Select
                         name="monthStartWork"
                         placeholder="Month Start"
-                        options={getOptions(12, 12)}
+                        options={generateOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("monthStartWork", e.value);
@@ -201,24 +195,24 @@ const WorkHistoryForm = ({
                     <Select
                         name="yearEndWork"
                         placeholder="Year End"
-                        options={getOptions(70, 2023)}
+                        options={generateOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("yearEndWork", e.value);
                             handleSkipWorkHistoryModal(e.value);
                         }}
-                        isDisabled={checked}
+                        isDisabled={currentlyWorkingCheckboxValue}
                     />
                     <Select
                         name="monthEndWork"
                         placeholder="Month End"
-                        options={getOptions(12, 12)}
+                        options={generateOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue("monthEndWork", e.value);
                             handleSkipWorkHistoryModal(e.value);
                         }}
-                        isDisabled={checked}
+                        isDisabled={currentlyWorkingCheckboxValue}
                     />
                 </div>
                 <div className="flex">
@@ -227,10 +221,9 @@ const WorkHistoryForm = ({
                             type="checkbox"
                             name="currentlyWorkingCheckbox"
                             className="mr-3 w-4 hover:cursor-pointer"
-                            onClick={handleCheckedState}
-                            value={currentlyWorkingCheckbox}
+                            checked={currentlyWorkingCheckboxValue}
                             onChange={(e) => {
-                                handleChange(e);
+                                handleCheckedState();
                                 handleSkipWorkHistoryModal(e.target.value);
                             }}
                         />
