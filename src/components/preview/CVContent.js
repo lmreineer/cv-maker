@@ -46,14 +46,29 @@ const CVContent = ({
         (cityContactInput || stateContactInput || countryInput || zipCodeInput) ===
         "";
     const hasNoPhone = pathname === "/work-history" && phoneInput === "";
-    const hasNoWorkDatePeriod =
-        pathname === "/education" &&
-        ((yearStartWorkInput &&
-            monthStartWorkInput) &&
-            yearEndWorkInput &&
-            monthEndWorkInput) === "";
 
     let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
+
+    const isEducationPath = pathname === "/education";
+    const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
+
+    let result = "";
+
+    if (isEducationPath) {
+        if (yearEndWorkInput !== "" && monthEndWorkInput !== "" && !isCurrentlyWorking) {
+            result = `${yearEndWorkInput}-${monthEndWorkInput}`;
+        } else if (yearEndWorkInput === "" && monthEndWorkInput === "" && isCurrentlyWorking) {
+            result = "Current";
+        } else {
+            result = "";
+        }
+    } else {
+        if (isCurrentlyWorking) {
+            result = "Current";
+        } else {
+            result = `${yearEndWorkInput || "2023"}${monthEndWorkInput || "06"}`;
+        }
+    }
 
     return (
         <div className={textContainer}>
@@ -130,30 +145,19 @@ const CVContent = ({
                 </ul>
                 <h6 className={mainBackgroundHeading}>Work History</h6>
                 <div className={stayPeriodContainer}>
-                    {hasNoWorkDatePeriod ? (
-                        ""
-                    ) : (
-                        <div className={workDatePeriodContainer}>
-                            <h6>
-                                {pathname === "/education" && yearEndWorkInput === ""
-                                    ? ""
-                                    : yearStartWorkInput || "2020"}
-                                -
-                                {pathname === "/education" && monthStartWorkInput === ""
-                                    ? ""
-                                    : monthStartWorkInput || "04"}
-                                -
-                                {pathname === "/education" &&
-                                    yearEndWorkInput === "" &&
-                                    monthEndWorkInput === ""
-                                    ? ""
-                                    : currentlyWorkingCheckboxValue === true
-                                        ? "Current"
-                                        : `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"
-                                        }`}
-                            </h6>
-                        </div>
-                    )}
+                    <div className={workDatePeriodContainer}>
+                        <h6>
+                            {pathname === "/education" && yearStartWorkInput === ""
+                                ? ""
+                                : yearStartWorkInput || "2020-"}
+                            
+                            {pathname === "/education" && monthStartWorkInput === ""
+                                ? ""
+                                : monthStartWorkInput || "04-"}
+                            
+                            {result}
+                        </h6>
+                    </div>
 
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>

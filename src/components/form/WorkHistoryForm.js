@@ -80,7 +80,6 @@ const WorkHistoryForm = ({
             <form
                 onSubmit={(e) => {
                     handleSubmit(e);
-                    setCurrentlyWorkingCheckboxValue(false);
                 }}
                 className="w-2/4 flex flex-col justify-center"
             >

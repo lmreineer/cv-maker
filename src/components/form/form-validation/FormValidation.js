@@ -15,7 +15,8 @@ import CVPreview from "../../preview/CVPreview";
 const FormValidation = () => {
     const pathname = useLocation().pathname;
 
-    const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] = useState(true);
+    const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
+        useState(true);
 
     const handleValidateOnChangeValue = () => {
         if (pathname === "/") {
@@ -34,7 +35,10 @@ const FormValidation = () => {
                     .required("Email is required")
                     .email("Email is invalid"),
             };
-        } else if (pathname === "/work-history" && showSkipWorkHistoryModal === false) {
+        } else if (
+            pathname === "/work-history" &&
+            showSkipWorkHistoryModal === false
+        ) {
             return {
                 jobTitle: Yup.string().required("Job title is required"),
                 company: Yup.string().required("Company is required"),
@@ -103,7 +107,8 @@ const FormValidation = () => {
         monthEndWork,
     } = formik.values;
 
-    const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] = useState(false);
+    const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
+        useState(false);
 
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
@@ -148,7 +153,9 @@ const FormValidation = () => {
                     element={
                         <WorkHistoryForm
                             currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
-                            setCurrentlyWorkingCheckboxValue={setCurrentlyWorkingCheckboxValue}
+                            setCurrentlyWorkingCheckboxValue={
+                                setCurrentlyWorkingCheckboxValue
+                            }
                             handleChange={formik.handleChange}
                             setShowSkipWorkHistoryModal={setShowSkipWorkHistoryModal}
                             showSkipWorkHistoryModal={showSkipWorkHistoryModal}
@@ -164,10 +171,7 @@ const FormValidation = () => {
                     }
                 />
                 <Route path="/education" element={<EducationForm />} />
-                <Route
-                    path="/skip-work-history"
-                    element={<SkipWorkHistoryModal />}
-                />
+                <Route path="/skip-work-history" element={<SkipWorkHistoryModal />} />
             </Routes>
 
             <CVPreview
