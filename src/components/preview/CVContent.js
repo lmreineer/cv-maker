@@ -41,33 +41,42 @@ const CVContent = ({
 }) => {
     const pathname = useLocation().pathname;
 
+    const isWorkHistoryPath = pathname === "/work-history";
+
     const hasNoAddress =
-        pathname === "/work-history" &&
-        (cityContactInput || stateContactInput || countryInput || zipCodeInput) ===
-        "";
-    const hasNoPhone = pathname === "/work-history" && phoneInput === "";
+        isWorkHistoryPath &&
+        (!cityContactInput || !stateContactInput || !countryInput || !zipCodeInput);
+    const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
+    const hasNoPhone = isWorkHistoryPath && !phoneInput;
 
-    let defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
-
-    const isEducationPath = pathname === "/education";
     const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
+    const isEducationPath = pathname === "/education";
+
+    const hasStartDate = yearStartWorkInput && monthStartWorkInput;
+    const hasEndDate = yearEndWorkInput && monthEndWorkInput;
+    const isMissingStartDate = !hasStartDate && isCurrentlyWorking;
+    const isMissingEndDate = !hasEndDate && !isCurrentlyWorking;
+    const hasNoWorkDatePeriod =
+        isEducationPath && (isMissingStartDate || isMissingEndDate);
 
     let result = "";
 
     if (isEducationPath) {
-        if (yearEndWorkInput !== "" && monthEndWorkInput !== "" && !isCurrentlyWorking) {
+        if (
+            !isCurrentlyWorking &&
+            yearEndWorkInput &&
+            monthEndWorkInput &&
+            yearStartWorkInput &&
+            monthEndWorkInput
+        ) {
             result = `${yearEndWorkInput}-${monthEndWorkInput}`;
-        } else if (yearEndWorkInput === "" && monthEndWorkInput === "" && isCurrentlyWorking) {
+        } else if (isCurrentlyWorking) {
             result = "Current";
-        } else {
-            result = "";
         }
+    } else if (isCurrentlyWorking) {
+        result = "Current";
     } else {
-        if (isCurrentlyWorking) {
-            result = "Current";
-        } else {
-            result = `${yearEndWorkInput || "2023"}${monthEndWorkInput || "06"}`;
-        }
+        result = `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`;
     }
 
     return (
@@ -145,19 +154,22 @@ const CVContent = ({
                 </ul>
                 <h6 className={mainBackgroundHeading}>Work History</h6>
                 <div className={stayPeriodContainer}>
-                    <div className={workDatePeriodContainer}>
-                        <h6>
-                            {pathname === "/education" && yearStartWorkInput === ""
-                                ? ""
-                                : yearStartWorkInput || "2020-"}
-                            
-                            {pathname === "/education" && monthStartWorkInput === ""
-                                ? ""
-                                : monthStartWorkInput || "04-"}
-                            
-                            {result}
-                        </h6>
-                    </div>
+                    {hasNoWorkDatePeriod ? (
+                        ""
+                    ) : (
+                        <div className={workDatePeriodContainer}>
+                            <h6>
+                                {pathname === "/education" && yearStartWorkInput === ""
+                                    ? ""
+                                    : yearStartWorkInput || "2020"}
+                                -
+                                {pathname === "/education" && monthStartWorkInput === ""
+                                    ? ""
+                                    : monthStartWorkInput || "04"}
+                                -{result}
+                            </h6>
+                        </div>
+                    )}
 
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>

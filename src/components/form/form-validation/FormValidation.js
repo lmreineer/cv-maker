@@ -110,9 +110,9 @@ const FormValidation = () => {
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
         useState(false);
 
-    const capitaliseFirstLetter = (input) => {
-        return input.charAt(0).toUpperCase() + input.slice(1);
-    };
+    // const capitaliseFirstLetter = (input) => {
+    // return input.charAt(0).toUpperCase() + input.slice(1);
+    // };
 
     const capitalizeFirstLetterOfEachWord = (input) => {
         // capitalize first letter of each word
@@ -121,9 +121,7 @@ const FormValidation = () => {
         );
     };
 
-    const lowerCaseEachLetter = (input) => {
-        return input.toLowerCase();
-    };
+    const lowerCaseEachLetter = (input) => input.toLowerCase();
 
     return (
         <>

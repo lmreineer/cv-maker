@@ -23,11 +23,10 @@ const WorkHistoryForm = ({
             : setCurrentlyWorkingCheckboxValue(true);
     };
 
-    // check if main input is omitted after inputting other non-main input
-    const inputIsOmitted = (omittedInput) => {
-        // main input is omitted but the state is false already
-        return omittedInput === "" && showSkipWorkHistoryModal === false;
-    };
+    // check if main input is omitted after inputting other secondary inputs
+    const inputIsOmitted = (omittedInput) =>
+        // main input is omitted but secondary inputs are inputted
+        omittedInput === "" && showSkipWorkHistoryModal === false;
 
     const handleSkipWorkHistoryModal = (e) => {
         e !== ""
@@ -71,16 +70,12 @@ const WorkHistoryForm = ({
     };
 
     const navigate = useNavigate();
-    const navigateBack = () => {
-        navigate("/");
-    };
+    const navigateBack = () => navigate("/");
 
     return (
         <>
             <form
-                onSubmit={(e) => {
-                    handleSubmit(e);
-                }}
+                onSubmit={handleSubmit}
                 className="w-2/4 flex flex-col justify-center"
             >
                 <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
