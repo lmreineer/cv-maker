@@ -40,44 +40,27 @@ const CVContent = ({
     educationDatePeriodContainer,
 }) => {
     const pathname = useLocation().pathname;
-
-    const isWorkHistoryPath = pathname === "/work-history";
+    const isOnWorkHistoryPath = pathname === "/work-history";
+    const isOnEducationPath = pathname === "/education";
+    const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
 
     const hasNoAddress =
-        isWorkHistoryPath &&
+        isOnWorkHistoryPath &&
         (!cityContactInput || !stateContactInput || !countryInput || !zipCodeInput);
     const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
-    const hasNoPhone = isWorkHistoryPath && !phoneInput;
-
-    const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
-    const isEducationPath = pathname === "/education";
+    const hasNoPhone = isOnWorkHistoryPath && !phoneInput;
 
     const hasStartDate = yearStartWorkInput && monthStartWorkInput;
     const hasEndDate = yearEndWorkInput && monthEndWorkInput;
     const isMissingStartDate = !hasStartDate && isCurrentlyWorking;
     const isMissingEndDate = !hasEndDate && !isCurrentlyWorking;
+    const startDateIsOmitted = hasEndDate && !hasStartDate;
+
     const hasNoWorkDatePeriod =
-        isEducationPath && (isMissingStartDate || isMissingEndDate);
-
-    let result = "";
-
-    if (isEducationPath) {
-        if (
-            !isCurrentlyWorking &&
-            yearEndWorkInput &&
-            monthEndWorkInput &&
-            yearStartWorkInput &&
-            monthEndWorkInput
-        ) {
-            result = `${yearEndWorkInput}-${monthEndWorkInput}`;
-        } else if (isCurrentlyWorking) {
-            result = "Current";
-        }
-    } else if (isCurrentlyWorking) {
-        result = "Current";
-    } else {
-        result = `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"}`;
-    }
+        isOnEducationPath &&
+        (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
+    const hasDatesButNotCurrentlyWorking =
+        !isCurrentlyWorking && hasEndDate && hasStartDate;
 
     return (
         <div className={textContainer}>
@@ -159,18 +142,27 @@ const CVContent = ({
                     ) : (
                         <div className={workDatePeriodContainer}>
                             <h6>
-                                {pathname === "/education" && yearStartWorkInput === ""
+                                {isOnEducationPath && yearStartWorkInput === ""
                                     ? ""
                                     : yearStartWorkInput || "2020"}
                                 -
-                                {pathname === "/education" && monthStartWorkInput === ""
+                                {isOnEducationPath && monthStartWorkInput === ""
                                     ? ""
                                     : monthStartWorkInput || "04"}
-                                -{result}
+                                -
+                                {isOnEducationPath && hasDatesButNotCurrentlyWorking
+                                    ? `${yearEndWorkInput}-${monthEndWorkInput}`
+                                    : isCurrentlyWorking
+                                        ? "Current"
+                                        : // if section is work history and currently working is checked
+                                        !isOnEducationPath && isCurrentlyWorking
+                                            ? "Current"
+                                            : // if not, display year and month inputs on work history section
+                                            `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"
+                                            }`}
                             </h6>
                         </div>
                     )}
-
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>
                             {jobTitleInput || "Marketing Intern"}
