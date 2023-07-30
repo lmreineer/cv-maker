@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import Select from "react-select";
+import Select from 'react-select';
 
 const WorkHistoryForm = ({
     currentlyWorkingCheckboxValue,
@@ -26,10 +26,10 @@ const WorkHistoryForm = ({
     // check if main input is omitted after inputting other secondary inputs
     const inputIsOmitted = (omittedInput) =>
         // main input is omitted but secondary inputs are inputted
-        omittedInput === "" && showSkipWorkHistoryModal === false;
+        omittedInput === '' && showSkipWorkHistoryModal === false;
 
     const handleSkipWorkHistoryModal = (e) => {
-        e !== ""
+        e !== ''
             ? setShowSkipWorkHistoryModal(false)
             : setShowSkipWorkHistoryModal(true);
     };
@@ -57,28 +57,28 @@ const WorkHistoryForm = ({
     const customStyles = {
         control: (base) => ({
             ...base,
-            border: "2px solid #E5E7EB",
-            boxShadow: "none",
-            margin: "0.75rem",
-            paddingLeft: "1rem",
-            height: "3.75rem",
-            borderRadius: "0.5rem",
-            "&:hover": {
-                border: "2px solid #7B8B5E",
+            border: '2px solid #E5E7EB',
+            boxShadow: 'none',
+            margin: '0.75rem',
+            paddingLeft: '1rem',
+            height: '3.75rem',
+            borderRadius: '0.5rem',
+            '&:hover': {
+                border: '2px solid #7B8B5E',
             },
         }),
     };
 
     const navigate = useNavigate();
-    const navigateBack = () => navigate("/");
+    const navigateBack = () => navigate('/');
 
     return (
         <>
             <form
                 onSubmit={handleSubmit}
-                className="w-2/4 flex flex-col justify-center"
+                className="flex w-2/4 flex-col justify-center"
             >
-                <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
+                <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
                 <div className="flex">
@@ -90,10 +90,10 @@ const WorkHistoryForm = ({
                                 placeholder="Job Title"
                                 className={
                                     inputIsOmitted(jobTitleValues) &&
-                                        formikErrors.jobTitle &&
-                                        touched.jobTitle
-                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 w-full"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                                    formikErrors.jobTitle &&
+                                    touched.jobTitle
+                                        ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                        : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
                                 value={jobTitleValues}
                                 onChange={(e) => {
@@ -106,7 +106,9 @@ const WorkHistoryForm = ({
                         {inputIsOmitted(jobTitleValues) &&
                             formikErrors.jobTitle &&
                             touched.jobTitle && (
-                                <p className="ml-4 text-red-800">{formikErrors.jobTitle}</p>
+                                <p className="ml-4 text-red-800">
+                                    {formikErrors.jobTitle}
+                                </p>
                             )}
                     </div>
                     <div className="w-full">
@@ -117,10 +119,10 @@ const WorkHistoryForm = ({
                                 placeholder="Company"
                                 className={
                                     inputIsOmitted(companyValues) &&
-                                        formikErrors.company &&
-                                        touched.company
-                                        ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700 w-full"
-                                        : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                                    formikErrors.company &&
+                                    touched.company
+                                        ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                        : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
                                 value={companyValues}
                                 onChange={(e) => {
@@ -133,7 +135,9 @@ const WorkHistoryForm = ({
                         {inputIsOmitted(companyValues) &&
                             formikErrors.company &&
                             touched.company && (
-                                <p className="ml-4 text-red-800">{formikErrors.company}</p>
+                                <p className="ml-4 text-red-800">
+                                    {formikErrors.company}
+                                </p>
                             )}
                     </div>
                 </div>
@@ -142,7 +146,7 @@ const WorkHistoryForm = ({
                         type="text"
                         name="cityWork"
                         placeholder="City"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={cityWorkValues}
                         onChange={(e) => {
                             handleChange(e);
@@ -154,7 +158,7 @@ const WorkHistoryForm = ({
                         type="text"
                         name="stateWork"
                         placeholder="State / Country"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={stateWorkValues}
                         onChange={(e) => {
                             handleChange(e);
@@ -170,7 +174,7 @@ const WorkHistoryForm = ({
                         options={generateOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("yearStartWork", e.value);
+                            setFieldValue('yearStartWork', e.value);
                             handleSkipWorkHistoryModal(e.value);
                         }}
                     />
@@ -180,7 +184,7 @@ const WorkHistoryForm = ({
                         options={generateOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("monthStartWork", e.value);
+                            setFieldValue('monthStartWork', e.value);
                             handleSkipWorkHistoryModal(e.value);
                         }}
                     />
@@ -192,7 +196,7 @@ const WorkHistoryForm = ({
                         options={generateOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("yearEndWork", e.value);
+                            setFieldValue('yearEndWork', e.value);
                             handleSkipWorkHistoryModal(e.value);
                         }}
                         isDisabled={currentlyWorkingCheckboxValue}
@@ -203,14 +207,14 @@ const WorkHistoryForm = ({
                         options={generateOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) => {
-                            setFieldValue("monthEndWork", e.value);
+                            setFieldValue('monthEndWork', e.value);
                             handleSkipWorkHistoryModal(e.value);
                         }}
                         isDisabled={currentlyWorkingCheckboxValue}
                     />
                 </div>
                 <div className="flex">
-                    <label className="flex m-4 text-base select-none hover:cursor-pointer">
+                    <label className="m-4 flex select-none text-base hover:cursor-pointer">
                         <input
                             type="checkbox"
                             name="currentlyWorkingCheckbox"
@@ -227,13 +231,13 @@ const WorkHistoryForm = ({
                 <div className="flex justify-around">
                     <input
                         type="button"
-                        className="bg-gray-300 hover:bg-gray-400 hover:cursor-pointer transition p-5 w-56 rounded-lg my-10"
+                        className="my-10 w-56 rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
                         onClick={navigateBack}
                         value="Back"
                     />
                     <input
                         type="submit"
-                        className="bg-yellow-green hover:bg-dark-yellow-green hover:cursor-pointer transition p-5 w-56 rounded-lg my-10"
+                        className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
                         value="Continue"
                     />
                 </div>

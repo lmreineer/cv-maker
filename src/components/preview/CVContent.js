@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 const CVContent = ({
     textContainer,
@@ -40,14 +40,17 @@ const CVContent = ({
     educationDatePeriodContainer,
 }) => {
     const pathname = useLocation().pathname;
-    const isOnWorkHistoryPath = pathname === "/work-history";
-    const isOnEducationPath = pathname === "/education";
+    const isOnWorkHistoryPath = pathname === '/work-history';
+    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
     const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
 
     const hasNoAddress =
         isOnWorkHistoryPath &&
-        (!cityContactInput || !stateContactInput || !countryInput || !zipCodeInput);
-    const defaultAddress = "Rampa São Januário, Praia, Cabo Verde, 7600";
+        (!cityContactInput ||
+            !stateContactInput ||
+            !countryInput ||
+            !zipCodeInput);
+    const defaultAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
     const hasNoPhone = isOnWorkHistoryPath && !phoneInput;
 
     const hasStartDate = yearStartWorkInput && monthStartWorkInput;
@@ -57,7 +60,7 @@ const CVContent = ({
     const startDateIsOmitted = hasEndDate && !hasStartDate;
 
     const hasNoWorkDatePeriod =
-        isOnEducationPath &&
+        isOnWorkResponsibilities &&
         (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
     const hasDatesButNotCurrentlyWorking =
         !isCurrentlyWorking && hasEndDate && hasStartDate;
@@ -65,71 +68,80 @@ const CVContent = ({
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
-                <span>{firstNameInput || "Afonso"} </span>
-                <span>{lastNameInput || "Santos"}</span>
+                <span>{firstNameInput || 'Afonso'} </span>
+                <span>{lastNameInput || 'Santos'}</span>
             </h1>
             <h6 className={profession}>{professionInput}</h6>
             <div>
                 <h6 className={address}>
-                    {hasNoAddress ? "" : "Address:"}
+                    {hasNoAddress ? '' : 'Address:'}
                     {hasNoAddress ? (
-                        ""
+                        ''
                     ) : (
                         <span className={contactInput}>
                             {cityContactInput ||
                                 stateContactInput ||
                                 countryInput ||
                                 zipCodeInput ||
-                                (defaultAddress && pathname === "/work-history"
-                                    ? ""
+                                (defaultAddress && pathname === '/work-history'
+                                    ? ''
                                     : defaultAddress)}
 
                             {cityContactInput &&
-                                (stateContactInput || countryInput || zipCodeInput) &&
-                                `, ${stateContactInput || countryInput || zipCodeInput}`}
+                                (stateContactInput ||
+                                    countryInput ||
+                                    zipCodeInput) &&
+                                `, ${
+                                    stateContactInput ||
+                                    countryInput ||
+                                    zipCodeInput
+                                }`}
 
                             {stateContactInput &&
                                 (countryInput || zipCodeInput) &&
                                 `, ${countryInput || zipCodeInput}`}
 
-                            {countryInput && zipCodeInput && `, ${zipCodeInput}`}
+                            {countryInput &&
+                                zipCodeInput &&
+                                `, ${zipCodeInput}`}
                         </span>
                     )}
                 </h6>
                 <h6 className={contactHeading}>
-                    {hasNoPhone ? "" : "Phone:"}
+                    {hasNoPhone ? '' : 'Phone:'}
                     {hasNoPhone ? (
-                        ""
+                        ''
                     ) : (
                         <span className={contactInput}>
-                            {phoneInput || "(238) 513-57521"}
+                            {phoneInput || '(238) 513-57521'}
                         </span>
                     )}
                 </h6>
                 <h6 className={contactHeading}>
                     Email:
                     <span className={contactInput}>
-                        <span>{emailInput || "afonsofrancisco@yahoo.com"}</span>
+                        <span>{emailInput || 'afonsofrancisco@yahoo.com'}</span>
                     </span>
                 </h6>
             </div>
             <div className={summaryContainer}>
                 <h6 className={mainBackgroundHeading}>Summary</h6>
                 <h6 className={summary}>
-                    Results-driven professional with a passion for marketing seeking a
-                    challenging position in a dynamic organization to utilize my skills in
-                    digital marketing and brand management.
+                    Results-driven professional with a passion for marketing
+                    seeking a challenging position in a dynamic organization to
+                    utilize my skills in digital marketing and brand management.
                 </h6>
             </div>
             <div className={mainBackgroundContainer}>
                 <h6 className={mainBackgroundHeading}>Skills</h6>
                 <ul className={skillsList}>
                     <li>
-                        Proficient in Google Analytics, SEO, and social media marketing
-                        tools
+                        Proficient in Google Analytics, SEO, and social media
+                        marketing tools
                     </li>
                     <li>
-                        Strong analytical skills and ability to interpret market trends
+                        Strong analytical skills and ability to interpret market
+                        trends
                     </li>
                     <li>Excellent written and verbal communication skills</li>
                     <li>Creative thinking and problem-solving abilities</li>
@@ -138,34 +150,39 @@ const CVContent = ({
                 <h6 className={mainBackgroundHeading}>Work History</h6>
                 <div className={stayPeriodContainer}>
                     {hasNoWorkDatePeriod ? (
-                        ""
+                        ''
                     ) : (
                         <div className={workDatePeriodContainer}>
                             <h6>
-                                {isOnEducationPath && yearStartWorkInput === ""
-                                    ? ""
-                                    : yearStartWorkInput || "2020"}
+                                {isOnWorkResponsibilities &&
+                                yearStartWorkInput === ''
+                                    ? ''
+                                    : yearStartWorkInput || '2020'}
                                 -
-                                {isOnEducationPath && monthStartWorkInput === ""
-                                    ? ""
-                                    : monthStartWorkInput || "04"}
+                                {isOnWorkResponsibilities &&
+                                monthStartWorkInput === ''
+                                    ? ''
+                                    : monthStartWorkInput || '04'}
                                 -
-                                {isOnEducationPath && hasDatesButNotCurrentlyWorking
+                                {isOnWorkResponsibilities &&
+                                hasDatesButNotCurrentlyWorking
                                     ? `${yearEndWorkInput}-${monthEndWorkInput}`
                                     : isCurrentlyWorking
-                                        ? "Current"
-                                        : // if section is work history and currently working is checked
-                                        !isOnEducationPath && isCurrentlyWorking
-                                            ? "Current"
-                                            : // if not, display year and month inputs on work history section
-                                            `${yearEndWorkInput || "2023"}-${monthEndWorkInput || "06"
-                                            }`}
+                                    ? 'Current'
+                                    : // if section is work history and currently working is checked
+                                    !isOnWorkResponsibilities &&
+                                      isCurrentlyWorking
+                                    ? 'Current'
+                                    : // if not, display year and month inputs on work history section
+                                      `${yearEndWorkInput || '2023'}-${
+                                          monthEndWorkInput || '06'
+                                      }`}
                             </h6>
                         </div>
                     )}
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>
-                            {jobTitleInput || "Marketing Intern"}
+                            {jobTitleInput || 'Marketing Intern'}
                         </div>
                         <div>
                             <h6 className={institution}>
@@ -173,30 +190,37 @@ const CVContent = ({
                                     {companyInput ||
                                         cityWorkInput ||
                                         stateWorkInput ||
-                                        "XYZ Company, City, State"}
+                                        'XYZ Company, City, State'}
 
-                                    {companyInput && cityWorkInput && `, ${cityWorkInput}`}
+                                    {companyInput &&
+                                        cityWorkInput &&
+                                        `, ${cityWorkInput}`}
 
-                                    {cityWorkInput && stateWorkInput && `, ${stateWorkInput}`}
+                                    {cityWorkInput &&
+                                        stateWorkInput &&
+                                        `, ${stateWorkInput}`}
                                 </span>
                             </h6>
                             <ul className={workDescriptionContainer}>
                                 <li className={workDescriptionList}>
-                                    Assisted the marketing team in developing and implementing
-                                    social media marketing campaigns, resulting in a 20% increase
-                                    in website traffic.
+                                    Assisted the marketing team in developing
+                                    and implementing social media marketing
+                                    campaigns, resulting in a 20% increase in
+                                    website traffic.
                                 </li>
                                 <li className={workDescriptionList}>
-                                    Conducted market research and competitor analysis to identify
-                                    new target demographics and improve marketing strategies.
+                                    Conducted market research and competitor
+                                    analysis to identify new target demographics
+                                    and improve marketing strategies.
                                 </li>
                                 <li className={workDescriptionList}>
-                                    Created engaging content for social media platforms,
-                                    increasing follower count by 15%.
+                                    Created engaging content for social media
+                                    platforms, increasing follower count by 15%.
                                 </li>
                                 <li className={workDescriptionList}>
-                                    Assisted in organizing and executing marketing events,
-                                    resulting in a 30% increase in lead generation.
+                                    Assisted in organizing and executing
+                                    marketing events, resulting in a 30%
+                                    increase in lead generation.
                                 </li>
                             </ul>
                         </div>
@@ -240,7 +264,9 @@ const CVContent = ({
                         <h6 className={stayDetailHeading}>
                             Bachelor of Business Administration, Marketing
                         </h6>
-                        <h6 className={institution}>ABC University, City, State</h6>
+                        <h6 className={institution}>
+                            ABC University, City, State
+                        </h6>
                     </div>
                 </div>
             </div>

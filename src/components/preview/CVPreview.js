@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import CVModal from "./CVModal";
+import CVModal from './CVModal';
 
-import CVContent from "./CVContent";
+import CVContent from './CVContent';
 
 const CVPreview = ({
     firstNameInput,
@@ -33,7 +33,7 @@ const CVPreview = ({
     return (
         <div>
             <div
-                className="border-2 rounded-lg w-[30rem] h-[43.3rem] my-[3rem] p-10 hover:cursor-pointer select-none overflow-auto break-all bg-white"
+                className="my-[3rem] h-[43.3rem] w-[30rem] select-none overflow-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
                 onClick={toggleClick}
             >
                 <CVContent
@@ -62,7 +62,9 @@ const CVPreview = ({
                     monthStartWorkInput={monthStartWorkInput}
                     yearEndWorkInput={yearEndWorkInput}
                     monthEndWorkInput={monthEndWorkInput}
-                    currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
+                    currentlyWorkingCheckboxValue={
+                        currentlyWorkingCheckboxValue
+                    }
                     stayDetailContainer="text-xs w-full"
                     stayDetailHeading="text-base"
                     jobTitleInput={jobTitleInput}
@@ -79,7 +81,7 @@ const CVPreview = ({
             {isClicked && (
                 <div>
                     <div
-                        className="inset-0 fixed bg-modal-overlay"
+                        className="fixed inset-0 bg-modal-overlay"
                         onClick={toggleClick}
                     ></div>
                     <CVModal

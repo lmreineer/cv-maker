@@ -15,8 +15,11 @@ const HeadingForm = ({
 }) => {
     return (
         <>
-            <form onSubmit={handleSubmit} className="flex flex-col justify-center">
-                <h1 className="text-4xl mb-10 mt-16 font-semibold text-center font-cabin tracking-wider text-very-dark-yellow-green">
+            <form
+                onSubmit={handleSubmit}
+                className="flex flex-col justify-center"
+            >
+                <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Contact Information:
                 </h1>
                 <div className="flex">
@@ -27,15 +30,17 @@ const HeadingForm = ({
                             placeholder="First Name"
                             className={
                                 formikErrors.firstName && touched.firstName
-                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
-                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
                             value={firstNameValues}
                             onChange={handleChange}
                             maxLength={15}
                         />
                         {formikErrors.firstName && touched.firstName && (
-                            <p className="ml-4 text-red-800">{formikErrors.firstName}</p>
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.firstName}
+                            </p>
                         )}
                     </div>
                     <div>
@@ -45,15 +50,17 @@ const HeadingForm = ({
                             placeholder="Last Name"
                             className={
                                 formikErrors.lastName && touched.lastName
-                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 outline-0 focus:border-red-700"
-                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
                             value={lastNameValues}
                             onChange={handleChange}
                             maxLength={15}
                         />
                         {formikErrors.lastName && touched.lastName && (
-                            <p className="ml-4 text-red-800">{formikErrors.lastName}</p>
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.lastName}
+                            </p>
                         )}
                     </div>
                 </div>
@@ -62,7 +69,7 @@ const HeadingForm = ({
                         type="text"
                         name="profession"
                         placeholder="Profession"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={professionValues}
                         onChange={handleChange}
                         maxLength={40}
@@ -73,7 +80,7 @@ const HeadingForm = ({
                         type="text"
                         name="country"
                         placeholder="Country"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={countryValues}
                         onChange={handleChange}
                         autoComplete="on"
@@ -82,7 +89,7 @@ const HeadingForm = ({
                         type="text"
                         name="city"
                         placeholder="City"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={cityContactValues}
                         onChange={handleChange}
                     />
@@ -92,7 +99,7 @@ const HeadingForm = ({
                         type="text"
                         name="state"
                         placeholder="State"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={stateContactValues}
                         onChange={handleChange}
                     />
@@ -100,7 +107,7 @@ const HeadingForm = ({
                         type="tel"
                         name="zipCode"
                         placeholder="ZIP Code"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={zipCodeValues}
                         onChange={handleChange}
                     />
@@ -110,7 +117,7 @@ const HeadingForm = ({
                         type="tel"
                         name="phone"
                         placeholder="Phone"
-                        className="border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         value={phoneValues}
                         onChange={handleChange}
                         autoComplete="on"
@@ -125,8 +132,8 @@ const HeadingForm = ({
                             id="email"
                             className={
                                 formikErrors.email && touched.email
-                                    ? "border-2 border-red-700 rounded-lg m-3 p-4 w-full outline-0 focus:border-red-700"
-                                    : "border-2 rounded-lg m-3 p-4 outline-0 focus:border-dark-yellow-green w-full"
+                                    ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
                             value={emailValues}
                             onChange={handleChange}
@@ -135,13 +142,15 @@ const HeadingForm = ({
                         />
                     </div>
                     {formikErrors.email && touched.email && (
-                        <p className="ml-4 text-red-800">{formikErrors.email}</p>
+                        <p className="ml-4 text-red-800">
+                            {formikErrors.email}
+                        </p>
                     )}
                 </div>
-                <div className="flex justify-end w-11/12">
+                <div className="flex w-11/12 justify-end">
                     <input
                         type="submit"
-                        className="bg-yellow-green hover:bg-dark-yellow-green hover:cursor-pointer transition p-5 w-56 rounded-lg my-10"
+                        className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
                         value="Continue"
                     />
                 </div>

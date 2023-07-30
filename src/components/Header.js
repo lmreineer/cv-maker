@@ -1,36 +1,38 @@
-import headerLogo from "../assets/headerLogo.svg";
-import { useLocation } from "react-router-dom";
+import headerLogo from '../assets/headerLogo.svg';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
     const pathname = useLocation().pathname;
 
     return (
-        <header className="flex justify-around items-center p-5 select-none">
+        <header className="flex select-none items-center justify-around p-5">
             <img
                 src={headerLogo}
                 alt="CV Maker"
-                className="w-48 pointer-events-none"
+                className="pointer-events-none w-48"
             />
             <div className="flex rounded-lg">
                 <div
                     className={
-                        pathname === "/"
-                            ? "m-2 p-4 rounded-xl text-very-dark-yellow-green bg-yellow-green"
-                            : "m-2 p-4 text-very-dark-yellow-green"
+                        pathname === '/'
+                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-very-dark-yellow-green'
                     }
                 >
                     Heading
                 </div>
                 <div
-                    className={`${pathname === "/work-history" || pathname === "/skip-work-history"
-                            ? "m-2 p-4 rounded-xl text-very-dark-yellow-green bg-yellow-green"
-                            : "m-2 p-4 text-gray-400"
-                        }
-                        ${(pathname !== "/work-history" ||
-                            pathname === "/skip-work-history") &&
-                            pathname !== "/"
-                            ? "text-very-dark-yellow-green"
-                            : "m-2 p-4 text-gray-400"
+                    className={`${
+                        pathname === '/work-history' ||
+                        pathname === '/work-responsibilities' ||
+                        pathname === '/skip-work-history'
+                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
+                    }
+                        ${
+                            pathname !== '/work-history' && pathname !== '/'
+                                ? 'text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
                         }
                             `}
                 >
@@ -38,9 +40,9 @@ const Header = () => {
                 </div>
                 <div
                     className={
-                        pathname === "/education"
-                            ? "m-2 p-4 rounded-xl text-very-dark-yellow-green bg-yellow-green"
-                            : "m-2 p-4 text-gray-400"
+                        pathname === '/education'
+                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
                     }
                 >
                     Education

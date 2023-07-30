@@ -1,4 +1,4 @@
-import CVContent from "./CVContent";
+import CVContent from './CVContent';
 
 const CVModal = ({
     firstNameInput,
@@ -12,7 +12,7 @@ const CVModal = ({
     emailInput,
 }) => {
     return (
-        <div className="select-none absolute top-2/4 left-2/4 translate-y-[-50%] translate-x-[-50%] bg-white p-10 rounded h-5/6 w-7/12 bg-zinc-200 break-all">
+        <div className="absolute left-2/4 top-2/4 h-5/6 w-7/12 translate-x-[-50%] translate-y-[-50%] select-none break-all rounded bg-zinc-200 p-10">
             <CVContent
                 textContainer="h-full rounded p-10 overflow-auto bg-white"
                 fullName="font-bold text-5xl"

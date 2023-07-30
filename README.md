@@ -1,3 +1,4 @@
-CV or résumé maker made with:
-- React
-- Tailwind CSS
+CV or resume maker made with:
+
+-   React
+-   Tailwind CSS

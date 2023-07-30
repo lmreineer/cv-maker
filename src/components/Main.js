@@ -1,8 +1,8 @@
-import FormValidation from "./form/form-validation/FormValidation";
+import FormValidation from './form/form-validation/FormValidation';
 
 const Main = () => {
     return (
-        <div className="flex justify-around px-40 bg-[#F9F9F9]">
+        <div className="flex justify-around bg-[#F9F9F9] px-40">
             <FormValidation />
         </div>
     );

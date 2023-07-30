@@ -1,16 +1,17 @@
-import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
+import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-import HeadingForm from "../HeadingForm";
-import WorkHistoryForm from "../WorkHistoryForm";
-import EducationForm from "../EducationForm";
-import SkipWorkHistoryModal from "../modal/SkipWorkHistoryModal";
+import HeadingForm from '../HeadingForm';
+import WorkHistoryForm from '../WorkHistoryForm';
+import WorkResponsibilitiesForm from '../WorkResponsibilitiesForm';
+import SkipWorkHistoryModal from '../modal/SkipWorkHistoryModal';
+import EducationForm from '../EducationForm';
 
-import CVPreview from "../../preview/CVPreview";
+import CVPreview from '../../preview/CVPreview';
 
 const FormValidation = () => {
     const pathname = useLocation().pathname;
@@ -19,29 +20,29 @@ const FormValidation = () => {
         useState(true);
 
     const handleValidateOnChangeValue = () => {
-        if (pathname === "/") {
+        if (pathname === '/') {
             return true;
-        } else if (pathname === "/work-history") {
+        } else if (pathname === '/work-history') {
             return false;
         }
     };
 
     const handleSchema = () => {
-        if (pathname === "/") {
+        if (pathname === '/') {
             return {
-                firstName: Yup.string().required("First name is required"),
-                lastName: Yup.string().required("Last name is required"),
+                firstName: Yup.string().required('First name is required'),
+                lastName: Yup.string().required('Last name is required'),
                 email: Yup.string()
-                    .required("Email is required")
-                    .email("Email is invalid"),
+                    .required('Email is required')
+                    .email('Email is invalid'),
             };
         } else if (
-            pathname === "/work-history" &&
+            pathname === '/work-history' &&
             showSkipWorkHistoryModal === false
         ) {
             return {
-                jobTitle: Yup.string().required("Job title is required"),
-                company: Yup.string().required("Company is required"),
+                jobTitle: Yup.string().required('Job title is required'),
+                company: Yup.string().required('Company is required'),
             };
         }
     };
@@ -51,36 +52,36 @@ const FormValidation = () => {
     const formik = useFormik({
         validateOnChange: handleValidateOnChangeValue(),
         initialValues: {
-            firstName: "",
-            lastName: "",
-            profession: "",
-            country: "",
-            cityContact: "",
-            stateContact: "",
-            zipCode: "",
-            phone: "",
-            email: "",
-            jobTitle: "",
-            company: "",
-            cityWork: "",
-            stateWork: "",
-            yearStartWork: "",
-            monthStartWork: "",
-            yearEndWork: "",
-            monthEndWork: "",
+            firstName: '',
+            lastName: '',
+            profession: '',
+            country: '',
+            cityContact: '',
+            stateContact: '',
+            zipCode: '',
+            phone: '',
+            email: '',
+            jobTitle: '',
+            company: '',
+            cityWork: '',
+            stateWork: '',
+            yearStartWork: '',
+            monthStartWork: '',
+            yearEndWork: '',
+            monthEndWork: '',
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
             // eslint-disable-next-line default-case
             switch (pathname) {
-                case "/":
-                    navigate("/work-history");
+                case '/':
+                    navigate('/work-history');
                     break;
-                case "/work-history":
+                case '/work-history':
                     if (showSkipWorkHistoryModal === false) {
-                        navigate("/education");
+                        navigate('/work-responsibilities');
                     } else if (showSkipWorkHistoryModal === true) {
-                        navigate("/skip-work-history");
+                        navigate('/skip-work-history');
                     }
                     break;
             }
@@ -117,7 +118,7 @@ const FormValidation = () => {
     const capitalizeFirstLetterOfEachWord = (input) => {
         // capitalize first letter of each word
         return input.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-            letter.toUpperCase()
+            letter.toUpperCase(),
         );
     };
 
@@ -150,12 +151,16 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
-                            currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
+                            currentlyWorkingCheckboxValue={
+                                currentlyWorkingCheckboxValue
+                            }
                             setCurrentlyWorkingCheckboxValue={
                                 setCurrentlyWorkingCheckboxValue
                             }
                             handleChange={formik.handleChange}
-                            setShowSkipWorkHistoryModal={setShowSkipWorkHistoryModal}
+                            setShowSkipWorkHistoryModal={
+                                setShowSkipWorkHistoryModal
+                            }
                             showSkipWorkHistoryModal={showSkipWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
                             jobTitleValues={jobTitle}
@@ -168,8 +173,15 @@ const FormValidation = () => {
                         />
                     }
                 />
+                <Route
+                    path="/work-responsibilities"
+                    element={<WorkResponsibilitiesForm />}
+                />
+                <Route
+                    path="/skip-work-history"
+                    element={<SkipWorkHistoryModal />}
+                />
                 <Route path="/education" element={<EducationForm />} />
-                <Route path="/skip-work-history" element={<SkipWorkHistoryModal />} />
             </Routes>
 
             <CVPreview
@@ -178,7 +190,9 @@ const FormValidation = () => {
                 professionInput={capitalizeFirstLetterOfEachWord(profession)}
                 countryInput={capitalizeFirstLetterOfEachWord(country)}
                 cityContactInput={capitalizeFirstLetterOfEachWord(cityContact)}
-                stateContactInput={capitalizeFirstLetterOfEachWord(stateContact)}
+                stateContactInput={capitalizeFirstLetterOfEachWord(
+                    stateContact,
+                )}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
                 emailInput={lowerCaseEachLetter(email)}
