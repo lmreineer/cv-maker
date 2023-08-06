@@ -37,21 +37,26 @@ const CVContent = ({
     stateWorkInput,
     workDescriptionContainer,
     workDescriptionList,
-    educationDatePeriodContainer,
+    bulletPointOneInput,
+    bulletPointTwoInput,
+    bulletPointThreeInput,
+    bulletPointFourInput,
+    educationDatePeriodContainer
 }) => {
     const pathname = useLocation().pathname;
+    const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
     const isOnWorkResponsibilities = pathname === '/work-responsibilities';
     const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
 
     const hasNoAddress =
-        isOnWorkHistoryPath &&
+        !isOnHeadingPath &&
         (!cityContactInput ||
             !stateContactInput ||
             !countryInput ||
             !zipCodeInput);
     const defaultAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
-    const hasNoPhone = isOnWorkHistoryPath && !phoneInput;
+    const hasNoPhone = !isOnHeadingPath && !phoneInput;
 
     const hasStartDate = yearStartWorkInput && monthStartWorkInput;
     const hasEndDate = yearEndWorkInput && monthEndWorkInput;
@@ -60,10 +65,20 @@ const CVContent = ({
     const startDateIsOmitted = hasEndDate && !hasStartDate;
 
     const hasNoWorkDatePeriod =
-        isOnWorkResponsibilities &&
+        !isOnHeadingPath &&
+        !isOnWorkHistoryPath &&
         (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
     const hasDatesButNotCurrentlyWorking =
         !isCurrentlyWorking && hasEndDate && hasStartDate;
+
+    const bulletPointIsSubmittedEmpty = (n) => {
+        return (
+            !n &&
+            !isOnHeadingPath &&
+            !isOnWorkHistoryPath &&
+            !isOnWorkResponsibilities
+        );
+    };
 
     return (
         <div className={textContainer}>
@@ -154,16 +169,8 @@ const CVContent = ({
                     ) : (
                         <div className={workDatePeriodContainer}>
                             <h6>
-                                {isOnWorkResponsibilities &&
-                                yearStartWorkInput === ''
-                                    ? ''
-                                    : yearStartWorkInput || '2020'}
-                                -
-                                {isOnWorkResponsibilities &&
-                                monthStartWorkInput === ''
-                                    ? ''
-                                    : monthStartWorkInput || '04'}
-                                -
+                                {yearStartWorkInput || '2020'}-
+                                {monthStartWorkInput || '04'}-
                                 {isOnWorkResponsibilities &&
                                 hasDatesButNotCurrentlyWorking
                                     ? `${yearEndWorkInput}-${monthEndWorkInput}`
@@ -202,25 +209,77 @@ const CVContent = ({
                                 </span>
                             </h6>
                             <ul className={workDescriptionContainer}>
-                                <li className={workDescriptionList}>
-                                    Assisted the marketing team in developing
-                                    and implementing social media marketing
-                                    campaigns, resulting in a 20% increase in
-                                    website traffic.
+                                <li
+                                    className={
+                                        bulletPointIsSubmittedEmpty(
+                                            bulletPointOneInput
+                                        )
+                                            ? // add default styles if bullet point is submitted empty
+                                              { workDescriptionList }
+                                            : // if not, add list-style-type: disc style
+                                              `${workDescriptionList} list-disc`
+                                    }
+                                >
+                                    {bulletPointIsSubmittedEmpty(
+                                        bulletPointOneInput
+                                    )
+                                        ? ''
+                                        : bulletPointOneInput ||
+                                          'Assisted the marketing team in developing and implementing social media marketing campaigns, resulting in a 20% increase in website traffic.'}
                                 </li>
-                                <li className={workDescriptionList}>
-                                    Conducted market research and competitor
-                                    analysis to identify new target demographics
-                                    and improve marketing strategies.
+                                <li
+                                    className={
+                                        bulletPointIsSubmittedEmpty(
+                                            bulletPointTwoInput
+                                        )
+                                            ? // add default styles if bullet point is submitted empty
+                                              { workDescriptionList }
+                                            : // if not, add list-style-type: disc style
+                                              `${workDescriptionList} list-disc`
+                                    }
+                                >
+                                    {bulletPointIsSubmittedEmpty(
+                                        bulletPointTwoInput
+                                    )
+                                        ? ''
+                                        : bulletPointTwoInput ||
+                                          'Conducted market research and competitor analysis to identify new target demographics and improve marketing strategies.'}
                                 </li>
-                                <li className={workDescriptionList}>
-                                    Created engaging content for social media
-                                    platforms, increasing follower count by 15%.
+                                <li
+                                    className={
+                                        bulletPointIsSubmittedEmpty(
+                                            bulletPointThreeInput
+                                        )
+                                            ? // add default styles if bullet point is submitted empty
+                                              { workDescriptionList }
+                                            : // if not, add list-style-type: disc style
+                                              `${workDescriptionList} list-disc`
+                                    }
+                                >
+                                    {bulletPointIsSubmittedEmpty(
+                                        bulletPointThreeInput
+                                    )
+                                        ? ''
+                                        : bulletPointThreeInput ||
+                                          'Created engaging content for social media platforms, increasing follower count by 15%.'}
                                 </li>
-                                <li className={workDescriptionList}>
-                                    Assisted in organizing and executing
-                                    marketing events, resulting in a 30%
-                                    increase in lead generation.
+                                <li
+                                    className={
+                                        bulletPointIsSubmittedEmpty(
+                                            bulletPointFourInput
+                                        )
+                                            ? // add default styles if bullet point is submitted empty
+                                              { workDescriptionList }
+                                            : // if not, add list-style-type: disc style
+                                              `${workDescriptionList} list-disc`
+                                    }
+                                >
+                                    {bulletPointIsSubmittedEmpty(
+                                        bulletPointFourInput
+                                    )
+                                        ? ''
+                                        : bulletPointFourInput ||
+                                          'Assisted in organizing and executing marketing events, resulting in a 30% increase in lead generation.'}
                                 </li>
                             </ul>
                         </div>

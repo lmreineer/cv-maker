@@ -15,34 +15,33 @@ import CVPreview from '../../preview/CVPreview';
 
 const FormValidation = () => {
     const pathname = useLocation().pathname;
+    const isOnHeadingPath = pathname === '/';
+    const isOnWorkHistoryPath = pathname === '/work-history';
 
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
 
     const handleValidateOnChangeValue = () => {
-        if (pathname === '/') {
+        if (isOnHeadingPath) {
             return true;
-        } else if (pathname === '/work-history') {
+        } else if (isOnWorkHistoryPath) {
             return false;
         }
     };
 
     const handleSchema = () => {
-        if (pathname === '/') {
+        if (isOnHeadingPath) {
             return {
                 firstName: Yup.string().required('First name is required'),
                 lastName: Yup.string().required('Last name is required'),
                 email: Yup.string()
                     .required('Email is required')
-                    .email('Email is invalid'),
+                    .email('Email is invalid')
             };
-        } else if (
-            pathname === '/work-history' &&
-            showSkipWorkHistoryModal === false
-        ) {
+        } else if (isOnWorkHistoryPath && showSkipWorkHistoryModal === false) {
             return {
                 jobTitle: Yup.string().required('Job title is required'),
-                company: Yup.string().required('Company is required'),
+                company: Yup.string().required('Company is required')
             };
         }
     };
@@ -65,10 +64,10 @@ const FormValidation = () => {
             company: '',
             cityWork: '',
             stateWork: '',
-            yearStartWork: '',
-            monthStartWork: '',
-            yearEndWork: '',
-            monthEndWork: '',
+            bulletPointOne: '',
+            bulletPointTwo: '',
+            bulletPointThree: '',
+            bulletPointFour: ''
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
@@ -84,8 +83,11 @@ const FormValidation = () => {
                         navigate('/skip-work-history');
                     }
                     break;
+                case '/work-responsibilities':
+                    navigate('/education');
+                    break;
             }
-        },
+        }
     });
 
     const {
@@ -106,19 +108,23 @@ const FormValidation = () => {
         monthStartWork,
         yearEndWork,
         monthEndWork,
+        bulletPointOne,
+        bulletPointTwo,
+        bulletPointThree,
+        bulletPointFour
     } = formik.values;
 
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
         useState(false);
 
-    // const capitaliseFirstLetter = (input) => {
-    // return input.charAt(0).toUpperCase() + input.slice(1);
-    // };
+    const capitaliseFirstLetter = (input) => {
+        return input.charAt(0).toUpperCase() + input.slice(1);
+    };
 
     const capitalizeFirstLetterOfEachWord = (input) => {
         // capitalize first letter of each word
         return input.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-            letter.toUpperCase(),
+            letter.toUpperCase()
         );
     };
 
@@ -175,7 +181,16 @@ const FormValidation = () => {
                 />
                 <Route
                     path="/work-responsibilities"
-                    element={<WorkResponsibilitiesForm />}
+                    element={
+                        <WorkResponsibilitiesForm
+                            handleSubmit={formik.handleSubmit}
+                            bulletPointOneValues={bulletPointOne}
+                            handleChange={formik.handleChange}
+                            bulletPointTwoValues={bulletPointTwo}
+                            bulletPointThreeValues={bulletPointThree}
+                            bulletPointFourValues={bulletPointFour}
+                        />
+                    }
                 />
                 <Route
                     path="/skip-work-history"
@@ -191,7 +206,7 @@ const FormValidation = () => {
                 countryInput={capitalizeFirstLetterOfEachWord(country)}
                 cityContactInput={capitalizeFirstLetterOfEachWord(cityContact)}
                 stateContactInput={capitalizeFirstLetterOfEachWord(
-                    stateContact,
+                    stateContact
                 )}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
@@ -205,6 +220,10 @@ const FormValidation = () => {
                 yearEndWorkInput={yearEndWork}
                 monthEndWorkInput={monthEndWork}
                 currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
+                bulletPointOneInput={capitaliseFirstLetter(bulletPointOne)}
+                bulletPointTwoInput={capitaliseFirstLetter(bulletPointTwo)}
+                bulletPointThreeInput={capitaliseFirstLetter(bulletPointThree)}
+                bulletPointFourInput={capitaliseFirstLetter(bulletPointFour)}
             />
         </>
     );

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import CVModal from './CVModal';
-
 import CVContent from './CVContent';
+
+import CVModal from './CVModal';
 
 const CVPreview = ({
     firstNameInput,
@@ -23,12 +23,13 @@ const CVPreview = ({
     yearEndWorkInput,
     monthEndWorkInput,
     currentlyWorkingCheckboxValue,
+    bulletPointOneInput,
+    bulletPointTwoInput,
+    bulletPointThreeInput,
+    bulletPointFourInput,
 }) => {
     const [isClicked, setIsClicked] = useState(false);
-
-    const toggleClick = () => {
-        setIsClicked(!isClicked);
-    };
+    const toggleClick = () => setIsClicked(!isClicked);
 
     return (
         <div>
@@ -72,8 +73,12 @@ const CVPreview = ({
                     companyInput={companyInput}
                     cityWorkInput={cityWorkInput}
                     stateWorkInput={stateWorkInput}
-                    workDescriptionContainer="list-disc ml-10 mt-2"
+                    workDescriptionContainer="ml-10 mt-2"
                     workDescriptionList="font-light"
+                    bulletPointOneInput={bulletPointOneInput}
+                    bulletPointTwoInput={bulletPointTwoInput}
+                    bulletPointThreeInput={bulletPointThreeInput}
+                    bulletPointFourInput={bulletPointFourInput}
                     educationDatePeriodContainer="text-xs w-20"
                 />
             </div>
