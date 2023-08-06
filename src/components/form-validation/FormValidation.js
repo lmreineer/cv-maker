@@ -5,13 +5,14 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import HeadingForm from '../HeadingForm';
-import WorkHistoryForm from '../WorkHistoryForm';
-import WorkResponsibilitiesForm from '../WorkResponsibilitiesForm';
-import SkipWorkHistoryModal from '../modal/SkipWorkHistoryModal';
-import EducationForm from '../EducationForm';
+import HeadingForm from '../path/form/HeadingForm';
+import WorkHistoryForm from '../path/form/WorkHistoryForm';
+import WorkResponsibilitiesForm from '../path/form/WorkResponsibilitiesForm';
+import WorkHistorylist from '../path/list/WorkHistoryList';
+import SkipWorkHistoryModal from '../path/modal/SkipWorkHistoryModal';
+import EducationForm from '../path/form/EducationForm';
 
-import CVPreview from '../../preview/CVPreview';
+import CVPreview from '../preview/CVPreview';
 
 const FormValidation = () => {
     const pathname = useLocation().pathname;
@@ -84,7 +85,7 @@ const FormValidation = () => {
                     }
                     break;
                 case '/work-responsibilities':
-                    navigate('/education');
+                    navigate('/work-history-list');
                     break;
             }
         }

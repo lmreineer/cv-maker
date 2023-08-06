@@ -1,4 +1,4 @@
-import FormValidation from './form/form-validation/FormValidation';
+import FormValidation from './form-validation/FormValidation';
 
 const Main = () => {
     return (
