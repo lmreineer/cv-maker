@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
+import { useLocation, useNavigate, Route, Routes } from 'react-router-dom';
 
 import { useState } from 'react';
 
@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import HeadingForm from '../path/form/HeadingForm';
 import WorkHistoryForm from '../path/form/WorkHistoryForm';
 import WorkResponsibilitiesForm from '../path/form/WorkResponsibilitiesForm';
-import WorkHistorylist from '../path/list/WorkHistoryList';
+import WorkHistoryList from '../path/list/WorkHistoryList';
 import SkipWorkHistoryModal from '../path/modal/SkipWorkHistoryModal';
 import EducationForm from '../path/form/EducationForm';
 
@@ -139,10 +139,10 @@ const FormValidation = () => {
                     element={
                         <HeadingForm
                             handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
+                            firstNameValues={firstName}
                             formikErrors={formik.errors}
                             touched={formik.touched}
-                            firstNameValues={firstName}
-                            handleChange={formik.handleChange}
                             lastNameValues={lastName}
                             professionValues={profession}
                             countryValues={country}
@@ -185,11 +185,21 @@ const FormValidation = () => {
                     element={
                         <WorkResponsibilitiesForm
                             handleSubmit={formik.handleSubmit}
-                            bulletPointOneValues={bulletPointOne}
                             handleChange={formik.handleChange}
+                            bulletPointOneValues={bulletPointOne}
                             bulletPointTwoValues={bulletPointTwo}
                             bulletPointThreeValues={bulletPointThree}
                             bulletPointFourValues={bulletPointFour}
+                        />
+                    }
+                />
+                <Route
+                    path="/work-history-list"
+                    element={
+                        <WorkHistoryList
+                            jobTitleInput={capitalizeFirstLetterOfEachWord(
+                                jobTitle
+                            )}
                         />
                     }
                 />

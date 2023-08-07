@@ -9,8 +9,8 @@ const CVPreview = ({
     lastNameInput,
     professionInput,
     countryInput,
-    cityContactInput,
-    stateContactInput,
+    cityHeadingInput,
+    stateHeadingInput,
     zipCodeInput,
     phoneInput,
     emailInput,
@@ -26,7 +26,7 @@ const CVPreview = ({
     bulletPointOneInput,
     bulletPointTwoInput,
     bulletPointThreeInput,
-    bulletPointFourInput,
+    bulletPointFourInput
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const toggleClick = () => setIsClicked(!isClicked);
@@ -47,8 +47,8 @@ const CVPreview = ({
                     contactHeading="text-xs font-medium"
                     contactInput="font-normal ml-1"
                     countryInput={countryInput}
-                    cityContactInput={cityContactInput}
-                    stateContactInput={stateContactInput}
+                    cityHeadingInput={cityHeadingInput}
+                    stateHeadingInput={stateHeadingInput}
                     zipCodeInput={zipCodeInput}
                     phoneInput={phoneInput}
                     emailInput={emailInput}
@@ -94,8 +94,8 @@ const CVPreview = ({
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
                         countryInput={countryInput}
-                        cityContactInput={cityContactInput}
-                        stateContactInput={stateContactInput}
+                        cityHeadingInput={cityHeadingInput}
+                        stateHeadingInput={stateHeadingInput}
                         zipCodeInput={zipCodeInput}
                         phoneInput={phoneInput}
                         emailInput={emailInput}

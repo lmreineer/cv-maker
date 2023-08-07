@@ -6,6 +6,7 @@ const Header = () => {
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
     const isOnWorkResponsibilities = pathname === '/work-responsibilities';
+    const isOnWorkHistoryList = pathname === '/work-history-list';
     const isOnSkipWorkHistoryModal = pathname === '/skip-work-history';
     const isOnEducationPath = pathname === '/education';
 
@@ -30,6 +31,7 @@ const Header = () => {
                     className={`${
                         isOnWorkHistoryPath ||
                         isOnWorkResponsibilities ||
+                        isOnWorkHistoryList ||
                         isOnSkipWorkHistoryModal
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-gray-400'

@@ -1,9 +1,9 @@
 const HeadingForm = ({
     handleSubmit,
+    handleChange,
+    firstNameValues,
     formikErrors,
     touched,
-    firstNameValues,
-    handleChange,
     lastNameValues,
     professionValues,
     countryValues,
@@ -11,7 +11,7 @@ const HeadingForm = ({
     stateContactValues,
     zipCodeValues,
     phoneValues,
-    emailValues,
+    emailValues
 }) => {
     return (
         <>
@@ -28,13 +28,13 @@ const HeadingForm = ({
                             type="text"
                             name="firstName"
                             placeholder="First Name"
+                            onChange={handleChange}
+                            value={firstNameValues}
                             className={
                                 formikErrors.firstName && touched.firstName
                                     ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                     : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
-                            value={firstNameValues}
-                            onChange={handleChange}
                             maxLength={15}
                         />
                         {formikErrors.firstName && touched.firstName && (
@@ -48,13 +48,13 @@ const HeadingForm = ({
                             type="text"
                             name="lastName"
                             placeholder="Last Name"
+                            onChange={handleChange}
+                            value={lastNameValues}
                             className={
                                 formikErrors.lastName && touched.lastName
                                     ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                     : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
-                            value={lastNameValues}
-                            onChange={handleChange}
                             maxLength={15}
                         />
                         {formikErrors.lastName && touched.lastName && (
@@ -70,8 +70,8 @@ const HeadingForm = ({
                         name="profession"
                         placeholder="Profession"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={professionValues}
                         onChange={handleChange}
+                        value={professionValues}
                         maxLength={40}
                     />
                 </div>
@@ -81,8 +81,8 @@ const HeadingForm = ({
                         name="country"
                         placeholder="Country"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={countryValues}
                         onChange={handleChange}
+                        value={countryValues}
                         autoComplete="on"
                     />
                     <input
@@ -90,8 +90,8 @@ const HeadingForm = ({
                         name="city"
                         placeholder="City"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={cityContactValues}
                         onChange={handleChange}
+                        value={cityContactValues}
                     />
                 </div>
                 <div>
@@ -100,16 +100,16 @@ const HeadingForm = ({
                         name="state"
                         placeholder="State"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={stateContactValues}
                         onChange={handleChange}
+                        value={stateContactValues}
                     />
                     <input
                         type="tel"
                         name="zipCode"
                         placeholder="ZIP Code"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={zipCodeValues}
                         onChange={handleChange}
+                        value={zipCodeValues}
                     />
                 </div>
                 <div className="flex">
@@ -118,8 +118,8 @@ const HeadingForm = ({
                         name="phone"
                         placeholder="Phone"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={phoneValues}
                         onChange={handleChange}
+                        value={phoneValues}
                         autoComplete="on"
                     />
                 </div>
@@ -130,13 +130,13 @@ const HeadingForm = ({
                             name="email"
                             placeholder="Email"
                             id="email"
+                            onChange={handleChange}
+                            value={emailValues}
                             className={
                                 formikErrors.email && touched.email
                                     ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                     : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
-                            value={emailValues}
-                            onChange={handleChange}
                             maxLength={40}
                             autoComplete="on"
                         />

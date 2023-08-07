@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 const WorkResponsibilitiesForm = ({
     handleSubmit,
-    bulletPointOneValues,
     handleChange,
+    bulletPointOneValues,
     bulletPointTwoValues,
     bulletPointThreeValues,
-    bulletPointFourValues,
+    bulletPointFourValues
 }) => {
     const textareaRef1 = useRef(null);
     const textareaRef2 = useRef(null);
@@ -39,8 +39,8 @@ const WorkResponsibilitiesForm = ({
                     name="bulletPointOne"
                     placeholder="Bullet Point 1"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                    value={bulletPointOneValues}
                     onChange={handleChange}
+                    value={bulletPointOneValues}
                     ref={textareaRef1}
                     maxLength={250}
                 />
@@ -48,8 +48,8 @@ const WorkResponsibilitiesForm = ({
                     name="bulletPointTwo"
                     placeholder="Bullet Point 2"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                    value={bulletPointTwoValues}
                     onChange={handleChange}
+                    value={bulletPointTwoValues}
                     ref={textareaRef2}
                     maxLength={250}
                 />
@@ -57,8 +57,8 @@ const WorkResponsibilitiesForm = ({
                     name="bulletPointThree"
                     placeholder="Bullet Point 3"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                    value={bulletPointThreeValues}
                     onChange={handleChange}
+                    value={bulletPointThreeValues}
                     ref={textareaRef3}
                     maxLength={250}
                 />
@@ -66,8 +66,8 @@ const WorkResponsibilitiesForm = ({
                     name="bulletPointFour"
                     placeholder="Bullet Point 4"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                    value={bulletPointFourValues}
                     onChange={handleChange}
+                    value={bulletPointFourValues}
                     ref={textareaRef4}
                     maxLength={250}
                 />

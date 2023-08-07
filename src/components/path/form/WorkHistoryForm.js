@@ -5,17 +5,17 @@ import Select from 'react-select';
 const WorkHistoryForm = ({
     currentlyWorkingCheckboxValue,
     setCurrentlyWorkingCheckboxValue,
-    handleChange,
-    setShowSkipWorkHistoryModal,
     showSkipWorkHistoryModal,
+    setShowSkipWorkHistoryModal,
     handleSubmit,
+    handleChange,
     jobTitleValues,
-    companyValues,
     formikErrors,
     touched,
+    companyValues,
     cityWorkValues,
     stateWorkValues,
-    setFieldValue,
+    setFieldValue
 }) => {
     const handleCheckedState = () => {
         currentlyWorkingCheckboxValue === true
@@ -64,9 +64,9 @@ const WorkHistoryForm = ({
             height: '3.75rem',
             borderRadius: '0.5rem',
             '&:hover': {
-                border: '2px solid #7B8B5E',
-            },
-        }),
+                border: '2px solid #7B8B5E'
+            }
+        })
     };
 
     const navigate = useNavigate();
@@ -88,6 +88,11 @@ const WorkHistoryForm = ({
                                 type="text"
                                 name="jobTitle"
                                 placeholder="Job Title"
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    handleSkipWorkHistoryModal(e.target.value);
+                                }}
+                                value={jobTitleValues}
                                 className={
                                     inputIsOmitted(jobTitleValues) &&
                                     formikErrors.jobTitle &&
@@ -95,11 +100,6 @@ const WorkHistoryForm = ({
                                         ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                         : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
-                                value={jobTitleValues}
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipWorkHistoryModal(e.target.value);
-                                }}
                                 maxLength={40}
                             />
                         </div>
@@ -117,6 +117,11 @@ const WorkHistoryForm = ({
                                 type="text"
                                 name="company"
                                 placeholder="Company"
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    handleSkipWorkHistoryModal(e.target.value);
+                                }}
+                                value={companyValues}
                                 className={
                                     inputIsOmitted(companyValues) &&
                                     formikErrors.company &&
@@ -124,11 +129,6 @@ const WorkHistoryForm = ({
                                         ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                         : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
-                                value={companyValues}
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipWorkHistoryModal(e.target.value);
-                                }}
                                 maxLength={40}
                             />
                         </div>
@@ -147,11 +147,11 @@ const WorkHistoryForm = ({
                         name="cityWork"
                         placeholder="City"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={cityWorkValues}
                         onChange={(e) => {
                             handleChange(e);
                             handleSkipWorkHistoryModal(e.target.value);
                         }}
+                        value={cityWorkValues}
                         maxLength={40}
                     />
                     <input
@@ -159,11 +159,11 @@ const WorkHistoryForm = ({
                         name="stateWork"
                         placeholder="State / Country"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        value={stateWorkValues}
                         onChange={(e) => {
                             handleChange(e);
                             handleSkipWorkHistoryModal(e.target.value);
                         }}
+                        value={stateWorkValues}
                         maxLength={40}
                     />
                 </div>
