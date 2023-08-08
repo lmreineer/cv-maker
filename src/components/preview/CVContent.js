@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
+import { useEffect } from 'react';
+
 const CVContent = ({
     textContainer,
     fullName,
@@ -80,10 +82,19 @@ const CVContent = ({
         );
     };
 
+    useEffect(() => {
+        if (isOnHeadingPath)
+            window.localStorage.setItem('test', firstNameInput);
+    }, [isOnHeadingPath, firstNameInput]);
+
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
-                <span>{firstNameInput || 'Afonso'} </span>
+                <span>
+                    {window.localStorage.getItem('test') ||
+                        firstNameInput ||
+                        'Afonso '}
+                </span>
                 <span>{lastNameInput || 'Santos'}</span>
             </h1>
             <h6 className={profession}>{professionInput}</h6>
