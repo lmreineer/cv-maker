@@ -7,8 +7,8 @@ const HeadingForm = ({
     lastNameValues,
     professionValues,
     countryValues,
-    cityContactValues,
-    stateContactValues,
+    cityHeadingValues,
+    stateHeadingValues,
     zipCodeValues,
     phoneValues,
     emailValues
@@ -87,21 +87,21 @@ const HeadingForm = ({
                     />
                     <input
                         type="text"
-                        name="city"
+                        name="cityHeading"
                         placeholder="City"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
-                        value={cityContactValues}
+                        value={cityHeadingValues}
                     />
                 </div>
                 <div>
                     <input
                         type="text"
-                        name="state"
+                        name="stateHeading"
                         placeholder="State"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
-                        value={stateContactValues}
+                        value={stateHeadingValues}
                     />
                     <input
                         type="tel"

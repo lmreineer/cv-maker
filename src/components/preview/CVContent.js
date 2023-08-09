@@ -12,8 +12,8 @@ const CVContent = ({
     address,
     contactInput,
     countryInput,
-    cityContactInput,
-    stateContactInput,
+    cityHeadingInput,
+    stateHeadingInput,
     zipCodeInput,
     contactHeading,
     phoneInput,
@@ -51,13 +51,47 @@ const CVContent = ({
     const isOnWorkResponsibilities = pathname === '/work-responsibilities';
     const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
 
+    useEffect(() => {
+        if (isOnHeadingPath)
+            // add data to localStorage
+            window.localStorage.setItem(
+                'formValues',
+                JSON.stringify({
+                    firstNameInput: firstNameInput,
+                    lastNameInput: lastNameInput,
+                    professionInput: professionInput,
+                    countryInput: countryInput,
+                    cityHeadingInput: cityHeadingInput,
+                    stateHeadingInput: stateHeadingInput,
+                    zipCodeInput: zipCodeInput,
+                    phoneInput: phoneInput,
+                    emailInput: emailInput
+                })
+            );
+    }, [
+        isOnHeadingPath,
+        firstNameInput,
+        lastNameInput,
+        professionInput,
+        countryInput,
+        cityHeadingInput,
+        stateHeadingInput,
+        zipCodeInput,
+        phoneInput,
+        emailInput
+    ]);
+
+    const submittedFormData = JSON.parse(
+        window.localStorage.getItem('formValues')
+    );
+
     const hasNoAddress =
         !isOnHeadingPath &&
-        (!cityContactInput ||
-            !stateContactInput ||
-            !countryInput ||
-            !zipCodeInput);
-    const defaultAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
+        !submittedFormData.cityHeadingInput &&
+        !submittedFormData.stateHeadingInput &&
+        !submittedFormData.countryInput &&
+        !submittedFormData.zipCodeInput;
+
     const hasNoPhone = !isOnHeadingPath && !phoneInput;
 
     const hasStartDate = yearStartWorkInput && monthStartWorkInput;
@@ -82,22 +116,13 @@ const CVContent = ({
         );
     };
 
-    useEffect(() => {
-        if (isOnHeadingPath)
-            window.localStorage.setItem('test', firstNameInput);
-    }, [isOnHeadingPath, firstNameInput]);
-
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
-                <span>
-                    {window.localStorage.getItem('test') ||
-                        firstNameInput ||
-                        'Afonso '}
-                </span>
-                <span>{lastNameInput || 'Santos'}</span>
+                <span>{submittedFormData.firstNameInput || 'Afonso'} </span>
+                <span>{submittedFormData.lastNameInput || 'Santos'}</span>
             </h1>
-            <h6 className={profession}>{professionInput}</h6>
+            <h6 className={profession}>{submittedFormData.professionInput}</h6>
             <div>
                 <h6 className={address}>
                     {hasNoAddress ? '' : 'Address:'}
@@ -105,31 +130,36 @@ const CVContent = ({
                         ''
                     ) : (
                         <span className={contactInput}>
-                            {cityContactInput ||
-                                stateContactInput ||
-                                countryInput ||
-                                zipCodeInput ||
-                                (defaultAddress && pathname === '/work-history'
+                            {submittedFormData.cityHeadingInput ||
+                                submittedFormData.stateHeadingInput ||
+                                submittedFormData.countryInput ||
+                                submittedFormData.zipCodeInput ||
+                                ('Rampa São Januário, Praia, Cabo Verde, 7600' &&
+                                isOnWorkHistoryPath
                                     ? ''
-                                    : defaultAddress)}
+                                    : 'Rampa São Januário, Praia, Cabo Verde, 7600')}
 
-                            {cityContactInput &&
-                                (stateContactInput ||
-                                    countryInput ||
-                                    zipCodeInput) &&
+                            {submittedFormData.cityHeadingInput &&
+                                (submittedFormData.stateHeadingInput ||
+                                    submittedFormData.countryInput ||
+                                    submittedFormData.zipCodeInput) &&
                                 `, ${
-                                    stateContactInput ||
-                                    countryInput ||
-                                    zipCodeInput
+                                    submittedFormData.stateHeadingInput ||
+                                    submittedFormData.countryInput ||
+                                    submittedFormData.zipCodeInput
                                 }`}
 
-                            {stateContactInput &&
-                                (countryInput || zipCodeInput) &&
-                                `, ${countryInput || zipCodeInput}`}
+                            {submittedFormData.stateHeadingInput &&
+                                (submittedFormData.countryInput ||
+                                    submittedFormData.zipCodeInput) &&
+                                `, ${
+                                    submittedFormData.countryInput ||
+                                    submittedFormData.zipCodeInput
+                                }`}
 
-                            {countryInput &&
-                                zipCodeInput &&
-                                `, ${zipCodeInput}`}
+                            {submittedFormData.countryInput &&
+                                submittedFormData.zipCodeInput &&
+                                `, ${submittedFormData.zipCodeInput}`}
                         </span>
                     )}
                 </h6>

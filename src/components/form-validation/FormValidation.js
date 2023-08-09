@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, Route, Routes } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -56,8 +56,8 @@ const FormValidation = () => {
             lastName: '',
             profession: '',
             country: '',
-            cityContact: '',
-            stateContact: '',
+            cityHeading: '',
+            stateHeading: '',
             zipCode: '',
             phone: '',
             email: '',
@@ -96,8 +96,8 @@ const FormValidation = () => {
         lastName,
         profession,
         country,
-        cityContact,
-        stateContact,
+        cityHeading,
+        stateHeading,
         zipCode,
         phone,
         email,
@@ -146,8 +146,8 @@ const FormValidation = () => {
                             lastNameValues={lastName}
                             professionValues={profession}
                             countryValues={country}
-                            cityContactValues={cityContact}
-                            stateContactValues={stateContact}
+                            cityHeadingValues={cityHeading}
+                            stateHeadingValues={stateHeading}
                             zipCodeValues={zipCode}
                             phoneValues={phone}
                             emailValues={email}
@@ -215,9 +215,9 @@ const FormValidation = () => {
                 lastNameInput={capitalizeFirstLetterOfEachWord(lastName)}
                 professionInput={capitalizeFirstLetterOfEachWord(profession)}
                 countryInput={capitalizeFirstLetterOfEachWord(country)}
-                cityContactInput={capitalizeFirstLetterOfEachWord(cityContact)}
-                stateContactInput={capitalizeFirstLetterOfEachWord(
-                    stateContact
+                cityHeadingInput={capitalizeFirstLetterOfEachWord(cityHeading)}
+                stateHeadingInput={capitalizeFirstLetterOfEachWord(
+                    stateHeading
                 )}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
