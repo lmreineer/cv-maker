@@ -48,26 +48,45 @@ const CVContent = ({
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
-    const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
 
     useEffect(() => {
-        if (isOnHeadingPath)
+        if (isOnHeadingPath) {
             // add data to localStorage
             window.localStorage.setItem(
-                'formValues',
+                'headingFormData',
                 JSON.stringify({
-                    firstNameInput: firstNameInput,
-                    lastNameInput: lastNameInput,
-                    professionInput: professionInput,
-                    countryInput: countryInput,
-                    cityHeadingInput: cityHeadingInput,
-                    stateHeadingInput: stateHeadingInput,
-                    zipCodeInput: zipCodeInput,
-                    phoneInput: phoneInput,
-                    emailInput: emailInput
+                    firstNameData: firstNameInput,
+                    lastNameData: lastNameInput,
+                    professionData: professionInput,
+                    countryData: countryInput,
+                    cityHeadingData: cityHeadingInput,
+                    stateHeadingData: stateHeadingInput,
+                    zipCodeData: zipCodeInput,
+                    phoneData: phoneInput,
+                    emailData: emailInput
                 })
             );
+        } else if (isOnWorkHistoryPath) {
+            // add data to localStorage
+            window.localStorage.setItem(
+                'workHistoryFormData',
+                JSON.stringify({
+                    jobTitleData: jobTitleInput,
+                    companyData: companyInput,
+                    cityWorkData: cityWorkInput,
+                    stateWorkData: stateWorkInput,
+                    yearStartWorkData: yearStartWorkInput,
+                    monthStartWorkData: monthStartWorkInput,
+                    yearEndWorkData: yearEndWorkInput,
+                    monthEndWorkData: monthEndWorkInput,
+                    currentlyWorkingCheckboxData: currentlyWorkingCheckboxValue,
+                    bulletPointOneData: bulletPointOneInput,
+                    bulletPointTwoData: bulletPointTwoInput,
+                    bulletPointThreeData: bulletPointThreeInput,
+                    bulletPointFourData: bulletPointFourInput
+                })
+            );
+        }
     }, [
         isOnHeadingPath,
         firstNameInput,
@@ -78,34 +97,139 @@ const CVContent = ({
         stateHeadingInput,
         zipCodeInput,
         phoneInput,
-        emailInput
+        emailInput,
+        isOnWorkHistoryPath,
+        jobTitleInput,
+        companyInput,
+        cityWorkInput,
+        stateWorkInput,
+        yearStartWorkInput,
+        monthStartWorkInput,
+        yearEndWorkInput,
+        monthEndWorkInput,
+        currentlyWorkingCheckboxValue,
+        bulletPointOneInput,
+        bulletPointTwoInput,
+        bulletPointThreeInput,
+        bulletPointFourInput
     ]);
 
-    const submittedFormData = JSON.parse(
-        window.localStorage.getItem('formValues')
-    );
+    const getFormData = (formData) => {
+        // make values of properties accessible
+        const data = JSON.parse(window.localStorage.getItem(formData));
+        // if form data is submitted, return form data
+        return data ? data : '';
+    };
+
+    const {
+        firstNameData,
+        lastNameData,
+        professionData,
+        cityHeadingData,
+        stateHeadingData,
+        countryData,
+        zipCodeData,
+        phoneData,
+        emailData
+    } = getFormData('headingFormData');
+
+    const {
+        jobTitleData,
+        companyData,
+        cityWorkData,
+        stateWorkData,
+        yearStartWorkData,
+        monthStartWorkData,
+        yearEndWorkData,
+        monthEndWorkData,
+        currentlyWorkingCheckboxData,
+        bulletPointOneData,
+        bulletPointTwoData,
+        bulletPointThreeData,
+        bulletPointFourData
+    } = getFormData('workHistoryFormData');
 
     const hasNoAddress =
         !isOnHeadingPath &&
-        !submittedFormData.cityHeadingInput &&
-        !submittedFormData.stateHeadingInput &&
-        !submittedFormData.countryInput &&
-        !submittedFormData.zipCodeInput;
+        !cityHeadingData &&
+        !stateHeadingData &&
+        !countryData &&
+        !zipCodeData;
 
-    const hasNoPhone = !isOnHeadingPath && !phoneInput;
+    const generateContact = () => {
+        let contact = '';
 
-    const hasStartDate = yearStartWorkInput && monthStartWorkInput;
-    const hasEndDate = yearEndWorkInput && monthEndWorkInput;
+        if (cityHeadingData || stateHeadingData || countryData || zipCodeData) {
+            contact += `${
+                cityHeadingData ||
+                stateHeadingData ||
+                countryData ||
+                zipCodeData
+            }`;
+        } else {
+            contact = 'Rampa São Januário, Praia, Cabo Verde, 7600';
+        }
+
+        if (cityHeadingData) {
+            if (stateHeadingData || countryData || zipCodeData) {
+                contact += `, ${
+                    stateHeadingData || countryData || zipCodeData
+                }`;
+            }
+        }
+
+        if (stateHeadingData) {
+            if (countryData || zipCodeInput) {
+                contact += `, ${countryData || zipCodeData}`;
+            }
+        }
+
+        if (countryData) {
+            if (zipCodeData) {
+                contact += `, ${zipCodeData}`;
+            }
+        }
+
+        return contact;
+    };
+
+    const hasNoPhone = !isOnHeadingPath && !phoneData;
+
+    const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
+    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
+
+    const hasStartDate = yearEndWorkData && monthStartWorkData;
+    const hasEndDate = yearEndWorkData && monthEndWorkData;
     const isMissingStartDate = !hasStartDate && isCurrentlyWorking;
     const isMissingEndDate = !hasEndDate && !isCurrentlyWorking;
     const startDateIsOmitted = hasEndDate && !hasStartDate;
-
     const hasNoWorkDatePeriod =
         !isOnHeadingPath &&
         !isOnWorkHistoryPath &&
         (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
     const hasDatesButNotCurrentlyWorking =
         !isCurrentlyWorking && hasEndDate && hasStartDate;
+
+    const generateWorkDatePeriod = () => {
+        let workDatePeriod = '';
+
+        if (!isOnWorkHistoryPath && hasDatesButNotCurrentlyWorking) {
+            workDatePeriod += `${yearStartWorkData}-${monthStartWorkData}-${yearEndWorkData}-${monthEndWorkData}`;
+        } else if (
+            isCurrentlyWorking ||
+            // if section is work history and currently working is checked
+            (isCurrentlyWorking && !isOnWorkResponsibilities)
+        ) {
+            workDatePeriod += 'Current';
+            // else, display year and month inputs on work history section
+        } else {
+            workDatePeriod += `${yearStartWorkInput || '2020'}-${
+                monthStartWorkInput || '04'
+            }-${yearEndWorkInput || '2023'}-${monthEndWorkInput || '06'}`;
+        }
+
+        return workDatePeriod;
+    };
 
     const bulletPointIsSubmittedEmpty = (n) => {
         return (
@@ -119,10 +243,10 @@ const CVContent = ({
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
-                <span>{submittedFormData.firstNameInput || 'Afonso'} </span>
-                <span>{submittedFormData.lastNameInput || 'Santos'}</span>
+                <span>{firstNameData || 'Afonso'} </span>
+                <span>{lastNameData || 'Santos'}</span>
             </h1>
-            <h6 className={profession}>{submittedFormData.professionInput}</h6>
+            <h6 className={profession}>{professionData}</h6>
             <div>
                 <h6 className={address}>
                     {hasNoAddress ? '' : 'Address:'}
@@ -130,36 +254,7 @@ const CVContent = ({
                         ''
                     ) : (
                         <span className={contactInput}>
-                            {submittedFormData.cityHeadingInput ||
-                                submittedFormData.stateHeadingInput ||
-                                submittedFormData.countryInput ||
-                                submittedFormData.zipCodeInput ||
-                                ('Rampa São Januário, Praia, Cabo Verde, 7600' &&
-                                isOnWorkHistoryPath
-                                    ? ''
-                                    : 'Rampa São Januário, Praia, Cabo Verde, 7600')}
-
-                            {submittedFormData.cityHeadingInput &&
-                                (submittedFormData.stateHeadingInput ||
-                                    submittedFormData.countryInput ||
-                                    submittedFormData.zipCodeInput) &&
-                                `, ${
-                                    submittedFormData.stateHeadingInput ||
-                                    submittedFormData.countryInput ||
-                                    submittedFormData.zipCodeInput
-                                }`}
-
-                            {submittedFormData.stateHeadingInput &&
-                                (submittedFormData.countryInput ||
-                                    submittedFormData.zipCodeInput) &&
-                                `, ${
-                                    submittedFormData.countryInput ||
-                                    submittedFormData.zipCodeInput
-                                }`}
-
-                            {submittedFormData.countryInput &&
-                                submittedFormData.zipCodeInput &&
-                                `, ${submittedFormData.zipCodeInput}`}
+                            {generateContact()}
                         </span>
                     )}
                 </h6>
@@ -169,14 +264,14 @@ const CVContent = ({
                         ''
                     ) : (
                         <span className={contactInput}>
-                            {phoneInput || '(238) 513-57521'}
+                            {phoneData || '(238) 513-57521'}
                         </span>
                     )}
                 </h6>
                 <h6 className={contactHeading}>
                     Email:
                     <span className={contactInput}>
-                        <span>{emailInput || 'afonsofrancisco@yahoo.com'}</span>
+                        <span>{emailData || 'afonsofrancisco@yahoo.com'}</span>
                     </span>
                 </h6>
             </div>
@@ -209,44 +304,44 @@ const CVContent = ({
                         ''
                     ) : (
                         <div className={workDatePeriodContainer}>
-                            <h6>
-                                {yearStartWorkInput || '2020'}-
-                                {monthStartWorkInput || '04'}-
-                                {isOnWorkResponsibilities &&
-                                hasDatesButNotCurrentlyWorking
-                                    ? `${yearEndWorkInput}-${monthEndWorkInput}`
-                                    : isCurrentlyWorking
-                                    ? 'Current'
-                                    : // if section is work history and currently working is checked
-                                    !isOnWorkResponsibilities &&
-                                      isCurrentlyWorking
-                                    ? 'Current'
-                                    : // if not, display year and month inputs on work history section
-                                      `${yearEndWorkInput || '2023'}-${
-                                          monthEndWorkInput || '06'
-                                      }`}
-                            </h6>
+                            <h6>{generateWorkDatePeriod()}</h6>
                         </div>
                     )}
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>
-                            {jobTitleInput || 'Marketing Intern'}
+                            {(!isOnWorkHistoryPath && jobTitleData) ||
+                                jobTitleInput ||
+                                'Marketing Intern'}
                         </div>
                         <div>
                             <h6 className={institution}>
                                 <span>
-                                    {companyInput ||
-                                        cityWorkInput ||
-                                        stateWorkInput ||
-                                        'XYZ Company, City, State'}
+                                    {!isOnWorkHistoryPath
+                                        ? companyData ||
+                                          cityWorkData ||
+                                          stateWorkData
+                                        : companyInput ||
+                                          cityWorkInput ||
+                                          stateWorkInput ||
+                                          'XYZ Company, City, State'}
 
-                                    {companyInput &&
-                                        cityWorkInput &&
-                                        `, ${cityWorkInput}`}
+                                    {!isOnWorkHistoryPath
+                                        ? companyData &&
+                                          (cityWorkData || stateWorkData) &&
+                                          `, ${cityWorkData || stateWorkData}`
+                                        : companyInput &&
+                                          (cityWorkInput || stateWorkInput) &&
+                                          `, ${
+                                              cityWorkInput || stateWorkInput
+                                          }`}
 
-                                    {cityWorkInput &&
-                                        stateWorkInput &&
-                                        `, ${stateWorkInput}`}
+                                    {!isOnWorkHistoryPath
+                                        ? cityWorkData &&
+                                          stateWorkData &&
+                                          `, ${stateWorkData}`
+                                        : cityWorkInput &&
+                                          stateWorkInput &&
+                                          `, ${stateWorkInput}`}
                                 </span>
                             </h6>
                             <ul className={workDescriptionContainer}>
@@ -265,7 +360,7 @@ const CVContent = ({
                                         bulletPointOneInput
                                     )
                                         ? ''
-                                        : bulletPointOneInput ||
+                                        : bulletPointOneData ||
                                           'Assisted the marketing team in developing and implementing social media marketing campaigns, resulting in a 20% increase in website traffic.'}
                                 </li>
                                 <li

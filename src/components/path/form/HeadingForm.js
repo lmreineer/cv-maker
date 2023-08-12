@@ -78,23 +78,12 @@ const HeadingForm = ({
                 <div>
                     <input
                         type="text"
-                        name="country"
-                        placeholder="Country"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
-                        value={countryValues}
-                        autoComplete="on"
-                    />
-                    <input
-                        type="text"
                         name="cityHeading"
                         placeholder="City"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
                         value={cityHeadingValues}
                     />
-                </div>
-                <div>
                     <input
                         type="text"
                         name="stateHeading"
@@ -102,6 +91,17 @@ const HeadingForm = ({
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
                         value={stateHeadingValues}
+                    />
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="country"
+                        placeholder="Country"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        onChange={handleChange}
+                        value={countryValues}
+                        autoComplete="on"
                     />
                     <input
                         type="tel"
