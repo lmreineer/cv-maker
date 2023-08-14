@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import HeadingForm from '../path/form/HeadingForm';
 import WorkHistoryForm from '../path/form/WorkHistoryForm';
 import WorkResponsibilitiesForm from '../path/form/WorkResponsibilitiesForm';
-import WorkHistoryList from '../path/list/WorkHistoryList';
+import WorkHistorySummary from '../path/summary/WorkHistorySummary';
 import SkipWorkHistoryModal from '../path/modal/SkipWorkHistoryModal';
 import EducationForm from '../path/form/EducationForm';
 
@@ -88,7 +88,7 @@ const FormValidation = () => {
                     }
                     break;
                 case '/work-responsibilities':
-                    navigate('/work-history-list');
+                    navigate('/work-history-summary');
                     break;
             }
         }
@@ -197,9 +197,9 @@ const FormValidation = () => {
                     }
                 />
                 <Route
-                    path="/work-history-list"
+                    path="/work-history-summary"
                     element={
-                        <WorkHistoryList
+                        <WorkHistorySummary
                             jobTitleInput={capitalizeFirstLetterOfEachWord(
                                 jobTitle
                             )}

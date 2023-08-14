@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
-const WorkHistoryList = () => {
+const WorkHistorySummary = () => {
     const navigate = useNavigate();
     const navigateBack = () => navigate('/work-responsibilities');
 
     return (
         <form className="flex w-1/2 flex-col justify-center">
             <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Work History List:
+                Work History Summary:
             </h1>
             <div className="flex flex-col justify-center">
                 <input
@@ -33,4 +33,4 @@ const WorkHistoryList = () => {
     );
 };
 
-export default WorkHistoryList;
+export default WorkHistorySummary;
