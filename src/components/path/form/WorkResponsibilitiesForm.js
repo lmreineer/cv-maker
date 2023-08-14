@@ -26,6 +26,12 @@ const WorkResponsibilitiesForm = ({
     const navigate = useNavigate();
     const navigateBack = () => navigate('/work-history');
 
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    };
+
     return (
         <form
             onSubmit={handleSubmit}
@@ -40,6 +46,7 @@ const WorkResponsibilitiesForm = ({
                     placeholder="Bullet Point 1"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
+                    onKeyDown={(e) => handleEnter(e)}
                     value={bulletPointOneValues}
                     ref={textareaRef1}
                     maxLength={250}

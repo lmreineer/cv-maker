@@ -33,16 +33,19 @@ const FormValidation = () => {
     const handleSchema = () => {
         if (isOnHeadingPath) {
             return {
-                firstName: Yup.string().required('First name is required'),
-                lastName: Yup.string().required('Last name is required'),
+                firstName: Yup.string()
+                    .trim()
+                    .required('First name is required'),
+                lastName: Yup.string().trim().required('Last name is required'),
                 email: Yup.string()
+                    .trim()
                     .required('Email is required')
                     .email('Email is invalid')
             };
         } else if (isOnWorkHistoryPath && showSkipWorkHistoryModal === false) {
             return {
-                jobTitle: Yup.string().required('Job title is required'),
-                company: Yup.string().required('Company is required')
+                jobTitle: Yup.string().trim().required('Job title is required'),
+                company: Yup.string().trim().required('Company is required')
             };
         }
     };

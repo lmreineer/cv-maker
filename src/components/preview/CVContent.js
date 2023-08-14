@@ -48,6 +48,10 @@ const CVContent = ({
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
+    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
+    const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
+    const workResponsibilityFormIsSubmitted =
+        workHistoryFormIsSubmitted && !isOnWorkResponsibilities;
 
     useEffect(() => {
         if (isOnHeadingPath) {
@@ -66,7 +70,7 @@ const CVContent = ({
                     emailData: emailInput
                 })
             );
-        } else if (isOnWorkHistoryPath) {
+        } else if (isOnWorkHistoryPath || isOnWorkResponsibilities) {
             // add data to localStorage
             window.localStorage.setItem(
                 'workHistoryFormData',
@@ -99,6 +103,7 @@ const CVContent = ({
         phoneInput,
         emailInput,
         isOnWorkHistoryPath,
+        isOnWorkResponsibilities,
         jobTitleInput,
         companyInput,
         cityWorkInput,
@@ -149,78 +154,88 @@ const CVContent = ({
         bulletPointFourData
     } = getFormData('workHistoryFormData');
 
+    const isCurrentlyWorkingData = currentlyWorkingCheckboxData === true;
+    const isCurrentlyWorkingValue = currentlyWorkingCheckboxValue === true;
+
     const hasNoAddress =
         !isOnHeadingPath &&
         !cityHeadingData &&
         !stateHeadingData &&
         !countryData &&
         !zipCodeData;
-
-    const generateContact = () => {
-        let contact = '';
-
-        if (cityHeadingData || stateHeadingData || countryData || zipCodeData) {
-            contact += `${
-                cityHeadingData ||
-                stateHeadingData ||
-                countryData ||
-                zipCodeData
-            }`;
-        } else {
-            contact = 'Rampa São Januário, Praia, Cabo Verde, 7600';
-        }
-
-        if (cityHeadingData) {
-            if (stateHeadingData || countryData || zipCodeData) {
-                contact += `, ${
-                    stateHeadingData || countryData || zipCodeData
-                }`;
-            }
-        }
-
-        if (stateHeadingData) {
-            if (countryData || zipCodeInput) {
-                contact += `, ${countryData || zipCodeData}`;
-            }
-        }
-
-        if (countryData) {
-            if (zipCodeData) {
-                contact += `, ${zipCodeData}`;
-            }
-        }
-
-        return contact;
-    };
-
     const hasNoPhone = !isOnHeadingPath && !phoneData;
 
-    const isCurrentlyWorking = currentlyWorkingCheckboxValue === true;
-    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
-
-    const hasStartDate = yearEndWorkData && monthStartWorkData;
+    const hasStartDate = yearStartWorkData && monthStartWorkData;
     const hasEndDate = yearEndWorkData && monthEndWorkData;
-    const isMissingStartDate = !hasStartDate && isCurrentlyWorking;
-    const isMissingEndDate = !hasEndDate && !isCurrentlyWorking;
+    const isMissingStartDate = !hasStartDate && isCurrentlyWorkingData;
+    const isMissingEndDate = !hasEndDate && !isCurrentlyWorkingData;
     const startDateIsOmitted = hasEndDate && !hasStartDate;
+
     const hasNoWorkDatePeriod =
         !isOnHeadingPath &&
         !isOnWorkHistoryPath &&
         (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
     const hasDatesButNotCurrentlyWorking =
-        !isCurrentlyWorking && hasEndDate && hasStartDate;
+        !isCurrentlyWorkingData && hasEndDate && hasStartDate;
+
+    const defaultHeadingAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
+    const defaultWorkAddress = 'XYZ Company, City, State';
+    const defaultBulletPointOne =
+        'Assisted the marketing team in developing and implementing social media marketing campaigns, resulting in a 20% increase in website traffic.';
+    const defaultBulletPointTwo =
+        'Conducted market research and competitor analysis to identify new target demographics and improve marketing strategies.';
+    const defaultBulletPointThree =
+        'Created engaging content for social media platforms, increasing follower count by 15%.';
+    const defaultBulletPointFour =
+        'Assisted in organizing and executing marketing events, resulting in a 30% increase in lead generation.';
+
+    const generateAddress = (a, b, c, d, defaultValue) => {
+        let address = '';
+
+        if (a || b || c || d) {
+            address += `${a || b || c || d}`;
+        } else {
+            address = defaultValue;
+        }
+
+        if (a) {
+            if (b || c || d) {
+                address += `, ${b || c || d}`;
+            }
+        }
+
+        if (b) {
+            if (c || d) {
+                address += `, ${c || d}`;
+            }
+        }
+
+        if (c) {
+            if (d) {
+                address += `, ${d}`;
+            }
+        }
+
+        return address;
+    };
 
     const generateWorkDatePeriod = () => {
         let workDatePeriod = '';
 
-        if (!isOnWorkHistoryPath && hasDatesButNotCurrentlyWorking) {
-            workDatePeriod += `${yearStartWorkData}-${monthStartWorkData}-${yearEndWorkData}-${monthEndWorkData}`;
+        if (workHistoryFormIsSubmitted) {
+            if (isCurrentlyWorkingData) {
+                workDatePeriod += `${yearStartWorkData}-${monthStartWorkData}-Current`;
+            } else if (hasDatesButNotCurrentlyWorking) {
+                workDatePeriod += `${yearStartWorkData}-${monthStartWorkData}-${yearEndWorkData}-${monthEndWorkData}`;
+            }
         } else if (
-            isCurrentlyWorking ||
-            // if section is work history and currently working is checked
-            (isCurrentlyWorking && !isOnWorkResponsibilities)
+            isCurrentlyWorkingValue === true ||
+            // if section is on work history and currently working is checked
+            (isCurrentlyWorkingValue === true && !isOnWorkResponsibilities)
         ) {
-            workDatePeriod += 'Current';
+            workDatePeriod += `${yearStartWorkInput || '2020'}-${
+                monthStartWorkInput || '04'
+            }-Current`;
             // else, display year and month inputs on work history section
         } else {
             workDatePeriod += `${yearStartWorkInput || '2020'}-${
@@ -231,13 +246,46 @@ const CVContent = ({
         return workDatePeriod;
     };
 
-    const bulletPointIsSubmittedEmpty = (n) => {
-        return (
-            !n &&
-            !isOnHeadingPath &&
-            !isOnWorkHistoryPath &&
-            !isOnWorkResponsibilities
-        );
+    const generateJobTitle = () => {
+        // if form is submitted already, display jobTitleData
+        return workHistoryFormIsSubmitted
+            ? jobTitleData
+            : jobTitleInput || 'Marketing Intern';
+    };
+
+    const generateBulletPoint = (
+        bulletPointInput,
+        bulletPointData,
+        defaultBulletPoint
+    ) => {
+        let bulletPoint = '';
+
+        if (workResponsibilityFormIsSubmitted) {
+            bulletPoint = !bulletPointInput.trim() ? '' : bulletPointData;
+        } else {
+            bulletPoint = bulletPointInput || defaultBulletPoint;
+        }
+
+        return bulletPoint;
+    };
+
+    const manageBulletPointStyles = (bulletPoint) => {
+        let styles = '';
+
+        // if bullet point is submitted empty
+        if (
+            workHistoryFormIsSubmitted &&
+            !isOnWorkResponsibilities &&
+            generateBulletPoint(bulletPoint) === ''
+        ) {
+            // add default styles
+            styles = { workDescriptionList };
+        } else {
+            // add list-style-type: disc style
+            styles = `${workDescriptionList} list-disc`;
+        }
+
+        return styles;
     };
 
     return (
@@ -254,7 +302,13 @@ const CVContent = ({
                         ''
                     ) : (
                         <span className={contactInput}>
-                            {generateContact()}
+                            {generateAddress(
+                                cityHeadingData,
+                                stateHeadingData,
+                                countryData,
+                                zipCodeData,
+                                defaultHeadingAddress
+                            )}
                         </span>
                     )}
                 </h6>
@@ -309,113 +363,75 @@ const CVContent = ({
                     )}
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>
-                            {(!isOnWorkHistoryPath && jobTitleData) ||
-                                jobTitleInput ||
-                                'Marketing Intern'}
+                            {generateJobTitle()}
                         </div>
                         <div>
                             <h6 className={institution}>
                                 <span>
-                                    {!isOnWorkHistoryPath
-                                        ? companyData ||
-                                          cityWorkData ||
-                                          stateWorkData
-                                        : companyInput ||
-                                          cityWorkInput ||
-                                          stateWorkInput ||
-                                          'XYZ Company, City, State'}
-
-                                    {!isOnWorkHistoryPath
-                                        ? companyData &&
-                                          (cityWorkData || stateWorkData) &&
-                                          `, ${cityWorkData || stateWorkData}`
-                                        : companyInput &&
-                                          (cityWorkInput || stateWorkInput) &&
-                                          `, ${
-                                              cityWorkInput || stateWorkInput
-                                          }`}
-
-                                    {!isOnWorkHistoryPath
-                                        ? cityWorkData &&
-                                          stateWorkData &&
-                                          `, ${stateWorkData}`
-                                        : cityWorkInput &&
-                                          stateWorkInput &&
-                                          `, ${stateWorkInput}`}
+                                    {
+                                        // display localStorage data if form is submitted already
+                                        !isOnWorkHistoryPath
+                                            ? generateAddress(
+                                                  companyData,
+                                                  cityWorkData,
+                                                  stateWorkData,
+                                                  null,
+                                                  defaultWorkAddress
+                                              )
+                                            : generateAddress(
+                                                  companyInput,
+                                                  cityWorkInput,
+                                                  stateWorkInput,
+                                                  null,
+                                                  defaultWorkAddress
+                                              )
+                                    }
                                 </span>
                             </h6>
                             <ul className={workDescriptionContainer}>
                                 <li
-                                    className={
-                                        bulletPointIsSubmittedEmpty(
-                                            bulletPointOneInput
-                                        )
-                                            ? // add default styles if bullet point is submitted empty
-                                              { workDescriptionList }
-                                            : // if not, add list-style-type: disc style
-                                              `${workDescriptionList} list-disc`
-                                    }
-                                >
-                                    {bulletPointIsSubmittedEmpty(
+                                    className={manageBulletPointStyles(
                                         bulletPointOneInput
-                                    )
-                                        ? ''
-                                        : bulletPointOneData ||
-                                          'Assisted the marketing team in developing and implementing social media marketing campaigns, resulting in a 20% increase in website traffic.'}
+                                    )}
+                                >
+                                    {generateBulletPoint(
+                                        bulletPointOneInput,
+                                        bulletPointOneData,
+                                        defaultBulletPointOne
+                                    )}
                                 </li>
                                 <li
-                                    className={
-                                        bulletPointIsSubmittedEmpty(
-                                            bulletPointTwoInput
-                                        )
-                                            ? // add default styles if bullet point is submitted empty
-                                              { workDescriptionList }
-                                            : // if not, add list-style-type: disc style
-                                              `${workDescriptionList} list-disc`
-                                    }
-                                >
-                                    {bulletPointIsSubmittedEmpty(
+                                    className={manageBulletPointStyles(
                                         bulletPointTwoInput
-                                    )
-                                        ? ''
-                                        : bulletPointTwoInput ||
-                                          'Conducted market research and competitor analysis to identify new target demographics and improve marketing strategies.'}
+                                    )}
+                                >
+                                    {generateBulletPoint(
+                                        bulletPointTwoInput,
+                                        bulletPointTwoData,
+                                        defaultBulletPointTwo
+                                    )}
                                 </li>
                                 <li
-                                    className={
-                                        bulletPointIsSubmittedEmpty(
-                                            bulletPointThreeInput
-                                        )
-                                            ? // add default styles if bullet point is submitted empty
-                                              { workDescriptionList }
-                                            : // if not, add list-style-type: disc style
-                                              `${workDescriptionList} list-disc`
-                                    }
-                                >
-                                    {bulletPointIsSubmittedEmpty(
+                                    className={manageBulletPointStyles(
                                         bulletPointThreeInput
-                                    )
-                                        ? ''
-                                        : bulletPointThreeInput ||
-                                          'Created engaging content for social media platforms, increasing follower count by 15%.'}
+                                    )}
+                                >
+                                    {generateBulletPoint(
+                                        bulletPointThreeInput,
+                                        bulletPointThreeData,
+                                        defaultBulletPointThree
+                                    )}
                                 </li>
                                 <li
-                                    className={
-                                        bulletPointIsSubmittedEmpty(
-                                            bulletPointFourInput
-                                        )
-                                            ? // add default styles if bullet point is submitted empty
-                                              { workDescriptionList }
-                                            : // if not, add list-style-type: disc style
-                                              `${workDescriptionList} list-disc`
-                                    }
-                                >
-                                    {bulletPointIsSubmittedEmpty(
+                                    className={manageBulletPointStyles(
                                         bulletPointFourInput
-                                    )
-                                        ? ''
-                                        : bulletPointFourInput ||
-                                          'Assisted in organizing and executing marketing events, resulting in a 30% increase in lead generation.'}
+                                    )}
+                                >
+                                    {generateBulletPoint(
+                                        bulletPointFourInput,
+                                        bulletPointFourData,
+                                        defaultBulletPointFour
+                                    )}
                                 </li>
                             </ul>
                         </div>
