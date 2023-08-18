@@ -3,7 +3,7 @@ import autosize from 'autosize';
 
 import { useNavigate } from 'react-router-dom';
 
-const WorkResponsibilitiesForm = ({
+const WorkResponsibilityForm = ({
     handleSubmit,
     handleChange,
     bulletPointOneValues,
@@ -15,6 +15,8 @@ const WorkResponsibilitiesForm = ({
     const textareaRef2 = useRef(null);
     const textareaRef3 = useRef(null);
     const textareaRef4 = useRef(null);
+
+    const formRef = useRef(null);
 
     useEffect(() => {
         autosize(textareaRef1.current);
@@ -36,6 +38,7 @@ const WorkResponsibilitiesForm = ({
 
     return (
         <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="flex w-1/2 flex-col justify-center"
         >
@@ -49,7 +52,6 @@ const WorkResponsibilitiesForm = ({
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
-                    value={bulletPointOneValues}
                     ref={textareaRef1}
                     maxLength={250}
                 />
@@ -58,7 +60,6 @@ const WorkResponsibilitiesForm = ({
                     placeholder="Bullet Point 2"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
-                    value={bulletPointTwoValues}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef2}
                     maxLength={250}
@@ -68,7 +69,6 @@ const WorkResponsibilitiesForm = ({
                     placeholder="Bullet Point 3"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
-                    value={bulletPointThreeValues}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef3}
                     maxLength={250}
@@ -78,7 +78,6 @@ const WorkResponsibilitiesForm = ({
                     placeholder="Bullet Point 4"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
-                    value={bulletPointFourValues}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef4}
                     maxLength={250}
@@ -90,18 +89,15 @@ const WorkResponsibilitiesForm = ({
                     className="my-10 w-56 rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
                     onClick={navigateBack}
                     value="Back"
-                    onKeyDown={(e) => handleEnter(e)}
                 />
                 <input
                     type="submit"
-                    id="continue-button"
                     className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
                     value="Continue"
-                    onKeyDown={(e) => handleEnter(e)}
                 />
             </div>
         </form>
     );
 };
 
-export default WorkResponsibilitiesForm;
+export default WorkResponsibilityForm;

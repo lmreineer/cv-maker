@@ -48,10 +48,10 @@ const CVContent = ({
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
+    const isOnWorkResponbility = pathname === '/work-responsibility';
     const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
     const workResponsibilityFormIsSubmitted =
-        workHistoryFormIsSubmitted && !isOnWorkResponsibilities;
+        workHistoryFormIsSubmitted && !isOnWorkResponbility;
 
     useEffect(() => {
         if (isOnHeadingPath) {
@@ -70,7 +70,7 @@ const CVContent = ({
                     emailData: emailInput
                 })
             );
-        } else if (isOnWorkHistoryPath || isOnWorkResponsibilities) {
+        } else if (isOnWorkHistoryPath || isOnWorkResponbility) {
             // add data to localStorage
             window.localStorage.setItem(
                 'workHistoryFormData',
@@ -103,7 +103,7 @@ const CVContent = ({
         phoneInput,
         emailInput,
         isOnWorkHistoryPath,
-        isOnWorkResponsibilities,
+        isOnWorkResponbility,
         jobTitleInput,
         companyInput,
         cityWorkInput,
@@ -231,7 +231,7 @@ const CVContent = ({
         } else if (
             isCurrentlyWorkingValue === true ||
             // if section is on work history and currently working is checked
-            (isCurrentlyWorkingValue === true && !isOnWorkResponsibilities)
+            (isCurrentlyWorkingValue === true && !isOnWorkResponbility)
         ) {
             workDatePeriod += `${yearStartWorkInput || '2020'}-${
                 monthStartWorkInput || '04'
@@ -275,7 +275,7 @@ const CVContent = ({
         // if bullet point is submitted empty
         if (
             workHistoryFormIsSubmitted &&
-            !isOnWorkResponsibilities &&
+            !isOnWorkResponbility &&
             generateBulletPoint(bulletPoint) === ''
         ) {
             // add default styles

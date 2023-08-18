@@ -5,7 +5,7 @@ const Header = () => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnWorkResponsibilities = pathname === '/work-responsibilities';
+    const isOnWorkResponbilityForm = pathname === '/work-responsibility';
     const isOnWorkHistorySummary = pathname === '/work-history-summary';
     const isOnSkipWorkHistoryModal = pathname === '/skip-work-history';
     const isOnEducationPath = pathname === '/education';
@@ -30,7 +30,7 @@ const Header = () => {
                 <div
                     className={`${
                         isOnWorkHistoryPath ||
-                        isOnWorkResponsibilities ||
+                        isOnWorkResponbilityForm ||
                         isOnWorkHistorySummary ||
                         isOnSkipWorkHistoryModal
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'

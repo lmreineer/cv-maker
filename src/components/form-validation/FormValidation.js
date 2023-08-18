@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 import HeadingForm from '../path/form/HeadingForm';
 import WorkHistoryForm from '../path/form/WorkHistoryForm';
-import WorkResponsibilitiesForm from '../path/form/WorkResponsibilitiesForm';
+import WorkResponsibilityForm from '../path/form/WorkResponsibilityForm';
 import WorkHistorySummary from '../path/summary/WorkHistorySummary';
 import SkipWorkHistoryModal from '../path/modal/SkipWorkHistoryModal';
 import EducationForm from '../path/form/EducationForm';
@@ -82,12 +82,12 @@ const FormValidation = () => {
                     break;
                 case '/work-history':
                     if (showSkipWorkHistoryModal === false) {
-                        navigate('/work-responsibilities');
+                        navigate('/work-responsibility');
                     } else if (showSkipWorkHistoryModal === true) {
                         navigate('/skip-work-history');
                     }
                     break;
-                case '/work-responsibilities':
+                case '/work-responsibility':
                     navigate('/work-history-summary');
                     break;
             }
@@ -161,32 +161,30 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
-                            currentlyWorkingCheckboxValue={
-                                currentlyWorkingCheckboxValue
-                            }
                             setCurrentlyWorkingCheckboxValue={
                                 setCurrentlyWorkingCheckboxValue
                             }
-                            handleChange={formik.handleChange}
+                            showSkipWorkHistoryModal={showSkipWorkHistoryModal}
+                            currentlyWorkingCheckboxValue={
+                                currentlyWorkingCheckboxValue
+                            }
                             setShowSkipWorkHistoryModal={
                                 setShowSkipWorkHistoryModal
                             }
-                            showSkipWorkHistoryModal={showSkipWorkHistoryModal}
                             handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
                             jobTitleValues={jobTitle}
-                            companyValues={company}
                             formikErrors={formik.errors}
                             touched={formik.touched}
-                            cityWorkValues={cityWork}
-                            stateWorkValues={stateWork}
+                            companyValues={company}
                             setFieldValue={formik.setFieldValue}
                         />
                     }
                 />
                 <Route
-                    path="/work-responsibilities"
+                    path="/work-responsibility"
                     element={
-                        <WorkResponsibilitiesForm
+                        <WorkResponsibilityForm
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
                             bulletPointOneValues={bulletPointOne}

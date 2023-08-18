@@ -3,36 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 
 const WorkHistoryForm = ({
+    setShowSkipWorkHistoryModal,
+    showSkipWorkHistoryModal,
     currentlyWorkingCheckboxValue,
     setCurrentlyWorkingCheckboxValue,
-    showSkipWorkHistoryModal,
-    setShowSkipWorkHistoryModal,
     handleSubmit,
     handleChange,
     jobTitleValues,
     formikErrors,
     touched,
     companyValues,
-    cityWorkValues,
-    stateWorkValues,
     setFieldValue
 }) => {
-    const handleCheckedState = () => {
-        currentlyWorkingCheckboxValue === true
-            ? setCurrentlyWorkingCheckboxValue(false)
-            : setCurrentlyWorkingCheckboxValue(true);
+    const handleSkipWorkHistoryModal = (e) => {
+        e !== ''
+            ? setShowSkipWorkHistoryModal(false)
+            : setShowSkipWorkHistoryModal(true);
     };
 
     // check if main input is omitted after inputting other secondary inputs
     const inputIsOmitted = (omittedInput) =>
         // main input is omitted but secondary inputs are inputted
         omittedInput === '' && showSkipWorkHistoryModal === false;
-
-    const handleSkipWorkHistoryModal = (e) => {
-        e !== ''
-            ? setShowSkipWorkHistoryModal(false)
-            : setShowSkipWorkHistoryModal(true);
-    };
 
     // generate options for react-select inputs
     const generateOptions = (loop, n) => {
@@ -69,8 +61,16 @@ const WorkHistoryForm = ({
         })
     };
 
+    const handleCheckedState = () => {
+        currentlyWorkingCheckboxValue === true
+            ? setCurrentlyWorkingCheckboxValue(false)
+            : setCurrentlyWorkingCheckboxValue(true);
+    };
+
     const navigate = useNavigate();
-    const navigateBack = () => navigate('/');
+    const navigateBack = () => {
+        navigate('/');
+    };
 
     return (
         <>
@@ -92,7 +92,6 @@ const WorkHistoryForm = ({
                                     handleChange(e);
                                     handleSkipWorkHistoryModal(e.target.value);
                                 }}
-                                value={jobTitleValues}
                                 className={
                                     inputIsOmitted(jobTitleValues) &&
                                     formikErrors.jobTitle &&
@@ -121,7 +120,6 @@ const WorkHistoryForm = ({
                                     handleChange(e);
                                     handleSkipWorkHistoryModal(e.target.value);
                                 }}
-                                value={companyValues}
                                 className={
                                     inputIsOmitted(companyValues) &&
                                     formikErrors.company &&
@@ -151,7 +149,6 @@ const WorkHistoryForm = ({
                             handleChange(e);
                             handleSkipWorkHistoryModal(e.target.value);
                         }}
-                        value={cityWorkValues}
                         maxLength={40}
                     />
                     <input
@@ -163,7 +160,6 @@ const WorkHistoryForm = ({
                             handleChange(e);
                             handleSkipWorkHistoryModal(e.target.value);
                         }}
-                        value={stateWorkValues}
                         maxLength={40}
                     />
                 </div>
