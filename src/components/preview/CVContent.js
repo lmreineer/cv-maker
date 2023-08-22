@@ -70,7 +70,7 @@ const CVContent = ({
                     emailData: emailInput
                 })
             );
-        } else if (isOnWorkHistoryPath || isOnWorkResponbility) {
+        } else if (isOnWorkHistoryPath) {
             // add data to localStorage
             window.localStorage.setItem(
                 'workHistoryFormData',
@@ -83,7 +83,13 @@ const CVContent = ({
                     monthStartWorkData: monthStartWorkInput,
                     yearEndWorkData: yearEndWorkInput,
                     monthEndWorkData: monthEndWorkInput,
-                    currentlyWorkingCheckboxData: currentlyWorkingCheckboxValue,
+                    currentlyWorkingCheckboxData: currentlyWorkingCheckboxValue
+                })
+            );
+        } else if (isOnWorkResponbility) {
+            window.localStorage.setItem(
+                'workResponsibilityFormData',
+                JSON.stringify({
                     bulletPointOneData: bulletPointOneInput,
                     bulletPointTwoData: bulletPointTwoInput,
                     bulletPointThreeData: bulletPointThreeInput,
@@ -147,12 +153,15 @@ const CVContent = ({
         monthStartWorkData,
         yearEndWorkData,
         monthEndWorkData,
-        currentlyWorkingCheckboxData,
+        currentlyWorkingCheckboxData
+    } = getFormData('workHistoryFormData');
+
+    const {
         bulletPointOneData,
         bulletPointTwoData,
         bulletPointThreeData,
         bulletPointFourData
-    } = getFormData('workHistoryFormData');
+    } = getFormData('workResponsibilityFormData');
 
     const isCurrentlyWorkingData = currentlyWorkingCheckboxData === true;
     const isCurrentlyWorkingValue = currentlyWorkingCheckboxValue === true;
