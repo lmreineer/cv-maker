@@ -1,18 +1,4 @@
-const HeadingForm = ({
-    handleSubmit,
-    handleChange,
-    firstNameValues,
-    formikErrors,
-    touched,
-    lastNameValues,
-    professionValues,
-    countryValues,
-    cityHeadingValues,
-    stateHeadingValues,
-    zipCodeValues,
-    phoneValues,
-    emailValues
-}) => {
+const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
     return (
         <>
             <form

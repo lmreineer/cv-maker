@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const WorkHistorySummary = () => {
+const WorkHistorySummary = ({ handleSubmit, setAddAnotherWorkPosition }) => {
     const getFormData = (formData) => {
         // make values of properties accessible
         const data = JSON.parse(window.localStorage.getItem(formData));
@@ -24,8 +24,16 @@ const WorkHistorySummary = () => {
     const navigate = useNavigate();
     const navigateBack = () => navigate('/work-responsibility');
 
+    const handleAddingWorkPosition = () => {
+        setAddAnotherWorkPosition(true);
+        navigate('/work-history');
+    };
+
     return (
-        <form className="flex w-1/2 flex-col justify-center">
+        <form
+            onSubmit={handleSubmit}
+            className="flex w-1/2 flex-col justify-center"
+        >
             <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Work History Summary:
             </h1>
@@ -59,8 +67,8 @@ const WorkHistorySummary = () => {
                 </div>
                 <button
                     className="mx-3 flex items-center
-                    justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4 transition  hover:bg-dark-yellow-green"
-                    onClick={navigateBack}
+                    justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
+                    onClick={handleAddingWorkPosition}
                 >
                     <span className="material-symbols-outlined mr-2 text-xl font-semibold">
                         add

@@ -43,7 +43,7 @@ const Header = () => {
                         }
                             `}
                 >
-                    Work History
+                    Work
                 </div>
                 <div
                     className={

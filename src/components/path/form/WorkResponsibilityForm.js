@@ -3,14 +3,7 @@ import autosize from 'autosize';
 
 import { useNavigate } from 'react-router-dom';
 
-const WorkResponsibilityForm = ({
-    handleSubmit,
-    handleChange,
-    bulletPointOneValues,
-    bulletPointTwoValues,
-    bulletPointThreeValues,
-    bulletPointFourValues
-}) => {
+const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
     const textareaRef1 = useRef(null);
     const textareaRef2 = useRef(null);
     const textareaRef3 = useRef(null);

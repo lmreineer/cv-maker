@@ -26,7 +26,8 @@ const CVPreview = ({
     bulletPointOneInput,
     bulletPointTwoInput,
     bulletPointThreeInput,
-    bulletPointFourInput
+    bulletPointFourInput,
+    addAnotherWorkPosition
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const toggleClick = () => setIsClicked(!isClicked);
@@ -79,6 +80,7 @@ const CVPreview = ({
                     bulletPointTwoInput={bulletPointTwoInput}
                     bulletPointThreeInput={bulletPointThreeInput}
                     bulletPointFourInput={bulletPointFourInput}
+                    addAnotherWorkPosition={addAnotherWorkPosition}
                     educationDatePeriodContainer="text-xs w-20"
                 />
             </div>

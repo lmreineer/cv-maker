@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, Route, Routes } from 'react-router-dom';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -18,6 +18,7 @@ const FormValidation = () => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
+    const isOnWorkResponsibilityPath = pathname === '/work-responsibility';
 
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
@@ -54,6 +55,7 @@ const FormValidation = () => {
 
     const formik = useFormik({
         validateOnChange: handleValidateOnChangeValue(),
+        enableReinitialize: true,
         initialValues: {
             firstName: '',
             lastName: '',
@@ -90,6 +92,9 @@ const FormValidation = () => {
                 case '/work-responsibility':
                     navigate('/work-history-summary');
                     break;
+                case '/work-history-summary':
+                    navigate('/education');
+                    break;
             }
         }
     });
@@ -121,6 +126,8 @@ const FormValidation = () => {
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
         useState(false);
 
+    const [addAnotherWorkPosition, setAddAnotherWorkPosition] = useState(false);
+
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
     };
@@ -143,17 +150,8 @@ const FormValidation = () => {
                         <HeadingForm
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
-                            firstNameValues={firstName}
                             formikErrors={formik.errors}
                             touched={formik.touched}
-                            lastNameValues={lastName}
-                            professionValues={profession}
-                            countryValues={country}
-                            cityHeadingValues={cityHeading}
-                            stateHeadingValues={stateHeading}
-                            zipCodeValues={zipCode}
-                            phoneValues={phone}
-                            emailValues={email}
                         />
                     }
                 />
@@ -187,10 +185,6 @@ const FormValidation = () => {
                         <WorkResponsibilityForm
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
-                            bulletPointOneValues={bulletPointOne}
-                            bulletPointTwoValues={bulletPointTwo}
-                            bulletPointThreeValues={bulletPointThree}
-                            bulletPointFourValues={bulletPointFour}
                         />
                     }
                 />
@@ -198,9 +192,10 @@ const FormValidation = () => {
                     path="/work-history-summary"
                     element={
                         <WorkHistorySummary
-                            jobTitleInput={capitalizeFirstLetterOfEachWord(
-                                jobTitle
-                            )}
+                            handleSubmit={formik.handleSubmit}
+                            setAddAnotherWorkPosition={
+                                setAddAnotherWorkPosition
+                            }
                         />
                     }
                 />
@@ -236,6 +231,7 @@ const FormValidation = () => {
                 bulletPointTwoInput={capitaliseFirstLetter(bulletPointTwo)}
                 bulletPointThreeInput={capitaliseFirstLetter(bulletPointThree)}
                 bulletPointFourInput={capitaliseFirstLetter(bulletPointFour)}
+                addAnotherWorkPosition={addAnotherWorkPosition}
             />
         </>
     );

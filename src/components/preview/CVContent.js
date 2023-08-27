@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const CVContent = ({
     textContainer,
@@ -43,15 +43,16 @@ const CVContent = ({
     bulletPointTwoInput,
     bulletPointThreeInput,
     bulletPointFourInput,
+    addAnotherWorkPosition,
     educationDatePeriodContainer
 }) => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnWorkResponbility = pathname === '/work-responsibility';
+    const isOnWorkResponbilityPath = pathname === '/work-responsibility';
     const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
     const workResponsibilityFormIsSubmitted =
-        workHistoryFormIsSubmitted && !isOnWorkResponbility;
+        workHistoryFormIsSubmitted && !isOnWorkResponbilityPath;
 
     useEffect(() => {
         if (isOnHeadingPath) {
@@ -86,7 +87,7 @@ const CVContent = ({
                     currentlyWorkingCheckboxData: currentlyWorkingCheckboxValue
                 })
             );
-        } else if (isOnWorkResponbility) {
+        } else if (isOnWorkResponbilityPath) {
             window.localStorage.setItem(
                 'workResponsibilityFormData',
                 JSON.stringify({
@@ -109,7 +110,7 @@ const CVContent = ({
         phoneInput,
         emailInput,
         isOnWorkHistoryPath,
-        isOnWorkResponbility,
+        isOnWorkResponbilityPath,
         jobTitleInput,
         companyInput,
         cityWorkInput,
@@ -187,6 +188,11 @@ const CVContent = ({
     const hasDatesButNotCurrentlyWorking =
         !isCurrentlyWorkingData && hasEndDate && hasStartDate;
 
+    const defaultFirstName = 'Afonso';
+    const defaultLastName = 'Santos';
+    const defaultPhone = '(238) 513-57521';
+    const defaultEmail = 'afonsofrancisco@yahoo.com';
+    const defaultJobTitle = 'Marketing Intern';
     const defaultHeadingAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
     const defaultWorkAddress = 'XYZ Company, City, State';
     const defaultBulletPointOne =
@@ -197,6 +203,11 @@ const CVContent = ({
         'Created engaging content for social media platforms, increasing follower count by 15%.';
     const defaultBulletPointFour =
         'Assisted in organizing and executing marketing events, resulting in a 30% increase in lead generation.';
+
+    const generateTitle = (path, titleData, titleInput, defaultTitle) => {
+        // if form is submitted already, display jobTitleData
+        return path ? titleData : titleInput || defaultTitle;
+    };
 
     const generateAddress = (a, b, c, d, defaultValue) => {
         let address = '';
@@ -228,6 +239,25 @@ const CVContent = ({
         return address;
     };
 
+    const handleAddressGeneration = () => {
+        // display localStorage data if form is submitted already
+        return workHistoryFormIsSubmitted
+            ? generateAddress(
+                  companyData,
+                  cityWorkData,
+                  stateWorkData,
+                  null,
+                  defaultWorkAddress
+              )
+            : generateAddress(
+                  companyInput,
+                  cityWorkInput,
+                  stateWorkInput,
+                  null,
+                  defaultWorkAddress
+              );
+    };
+
     const generateWorkDatePeriod = () => {
         let workDatePeriod = '';
 
@@ -240,7 +270,7 @@ const CVContent = ({
         } else if (
             isCurrentlyWorkingValue === true ||
             // if section is on work history and currently working is checked
-            (isCurrentlyWorkingValue === true && !isOnWorkResponbility)
+            (isCurrentlyWorkingValue === true && !isOnWorkResponbilityPath)
         ) {
             workDatePeriod += `${yearStartWorkInput || '2020'}-${
                 monthStartWorkInput || '04'
@@ -255,13 +285,6 @@ const CVContent = ({
         return workDatePeriod;
     };
 
-    const generateJobTitle = () => {
-        // if form is submitted already, display jobTitleData
-        return workHistoryFormIsSubmitted
-            ? jobTitleData
-            : jobTitleInput || 'Marketing Intern';
-    };
-
     const generateBulletPoint = (
         bulletPointInput,
         bulletPointData,
@@ -269,8 +292,12 @@ const CVContent = ({
     ) => {
         let bulletPoint = '';
 
-        if (workResponsibilityFormIsSubmitted) {
-            bulletPoint = !bulletPointInput.trim() ? '' : bulletPointData;
+        if (workResponsibilityFormIsSubmitted || addAnotherWorkPosition) {
+            if (bulletPointData) {
+                bulletPoint = !bulletPointData.trim() ? '' : bulletPointData;
+            } else {
+                bulletPoint = !bulletPointInput.trim() ? '' : bulletPointData;
+            }
         } else {
             bulletPoint = bulletPointInput || defaultBulletPoint;
         }
@@ -282,11 +309,7 @@ const CVContent = ({
         let styles = '';
 
         // if bullet point is submitted empty
-        if (
-            workHistoryFormIsSubmitted &&
-            !isOnWorkResponbility &&
-            generateBulletPoint(bulletPoint) === ''
-        ) {
+        if (generateBulletPoint(bulletPoint) === '') {
             // add default styles
             styles = { workDescriptionList };
         } else {
@@ -300,10 +323,30 @@ const CVContent = ({
     return (
         <div className={textContainer}>
             <h1 className={fullName}>
-                <span>{firstNameData || 'Afonso'} </span>
-                <span>{lastNameData || 'Santos'}</span>
+                <span>
+                    {generateTitle(
+                        !isOnHeadingPath,
+                        firstNameData,
+                        firstNameInput,
+                        defaultFirstName
+                    )}{' '}
+                </span>
+                <span>
+                    {generateTitle(
+                        !isOnHeadingPath,
+                        lastNameData,
+                        lastNameInput,
+                        defaultLastName
+                    )}
+                </span>
             </h1>
-            <h6 className={profession}>{professionData}</h6>
+            <h6 className={profession}>
+                {generateTitle(
+                    !isOnHeadingPath,
+                    professionData,
+                    professionInput
+                )}
+            </h6>
             <div>
                 <h6 className={address}>
                     {hasNoAddress ? '' : 'Address:'}
@@ -327,14 +370,26 @@ const CVContent = ({
                         ''
                     ) : (
                         <span className={contactInput}>
-                            {phoneData || '(238) 513-57521'}
+                            {generateTitle(
+                                !isOnHeadingPath,
+                                phoneData,
+                                phoneInput,
+                                defaultPhone
+                            )}
                         </span>
                     )}
                 </h6>
                 <h6 className={contactHeading}>
                     Email:
                     <span className={contactInput}>
-                        <span>{emailData || 'afonsofrancisco@yahoo.com'}</span>
+                        <span>
+                            {generateTitle(
+                                !isOnHeadingPath,
+                                emailData,
+                                emailInput,
+                                defaultEmail
+                            )}
+                        </span>
                     </span>
                 </h6>
             </div>
@@ -372,35 +427,21 @@ const CVContent = ({
                     )}
                     <div className={stayDetailContainer}>
                         <div className={stayDetailHeading}>
-                            {generateJobTitle()}
+                            {generateTitle(
+                                workHistoryFormIsSubmitted,
+                                jobTitleData,
+                                jobTitleInput,
+                                defaultJobTitle
+                            )}
                         </div>
                         <div>
                             <h6 className={institution}>
-                                <span>
-                                    {
-                                        // display localStorage data if form is submitted already
-                                        !isOnWorkHistoryPath
-                                            ? generateAddress(
-                                                  companyData,
-                                                  cityWorkData,
-                                                  stateWorkData,
-                                                  null,
-                                                  defaultWorkAddress
-                                              )
-                                            : generateAddress(
-                                                  companyInput,
-                                                  cityWorkInput,
-                                                  stateWorkInput,
-                                                  null,
-                                                  defaultWorkAddress
-                                              )
-                                    }
-                                </span>
+                                <span>{handleAddressGeneration()}</span>
                             </h6>
                             <ul className={workDescriptionContainer}>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointOneInput
+                                        bulletPointOneData
                                     )}
                                 >
                                     {generateBulletPoint(
@@ -411,7 +452,7 @@ const CVContent = ({
                                 </li>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointTwoInput
+                                        bulletPointTwoData
                                     )}
                                 >
                                     {generateBulletPoint(
@@ -422,7 +463,7 @@ const CVContent = ({
                                 </li>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointThreeInput
+                                        bulletPointThreeData
                                     )}
                                 >
                                     {generateBulletPoint(
@@ -433,7 +474,7 @@ const CVContent = ({
                                 </li>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointFourInput
+                                        bulletPointFourData
                                     )}
                                 >
                                     {generateBulletPoint(
@@ -446,35 +487,46 @@ const CVContent = ({
                         </div>
                     </div>
                 </div>
-                {/* <div className={stayPeriodContainer}>
-                    <div className={workDatePeriodContainer}>
-                        <h6>2020-07 - 2022</h6>
-                    </div>
-                    <div className={stayDetailContainer}>
-                        <div className={stayDetailHeading}>Sales Representative</div>
-                        <div>
-                            <h6 className={institution}>ABC Retail Store, City, State</h6>
-                            <ul className={workDescriptionContainer}>
-                                <li className={workDescriptionList}>
-                                    Provided exceptional customer service, resulting in a 15%
-                                    increase in customer satisfaction ratings.
-                                </li>
-                                <li className={workDescriptionList}>
-                                    Achieved and exceeded monthly sales targets by 20% through
-                                    effective product knowledge and persuasive selling techniques.
-                                </li>
-                                <li className={workDescriptionList}>
-                                    Assisted in visual merchandising and store displays to enhance
-                                    the customer shopping experience.
-                                </li>
-                                <li className={workDescriptionList}>
-                                    Collaborated with team members to resolve customer complaints
-                                    and ensure smooth store operations.
-                                </li>
-                            </ul>
+                {addAnotherWorkPosition === true ? (
+                    <div className={stayPeriodContainer}>
+                        <div className={workDatePeriodContainer}>
+                            <h6>2020-07 - 2022</h6>
+                        </div>
+                        <div className={stayDetailContainer}>
+                            <div className={stayDetailHeading}>Job</div>
+                            <div>
+                                <h6 className={institution}>
+                                    ABC Retail Store, City, State
+                                </h6>
+                                <ul className={workDescriptionContainer}>
+                                    <li className={workDescriptionList}>
+                                        Provided exceptional customer service,
+                                        resulting in a 15% increase in customer
+                                        satisfaction ratings.
+                                    </li>
+                                    <li className={workDescriptionList}>
+                                        Achieved and exceeded monthly sales
+                                        targets by 20% through effective product
+                                        knowledge and persuasive selling
+                                        techniques.
+                                    </li>
+                                    <li className={workDescriptionList}>
+                                        Assisted in visual merchandising and
+                                        store displays to enhance the customer
+                                        shopping experience.
+                                    </li>
+                                    <li className={workDescriptionList}>
+                                        Collaborated with team members to
+                                        resolve customer complaints and ensure
+                                        smooth store operations.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div> */}
+                ) : (
+                    ''
+                )}
                 <h6 className={mainBackgroundHeading}>Education</h6>
                 <div className={stayPeriodContainer}>
                     <div className={educationDatePeriodContainer}>
