@@ -1,15 +1,17 @@
 import { useLocation, useNavigate, Route, Routes } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import HeadingForm from '../path/form/HeadingForm';
-import WorkHistoryForm from '../path/form/WorkHistoryForm';
-import WorkResponsibilityForm from '../path/form/WorkResponsibilityForm';
-import WorkHistorySummary from '../path/summary/WorkHistorySummary';
-import SkipWorkHistoryModal from '../path/modal/SkipWorkHistoryModal';
+import WorkHistoryForm from '../path/form/default-work-history/WorkHistoryForm';
+import WorkResponsibilityForm from '../path/form/default-work-history/WorkResponsibilityForm';
+import WorkHistorySummary from '../path/WorkHistorySummary';
+import SkipWorkHistoryModal from '../path/SkipWorkHistoryModal';
+import AdditionalWorkHistoryForm from '../path/form/additional-work-history/AdditionalWorkHistoryForm';
+import AdditionalWorkResponsibilityForm from '../path/form/additional-work-history/AdditionalWorkResponsibilityForm';
 import EducationForm from '../path/form/EducationForm';
 
 import CVPreview from '../preview/CVPreview';
@@ -23,10 +25,11 @@ const FormValidation = () => {
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
 
+    // manage showing of errors on heading form
     const handleValidateOnChangeValue = () => {
         if (isOnHeadingPath) {
             return true;
-        } else if (isOnWorkHistoryPath) {
+        } else {
             return false;
         }
     };
@@ -55,7 +58,6 @@ const FormValidation = () => {
 
     const formik = useFormik({
         validateOnChange: handleValidateOnChangeValue(),
-        enableReinitialize: true,
         initialValues: {
             firstName: '',
             lastName: '',
@@ -73,7 +75,15 @@ const FormValidation = () => {
             bulletPointOne: '',
             bulletPointTwo: '',
             bulletPointThree: '',
-            bulletPointFour: ''
+            bulletPointFour: '',
+            secondJobTitle: '',
+            secondCompany: '',
+            secondCityWork: '',
+            secondStateWork: '',
+            secondBulletPointOne: '',
+            secondBulletPointTwo: '',
+            secondBulletPointThree: '',
+            secondBulletPointFour: ''
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
@@ -120,11 +130,27 @@ const FormValidation = () => {
         bulletPointOne,
         bulletPointTwo,
         bulletPointThree,
-        bulletPointFour
+        bulletPointFour,
+        secondJobTitle,
+        secondCompany,
+        secondCityWork,
+        secondStateWork,
+        secondYearStartWork,
+        secondMonthStartWork,
+        secondYearEndWork,
+        secondMonthEndWork,
+        secondBulletPointOne,
+        secondBulletPointTwo,
+        secondBulletPointThree,
+        secondBulletPointFour
     } = formik.values;
 
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
         useState(false);
+    const [
+        secondCurrentlyWorkingCheckboxValue,
+        setSecondCurrentlyWorkingCheckboxValue
+    ] = useState(false);
 
     const [addAnotherWorkPosition, setAddAnotherWorkPosition] = useState(false);
 
@@ -159,15 +185,15 @@ const FormValidation = () => {
                     path="/work-history"
                     element={
                         <WorkHistoryForm
-                            setCurrentlyWorkingCheckboxValue={
-                                setCurrentlyWorkingCheckboxValue
+                            setShowSkipWorkHistoryModal={
+                                setShowSkipWorkHistoryModal
                             }
                             showSkipWorkHistoryModal={showSkipWorkHistoryModal}
                             currentlyWorkingCheckboxValue={
                                 currentlyWorkingCheckboxValue
                             }
-                            setShowSkipWorkHistoryModal={
-                                setShowSkipWorkHistoryModal
+                            setCurrentlyWorkingCheckboxValue={
+                                setCurrentlyWorkingCheckboxValue
                             }
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
@@ -203,6 +229,33 @@ const FormValidation = () => {
                     path="/skip-work-history"
                     element={<SkipWorkHistoryModal />}
                 />
+                <Route
+                    path="/additional-work-history"
+                    element={
+                        <AdditionalWorkHistoryForm
+                            secondCurrentlyWorkingCheckboxValue={
+                                secondCurrentlyWorkingCheckboxValue
+                            }
+                            setSecondCurrentlyWorkingCheckboxValue={
+                                setSecondCurrentlyWorkingCheckboxValue
+                            }
+                            handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
+                            formikErrors={formik.errors}
+                            touched={formik.touched}
+                            setFieldValue={formik.setFieldValue}
+                        />
+                    }
+                />
+                <Route
+                    path="/additional-work-responsibility"
+                    element={
+                        <AdditionalWorkHistoryForm
+                            handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
+                        />
+                    }
+                />
                 <Route path="/education" element={<EducationForm />} />
             </Routes>
 
@@ -210,28 +263,57 @@ const FormValidation = () => {
                 firstNameInput={capitalizeFirstLetterOfEachWord(firstName)}
                 lastNameInput={capitalizeFirstLetterOfEachWord(lastName)}
                 professionInput={capitalizeFirstLetterOfEachWord(profession)}
-                countryInput={capitalizeFirstLetterOfEachWord(country)}
                 cityHeadingInput={capitalizeFirstLetterOfEachWord(cityHeading)}
                 stateHeadingInput={capitalizeFirstLetterOfEachWord(
                     stateHeading
                 )}
+                countryInput={capitalizeFirstLetterOfEachWord(country)}
                 zipCodeInput={zipCode}
                 phoneInput={phone}
                 emailInput={lowerCaseEachLetter(email)}
-                jobTitleInput={capitalizeFirstLetterOfEachWord(jobTitle)}
-                companyInput={capitalizeFirstLetterOfEachWord(company)}
-                cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
-                stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
                 yearStartWorkInput={yearStartWork}
                 monthStartWorkInput={monthStartWork}
                 yearEndWorkInput={yearEndWork}
                 monthEndWorkInput={monthEndWork}
                 currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
+                jobTitleInput={capitalizeFirstLetterOfEachWord(jobTitle)}
+                companyInput={capitalizeFirstLetterOfEachWord(company)}
+                cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
+                stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
                 bulletPointOneInput={capitaliseFirstLetter(bulletPointOne)}
                 bulletPointTwoInput={capitaliseFirstLetter(bulletPointTwo)}
                 bulletPointThreeInput={capitaliseFirstLetter(bulletPointThree)}
                 bulletPointFourInput={capitaliseFirstLetter(bulletPointFour)}
                 addAnotherWorkPosition={addAnotherWorkPosition}
+                secondYearStartWorkInput={secondYearStartWork}
+                secondMonthStartWorkInput={secondMonthStartWork}
+                secondYearEndWorkInput={secondYearEndWork}
+                secondMonthEndWorkInput={secondMonthEndWork}
+                secondCurrentlyWorkingCheckboxValue={
+                    secondCurrentlyWorkingCheckboxValue
+                }
+                secondJobTitleInput={capitaliseFirstLetter(secondJobTitle)}
+                secondCompanyInput={capitalizeFirstLetterOfEachWord(
+                    secondCompany
+                )}
+                secondCityWorkInput={capitalizeFirstLetterOfEachWord(
+                    secondCityWork
+                )}
+                secondStateWorkInput={capitalizeFirstLetterOfEachWord(
+                    secondStateWork
+                )}
+                secondBulletPointOneInput={capitaliseFirstLetter(
+                    secondBulletPointOne
+                )}
+                secondBulletPointTwoInput={capitaliseFirstLetter(
+                    secondBulletPointTwo
+                )}
+                secondBulletPointThreeInput={capitaliseFirstLetter(
+                    secondBulletPointThree
+                )}
+                secondBulletPointFourInput={capitaliseFirstLetter(
+                    secondBulletPointFour
+                )}
             />
         </>
     );

@@ -8,26 +8,39 @@ const CVPreview = ({
     firstNameInput,
     lastNameInput,
     professionInput,
-    countryInput,
     cityHeadingInput,
     stateHeadingInput,
+    countryInput,
     zipCodeInput,
     phoneInput,
     emailInput,
-    jobTitleInput,
-    companyInput,
-    cityWorkInput,
-    stateWorkInput,
     yearStartWorkInput,
     monthStartWorkInput,
     yearEndWorkInput,
     monthEndWorkInput,
     currentlyWorkingCheckboxValue,
+    jobTitleInput,
+    companyInput,
+    cityWorkInput,
+    stateWorkInput,
     bulletPointOneInput,
     bulletPointTwoInput,
     bulletPointThreeInput,
     bulletPointFourInput,
-    addAnotherWorkPosition
+    addAnotherWorkPosition,
+    secondYearStartWorkInput,
+    secondMonthStartWorkInput,
+    secondYearEndWorkInput,
+    secondMonthEndWorkInput,
+    secondCurrentlyWorkingCheckboxValue,
+    secondJobTitleInput,
+    secondCompanyInput,
+    secondCityWorkInput,
+    secondStateWorkInput,
+    secondBulletPointOneInput,
+    secondBulletPointTwoInput,
+    secondBulletPointThreeInput,
+    secondBulletPointFourInput
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const toggleClick = () => setIsClicked(!isClicked);
@@ -45,12 +58,12 @@ const CVPreview = ({
                     profession="text-base"
                     professionInput={professionInput}
                     address="mt-3 text-xs font-medium"
-                    contactHeading="text-xs font-medium"
                     contactInput="font-normal ml-1"
-                    countryInput={countryInput}
                     cityHeadingInput={cityHeadingInput}
                     stateHeadingInput={stateHeadingInput}
+                    countryInput={countryInput}
                     zipCodeInput={zipCodeInput}
+                    contactHeading="text-xs font-medium"
                     phoneInput={phoneInput}
                     emailInput={emailInput}
                     summaryContainer="mt-5"
@@ -75,12 +88,27 @@ const CVPreview = ({
                     cityWorkInput={cityWorkInput}
                     stateWorkInput={stateWorkInput}
                     workDescriptionContainer="ml-10 mt-2"
-                    workDescriptionList="font-light"
                     bulletPointOneInput={bulletPointOneInput}
                     bulletPointTwoInput={bulletPointTwoInput}
                     bulletPointThreeInput={bulletPointThreeInput}
                     bulletPointFourInput={bulletPointFourInput}
+                    workDescriptionList="font-light"
                     addAnotherWorkPosition={addAnotherWorkPosition}
+                    secondYearStartWorkInput={secondYearStartWorkInput}
+                    secondMonthStartWorkInput={secondMonthStartWorkInput}
+                    secondYearEndWorkInput={secondYearEndWorkInput}
+                    secondMonthEndWorkInput={secondMonthEndWorkInput}
+                    secondCurrentlyWorkingCheckboxValue={
+                        secondCurrentlyWorkingCheckboxValue
+                    }
+                    secondJobTitleInput={secondJobTitleInput}
+                    secondCompanyInput={secondCompanyInput}
+                    secondCityWorkInput={secondCityWorkInput}
+                    secondStateWorkInput={secondStateWorkInput}
+                    secondBulletPointOneInput={secondBulletPointOneInput}
+                    secondBulletPointTwoInput={secondBulletPointTwoInput}
+                    secondBulletPointThreeInput={secondBulletPointThreeInput}
+                    secondBulletPointFourInput={secondBulletPointFourInput}
                     educationDatePeriodContainer="text-xs w-20"
                 />
             </div>

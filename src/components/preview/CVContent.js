@@ -1,9 +1,8 @@
 import { useLocation } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const CVContent = ({
-    textContainer,
     fullName,
     firstNameInput,
     lastNameInput,
@@ -11,9 +10,9 @@ const CVContent = ({
     professionInput,
     address,
     contactInput,
-    countryInput,
     cityHeadingInput,
     stateHeadingInput,
+    countryInput,
     zipCodeInput,
     contactHeading,
     phoneInput,
@@ -38,12 +37,25 @@ const CVContent = ({
     cityWorkInput,
     stateWorkInput,
     workDescriptionContainer,
-    workDescriptionList,
     bulletPointOneInput,
     bulletPointTwoInput,
     bulletPointThreeInput,
     bulletPointFourInput,
+    workDescriptionList,
     addAnotherWorkPosition,
+    secondYearStartWorkInput,
+    secondMonthStartWorkInput,
+    secondYearEndWorkInput,
+    secondMonthEndWorkInput,
+    secondCurrentlyWorkingCheckboxValue,
+    secondJobTitleInput,
+    secondCompanyInput,
+    secondCityWorkInput,
+    secondStateWorkInput,
+    secondBulletPointOneInput,
+    secondBulletPointTwoInput,
+    secondBulletPointThreeInput,
+    secondBulletPointFourInput,
     educationDatePeriodContainer
 }) => {
     const pathname = useLocation().pathname;
@@ -53,6 +65,15 @@ const CVContent = ({
     const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
     const workResponsibilityFormIsSubmitted =
         workHistoryFormIsSubmitted && !isOnWorkResponbilityPath;
+    const isOnAdditionalWorkHistoryPath =
+        pathname === '/additional-work-history';
+    const isOnAdditionalWorkResponsibilityPath =
+        pathname === '/additional-work-responsibility';
+    const additionalWorkHistoryFormIsSubmitted =
+        !isOnHeadingPath && !isOnAdditionalWorkHistoryPath;
+    const additionalWorkResponsibilityFormIsSubmitted =
+        additionalWorkHistoryFormIsSubmitted &&
+        !isOnAdditionalWorkResponsibilityPath;
 
     useEffect(() => {
         if (isOnHeadingPath) {
@@ -97,33 +118,75 @@ const CVContent = ({
                     bulletPointFourData: bulletPointFourInput
                 })
             );
+        } else if (isOnAdditionalWorkHistoryPath) {
+            window.localStorage.setItem(
+                'additionalWorkHistoryFormData',
+                JSON.stringify({
+                    secondJobTitle: secondJobTitleInput,
+                    secondCompany: secondCompanyInput,
+                    secondCityWork: secondCityWorkInput,
+                    secondStateWork: secondStateWorkInput,
+                    secondYearStartWork: secondYearStartWorkInput,
+                    secondMonthStartWork: secondMonthStartWorkInput,
+                    secondYearEndWork: secondYearEndWorkInput,
+                    secondMonthEndWork: secondMonthEndWorkInput,
+                    secondCurrentlyWorkingCheckboxValue:
+                        secondCurrentlyWorkingCheckboxValue
+                })
+            );
+        } else if (isOnAdditionalWorkResponsibilityPath) {
+            window.localStorage.setItem(
+                'additionalWorkResponsibilityFormData',
+                JSON.stringify({
+                    secondBulletPointOneData: secondBulletPointOneInput,
+                    secondBulletPointTwoData: secondBulletPointTwoInput,
+                    secondBulletPointThreeData: secondBulletPointThreeInput,
+                    secondBulletPointFourData: secondBulletPointFourInput
+                })
+            );
         }
     }, [
         isOnHeadingPath,
         firstNameInput,
         lastNameInput,
         professionInput,
-        countryInput,
+        contactInput,
         cityHeadingInput,
         stateHeadingInput,
+        countryInput,
         zipCodeInput,
         phoneInput,
         emailInput,
         isOnWorkHistoryPath,
-        isOnWorkResponbilityPath,
-        jobTitleInput,
-        companyInput,
-        cityWorkInput,
-        stateWorkInput,
         yearStartWorkInput,
         monthStartWorkInput,
         yearEndWorkInput,
         monthEndWorkInput,
         currentlyWorkingCheckboxValue,
+        isOnWorkResponbilityPath,
+        jobTitleInput,
+        companyInput,
+        cityWorkInput,
+        stateWorkInput,
         bulletPointOneInput,
         bulletPointTwoInput,
         bulletPointThreeInput,
-        bulletPointFourInput
+        bulletPointFourInput,
+        isOnAdditionalWorkHistoryPath,
+        secondYearStartWorkInput,
+        secondMonthStartWorkInput,
+        secondYearEndWorkInput,
+        secondMonthEndWorkInput,
+        secondCurrentlyWorkingCheckboxValue,
+        isOnAdditionalWorkResponsibilityPath,
+        secondJobTitleInput,
+        secondCompanyInput,
+        secondCityWorkInput,
+        secondStateWorkInput,
+        secondBulletPointOneInput,
+        secondBulletPointTwoInput,
+        secondBulletPointThreeInput,
+        secondBulletPointFourInput
     ]);
 
     const getFormData = (formData) => {
@@ -164,8 +227,29 @@ const CVContent = ({
         bulletPointFourData
     } = getFormData('workResponsibilityFormData');
 
+    const {
+        secondJobTitleData,
+        secondCompanyData,
+        secondCityWorkData,
+        secondStateWorkData,
+        secondYearStartWorkData,
+        secondMonthStartWorkData,
+        secondYearEndWorkData,
+        secondMonthEndWorkData,
+        secondCurrentlyWorkingCheckboxData
+    } = getFormData('additionalWorkHistoryFormData');
+
+    const {
+        secondBulletPointOneData,
+        secondBulletPointTwoData,
+        secondBulletPointThreeData,
+        secondBulletPointFourData
+    } = getFormData('additionalWorkResponsibilityFormData');
+
     const isCurrentlyWorkingData = currentlyWorkingCheckboxData === true;
     const isCurrentlyWorkingValue = currentlyWorkingCheckboxValue === true;
+    const secondIsCurrentlyWorkingValue =
+        secondCurrentlyWorkingCheckboxValue === true;
 
     const hasNoAddress =
         !isOnHeadingPath &&
@@ -192,8 +276,8 @@ const CVContent = ({
     const defaultLastName = 'Santos';
     const defaultPhone = '(238) 513-57521';
     const defaultEmail = 'afonsofrancisco@yahoo.com';
-    const defaultJobTitle = 'Marketing Intern';
     const defaultHeadingAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
+    const defaultJobTitle = 'Marketing Intern';
     const defaultWorkAddress = 'XYZ Company, City, State';
     const defaultBulletPointOne =
         'Assisted the marketing team in developing and implementing social media marketing campaigns, resulting in a 20% increase in website traffic.';
@@ -203,6 +287,16 @@ const CVContent = ({
         'Created engaging content for social media platforms, increasing follower count by 15%.';
     const defaultBulletPointFour =
         'Assisted in organizing and executing marketing events, resulting in a 30% increase in lead generation.';
+    const defaultSecondJobTitle = 'Sales Representative';
+    const defaultSecondWorkAddress = 'ABC Retail Store, City, State';
+    const defaultSecondBulletPointOne =
+        'Provided exceptional customer service, resulting in a 15% increase in customer satisfaction ratings.';
+    const defaultSecondBulletPointTwo =
+        'Achieved and exceeded monthly sales targets by 20% through effective product knowledge and persuasive selling techniques.';
+    const defaultSecondBulletPointThree =
+        'Assisted in visual merchandising and store displays to enhance the customer shopping experience.';
+    const defaultSecondBulletPointFour =
+        'Assisted in visual merchandising and store displays to enhance the customer shopping experienceCollaborated with team members to resolve customer complaints and ensure smooth store operations.';
 
     const generateTitle = (path, titleData, titleInput, defaultTitle) => {
         // if form is submitted already, display jobTitleData
@@ -239,47 +333,70 @@ const CVContent = ({
         return address;
     };
 
-    const handleAddressGeneration = () => {
+    const handleAddressGeneration = (
+        workHistoryFormOrderIsSubmitted,
+        companyDataOrder,
+        cityWorkDataOrder,
+        stateWorkDataOrder,
+        defaultWorkAddressOrder,
+        companyInputOrder,
+        cityWorkInputOrder,
+        stateWorkInputOrder
+    ) => {
         // display localStorage data if form is submitted already
-        return workHistoryFormIsSubmitted
+        return workHistoryFormOrderIsSubmitted
             ? generateAddress(
-                  companyData,
-                  cityWorkData,
-                  stateWorkData,
+                  companyDataOrder,
+                  cityWorkDataOrder,
+                  stateWorkDataOrder,
                   null,
-                  defaultWorkAddress
+                  defaultWorkAddressOrder
               )
             : generateAddress(
-                  companyInput,
-                  cityWorkInput,
-                  stateWorkInput,
+                  companyInputOrder,
+                  cityWorkInputOrder,
+                  stateWorkInputOrder,
                   null,
-                  defaultWorkAddress
+                  defaultWorkAddressOrder
               );
     };
 
-    const generateWorkDatePeriod = () => {
+    const generateWorkDatePeriod = (
+        workHistoryFormOrderIsSubmitted,
+        yearStartWorkDataOrder,
+        monthStartWorkDataOrder,
+        yearEndWorkDataOrder,
+        monthEndWorkDataOrder,
+        isCurrentlyWorkingValueOrder,
+        yearStartWorkInputOrder,
+        monthStartWorkInputOrder,
+        yearEndWorkInputOrder,
+        monthEndWorkInputOrder
+    ) => {
         let workDatePeriod = '';
 
-        if (workHistoryFormIsSubmitted) {
+        if (workHistoryFormOrderIsSubmitted) {
             if (isCurrentlyWorkingData) {
-                workDatePeriod += `${yearStartWorkData}-${monthStartWorkData}-Current`;
+                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
             } else if (hasDatesButNotCurrentlyWorking) {
-                workDatePeriod += `${yearStartWorkData}-${monthStartWorkData}-${yearEndWorkData}-${monthEndWorkData}`;
+                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-${yearEndWorkDataOrder}-${monthEndWorkDataOrder}`;
             }
         } else if (
-            isCurrentlyWorkingValue === true ||
+            isCurrentlyWorkingValueOrder === true ||
             // if section is on work history and currently working is checked
-            (isCurrentlyWorkingValue === true && !isOnWorkResponbilityPath)
+            (isCurrentlyWorkingValueOrder === true &&
+                !isCurrentlyWorkingValueOrder)
         ) {
-            workDatePeriod += `${yearStartWorkInput || '2020'}-${
-                monthStartWorkInput || '04'
+            workDatePeriod += `${yearStartWorkInputOrder || '2020'}-${
+                monthStartWorkInputOrder || '04'
             }-Current`;
             // else, display year and month inputs on work history section
         } else {
-            workDatePeriod += `${yearStartWorkInput || '2020'}-${
-                monthStartWorkInput || '04'
-            }-${yearEndWorkInput || '2023'}-${monthEndWorkInput || '06'}`;
+            workDatePeriod += `${yearStartWorkInputOrder || '2020'}-${
+                monthStartWorkInputOrder || '04'
+            }-${yearEndWorkInputOrder || '2023'}-${
+                monthEndWorkInputOrder || '06'
+            }`;
         }
 
         return workDatePeriod;
@@ -321,7 +438,7 @@ const CVContent = ({
     };
 
     return (
-        <div className={textContainer}>
+        <>
             <h1 className={fullName}>
                 <span>
                     {generateTitle(
@@ -422,7 +539,20 @@ const CVContent = ({
                         ''
                     ) : (
                         <div className={workDatePeriodContainer}>
-                            <h6>{generateWorkDatePeriod()}</h6>
+                            <h6>
+                                {generateWorkDatePeriod(
+                                    workHistoryFormIsSubmitted,
+                                    yearStartWorkData,
+                                    monthStartWorkData,
+                                    yearEndWorkData,
+                                    monthEndWorkData,
+                                    isCurrentlyWorkingValue,
+                                    yearStartWorkInput,
+                                    monthStartWorkInput,
+                                    yearEndWorkInput,
+                                    monthEndWorkInput
+                                )}
+                            </h6>
                         </div>
                     )}
                     <div className={stayDetailContainer}>
@@ -436,7 +566,18 @@ const CVContent = ({
                         </div>
                         <div>
                             <h6 className={institution}>
-                                <span>{handleAddressGeneration()}</span>
+                                <span>
+                                    {handleAddressGeneration(
+                                        workHistoryFormIsSubmitted,
+                                        companyData,
+                                        cityWorkData,
+                                        stateWorkData,
+                                        defaultWorkAddress,
+                                        companyInput,
+                                        cityWorkInput,
+                                        stateWorkInput
+                                    )}
+                                </span>
                             </h6>
                             <ul className={workDescriptionContainer}>
                                 <li
@@ -489,36 +630,94 @@ const CVContent = ({
                 </div>
                 {addAnotherWorkPosition === true ? (
                     <div className={stayPeriodContainer}>
-                        <div className={workDatePeriodContainer}>
-                            <h6>2020-07 - 2022</h6>
-                        </div>
+                        {hasNoWorkDatePeriod ? (
+                            ''
+                        ) : (
+                            <div className={workDatePeriodContainer}>
+                                <h6>
+                                    {generateWorkDatePeriod(
+                                        additionalWorkHistoryFormIsSubmitted,
+                                        secondYearStartWorkData,
+                                        secondMonthStartWorkData,
+                                        secondYearEndWorkData,
+                                        secondMonthEndWorkData,
+                                        secondIsCurrentlyWorkingValue,
+                                        secondYearStartWorkInput,
+                                        secondMonthStartWorkInput,
+                                        secondYearEndWorkInput,
+                                        secondMonthEndWorkInput
+                                    )}
+                                </h6>
+                            </div>
+                        )}
                         <div className={stayDetailContainer}>
-                            <div className={stayDetailHeading}>Job</div>
+                            <div className={stayDetailHeading}>
+                                {generateTitle(
+                                    workHistoryFormIsSubmitted,
+                                    secondJobTitleData,
+                                    secondJobTitleInput,
+                                    defaultSecondJobTitle
+                                )}
+                            </div>
                             <div>
                                 <h6 className={institution}>
-                                    ABC Retail Store, City, State
+                                    <span>
+                                        {handleAddressGeneration(
+                                            additionalWorkHistoryFormIsSubmitted,
+                                            secondCompanyData,
+                                            secondCityWorkData,
+                                            secondStateWorkData,
+                                            defaultSecondWorkAddress,
+                                            secondCompanyInput,
+                                            secondCityWorkInput,
+                                            secondStateWorkInput
+                                        )}
+                                    </span>
                                 </h6>
                                 <ul className={workDescriptionContainer}>
-                                    <li className={workDescriptionList}>
-                                        Provided exceptional customer service,
-                                        resulting in a 15% increase in customer
-                                        satisfaction ratings.
+                                    <li
+                                        className={manageBulletPointStyles(
+                                            secondBulletPointOneData
+                                        )}
+                                    >
+                                        {generateBulletPoint(
+                                            secondBulletPointOneInput,
+                                            secondBulletPointOneData,
+                                            defaultSecondBulletPointOne
+                                        )}
                                     </li>
-                                    <li className={workDescriptionList}>
-                                        Achieved and exceeded monthly sales
-                                        targets by 20% through effective product
-                                        knowledge and persuasive selling
-                                        techniques.
+                                    <li
+                                        className={manageBulletPointStyles(
+                                            secondBulletPointTwoData
+                                        )}
+                                    >
+                                        {generateBulletPoint(
+                                            secondBulletPointTwoInput,
+                                            secondBulletPointTwoData,
+                                            defaultSecondBulletPointTwo
+                                        )}
                                     </li>
-                                    <li className={workDescriptionList}>
-                                        Assisted in visual merchandising and
-                                        store displays to enhance the customer
-                                        shopping experience.
+                                    <li
+                                        className={manageBulletPointStyles(
+                                            secondBulletPointThreeData
+                                        )}
+                                    >
+                                        {generateBulletPoint(
+                                            secondBulletPointThreeInput,
+                                            secondBulletPointThreeData,
+                                            defaultSecondBulletPointThree
+                                        )}
                                     </li>
-                                    <li className={workDescriptionList}>
-                                        Collaborated with team members to
-                                        resolve customer complaints and ensure
-                                        smooth store operations.
+                                    <li
+                                        className={manageBulletPointStyles(
+                                            secondBulletPointFourData
+                                        )}
+                                    >
+                                        {generateBulletPoint(
+                                            secondBulletPointFourInput,
+                                            secondBulletPointFourData,
+                                            defaultSecondBulletPointFour
+                                        )}
                                     </li>
                                 </ul>
                             </div>
@@ -542,7 +741,7 @@ const CVContent = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

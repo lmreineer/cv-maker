@@ -3,7 +3,7 @@ import autosize from 'autosize';
 
 import { useNavigate } from 'react-router-dom';
 
-const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
+const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
     const textareaRef1 = useRef(null);
     const textareaRef2 = useRef(null);
     const textareaRef3 = useRef(null);
@@ -40,7 +40,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
             </h1>
             <div className="flex flex-col justify-center">
                 <textarea
-                    name="bulletPointOne"
+                    name="secondBulletPointOne"
                     placeholder="Bullet Point 1"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
@@ -49,7 +49,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="bulletPointTwo"
+                    name="secondBulletPointTwo"
                     placeholder="Bullet Point 2"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
@@ -58,7 +58,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="bulletPointThree"
+                    name="secondBulletPointThree"
                     placeholder="Bullet Point 3"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
@@ -67,7 +67,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="bulletPointFour"
+                    name="secondBulletPointFour"
                     placeholder="Bullet Point 4"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
@@ -93,4 +93,4 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
     );
 };
 
-export default WorkResponsibilityForm;
+export default AdditionalWorkResponsibilityForm;

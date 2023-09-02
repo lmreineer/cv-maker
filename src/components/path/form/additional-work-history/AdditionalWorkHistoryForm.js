@@ -2,30 +2,15 @@ import { useNavigate } from 'react-router-dom';
 
 import Select from 'react-select';
 
-const WorkHistoryForm = ({
-    setShowSkipWorkHistoryModal,
-    showSkipWorkHistoryModal,
-    currentlyWorkingCheckboxValue,
-    setCurrentlyWorkingCheckboxValue,
+const AdditionalWorkHistoryForm = ({
+    secondCurrentlyWorkingCheckboxValue,
+    setSecondCurrentlyWorkingCheckboxValue,
     handleSubmit,
     handleChange,
-    jobTitleValues,
     formikErrors,
     touched,
-    companyValues,
     setFieldValue
 }) => {
-    const handleSkipWorkHistoryModal = (e) => {
-        e !== ''
-            ? setShowSkipWorkHistoryModal(false)
-            : setShowSkipWorkHistoryModal(true);
-    };
-
-    // check if main input is omitted after inputting other secondary inputs
-    const inputIsOmitted = (omittedInput) =>
-        // main input is omitted but secondary inputs are inputted
-        omittedInput === '' && showSkipWorkHistoryModal === false;
-
     // generate options for react-select inputs
     const generateOptions = (loop, n) => {
         const options = [];
@@ -62,9 +47,9 @@ const WorkHistoryForm = ({
     };
 
     const handleCheckedState = () => {
-        currentlyWorkingCheckboxValue === true
-            ? setCurrentlyWorkingCheckboxValue(false)
-            : setCurrentlyWorkingCheckboxValue(true);
+        secondCurrentlyWorkingCheckboxValue === true
+            ? setSecondCurrentlyWorkingCheckboxValue(false)
+            : setSecondCurrentlyWorkingCheckboxValue(true);
     };
 
     const navigate = useNavigate();
@@ -86,140 +71,113 @@ const WorkHistoryForm = ({
                         <div className="flex">
                             <input
                                 type="text"
-                                name="jobTitle"
+                                name="jobTitleTwo"
                                 placeholder="Job Title"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipWorkHistoryModal(e.target.value);
-                                }}
+                                onChange={handleChange}
                                 className={
-                                    inputIsOmitted(jobTitleValues) &&
-                                    formikErrors.jobTitle &&
-                                    touched.jobTitle
+                                    formikErrors.jobTitle && touched.jobTitle
                                         ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                         : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
                                 maxLength={40}
                             />
                         </div>
-                        {inputIsOmitted(jobTitleValues) &&
-                            formikErrors.jobTitle &&
-                            touched.jobTitle && (
-                                <p className="ml-4 text-red-800">
-                                    {formikErrors.jobTitle}
-                                </p>
-                            )}
+                        {formikErrors.jobTitle && touched.jobTitle && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.jobTitle}
+                            </p>
+                        )}
                     </div>
                     <div className="w-full">
                         <div className="flex">
                             <input
                                 type="text"
-                                name="company"
+                                name="companyTwo"
                                 placeholder="Company"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipWorkHistoryModal(e.target.value);
-                                }}
+                                onChange={handleChange}
                                 className={
-                                    inputIsOmitted(companyValues) &&
-                                    formikErrors.company &&
-                                    touched.company
+                                    formikErrors.company && touched.company
                                         ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
                                         : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
                                 maxLength={40}
                             />
                         </div>
-                        {inputIsOmitted(companyValues) &&
-                            formikErrors.company &&
-                            touched.company && (
-                                <p className="ml-4 text-red-800">
-                                    {formikErrors.company}
-                                </p>
-                            )}
+                        {formikErrors.company && touched.company && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.company}
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="flex">
                     <input
                         type="text"
-                        name="cityWork"
+                        name="cityWorkTwo"
                         placeholder="City"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={(e) => {
-                            handleChange(e);
-                            handleSkipWorkHistoryModal(e.target.value);
-                        }}
+                        onChange={handleChange}
                         maxLength={40}
                     />
                     <input
                         type="text"
-                        name="stateWork"
+                        name="stateWorkTwo"
                         placeholder="State / Country"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={(e) => {
-                            handleChange(e);
-                            handleSkipWorkHistoryModal(e.target.value);
-                        }}
+                        onChange={handleChange}
                         maxLength={40}
                     />
                 </div>
                 <div className="flex">
                     <Select
-                        name="yearStartWork"
+                        name="yearStartWorkTwo"
                         placeholder="Year Start"
                         options={generateOptions(70, 2023)}
                         styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('yearStartWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
+                        onChange={(e) =>
+                            setFieldValue('yearStartWorkTwo', e.value)
+                        }
                     />
                     <Select
-                        name="monthStartWork"
+                        name="monthStartWorkTwo"
                         placeholder="Month Start"
                         options={generateOptions(12, 12)}
                         styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('monthStartWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
+                        onChange={(e) =>
+                            setFieldValue('monthStartWorkTwo', e.value)
+                        }
                     />
                 </div>
                 <div className="flex">
                     <Select
-                        name="yearEndWork"
+                        name="yearEndWorkTwo"
                         placeholder="Year End"
                         options={generateOptions(70, 2023)}
                         styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('yearEndWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
-                        isDisabled={currentlyWorkingCheckboxValue}
+                        onChange={(e) =>
+                            setFieldValue('yearEndWorkTwo', e.value)
+                        }
+                        isDisabled={secondCurrentlyWorkingCheckboxValue}
                     />
                     <Select
-                        name="monthEndWork"
+                        name="monthEndWorkTwo"
                         placeholder="Month End"
                         options={generateOptions(12, 12)}
                         styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('monthEndWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
-                        isDisabled={currentlyWorkingCheckboxValue}
+                        onChange={(e) =>
+                            setFieldValue('monthEndWorkTwo', e.value)
+                        }
+                        isDisabled={secondCurrentlyWorkingCheckboxValue}
                     />
                 </div>
                 <div className="flex">
                     <label className="m-4 flex select-none text-base hover:cursor-pointer">
                         <input
                             type="checkbox"
-                            name="currentlyWorkingCheckbox"
+                            name="secondCurrentlyWorkingCheckbox"
                             className="mr-3 w-4 hover:cursor-pointer"
-                            checked={currentlyWorkingCheckboxValue}
-                            onChange={(e) => {
-                                handleCheckedState();
-                                handleSkipWorkHistoryModal(e.target.value);
-                            }}
+                            checked={secondCurrentlyWorkingCheckboxValue}
+                            onChange={handleCheckedState}
                         />
                         I currently work here
                     </label>
@@ -242,4 +200,4 @@ const WorkHistoryForm = ({
     );
 };
 
-export default WorkHistoryForm;
+export default AdditionalWorkHistoryForm;
