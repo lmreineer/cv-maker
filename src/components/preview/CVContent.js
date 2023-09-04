@@ -61,10 +61,10 @@ const CVContent = ({
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnWorkResponbilityPath = pathname === '/work-responsibility';
+    const isOnWorkResponsibilityPath = pathname === '/work-responsibility';
     const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
     const workResponsibilityFormIsSubmitted =
-        workHistoryFormIsSubmitted && !isOnWorkResponbilityPath;
+        workHistoryFormIsSubmitted && !isOnWorkResponsibilityPath;
     const isOnAdditionalWorkHistoryPath =
         pathname === '/additional-work-history';
     const isOnAdditionalWorkResponsibilityPath =
@@ -108,7 +108,7 @@ const CVContent = ({
                     currentlyWorkingCheckboxData: currentlyWorkingCheckboxValue
                 })
             );
-        } else if (isOnWorkResponbilityPath) {
+        } else if (isOnWorkResponsibilityPath) {
             window.localStorage.setItem(
                 'workResponsibilityFormData',
                 JSON.stringify({
@@ -163,7 +163,7 @@ const CVContent = ({
         yearEndWorkInput,
         monthEndWorkInput,
         currentlyWorkingCheckboxValue,
-        isOnWorkResponbilityPath,
+        isOnWorkResponsibilityPath,
         jobTitleInput,
         companyInput,
         cityWorkInput,
@@ -402,19 +402,56 @@ const CVContent = ({
         return workDatePeriod;
     };
 
+    // const generateBulletPoint = (
+    //     bulletPointInputOrder,
+    //     bulletPointDataOrder,
+    //     workResponsibilityFormOrderIsSubmitted,
+    //     defaultBulletPointOrder
+    // ) => {
+    //     let bulletPoint = '';
+
+    //     if (workResponsibilityFormOrderIsSubmitted || addAnotherWorkPosition) {
+    //         if (bulletPointDataOrder) {
+    //             bulletPoint = !bulletPointDataOrder.trim()
+    //                 ? ''
+    //                 : bulletPointDataOrder;
+    //         } else {
+    //             bulletPoint = !bulletPointInputOrder.trim()
+    //                 ? ''
+    //                 : bulletPointDataOrder;
+    //         }
+    //     } else {
+    //         bulletPoint = bulletPointInputOrder || defaultBulletPointOrder;
+    //     }
+
+    //     return bulletPoint;
+    // };
+
+    // const manageBulletPointStyles = (bulletPointOrder) => {
+    //     let styles = '';
+
+    //     // if bullet point is submitted empty
+    //     if (generateBulletPoint(bulletPointOrder) === '') {
+    //         // add default styles
+    //         styles = { workDescriptionList };
+    //     } else {
+    //         // add list-style-type: disc style
+    //         styles = `${workDescriptionList} list-disc`;
+    //     }
+
+    //     return styles;
+    // };
+
     const generateBulletPoint = (
         bulletPointInput,
+        workResponsibilityFormOrderIsSubmitted,
         bulletPointData,
         defaultBulletPoint
     ) => {
         let bulletPoint = '';
 
-        if (workResponsibilityFormIsSubmitted || addAnotherWorkPosition) {
-            if (bulletPointData) {
-                bulletPoint = !bulletPointData.trim() ? '' : bulletPointData;
-            } else {
-                bulletPoint = !bulletPointInput.trim() ? '' : bulletPointData;
-            }
+        if (workResponsibilityFormOrderIsSubmitted) {
+            bulletPoint = !bulletPointInput.trim() ? '' : bulletPointData;
         } else {
             bulletPoint = bulletPointInput || defaultBulletPoint;
         }
@@ -422,11 +459,19 @@ const CVContent = ({
         return bulletPoint;
     };
 
-    const manageBulletPointStyles = (bulletPoint) => {
+    const manageBulletPointStyles = (
+        bulletPoint,
+        workResponsibilityFormOrderIsSubmitted
+    ) => {
         let styles = '';
 
         // if bullet point is submitted empty
-        if (generateBulletPoint(bulletPoint) === '') {
+        if (
+            generateBulletPoint(
+                bulletPoint,
+                workResponsibilityFormOrderIsSubmitted
+            ) === ''
+        ) {
             // add default styles
             styles = { workDescriptionList };
         } else {
@@ -436,6 +481,8 @@ const CVContent = ({
 
         return styles;
     };
+
+    // BULLET POINT STYLING ERROR
 
     return (
         <>
@@ -582,44 +629,52 @@ const CVContent = ({
                             <ul className={workDescriptionContainer}>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointOneData
+                                        bulletPointOneData,
+                                        workResponsibilityFormIsSubmitted
                                     )}
                                 >
                                     {generateBulletPoint(
                                         bulletPointOneInput,
+                                        workResponsibilityFormIsSubmitted,
                                         bulletPointOneData,
                                         defaultBulletPointOne
                                     )}
                                 </li>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointTwoData
+                                        bulletPointTwoData,
+                                        workResponsibilityFormIsSubmitted
                                     )}
                                 >
                                     {generateBulletPoint(
                                         bulletPointTwoInput,
+                                        workResponsibilityFormIsSubmitted,
                                         bulletPointTwoData,
                                         defaultBulletPointTwo
                                     )}
                                 </li>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointThreeData
+                                        bulletPointThreeData,
+                                        workResponsibilityFormIsSubmitted
                                     )}
                                 >
                                     {generateBulletPoint(
                                         bulletPointThreeInput,
+                                        workResponsibilityFormIsSubmitted,
                                         bulletPointThreeData,
                                         defaultBulletPointThree
                                     )}
                                 </li>
                                 <li
                                     className={manageBulletPointStyles(
-                                        bulletPointFourData
+                                        bulletPointFourData,
+                                        workResponsibilityFormIsSubmitted
                                     )}
                                 >
                                     {generateBulletPoint(
                                         bulletPointFourInput,
+                                        workResponsibilityFormIsSubmitted,
                                         bulletPointFourData,
                                         defaultBulletPointFour
                                     )}
@@ -682,6 +737,7 @@ const CVContent = ({
                                     >
                                         {generateBulletPoint(
                                             secondBulletPointOneInput,
+                                            additionalWorkResponsibilityFormIsSubmitted,
                                             secondBulletPointOneData,
                                             defaultSecondBulletPointOne
                                         )}
@@ -693,6 +749,7 @@ const CVContent = ({
                                     >
                                         {generateBulletPoint(
                                             secondBulletPointTwoInput,
+                                            additionalWorkResponsibilityFormIsSubmitted,
                                             secondBulletPointTwoData,
                                             defaultSecondBulletPointTwo
                                         )}
@@ -704,6 +761,7 @@ const CVContent = ({
                                     >
                                         {generateBulletPoint(
                                             secondBulletPointThreeInput,
+                                            additionalWorkResponsibilityFormIsSubmitted,
                                             secondBulletPointThreeData,
                                             defaultSecondBulletPointThree
                                         )}
@@ -715,6 +773,7 @@ const CVContent = ({
                                     >
                                         {generateBulletPoint(
                                             secondBulletPointFourInput,
+                                            additionalWorkResponsibilityFormIsSubmitted,
                                             secondBulletPointFourData,
                                             defaultSecondBulletPointFour
                                         )}
