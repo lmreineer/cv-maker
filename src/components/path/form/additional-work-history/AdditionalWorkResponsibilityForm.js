@@ -3,7 +3,7 @@ import autosize from 'autosize';
 
 import { useNavigate } from 'react-router-dom';
 
-const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
+const AdditionalWorkResponsibilityForm = ({ handleChange }) => {
     const textareaRef1 = useRef(null);
     const textareaRef2 = useRef(null);
     const textareaRef3 = useRef(null);
@@ -25,16 +25,11 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
         if (e.key === 'Enter') {
             // prevent the addition of a new line in the text field
             e.preventDefault();
-            handleSubmit(e);
         }
     };
 
     return (
-        <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="flex w-1/2 flex-col justify-center"
-        >
+        <form ref={formRef} className="flex w-1/2 flex-col justify-center">
             <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Work Responsibilities:
             </h1>

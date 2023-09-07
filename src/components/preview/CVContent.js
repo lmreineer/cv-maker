@@ -248,6 +248,9 @@ const CVContent = ({
 
     const isCurrentlyWorkingData = currentlyWorkingCheckboxData === true;
     const isCurrentlyWorkingValue = currentlyWorkingCheckboxValue === true;
+
+    const secondIsCurrentlyWorkingData =
+        secondCurrentlyWorkingCheckboxData === true;
     const secondIsCurrentlyWorkingValue =
         secondCurrentlyWorkingCheckboxValue === true;
 
@@ -271,6 +274,24 @@ const CVContent = ({
         (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
     const hasDatesButNotCurrentlyWorking =
         !isCurrentlyWorkingData && hasEndDate && hasStartDate;
+
+    const secondHasStartDate =
+        secondYearStartWorkData && secondMonthStartWorkData;
+    const secondHasEndDate = secondYearEndWorkData && secondMonthEndWorkData;
+    const secondIsMissingStartDate =
+        !secondHasStartDate && secondIsCurrentlyWorkingData;
+    const secondIsMissingEndDate =
+        !secondHasEndDate && !secondIsCurrentlyWorkingData;
+    const secondStartDateIsOmitted = secondHasEndDate && !secondHasStartDate;
+
+    const secondHasNoWorkDatePeriod =
+        addAnotherWorkPosition &&
+        !isOnAdditionalWorkHistoryPath &&
+        (secondIsMissingStartDate ||
+            secondIsMissingEndDate ||
+            secondStartDateIsOmitted);
+    const secondHasDatesButNotCurrentlyWorking =
+        !secondIsCurrentlyWorkingData && secondHasEndDate && secondHasStartDate;
 
     const defaultFirstName = 'Afonso';
     const defaultLastName = 'Santos';
@@ -363,11 +384,13 @@ const CVContent = ({
 
     const generateWorkDatePeriod = (
         workHistoryFormOrderIsSubmitted,
+        isCurrentlyWorkingDataOrder,
         yearStartWorkDataOrder,
         monthStartWorkDataOrder,
         yearEndWorkDataOrder,
         monthEndWorkDataOrder,
         isCurrentlyWorkingValueOrder,
+        hasDatesButNotCurrentlyWorkingOrder,
         yearStartWorkInputOrder,
         monthStartWorkInputOrder,
         yearEndWorkInputOrder,
@@ -376,9 +399,9 @@ const CVContent = ({
         let workDatePeriod = '';
 
         if (workHistoryFormOrderIsSubmitted) {
-            if (isCurrentlyWorkingData) {
+            if (isCurrentlyWorkingDataOrder) {
                 workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
-            } else if (hasDatesButNotCurrentlyWorking) {
+            } else if (hasDatesButNotCurrentlyWorkingOrder) {
                 workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-${yearEndWorkDataOrder}-${monthEndWorkDataOrder}`;
             }
         } else if (
@@ -401,46 +424,6 @@ const CVContent = ({
 
         return workDatePeriod;
     };
-
-    // const generateBulletPoint = (
-    //     bulletPointInputOrder,
-    //     bulletPointDataOrder,
-    //     workResponsibilityFormOrderIsSubmitted,
-    //     defaultBulletPointOrder
-    // ) => {
-    //     let bulletPoint = '';
-
-    //     if (workResponsibilityFormOrderIsSubmitted || addAnotherWorkPosition) {
-    //         if (bulletPointDataOrder) {
-    //             bulletPoint = !bulletPointDataOrder.trim()
-    //                 ? ''
-    //                 : bulletPointDataOrder;
-    //         } else {
-    //             bulletPoint = !bulletPointInputOrder.trim()
-    //                 ? ''
-    //                 : bulletPointDataOrder;
-    //         }
-    //     } else {
-    //         bulletPoint = bulletPointInputOrder || defaultBulletPointOrder;
-    //     }
-
-    //     return bulletPoint;
-    // };
-
-    // const manageBulletPointStyles = (bulletPointOrder) => {
-    //     let styles = '';
-
-    //     // if bullet point is submitted empty
-    //     if (generateBulletPoint(bulletPointOrder) === '') {
-    //         // add default styles
-    //         styles = { workDescriptionList };
-    //     } else {
-    //         // add list-style-type: disc style
-    //         styles = `${workDescriptionList} list-disc`;
-    //     }
-
-    //     return styles;
-    // };
 
     const generateBulletPoint = (
         bulletPointInput,
@@ -589,11 +572,13 @@ const CVContent = ({
                             <h6>
                                 {generateWorkDatePeriod(
                                     workHistoryFormIsSubmitted,
+                                    isCurrentlyWorkingData,
                                     yearStartWorkData,
                                     monthStartWorkData,
                                     yearEndWorkData,
                                     monthEndWorkData,
                                     isCurrentlyWorkingValue,
+                                    hasDatesButNotCurrentlyWorking,
                                     yearStartWorkInput,
                                     monthStartWorkInput,
                                     yearEndWorkInput,
@@ -685,18 +670,20 @@ const CVContent = ({
                 </div>
                 {addAnotherWorkPosition === true ? (
                     <div className={stayPeriodContainer}>
-                        {hasNoWorkDatePeriod ? (
+                        {secondHasNoWorkDatePeriod ? (
                             ''
                         ) : (
                             <div className={workDatePeriodContainer}>
                                 <h6>
                                     {generateWorkDatePeriod(
                                         additionalWorkHistoryFormIsSubmitted,
+                                        secondIsCurrentlyWorkingData,
                                         secondYearStartWorkData,
                                         secondMonthStartWorkData,
                                         secondYearEndWorkData,
                                         secondMonthEndWorkData,
                                         secondIsCurrentlyWorkingValue,
+                                        secondHasDatesButNotCurrentlyWorking,
                                         secondYearStartWorkInput,
                                         secondMonthStartWorkInput,
                                         secondYearEndWorkInput,
@@ -708,7 +695,7 @@ const CVContent = ({
                         <div className={stayDetailContainer}>
                             <div className={stayDetailHeading}>
                                 {generateTitle(
-                                    workHistoryFormIsSubmitted,
+                                    additionalWorkHistoryFormIsSubmitted,
                                     secondJobTitleData,
                                     secondJobTitleInput,
                                     defaultSecondJobTitle

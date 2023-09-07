@@ -20,7 +20,8 @@ const FormValidation = () => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnWorkResponsibilityPath = pathname === '/work-responsibility';
+    const isOnAdditionalIsOnWorkHistoryPath =
+        pathname === '/additional-work-history';
 
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
@@ -105,6 +106,9 @@ const FormValidation = () => {
                 case '/work-history-summary':
                     navigate('/education');
                     break;
+                case '/additional-work-history':
+                    navigate('/additional-work-responsibility');
+                    break;
             }
         }
     });
@@ -131,14 +135,14 @@ const FormValidation = () => {
         bulletPointTwo,
         bulletPointThree,
         bulletPointFour,
-        secondJobTitle,
-        secondCompany,
-        secondCityWork,
-        secondStateWork,
         secondYearStartWork,
         secondMonthStartWork,
         secondYearEndWork,
         secondMonthEndWork,
+        secondJobTitle,
+        secondCompany,
+        secondCityWork,
+        secondStateWork,
         secondBulletPointOne,
         secondBulletPointTwo,
         secondBulletPointThree,
@@ -241,8 +245,6 @@ const FormValidation = () => {
                             }
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
-                            formikErrors={formik.errors}
-                            touched={formik.touched}
                             setFieldValue={formik.setFieldValue}
                         />
                     }
@@ -250,7 +252,7 @@ const FormValidation = () => {
                 <Route
                     path="/additional-work-responsibility"
                     element={
-                        <AdditionalWorkHistoryForm
+                        <AdditionalWorkResponsibilityForm
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
                         />

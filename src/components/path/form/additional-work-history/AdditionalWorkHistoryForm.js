@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 import Select from 'react-select';
@@ -7,8 +9,6 @@ const AdditionalWorkHistoryForm = ({
     setSecondCurrentlyWorkingCheckboxValue,
     handleSubmit,
     handleChange,
-    formikErrors,
-    touched,
     setFieldValue
 }) => {
     // generate options for react-select inputs
@@ -71,101 +71,99 @@ const AdditionalWorkHistoryForm = ({
                         <div className="flex">
                             <input
                                 type="text"
-                                name="jobTitleTwo"
+                                name="secondJobTitle"
                                 placeholder="Job Title"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    // handleEmptySubmission(e);
+                                }}
                                 className={
-                                    formikErrors.jobTitle && touched.jobTitle
-                                        ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                        : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                                    'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
                                 maxLength={40}
                             />
                         </div>
-                        {formikErrors.jobTitle && touched.jobTitle && (
-                            <p className="ml-4 text-red-800">
-                                {formikErrors.jobTitle}
-                            </p>
-                        )}
                     </div>
                     <div className="w-full">
                         <div className="flex">
                             <input
                                 type="text"
-                                name="companyTwo"
+                                name="secondCompany"
                                 placeholder="Company"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    // handleEmptySubmission(e);
+                                }}
                                 className={
-                                    formikErrors.company && touched.company
-                                        ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                        : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                                    'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                                 }
                                 maxLength={40}
                             />
                         </div>
-                        {formikErrors.company && touched.company && (
-                            <p className="ml-4 text-red-800">
-                                {formikErrors.company}
-                            </p>
-                        )}
                     </div>
                 </div>
                 <div className="flex">
                     <input
                         type="text"
-                        name="cityWorkTwo"
+                        name="secondCityWork"
                         placeholder="City"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            handleChange(e);
+                            // handleEmptySubmission(e.target.value);
+                        }}
                         maxLength={40}
                     />
                     <input
                         type="text"
-                        name="stateWorkTwo"
+                        name="secondStateWork"
                         placeholder="State / Country"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            handleChange(e);
+                            // handleEmptySubmission(e.target.value);
+                        }}
                         maxLength={40}
                     />
                 </div>
                 <div className="flex">
                     <Select
-                        name="yearStartWorkTwo"
+                        name="secondYearStartWork"
                         placeholder="Year Start"
                         options={generateOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) =>
-                            setFieldValue('yearStartWorkTwo', e.value)
+                            setFieldValue('secondYearStartWork', e.value)
                         }
                     />
                     <Select
-                        name="monthStartWorkTwo"
+                        name="secondMonthStartWork"
                         placeholder="Month Start"
                         options={generateOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) =>
-                            setFieldValue('monthStartWorkTwo', e.value)
+                            setFieldValue('secondMonthStartWork', e.value)
                         }
                     />
                 </div>
                 <div className="flex">
                     <Select
-                        name="yearEndWorkTwo"
+                        name="secondYearEndWork"
                         placeholder="Year End"
                         options={generateOptions(70, 2023)}
                         styles={customStyles}
                         onChange={(e) =>
-                            setFieldValue('yearEndWorkTwo', e.value)
+                            setFieldValue('secondYearEndWork', e.value)
                         }
                         isDisabled={secondCurrentlyWorkingCheckboxValue}
                     />
                     <Select
-                        name="monthEndWorkTwo"
+                        name="secondMonthEndWork"
                         placeholder="Month End"
                         options={generateOptions(12, 12)}
                         styles={customStyles}
                         onChange={(e) =>
-                            setFieldValue('monthEndWorkTwo', e.value)
+                            setFieldValue('secondMonthEndWork', e.value)
                         }
                         isDisabled={secondCurrentlyWorkingCheckboxValue}
                     />
