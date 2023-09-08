@@ -65,6 +65,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         placeholder="City"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
+                        maxLength={40}
                     />
                     <input
                         type="text"
@@ -72,6 +73,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         placeholder="State"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
+                        maxLength={40}
                     />
                 </div>
                 <div>
@@ -81,7 +83,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         placeholder="Country"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
-                        autoComplete="on"
+                        maxLength={40}
                     />
                     <input
                         type="tel"
@@ -89,6 +91,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         placeholder="ZIP Code"
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
+                        maxLength={40}
                     />
                 </div>
                 <div className="flex">
@@ -98,7 +101,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         placeholder="Phone"
                         className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={handleChange}
-                        autoComplete="on"
+                        maxLength={40}
                     />
                 </div>
                 <div>
@@ -115,7 +118,6 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                                     : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
                             maxLength={40}
-                            autoComplete="on"
                         />
                     </div>
                     {formikErrors.email && touched.email && (

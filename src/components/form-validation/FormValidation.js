@@ -12,6 +12,7 @@ import WorkHistorySummary from '../path/WorkHistorySummary';
 import SkipWorkHistoryModal from '../path/SkipWorkHistoryModal';
 import AdditionalWorkHistoryForm from '../path/form/additional-work-history/AdditionalWorkHistoryForm';
 import AdditionalWorkResponsibilityForm from '../path/form/additional-work-history/AdditionalWorkResponsibilityForm';
+import AdditionalWorkHistorySummary from '../path/AdditionalWorkHistorySummary';
 import EducationForm from '../path/form/EducationForm';
 
 import CVPreview from '../preview/CVPreview';
@@ -109,6 +110,9 @@ const FormValidation = () => {
                 case '/additional-work-history':
                     navigate('/additional-work-responsibility');
                     break;
+                case '/additional-work-responsibility':
+                    navigate('/additional-work-history-summary');
+                    break;
             }
         }
     });
@@ -155,8 +159,6 @@ const FormValidation = () => {
         secondCurrentlyWorkingCheckboxValue,
         setSecondCurrentlyWorkingCheckboxValue
     ] = useState(false);
-
-    const [addAnotherWorkPosition, setAddAnotherWorkPosition] = useState(false);
 
     const capitaliseFirstLetter = (input) => {
         return input.charAt(0).toUpperCase() + input.slice(1);
@@ -223,9 +225,6 @@ const FormValidation = () => {
                     element={
                         <WorkHistorySummary
                             handleSubmit={formik.handleSubmit}
-                            setAddAnotherWorkPosition={
-                                setAddAnotherWorkPosition
-                            }
                         />
                     }
                 />
@@ -258,6 +257,14 @@ const FormValidation = () => {
                         />
                     }
                 />
+                <Route
+                    path="/additional-work-history-summary"
+                    element={
+                        <AdditionalWorkHistorySummary
+                            handleSubmit={formik.handleSubmit}
+                        />
+                    }
+                />
                 <Route path="/education" element={<EducationForm />} />
             </Routes>
 
@@ -286,7 +293,6 @@ const FormValidation = () => {
                 bulletPointTwoInput={capitaliseFirstLetter(bulletPointTwo)}
                 bulletPointThreeInput={capitaliseFirstLetter(bulletPointThree)}
                 bulletPointFourInput={capitaliseFirstLetter(bulletPointFour)}
-                addAnotherWorkPosition={addAnotherWorkPosition}
                 secondYearStartWorkInput={secondYearStartWork}
                 secondMonthStartWorkInput={secondMonthStartWork}
                 secondYearEndWorkInput={secondYearEndWork}

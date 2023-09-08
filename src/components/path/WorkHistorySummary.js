@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const WorkHistorySummary = ({ handleSubmit, setAddAnotherWorkPosition }) => {
+const WorkHistorySummary = ({ handleSubmit }) => {
     const getFormData = (formData) => {
         // make values of properties accessible
         const data = JSON.parse(window.localStorage.getItem(formData));
@@ -8,14 +8,14 @@ const WorkHistorySummary = ({ handleSubmit, setAddAnotherWorkPosition }) => {
         return data ? data : '';
     };
 
+    const { jobTitleData, companyData } = getFormData('workHistoryFormData');
+
     const {
-        jobTitleData,
-        companyData,
         bulletPointOneData,
         bulletPointTwoData,
         bulletPointThreeData,
         bulletPointFourData
-    } = getFormData('workHistoryFormData');
+    } = getFormData('workResponsibilityFormData');
 
     const manageBulletPointStyles = (bulletPoint) => {
         return bulletPoint ? 'my-3' : 'list-none';
@@ -25,7 +25,6 @@ const WorkHistorySummary = ({ handleSubmit, setAddAnotherWorkPosition }) => {
     const navigateBack = () => navigate('/work-responsibility');
 
     const handleAddingWorkPosition = () => {
-        setAddAnotherWorkPosition(true);
         navigate('/additional-work-history');
     };
 
@@ -38,13 +37,11 @@ const WorkHistorySummary = ({ handleSubmit, setAddAnotherWorkPosition }) => {
                 Work History Summary:
             </h1>
             <div className="flex flex-col justify-center">
-                <div
-                    className="m-3
-                    rounded-lg border border-dark-yellow-green p-4
-                    "
-                >
+                <div className="m-3 break-all rounded-lg border border-dark-yellow-green p-4">
                     <p className="font-medium">
-                        {jobTitleData}, {companyData}
+                        {jobTitleData && companyData
+                            ? `${jobTitleData}, ${companyData}`
+                            : ''}
                     </p>
                     <li className={manageBulletPointStyles(bulletPointOneData)}>
                         {bulletPointOneData}
@@ -66,8 +63,7 @@ const WorkHistorySummary = ({ handleSubmit, setAddAnotherWorkPosition }) => {
                     </li>
                 </div>
                 <button
-                    className="mx-3 flex items-center
-                    justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
+                    className="mx-3 flex items-center justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
                     onClick={handleAddingWorkPosition}
                 >
                     <span className="material-symbols-outlined mr-2 text-xl font-semibold">

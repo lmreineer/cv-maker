@@ -27,7 +27,6 @@ const CVPreview = ({
     bulletPointTwoInput,
     bulletPointThreeInput,
     bulletPointFourInput,
-    addAnotherWorkPosition,
     secondYearStartWorkInput,
     secondMonthStartWorkInput,
     secondYearEndWorkInput,
@@ -93,7 +92,6 @@ const CVPreview = ({
                     bulletPointThreeInput={bulletPointThreeInput}
                     bulletPointFourInput={bulletPointFourInput}
                     workDescriptionList="font-light"
-                    addAnotherWorkPosition={addAnotherWorkPosition}
                     secondYearStartWorkInput={secondYearStartWorkInput}
                     secondMonthStartWorkInput={secondMonthStartWorkInput}
                     secondYearEndWorkInput={secondYearEndWorkInput}

@@ -8,6 +8,13 @@ const Header = () => {
     const isOnWorkResponbilityForm = pathname === '/work-responsibility';
     const isOnWorkHistorySummary = pathname === '/work-history-summary';
     const isOnSkipWorkHistoryModal = pathname === '/skip-work-history';
+    const isOnAdditionalWorkHistoryForm =
+        pathname === '/additional-work-history';
+    const isOnAdditionalWorkResponsibilityForm =
+        pathname === '/additional-work-responsibility';
+    const isOnAdditionalWorkHistorySummary =
+        pathname === '/additional-work-history-summary';
+
     const isOnEducationPath = pathname === '/education';
 
     return (
@@ -32,7 +39,10 @@ const Header = () => {
                         isOnWorkHistoryPath ||
                         isOnWorkResponbilityForm ||
                         isOnWorkHistorySummary ||
-                        isOnSkipWorkHistoryModal
+                        isOnSkipWorkHistoryModal ||
+                        isOnAdditionalWorkHistoryForm ||
+                        isOnAdditionalWorkResponsibilityForm ||
+                        isOnAdditionalWorkHistorySummary
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-gray-400'
                     }
