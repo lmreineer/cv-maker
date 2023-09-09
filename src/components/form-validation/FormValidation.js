@@ -85,7 +85,11 @@ const FormValidation = () => {
             secondBulletPointOne: '',
             secondBulletPointTwo: '',
             secondBulletPointThree: '',
-            secondBulletPointFour: ''
+            secondBulletPointFour: '',
+            schoolName: '',
+            schoolLocation: '',
+            degree: '',
+            fieldOfStudy: ''
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
@@ -112,6 +116,9 @@ const FormValidation = () => {
                     break;
                 case '/additional-work-responsibility':
                     navigate('/additional-work-history-summary');
+                    break;
+                case '/additional-work-history-summary':
+                    navigate('/education');
                     break;
             }
         }
@@ -150,7 +157,13 @@ const FormValidation = () => {
         secondBulletPointOne,
         secondBulletPointTwo,
         secondBulletPointThree,
-        secondBulletPointFour
+        secondBulletPointFour,
+        yearStartGraduation,
+        monthStartGraduation,
+        schoolName,
+        schoolLocation,
+        degree,
+        fieldOfStudy
     } = formik.values;
 
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
@@ -265,7 +278,16 @@ const FormValidation = () => {
                         />
                     }
                 />
-                <Route path="/education" element={<EducationForm />} />
+                <Route
+                    path="/education"
+                    element={
+                        <EducationForm
+                            handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
+                            setFieldValue={formik.setFieldValue}
+                        />
+                    }
+                />
             </Routes>
 
             <CVPreview
@@ -321,6 +343,16 @@ const FormValidation = () => {
                 )}
                 secondBulletPointFourInput={capitaliseFirstLetter(
                     secondBulletPointFour
+                )}
+                yearStartGraduationInput={yearStartGraduation}
+                monthStartGraduationInput={monthStartGraduation}
+                schoolNameInput={capitalizeFirstLetterOfEachWord(schoolName)}
+                schoolLocationInput={capitalizeFirstLetterOfEachWord(
+                    schoolLocation
+                )}
+                degreeInput={capitalizeFirstLetterOfEachWord(degree)}
+                fieldOfStudyInput={capitalizeFirstLetterOfEachWord(
+                    fieldOfStudy
                 )}
             />
         </>

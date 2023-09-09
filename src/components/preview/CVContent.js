@@ -55,7 +55,13 @@ const CVContent = ({
     secondBulletPointTwoInput,
     secondBulletPointThreeInput,
     secondBulletPointFourInput,
-    educationDatePeriodContainer
+    educationDatePeriodContainer,
+    yearStartGraduationInput,
+    monthStartGraduationInput,
+    schoolNameInput,
+    schoolLocationInput,
+    degreeInput,
+    fieldOfStudyInput
 }) => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
@@ -79,6 +85,9 @@ const CVContent = ({
     const additionalWorkResponsibilityFormIsSubmitted =
         additionalWorkHistoryFormIsSubmitted &&
         !isOnAdditionalWorkResponsibilityPath;
+    const isOnEducationPath = pathname === '/education';
+    const educationFormIsSubmitted =
+        additionalWorkResponsibilityFormIsSubmitted && !isOnEducationPath;
 
     useEffect(() => {
         if (isOnHeadingPath) {
@@ -149,6 +158,18 @@ const CVContent = ({
                     secondBulletPointFourData: secondBulletPointFourInput
                 })
             );
+        } else if (isOnEducationPath) {
+            window.localStorage.setItem(
+                'educationFormData',
+                JSON.stringify({
+                    yearStartGraduationData: yearStartGraduationInput,
+                    monthStartGraduationData: monthStartGraduationInput,
+                    schoolNameData: schoolNameInput,
+                    schoolLocationData: schoolLocationInput,
+                    degreeData: degreeInput,
+                    fieldOfStudyData: fieldOfStudyInput
+                })
+            );
         }
     }, [
         isOnHeadingPath,
@@ -191,7 +212,14 @@ const CVContent = ({
         secondBulletPointOneInput,
         secondBulletPointTwoInput,
         secondBulletPointThreeInput,
-        secondBulletPointFourInput
+        secondBulletPointFourInput,
+        isOnEducationPath,
+        yearStartGraduationInput,
+        monthStartGraduationInput,
+        schoolNameInput,
+        schoolLocationInput,
+        degreeInput,
+        fieldOfStudyInput
     ]);
 
     const getFormData = (formData) => {
@@ -250,6 +278,15 @@ const CVContent = ({
         secondBulletPointThreeData,
         secondBulletPointFourData
     } = getFormData('additionalWorkResponsibilityFormData');
+
+    const {
+        yearStartGraduationData,
+        monthStartGraduationData,
+        schoolNameData,
+        schoolLocationData,
+        degreeData,
+        fieldOfStudyData
+    } = getFormData('educationFormData');
 
     // handle addAnotherWorkPosition for additional work history and responsibility forms state
     if (workHistorySummaryIsSubmitted) {
@@ -460,6 +497,26 @@ const CVContent = ({
         return workDatePeriod;
     };
 
+    const generateEducationDatePeriod = (
+        educationFormOrderIsSubmitted,
+        yearStartGraduationDataOrder,
+        monthStartGraduationDataOrder,
+        yearStartGraduationInputOrder,
+        monthStartGraduationInputOrder
+    ) => {
+        let graduationDatePeriod = '';
+
+        if (educationFormOrderIsSubmitted) {
+            graduationDatePeriod += `${yearStartGraduationDataOrder}-${monthStartGraduationDataOrder}`;
+        } else {
+            graduationDatePeriod += `${
+                yearStartGraduationInputOrder || '2023'
+            }-${monthStartGraduationInputOrder || 'June'}`;
+        }
+
+        return graduationDatePeriod;
+    };
+
     const generateBulletPoint = (
         bulletPointData,
         workResponsibilityFormOrderIsSubmitted,
@@ -607,114 +664,116 @@ const CVContent = ({
                     <li>Creative thinking and problem-solving abilities</li>
                     <li>Team player with strong interpersonal skills</li>
                 </ul>
-                <h6 className={mainBackgroundHeading}>Work History</h6>
                 {hasNoWorkHistory ? (
                     ''
                 ) : (
-                    <div className={stayPeriodContainer}>
-                        {hasNoWorkDatePeriod ? (
-                            ''
-                        ) : (
-                            <div className={workDatePeriodContainer}>
-                                <h6>
-                                    {generateWorkDatePeriod(
-                                        workHistoryFormIsSubmitted,
-                                        isCurrentlyWorkingData,
-                                        yearStartWorkData,
-                                        monthStartWorkData,
-                                        yearEndWorkData,
-                                        monthEndWorkData,
-                                        isCurrentlyWorkingValue,
-                                        hasDatesButNotCurrentlyWorking,
-                                        yearStartWorkInput,
-                                        monthStartWorkInput,
-                                        yearEndWorkInput,
-                                        monthEndWorkInput
-                                    )}
-                                </h6>
-                            </div>
-                        )}
-                        <div className={stayDetailContainer}>
-                            <div className={stayDetailHeading}>
-                                {generateTitle(
-                                    workHistoryFormIsSubmitted,
-                                    jobTitleData,
-                                    jobTitleInput,
-                                    defaultJobTitle
-                                )}
-                            </div>
-                            <div>
-                                <h6 className={institution}>
-                                    <span>
-                                        {handleAddressGeneration(
+                    <>
+                        <h6 className={mainBackgroundHeading}>Work History</h6>
+                        <div className={stayPeriodContainer}>
+                            {hasNoWorkDatePeriod ? (
+                                ''
+                            ) : (
+                                <div className={workDatePeriodContainer}>
+                                    <h6>
+                                        {generateWorkDatePeriod(
                                             workHistoryFormIsSubmitted,
-                                            companyData,
-                                            cityWorkData,
-                                            stateWorkData,
-                                            defaultWorkAddress,
-                                            companyInput,
-                                            cityWorkInput,
-                                            stateWorkInput
+                                            isCurrentlyWorkingData,
+                                            yearStartWorkData,
+                                            monthStartWorkData,
+                                            yearEndWorkData,
+                                            monthEndWorkData,
+                                            isCurrentlyWorkingValue,
+                                            hasDatesButNotCurrentlyWorking,
+                                            yearStartWorkInput,
+                                            monthStartWorkInput,
+                                            yearEndWorkInput,
+                                            monthEndWorkInput
                                         )}
-                                    </span>
-                                </h6>
-                                <ul className={workDescriptionContainer}>
-                                    <li
-                                        className={manageBulletPointStyles(
-                                            bulletPointOneData,
-                                            workResponsibilityFormIsSubmitted
-                                        )}
-                                    >
-                                        {generateBulletPoint(
-                                            bulletPointOneData,
-                                            workResponsibilityFormIsSubmitted,
-                                            bulletPointOneInput,
-                                            defaultBulletPointOne
-                                        )}
-                                    </li>
-                                    <li
-                                        className={manageBulletPointStyles(
-                                            bulletPointTwoData,
-                                            workResponsibilityFormIsSubmitted
-                                        )}
-                                    >
-                                        {generateBulletPoint(
-                                            bulletPointTwoData,
-                                            workResponsibilityFormIsSubmitted,
-                                            bulletPointTwoInput,
-                                            defaultBulletPointTwo
-                                        )}
-                                    </li>
-                                    <li
-                                        className={manageBulletPointStyles(
-                                            bulletPointThreeData,
-                                            workResponsibilityFormIsSubmitted
-                                        )}
-                                    >
-                                        {generateBulletPoint(
-                                            bulletPointThreeData,
-                                            workResponsibilityFormIsSubmitted,
-                                            bulletPointThreeInput,
-                                            defaultBulletPointThree
-                                        )}
-                                    </li>
-                                    <li
-                                        className={manageBulletPointStyles(
-                                            bulletPointFourData,
-                                            workResponsibilityFormIsSubmitted
-                                        )}
-                                    >
-                                        {generateBulletPoint(
-                                            bulletPointFourData,
-                                            workResponsibilityFormIsSubmitted,
-                                            bulletPointFourInput,
-                                            defaultBulletPointFour
-                                        )}
-                                    </li>
-                                </ul>
+                                    </h6>
+                                </div>
+                            )}
+                            <div className={stayDetailContainer}>
+                                <div className={stayDetailHeading}>
+                                    {generateTitle(
+                                        workHistoryFormIsSubmitted,
+                                        jobTitleData,
+                                        jobTitleInput,
+                                        defaultJobTitle
+                                    )}
+                                </div>
+                                <div>
+                                    <h6 className={institution}>
+                                        <span>
+                                            {handleAddressGeneration(
+                                                workHistoryFormIsSubmitted,
+                                                companyData,
+                                                cityWorkData,
+                                                stateWorkData,
+                                                defaultWorkAddress,
+                                                companyInput,
+                                                cityWorkInput,
+                                                stateWorkInput
+                                            )}
+                                        </span>
+                                    </h6>
+                                    <ul className={workDescriptionContainer}>
+                                        <li
+                                            className={manageBulletPointStyles(
+                                                bulletPointOneData,
+                                                workResponsibilityFormIsSubmitted
+                                            )}
+                                        >
+                                            {generateBulletPoint(
+                                                bulletPointOneData,
+                                                workResponsibilityFormIsSubmitted,
+                                                bulletPointOneInput,
+                                                defaultBulletPointOne
+                                            )}
+                                        </li>
+                                        <li
+                                            className={manageBulletPointStyles(
+                                                bulletPointTwoData,
+                                                workResponsibilityFormIsSubmitted
+                                            )}
+                                        >
+                                            {generateBulletPoint(
+                                                bulletPointTwoData,
+                                                workResponsibilityFormIsSubmitted,
+                                                bulletPointTwoInput,
+                                                defaultBulletPointTwo
+                                            )}
+                                        </li>
+                                        <li
+                                            className={manageBulletPointStyles(
+                                                bulletPointThreeData,
+                                                workResponsibilityFormIsSubmitted
+                                            )}
+                                        >
+                                            {generateBulletPoint(
+                                                bulletPointThreeData,
+                                                workResponsibilityFormIsSubmitted,
+                                                bulletPointThreeInput,
+                                                defaultBulletPointThree
+                                            )}
+                                        </li>
+                                        <li
+                                            className={manageBulletPointStyles(
+                                                bulletPointFourData,
+                                                workResponsibilityFormIsSubmitted
+                                            )}
+                                        >
+                                            {generateBulletPoint(
+                                                bulletPointFourData,
+                                                workResponsibilityFormIsSubmitted,
+                                                bulletPointFourInput,
+                                                defaultBulletPointFour
+                                            )}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 )}
                 {addAnotherWorkPosition === true &&
                 hasNoSecondWorkHistory === false ? (
@@ -828,7 +887,15 @@ const CVContent = ({
                 <h6 className={mainBackgroundHeading}>Education</h6>
                 <div className={stayPeriodContainer}>
                     <div className={educationDatePeriodContainer}>
-                        <h6>2022 - 06</h6>
+                        <h6>
+                            {generateEducationDatePeriod(
+                                educationFormIsSubmitted,
+                                yearStartGraduationData,
+                                monthStartGraduationData,
+                                yearStartGraduationInput,
+                                monthStartGraduationInput
+                            )}
+                        </h6>
                     </div>
                     <div className={stayDetailContainer}>
                         <h6 className={stayDetailHeading}>

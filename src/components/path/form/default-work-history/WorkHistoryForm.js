@@ -177,7 +177,7 @@ const WorkHistoryForm = ({
                     <Select
                         name="monthStartWork"
                         placeholder="Month Start"
-                        options={generateOptions(12, 12)}
+                        options={generateOptions(11, 12)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue('monthStartWork', e.value);
@@ -200,7 +200,7 @@ const WorkHistoryForm = ({
                     <Select
                         name="monthEndWork"
                         placeholder="Month End"
-                        options={generateOptions(12, 12)}
+                        options={generateOptions(11, 12)}
                         styles={customStyles}
                         onChange={(e) => {
                             setFieldValue('monthEndWork', e.value);

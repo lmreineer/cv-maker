@@ -39,7 +39,13 @@ const CVPreview = ({
     secondBulletPointOneInput,
     secondBulletPointTwoInput,
     secondBulletPointThreeInput,
-    secondBulletPointFourInput
+    secondBulletPointFourInput,
+    yearStartGraduationInput,
+    monthStartGraduationInput,
+    schoolNameInput,
+    schoolLocationInput,
+    degreeInput,
+    fieldOfStudyInput
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const toggleClick = () => setIsClicked(!isClicked);
@@ -108,6 +114,12 @@ const CVPreview = ({
                     secondBulletPointThreeInput={secondBulletPointThreeInput}
                     secondBulletPointFourInput={secondBulletPointFourInput}
                     educationDatePeriodContainer="text-xs w-20"
+                    yearStartGraduationInput={yearStartGraduationInput}
+                    monthStartGraduationInput={monthStartGraduationInput}
+                    schoolNameInput={schoolNameInput}
+                    schoolLocationInput={schoolLocationInput}
+                    degreeInput={degreeInput}
+                    fieldOfStudyInput={fieldOfStudyInput}
                 />
             </div>
 
