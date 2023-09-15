@@ -2,22 +2,44 @@ import { useNavigate } from 'react-router-dom';
 
 import Select from 'react-select';
 
-const WorkHistoryForm = ({ handleSubmit, handleChange, setFieldValue }) => {
+const WorkHistoryForm = ({
+    setSkipEducation,
+    skipEducation,
+    handleSubmit,
+    handleChange,
+    setFieldValue
+}) => {
+    const handleSkipEducation = (e) => {
+        e !== '' ? setSkipEducation(false) : setSkipEducation(true);
+    };
+
     // generate options for react-select inputs
-    const generateOptions = (loop, n) => {
+    const generateYearStartOptions = () => {
         const options = [];
-        for (let i = 0; i <= loop; i += 1) {
-            const year = n - i;
+        for (let i = 0; i <= 70; i += 1) {
+            const year = 2033 - i;
             options.push({ value: year.toString(), label: year.toString() });
         }
 
-        // adjust numbering for month options
-        options.forEach((month) => {
-            if (month.value.length === 1) {
-                month.value = `0${month.value}`;
-                month.label = `0${month.label}`;
-            }
-        });
+        return options;
+    };
+
+    const generateMonthStartOptions = () => {
+        const options = [];
+        options.push(
+            { value: 'December', label: 'December' },
+            { value: 'November', label: 'November' },
+            { value: 'October', label: 'October' },
+            { value: 'September', label: 'September' },
+            { value: 'August', label: 'August' },
+            { value: 'July', label: 'July' },
+            { value: 'June', label: 'June' },
+            { value: 'May', label: 'May' },
+            { value: 'April', label: 'April' },
+            { value: 'March', label: 'March' },
+            { value: 'February', label: 'February' },
+            { value: 'January', label: 'January' }
+        );
 
         return options;
     };
@@ -53,13 +75,40 @@ const WorkHistoryForm = ({ handleSubmit, handleChange, setFieldValue }) => {
                     Education:
                 </h1>
                 <div className="flex">
+                    <input
+                        type="text"
+                        name="degree"
+                        placeholder="Degree"
+                        onChange={(e) => {
+                            handleChange(e);
+                            handleSkipEducation(e);
+                        }}
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        maxLength={40}
+                    />
+                    <input
+                        type="text"
+                        name="fieldOfStudy"
+                        placeholder="Field of Study"
+                        onChange={(e) => {
+                            handleChange(e);
+                            handleSkipEducation(e);
+                        }}
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        maxLength={40}
+                    />
+                </div>
+                <div className="flex">
                     <div className="w-full">
                         <div className="flex">
                             <input
                                 type="text"
                                 name="schoolName"
                                 placeholder="School Name"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    handleSkipEducation(e);
+                                }}
                                 className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                                 maxLength={40}
                             />
@@ -71,7 +120,10 @@ const WorkHistoryForm = ({ handleSubmit, handleChange, setFieldValue }) => {
                                 type="text"
                                 name="schoolLocation"
                                 placeholder="School Location"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    handleSkipEducation(e);
+                                }}
                                 className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                                 maxLength={40}
                             />
@@ -79,41 +131,25 @@ const WorkHistoryForm = ({ handleSubmit, handleChange, setFieldValue }) => {
                     </div>
                 </div>
                 <div className="flex">
-                    <input
-                        type="text"
-                        name="degree"
-                        placeholder="Degree"
-                        onChange={handleChange}
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        maxLength={40}
-                    />
-                    <input
-                        type="text"
-                        name="fieldOfStudy"
-                        placeholder="Field of Study"
-                        onChange={handleChange}
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        maxLength={40}
-                    />
-                </div>
-                <div className="flex">
                     <Select
                         name="yearStartGraduation"
                         placeholder="Graduation Start Year"
-                        options={generateOptions(70, 2023 + 10)}
+                        options={generateYearStartOptions()}
                         styles={customStyles}
-                        onChange={(e) =>
-                            setFieldValue('yearStartGraduation', e.value)
-                        }
+                        onChange={(e) => {
+                            setFieldValue('yearStartGraduation', e.value);
+                            handleSkipEducation(e.value);
+                        }}
                     />
                     <Select
                         name="monthStartGraduation"
                         placeholder="Graduation Start Month"
-                        options={generateOptions(11, 12)}
+                        options={generateMonthStartOptions()}
                         styles={customStyles}
-                        onChange={(e) =>
-                            setFieldValue('monthStartGraduation', e.value)
-                        }
+                        onChange={(e) => {
+                            setFieldValue('monthStartGraduation', e.value);
+                            handleSkipEducation(e.value);
+                        }}
                     />
                 </div>
                 <div className="flex justify-around">

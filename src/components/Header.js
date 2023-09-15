@@ -14,8 +14,8 @@ const Header = () => {
         pathname === '/additional-work-responsibility';
     const isOnAdditionalWorkHistorySummary =
         pathname === '/additional-work-history-summary';
-
     const isOnEducationPath = pathname === '/education';
+    const isOnEducationSummaryPath = pathname === '/education-summary';
 
     return (
         <header className="flex select-none items-center justify-around p-5">
@@ -57,7 +57,7 @@ const Header = () => {
                 </div>
                 <div
                     className={
-                        isOnEducationPath
+                        isOnEducationPath || isOnEducationSummaryPath
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-gray-400'
                     }

@@ -40,8 +40,8 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
             </h1>
             <div className="flex flex-col justify-center">
                 <textarea
-                    name="bulletPointOne"
-                    placeholder="Bullet Point 1"
+                    name="workResponsibilityOne"
+                    placeholder="Work Responsibility 1"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
@@ -49,8 +49,8 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="bulletPointTwo"
-                    placeholder="Bullet Point 2"
+                    name="workResponsibilityTwo"
+                    placeholder="Work Responsibility 2"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
@@ -58,8 +58,8 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="bulletPointThree"
-                    placeholder="Bullet Point 3"
+                    name="workResponsibilityThree"
+                    placeholder="Work Responsibility 3"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
@@ -67,8 +67,8 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="bulletPointFour"
-                    placeholder="Bullet Point 4"
+                    name="workResponsibilityFour"
+                    placeholder="Work Responsibility 4"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}

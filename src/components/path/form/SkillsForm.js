@@ -3,11 +3,12 @@ import autosize from 'autosize';
 
 import { useNavigate } from 'react-router-dom';
 
-const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
+const SkillsForm = ({ handleSubmit, handleChange }) => {
     const textareaRef1 = useRef(null);
     const textareaRef2 = useRef(null);
     const textareaRef3 = useRef(null);
     const textareaRef4 = useRef(null);
+    const textareaRef5 = useRef(null);
 
     const formRef = useRef(null);
 
@@ -16,6 +17,7 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
         autosize(textareaRef2.current);
         autosize(textareaRef3.current);
         autosize(textareaRef4.current);
+        autosize(textareaRef5.current);
     });
 
     const navigate = useNavigate();
@@ -36,12 +38,12 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
             className="flex w-1/2 flex-col justify-center"
         >
             <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Work Responsibilities:
+                Skills:
             </h1>
             <div className="flex flex-col justify-center">
                 <textarea
-                    name="secondWorkResponsibilityOne"
-                    placeholder="Work Responsibility 1"
+                    name="skillOne"
+                    placeholder="Skill 1"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
@@ -49,8 +51,8 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="secondWorkResponsibilityTwo"
-                    placeholder="Work Responsibility 2"
+                    name="skillTwo"
+                    placeholder="Skill 2"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
@@ -58,8 +60,8 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="secondWorkResponsibilityThree"
-                    placeholder="Work Responsibility 3"
+                    name="skillThree"
+                    placeholder="Skill 3"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
@@ -67,12 +69,21 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                     maxLength={250}
                 />
                 <textarea
-                    name="secondWorkResponsibilityFour"
-                    placeholder="Work Responsibility 4"
+                    name="skillFour"
+                    placeholder="Skill 4"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef4}
+                    maxLength={250}
+                />
+                <textarea
+                    name="skillFive"
+                    placeholder="Skill 5"
+                    className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    onChange={handleChange}
+                    onKeyDown={(e) => handleEnter(e)}
+                    ref={textareaRef5}
                     maxLength={250}
                 />
             </div>
@@ -93,4 +104,4 @@ const AdditionalWorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
     );
 };
 
-export default AdditionalWorkResponsibilityForm;
+export default SkillsForm;

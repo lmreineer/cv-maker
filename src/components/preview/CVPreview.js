@@ -23,10 +23,10 @@ const CVPreview = ({
     companyInput,
     cityWorkInput,
     stateWorkInput,
-    bulletPointOneInput,
-    bulletPointTwoInput,
-    bulletPointThreeInput,
-    bulletPointFourInput,
+    workResponsibilityOneInput,
+    workResponsibilityTwoInput,
+    workResponsibilityThreeInput,
+    workResponsibilityFourInput,
     secondYearStartWorkInput,
     secondMonthStartWorkInput,
     secondYearEndWorkInput,
@@ -36,10 +36,10 @@ const CVPreview = ({
     secondCompanyInput,
     secondCityWorkInput,
     secondStateWorkInput,
-    secondBulletPointOneInput,
-    secondBulletPointTwoInput,
-    secondBulletPointThreeInput,
-    secondBulletPointFourInput,
+    secondWorkResponsibilityOneInput,
+    secondWorkResponsibilityTwoInput,
+    secondWorkResponsibilityThreeInput,
+    secondWorkResponsibilityFourInput,
     yearStartGraduationInput,
     monthStartGraduationInput,
     schoolNameInput,
@@ -93,10 +93,10 @@ const CVPreview = ({
                     cityWorkInput={cityWorkInput}
                     stateWorkInput={stateWorkInput}
                     workDescriptionContainer="ml-10 mt-2"
-                    bulletPointOneInput={bulletPointOneInput}
-                    bulletPointTwoInput={bulletPointTwoInput}
-                    bulletPointThreeInput={bulletPointThreeInput}
-                    bulletPointFourInput={bulletPointFourInput}
+                    workResponsibilityOneInput={workResponsibilityOneInput}
+                    workResponsibilityTwoInput={workResponsibilityTwoInput}
+                    workResponsibilityThreeInput={workResponsibilityThreeInput}
+                    workResponsibilityFourInput={workResponsibilityFourInput}
                     workDescriptionList="font-light"
                     secondYearStartWorkInput={secondYearStartWorkInput}
                     secondMonthStartWorkInput={secondMonthStartWorkInput}
@@ -109,11 +109,19 @@ const CVPreview = ({
                     secondCompanyInput={secondCompanyInput}
                     secondCityWorkInput={secondCityWorkInput}
                     secondStateWorkInput={secondStateWorkInput}
-                    secondBulletPointOneInput={secondBulletPointOneInput}
-                    secondBulletPointTwoInput={secondBulletPointTwoInput}
-                    secondBulletPointThreeInput={secondBulletPointThreeInput}
-                    secondBulletPointFourInput={secondBulletPointFourInput}
-                    educationDatePeriodContainer="text-xs w-20"
+                    secondWorkResponsibilityOneInput={
+                        secondWorkResponsibilityOneInput
+                    }
+                    secondWorkResponsibilityTwoInput={
+                        secondWorkResponsibilityTwoInput
+                    }
+                    secondWorkResponsibilityThreeInput={
+                        secondWorkResponsibilityThreeInput
+                    }
+                    secondWorkResponsibilityFourInput={
+                        secondWorkResponsibilityFourInput
+                    }
+                    educationDatePeriodContainer="w-56 text-xs"
                     yearStartGraduationInput={yearStartGraduationInput}
                     monthStartGraduationInput={monthStartGraduationInput}
                     schoolNameInput={schoolNameInput}

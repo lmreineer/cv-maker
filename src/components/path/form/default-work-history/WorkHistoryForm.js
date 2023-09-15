@@ -22,9 +22,10 @@ const WorkHistoryForm = ({
     };
 
     // check if main input is omitted after inputting other secondary inputs
-    const inputIsOmitted = (omittedInput) =>
+    const inputIsOmitted = (omittedInput) => {
         // main input is omitted but secondary inputs are inputted
-        omittedInput === '' && showSkipWorkHistoryModal === false;
+        return omittedInput === '' && !showSkipWorkHistoryModal;
+    };
 
     // generate options for react-select inputs
     const generateOptions = (loop, n) => {
@@ -62,7 +63,7 @@ const WorkHistoryForm = ({
     };
 
     const handleCheckedState = () => {
-        currentlyWorkingCheckboxValue === true
+        currentlyWorkingCheckboxValue
             ? setCurrentlyWorkingCheckboxValue(false)
             : setCurrentlyWorkingCheckboxValue(true);
     };

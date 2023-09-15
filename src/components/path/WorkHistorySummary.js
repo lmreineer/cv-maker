@@ -8,7 +8,62 @@ const WorkHistorySummary = ({ handleSubmit }) => {
         return data ? data : '';
     };
 
-    const { jobTitleData, companyData } = getFormData('workHistoryFormData');
+    const {
+        yearStartWorkData,
+        monthStartWorkData,
+        yearEndWorkData,
+        monthEndWorkData,
+        jobTitleData,
+        companyData,
+        cityWorkData,
+        stateWorkData,
+        currentlyWorkingCheckboxData
+    } = getFormData('workHistoryFormData');
+
+    const generateAddress = (a, b) => {
+        let address = '';
+
+        if (a || b) {
+            address += ` | ${a || b}`;
+        }
+
+        if (a) {
+            if (b) {
+                address += `, ${b}`;
+            }
+        }
+
+        return address;
+    };
+
+    const hasStartDate = yearStartWorkData && monthStartWorkData;
+    const hasEndDate = yearEndWorkData && monthEndWorkData;
+    const hasDatesButNotCurrentlyWorking =
+        !currentlyWorkingCheckboxData && hasEndDate && hasStartDate;
+
+    const generateWorkDatePeriod = (
+        currentlyWorkingCheckboxDataOrder,
+        yearStartWorkDataOrder,
+        monthStartWorkDataOrder,
+        yearEndWorkDataOrder,
+        monthEndWorkDataOrder
+    ) => {
+        let workDatePeriod = '';
+
+        if (currentlyWorkingCheckboxDataOrder) {
+            workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
+        } else {
+            if (hasDatesButNotCurrentlyWorking) {
+                workDatePeriod += `${yearStartWorkDataOrder || ''} ${
+                    -monthStartWorkDataOrder || ''
+                } ${-yearEndWorkDataOrder || ''} ${
+                    -monthEndWorkDataOrder || ''
+                }`;
+            }
+        }
+
+        return workDatePeriod;
+    };
 
     const {
         bulletPointOneData,
@@ -34,7 +89,7 @@ const WorkHistorySummary = ({ handleSubmit }) => {
             className="flex w-1/2 flex-col justify-center"
         >
             <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Work History Summary:
+                Work History:
             </h1>
             <div className="flex flex-col justify-center">
                 <div className="m-3 break-all rounded-lg border border-dark-yellow-green p-4">
@@ -42,6 +97,18 @@ const WorkHistorySummary = ({ handleSubmit }) => {
                         {jobTitleData && companyData
                             ? `${jobTitleData}, ${companyData}`
                             : ''}
+                        <span className="font-normal">
+                            {generateAddress(cityWorkData, stateWorkData)}
+                        </span>
+                    </p>
+                    <p className="font-medium">
+                        {generateWorkDatePeriod(
+                            currentlyWorkingCheckboxData,
+                            yearStartWorkData,
+                            monthStartWorkData,
+                            yearEndWorkData,
+                            monthEndWorkData
+                        )}
                     </p>
                     <li className={manageBulletPointStyles(bulletPointOneData)}>
                         {bulletPointOneData}

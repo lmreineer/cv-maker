@@ -37,10 +37,10 @@ const CVContent = ({
     cityWorkInput,
     stateWorkInput,
     workDescriptionContainer,
-    bulletPointOneInput,
-    bulletPointTwoInput,
-    bulletPointThreeInput,
-    bulletPointFourInput,
+    workResponsibilityOneInput,
+    workResponsibilityTwoInput,
+    workResponsibilityThreeInput,
+    workResponsibilityFourInput,
     workDescriptionList,
     secondYearStartWorkInput,
     secondMonthStartWorkInput,
@@ -51,10 +51,10 @@ const CVContent = ({
     secondCompanyInput,
     secondCityWorkInput,
     secondStateWorkInput,
-    secondBulletPointOneInput,
-    secondBulletPointTwoInput,
-    secondBulletPointThreeInput,
-    secondBulletPointFourInput,
+    secondWorkResponsibilityOneInput,
+    secondWorkResponsibilityTwoInput,
+    secondWorkResponsibilityThreeInput,
+    secondWorkResponsibilityFourInput,
     educationDatePeriodContainer,
     yearStartGraduationInput,
     monthStartGraduationInput,
@@ -126,10 +126,10 @@ const CVContent = ({
             window.localStorage.setItem(
                 'workResponsibilityFormData',
                 JSON.stringify({
-                    bulletPointOneData: bulletPointOneInput,
-                    bulletPointTwoData: bulletPointTwoInput,
-                    bulletPointThreeData: bulletPointThreeInput,
-                    bulletPointFourData: bulletPointFourInput
+                    workResponsibilityOneData: workResponsibilityOneInput,
+                    workResponsibilityTwoData: workResponsibilityTwoInput,
+                    workResponsibilityThreeData: workResponsibilityThreeInput,
+                    workResponsibilityFourData: workResponsibilityFourInput
                 })
             );
         } else if (isOnAdditionalWorkHistoryPath) {
@@ -152,10 +152,14 @@ const CVContent = ({
             window.localStorage.setItem(
                 'additionalWorkResponsibilityFormData',
                 JSON.stringify({
-                    secondBulletPointOneData: secondBulletPointOneInput,
-                    secondBulletPointTwoData: secondBulletPointTwoInput,
-                    secondBulletPointThreeData: secondBulletPointThreeInput,
-                    secondBulletPointFourData: secondBulletPointFourInput
+                    secondWorkResponsibilityOneData:
+                        secondWorkResponsibilityOneInput,
+                    secondWorkResponsibilityTwoData:
+                        secondWorkResponsibilityTwoInput,
+                    secondWorkResponsibilityThreeData:
+                        secondWorkResponsibilityThreeInput,
+                    secondWorkResponsibilityFourData:
+                        secondWorkResponsibilityFourInput
                 })
             );
         } else if (isOnEducationPath) {
@@ -194,10 +198,10 @@ const CVContent = ({
         companyInput,
         cityWorkInput,
         stateWorkInput,
-        bulletPointOneInput,
-        bulletPointTwoInput,
-        bulletPointThreeInput,
-        bulletPointFourInput,
+        workResponsibilityOneInput,
+        workResponsibilityTwoInput,
+        workResponsibilityThreeInput,
+        workResponsibilityFourInput,
         isOnAdditionalWorkHistoryPath,
         secondYearStartWorkInput,
         secondMonthStartWorkInput,
@@ -209,10 +213,10 @@ const CVContent = ({
         secondCompanyInput,
         secondCityWorkInput,
         secondStateWorkInput,
-        secondBulletPointOneInput,
-        secondBulletPointTwoInput,
-        secondBulletPointThreeInput,
-        secondBulletPointFourInput,
+        secondWorkResponsibilityOneInput,
+        secondWorkResponsibilityTwoInput,
+        secondWorkResponsibilityThreeInput,
+        secondWorkResponsibilityFourInput,
         isOnEducationPath,
         yearStartGraduationInput,
         monthStartGraduationInput,
@@ -254,10 +258,10 @@ const CVContent = ({
     } = getFormData('workHistoryFormData');
 
     const {
-        bulletPointOneData,
-        bulletPointTwoData,
-        bulletPointThreeData,
-        bulletPointFourData
+        workResponsibilityOneData,
+        workResponsibilityTwoData,
+        workResponsibilityThreeData,
+        workResponsibilityFourData
     } = getFormData('workResponsibilityFormData');
 
     const {
@@ -273,10 +277,10 @@ const CVContent = ({
     } = getFormData('additionalWorkHistoryFormData');
 
     const {
-        secondBulletPointOneData,
-        secondBulletPointTwoData,
-        secondBulletPointThreeData,
-        secondBulletPointFourData
+        secondWorkResponsibilityOneData,
+        secondWorkResponsibilityTwoData,
+        secondWorkResponsibilityThreeData,
+        secondWorkResponsibilityFourData
     } = getFormData('additionalWorkResponsibilityFormData');
 
     const {
@@ -309,14 +313,6 @@ const CVContent = ({
         'addAnotherWorkPositionData'
     );
 
-    const isCurrentlyWorkingData = currentlyWorkingCheckboxData === true;
-    const isCurrentlyWorkingValue = currentlyWorkingCheckboxValue === true;
-
-    const secondIsCurrentlyWorkingData =
-        secondCurrentlyWorkingCheckboxData === true;
-    const secondIsCurrentlyWorkingValue =
-        secondCurrentlyWorkingCheckboxValue === true;
-
     const hasNoAddress =
         !isOnHeadingPath &&
         !cityHeadingData &&
@@ -328,18 +324,20 @@ const CVContent = ({
     const hasNoHeading =
         !isOnHeadingPath && hasNoAddress && hasNoPhone && hasNoEmail;
 
-    const hasStartDate = yearStartWorkData && monthStartWorkData;
-    const hasEndDate = yearEndWorkData && monthEndWorkData;
-    const isMissingStartDate = !hasStartDate && isCurrentlyWorkingData;
-    const isMissingEndDate = !hasEndDate && !isCurrentlyWorkingData;
-    const startDateIsOmitted = hasEndDate && !hasStartDate;
-
+    const hasWorkStartDate = yearStartWorkData && monthStartWorkData;
+    const hasWorkEndDate = yearEndWorkData && monthEndWorkData;
+    const isMissingWorkStartDate =
+        !hasWorkStartDate && currentlyWorkingCheckboxData;
+    const isMissingWorkEndDate =
+        !hasWorkEndDate && !currentlyWorkingCheckboxData;
+    const workStartDateIsOmitted = hasWorkEndDate && !hasWorkStartDate;
     const hasNoWorkDatePeriod =
-        !isOnHeadingPath &&
-        !isOnWorkHistoryPath &&
-        (isMissingStartDate || isMissingEndDate || startDateIsOmitted);
+        workHistoryFormIsSubmitted &&
+        (isMissingWorkStartDate ||
+            isMissingWorkEndDate ||
+            workStartDateIsOmitted);
     const hasDatesButNotCurrentlyWorking =
-        !isCurrentlyWorkingData && hasEndDate && hasStartDate;
+        !currentlyWorkingCheckboxData && hasWorkEndDate && hasWorkStartDate;
     const hasNoWorkHistory =
         workHistoryFormIsSubmitted && !jobTitleData && !companyData;
 
@@ -347,10 +345,18 @@ const CVContent = ({
         secondYearStartWorkData && secondMonthStartWorkData;
     const secondHasEndDate = secondYearEndWorkData && secondMonthEndWorkData;
     const secondIsMissingStartDate =
-        !secondHasStartDate && secondIsCurrentlyWorkingData;
+        !secondHasStartDate && secondCurrentlyWorkingCheckboxData;
     const secondIsMissingEndDate =
-        !secondHasEndDate && !secondIsCurrentlyWorkingData;
+        !secondHasEndDate && !secondCurrentlyWorkingCheckboxData;
     const secondStartDateIsOmitted = secondHasEndDate && !secondHasStartDate;
+
+    const hasEducationStartDate =
+        yearStartGraduationData && monthStartGraduationData;
+    const educationStartDateIsOmitted = !hasEducationStartDate;
+    const hasNoEducationDatePeriod =
+        educationFormIsSubmitted && educationStartDateIsOmitted;
+    const hasNoEducation =
+        educationFormIsSubmitted & !degreeData && !fieldOfStudyData;
 
     const secondHasNoWorkDatePeriod =
         addAnotherWorkPosition &&
@@ -359,7 +365,9 @@ const CVContent = ({
             secondIsMissingEndDate ||
             secondStartDateIsOmitted);
     const secondHasDatesButNotCurrentlyWorking =
-        !secondIsCurrentlyWorkingData && secondHasEndDate && secondHasStartDate;
+        !secondCurrentlyWorkingCheckboxData &&
+        secondHasEndDate &&
+        secondHasStartDate;
     const hasNoSecondWorkHistory =
         additionalWorkHistoryFormIsSubmitted &&
         !secondJobTitleData &&
@@ -390,17 +398,60 @@ const CVContent = ({
         'Assisted in visual merchandising and store displays to enhance the customer shopping experience.';
     const defaultSecondBulletPointFour =
         'Assisted in visual merchandising and store displays to enhance the customer shopping experienceCollaborated with team members to resolve customer complaints and ensure smooth store operations.';
+    const defaultDegreeAndFieldOfStudy =
+        'Bachelor of Business Administration, Marketing';
+    const defaultSchoolAddress = 'ABC University, City, State';
 
-    const generateTitle = (path, titleData, titleInput, defaultTitle) => {
-        // if form is submitted already, display titleData
-        return path ? titleData : titleInput || defaultTitle;
+    const generateTitle = (
+        path,
+        titleDataOrder,
+        titleInputOrder,
+        defaultTitle,
+        additionalTitleDataOrder,
+        additionalTitleInputOrder
+    ) => {
+        let title = '';
+
+        // if form is submitted already, display titleDataOrder
+        if (path) {
+            if (titleDataOrder || additionalTitleDataOrder) {
+                title = titleDataOrder || additionalTitleDataOrder;
+            } else {
+                title = titleDataOrder;
+            }
+
+            if (titleDataOrder) {
+                if (additionalTitleDataOrder) {
+                    title = `${titleDataOrder}, ${additionalTitleDataOrder}`;
+                }
+            }
+        } else {
+            if (titleInputOrder || additionalTitleInputOrder) {
+                title =
+                    titleInputOrder ||
+                    additionalTitleInputOrder ||
+                    defaultTitle;
+            } else {
+                title = titleInputOrder || defaultTitle;
+            }
+
+            if (titleInputOrder) {
+                if (additionalTitleInputOrder) {
+                    title =
+                        `${titleInputOrder}, ${additionalTitleInputOrder}` ||
+                        defaultTitle;
+                }
+            }
+        }
+
+        return title;
     };
 
     const generateAddress = (a, b, c, d, defaultValue) => {
         let address = '';
 
         if (a || b || c || d) {
-            address += `${a || b || c || d}`;
+            address += a || b || c || d;
         } else {
             address = defaultValue;
         }
@@ -427,7 +478,7 @@ const CVContent = ({
     };
 
     const handleAddressGeneration = (
-        workHistoryFormOrderIsSubmitted,
+        path,
         companyDataOrder,
         cityWorkDataOrder,
         stateWorkDataOrder,
@@ -437,7 +488,7 @@ const CVContent = ({
         stateWorkInputOrder
     ) => {
         // display localStorage data if form is submitted already
-        return workHistoryFormOrderIsSubmitted
+        return path
             ? generateAddress(
                   companyDataOrder,
                   cityWorkDataOrder,
@@ -455,13 +506,13 @@ const CVContent = ({
     };
 
     const generateWorkDatePeriod = (
-        workHistoryFormOrderIsSubmitted,
-        isCurrentlyWorkingDataOrder,
+        path,
+        currentlyWorkingCheckboxDataOrder,
         yearStartWorkDataOrder,
         monthStartWorkDataOrder,
         yearEndWorkDataOrder,
         monthEndWorkDataOrder,
-        isCurrentlyWorkingValueOrder,
+        currentlyWorkingCheckboxValueOrder,
         hasDatesButNotCurrentlyWorkingOrder,
         yearStartWorkInputOrder,
         monthStartWorkInputOrder,
@@ -470,17 +521,17 @@ const CVContent = ({
     ) => {
         let workDatePeriod = '';
 
-        if (workHistoryFormOrderIsSubmitted) {
-            if (isCurrentlyWorkingDataOrder) {
+        if (path) {
+            if (currentlyWorkingCheckboxDataOrder) {
                 workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
             } else if (hasDatesButNotCurrentlyWorkingOrder) {
                 workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-${yearEndWorkDataOrder}-${monthEndWorkDataOrder}`;
             }
         } else if (
-            isCurrentlyWorkingValueOrder === true ||
+            currentlyWorkingCheckboxValueOrder ||
             // if section is on work history and currently working is checked
-            (isCurrentlyWorkingValueOrder === true &&
-                !isCurrentlyWorkingValueOrder)
+            (currentlyWorkingCheckboxValueOrder &&
+                !currentlyWorkingCheckboxValueOrder)
         ) {
             workDatePeriod += `${yearStartWorkInputOrder || '2020'}-${
                 monthStartWorkInputOrder || '04'
@@ -518,35 +569,37 @@ const CVContent = ({
     };
 
     const generateBulletPoint = (
-        bulletPointData,
+        workResponsibilityData,
         workResponsibilityFormOrderIsSubmitted,
-        bulletPointInput,
+        workResponsibilityInput,
         defaultBulletPoint
     ) => {
-        let bulletPoint = '';
+        let workResponsibility = '';
 
         if (workResponsibilityFormOrderIsSubmitted) {
-            if (bulletPointData) {
-                // if bulletPointData has is empty, put no value, else, show bulletPointData
-                bulletPoint = !bulletPointData.trim() ? '' : bulletPointData;
+            if (workResponsibilityData) {
+                // if workResponsibilityData has is empty, put no value, else, show workResponsibilityData
+                workResponsibility = !workResponsibilityData.trim()
+                    ? ''
+                    : workResponsibilityData;
             }
         } else {
-            bulletPoint = bulletPointInput || defaultBulletPoint;
+            workResponsibility = workResponsibilityInput || defaultBulletPoint;
         }
 
-        return bulletPoint;
+        return workResponsibility;
     };
 
     const manageBulletPointStyles = (
-        bulletPoint,
+        workResponsibility,
         workResponsibilityFormOrderIsSubmitted
     ) => {
         let styles = '';
 
-        // if bulletPoint is submitted empty
+        // if workResponsibility is submitted empty
         if (
             generateBulletPoint(
-                bulletPoint,
+                workResponsibility,
                 workResponsibilityFormOrderIsSubmitted
             ) === ''
         ) {
@@ -565,7 +618,7 @@ const CVContent = ({
             {hasNoHeading ? (
                 ''
             ) : (
-                <div>
+                <>
                     <h1 className={fullName}>
                         <span>
                             {generateTitle(
@@ -639,7 +692,7 @@ const CVContent = ({
                             )}
                         </span>
                     </h6>
-                </div>
+                </>
             )}
             <div className={summaryContainer}>
                 <h6 className={mainBackgroundHeading}>Summary</h6>
@@ -677,12 +730,12 @@ const CVContent = ({
                                     <h6>
                                         {generateWorkDatePeriod(
                                             workHistoryFormIsSubmitted,
-                                            isCurrentlyWorkingData,
+                                            currentlyWorkingCheckboxData,
                                             yearStartWorkData,
                                             monthStartWorkData,
                                             yearEndWorkData,
                                             monthEndWorkData,
-                                            isCurrentlyWorkingValue,
+                                            currentlyWorkingCheckboxValue,
                                             hasDatesButNotCurrentlyWorking,
                                             yearStartWorkInput,
                                             monthStartWorkInput,
@@ -719,53 +772,53 @@ const CVContent = ({
                                     <ul className={workDescriptionContainer}>
                                         <li
                                             className={manageBulletPointStyles(
-                                                bulletPointOneData,
+                                                workResponsibilityOneData,
                                                 workResponsibilityFormIsSubmitted
                                             )}
                                         >
                                             {generateBulletPoint(
-                                                bulletPointOneData,
+                                                workResponsibilityOneData,
                                                 workResponsibilityFormIsSubmitted,
-                                                bulletPointOneInput,
+                                                workResponsibilityOneInput,
                                                 defaultBulletPointOne
                                             )}
                                         </li>
                                         <li
                                             className={manageBulletPointStyles(
-                                                bulletPointTwoData,
+                                                workResponsibilityTwoData,
                                                 workResponsibilityFormIsSubmitted
                                             )}
                                         >
                                             {generateBulletPoint(
-                                                bulletPointTwoData,
+                                                workResponsibilityTwoData,
                                                 workResponsibilityFormIsSubmitted,
-                                                bulletPointTwoInput,
+                                                workResponsibilityTwoInput,
                                                 defaultBulletPointTwo
                                             )}
                                         </li>
                                         <li
                                             className={manageBulletPointStyles(
-                                                bulletPointThreeData,
+                                                workResponsibilityThreeData,
                                                 workResponsibilityFormIsSubmitted
                                             )}
                                         >
                                             {generateBulletPoint(
-                                                bulletPointThreeData,
+                                                workResponsibilityThreeData,
                                                 workResponsibilityFormIsSubmitted,
-                                                bulletPointThreeInput,
+                                                workResponsibilityThreeInput,
                                                 defaultBulletPointThree
                                             )}
                                         </li>
                                         <li
                                             className={manageBulletPointStyles(
-                                                bulletPointFourData,
+                                                workResponsibilityFourData,
                                                 workResponsibilityFormIsSubmitted
                                             )}
                                         >
                                             {generateBulletPoint(
-                                                bulletPointFourData,
+                                                workResponsibilityFourData,
                                                 workResponsibilityFormIsSubmitted,
-                                                bulletPointFourInput,
+                                                workResponsibilityFourInput,
                                                 defaultBulletPointFour
                                             )}
                                         </li>
@@ -775,8 +828,9 @@ const CVContent = ({
                         </div>
                     </>
                 )}
-                {addAnotherWorkPosition === true &&
-                hasNoSecondWorkHistory === false ? (
+                {addAnotherWorkPosition &&
+                !hasNoWorkHistory &&
+                !hasNoSecondWorkHistory ? (
                     <div className={stayPeriodContainer}>
                         {secondHasNoWorkDatePeriod ? (
                             ''
@@ -785,12 +839,12 @@ const CVContent = ({
                                 <h6>
                                     {generateWorkDatePeriod(
                                         additionalWorkHistoryFormIsSubmitted,
-                                        secondIsCurrentlyWorkingData,
+                                        secondCurrentlyWorkingCheckboxData,
                                         secondYearStartWorkData,
                                         secondMonthStartWorkData,
                                         secondYearEndWorkData,
                                         secondMonthEndWorkData,
-                                        secondIsCurrentlyWorkingValue,
+                                        secondCurrentlyWorkingCheckboxValue,
                                         secondHasDatesButNotCurrentlyWorking,
                                         secondYearStartWorkInput,
                                         secondMonthStartWorkInput,
@@ -827,53 +881,53 @@ const CVContent = ({
                                 <ul className={workDescriptionContainer}>
                                     <li
                                         className={manageBulletPointStyles(
-                                            secondBulletPointOneData,
+                                            secondWorkResponsibilityOneData,
                                             additionalWorkResponsibilityFormIsSubmitted
                                         )}
                                     >
                                         {generateBulletPoint(
-                                            secondBulletPointOneData,
+                                            secondWorkResponsibilityOneData,
                                             additionalWorkResponsibilityFormIsSubmitted,
-                                            secondBulletPointOneInput,
+                                            secondWorkResponsibilityOneInput,
                                             defaultSecondBulletPointOne
                                         )}
                                     </li>
                                     <li
                                         className={manageBulletPointStyles(
-                                            secondBulletPointTwoData,
+                                            secondWorkResponsibilityTwoData,
                                             additionalWorkResponsibilityFormIsSubmitted
                                         )}
                                     >
                                         {generateBulletPoint(
-                                            secondBulletPointTwoData,
+                                            secondWorkResponsibilityTwoData,
                                             additionalWorkResponsibilityFormIsSubmitted,
-                                            secondBulletPointTwoInput,
+                                            secondWorkResponsibilityTwoInput,
                                             defaultSecondBulletPointTwo
                                         )}
                                     </li>
                                     <li
                                         className={manageBulletPointStyles(
-                                            secondBulletPointThreeData,
+                                            secondWorkResponsibilityThreeData,
                                             additionalWorkResponsibilityFormIsSubmitted
                                         )}
                                     >
                                         {generateBulletPoint(
-                                            secondBulletPointThreeData,
+                                            secondWorkResponsibilityThreeData,
                                             additionalWorkResponsibilityFormIsSubmitted,
-                                            secondBulletPointThreeInput,
+                                            secondWorkResponsibilityThreeInput,
                                             defaultSecondBulletPointThree
                                         )}
                                     </li>
                                     <li
                                         className={manageBulletPointStyles(
-                                            secondBulletPointFourData,
+                                            secondWorkResponsibilityFourData,
                                             additionalWorkResponsibilityFormIsSubmitted
                                         )}
                                     >
                                         {generateBulletPoint(
-                                            secondBulletPointFourData,
+                                            secondWorkResponsibilityFourData,
                                             additionalWorkResponsibilityFormIsSubmitted,
-                                            secondBulletPointFourInput,
+                                            secondWorkResponsibilityFourInput,
                                             defaultSecondBulletPointFour
                                         )}
                                     </li>
@@ -884,28 +938,54 @@ const CVContent = ({
                 ) : (
                     ''
                 )}
-                <h6 className={mainBackgroundHeading}>Education</h6>
-                <div className={stayPeriodContainer}>
-                    <div className={educationDatePeriodContainer}>
-                        <h6>
-                            {generateEducationDatePeriod(
-                                educationFormIsSubmitted,
-                                yearStartGraduationData,
-                                monthStartGraduationData,
-                                yearStartGraduationInput,
-                                monthStartGraduationInput
+                {hasNoEducation ? (
+                    ''
+                ) : (
+                    <>
+                        <h6 className={mainBackgroundHeading}>Education</h6>
+                        <div className={stayPeriodContainer}>
+                            {hasNoEducationDatePeriod ? (
+                                ''
+                            ) : (
+                                <div className={educationDatePeriodContainer}>
+                                    <h6>
+                                        {generateEducationDatePeriod(
+                                            educationFormIsSubmitted,
+                                            yearStartGraduationData,
+                                            monthStartGraduationData,
+                                            yearStartGraduationInput,
+                                            monthStartGraduationInput
+                                        )}
+                                    </h6>
+                                </div>
                             )}
-                        </h6>
-                    </div>
-                    <div className={stayDetailContainer}>
-                        <h6 className={stayDetailHeading}>
-                            Bachelor of Business Administration, Marketing
-                        </h6>
-                        <h6 className={institution}>
-                            ABC University, City, State
-                        </h6>
-                    </div>
-                </div>
+                            <div className={stayDetailContainer}>
+                                <h6 className={stayDetailHeading}>
+                                    {generateTitle(
+                                        educationFormIsSubmitted,
+                                        degreeData,
+                                        degreeInput,
+                                        defaultDegreeAndFieldOfStudy,
+                                        fieldOfStudyData,
+                                        fieldOfStudyInput
+                                    )}
+                                </h6>
+                                <h6 className={institution}>
+                                    {handleAddressGeneration(
+                                        educationFormIsSubmitted,
+                                        schoolNameData,
+                                        schoolLocationData,
+                                        null,
+                                        defaultSchoolAddress,
+                                        schoolNameInput,
+                                        schoolLocationInput,
+                                        null
+                                    )}
+                                </h6>
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );

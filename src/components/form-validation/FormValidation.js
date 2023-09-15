@@ -14,6 +14,8 @@ import AdditionalWorkHistoryForm from '../path/form/additional-work-history/Addi
 import AdditionalWorkResponsibilityForm from '../path/form/additional-work-history/AdditionalWorkResponsibilityForm';
 import AdditionalWorkHistorySummary from '../path/AdditionalWorkHistorySummary';
 import EducationForm from '../path/form/EducationForm';
+import EducationSummary from '../path/EducationSummary';
+import SkillsForm from '../path/form/SkillsForm';
 
 import CVPreview from '../preview/CVPreview';
 
@@ -21,11 +23,10 @@ const FormValidation = () => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnAdditionalIsOnWorkHistoryPath =
-        pathname === '/additional-work-history';
 
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
+    const [skipEducation, setSkipEducation] = useState(true);
 
     // manage showing of errors on heading form
     const handleValidateOnChangeValue = () => {
@@ -48,7 +49,7 @@ const FormValidation = () => {
                     .required('Email is required')
                     .email('Email is invalid')
             };
-        } else if (isOnWorkHistoryPath && showSkipWorkHistoryModal === false) {
+        } else if (isOnWorkHistoryPath && !showSkipWorkHistoryModal) {
             return {
                 jobTitle: Yup.string().trim().required('Job title is required'),
                 company: Yup.string().trim().required('Company is required')
@@ -74,18 +75,18 @@ const FormValidation = () => {
             company: '',
             cityWork: '',
             stateWork: '',
-            bulletPointOne: '',
-            bulletPointTwo: '',
-            bulletPointThree: '',
-            bulletPointFour: '',
+            workResponsibilityOne: '',
+            workResponsibilityTwo: '',
+            workResponsibilityThree: '',
+            workResponsibilityFour: '',
             secondJobTitle: '',
             secondCompany: '',
             secondCityWork: '',
             secondStateWork: '',
-            secondBulletPointOne: '',
-            secondBulletPointTwo: '',
-            secondBulletPointThree: '',
-            secondBulletPointFour: '',
+            secondWorkResponsibilityOne: '',
+            secondWorkResponsibilityTwo: '',
+            secondWorkResponsibilityThree: '',
+            secondWorkResponsibilityFour: '',
             schoolName: '',
             schoolLocation: '',
             degree: '',
@@ -99,9 +100,9 @@ const FormValidation = () => {
                     navigate('/work-history');
                     break;
                 case '/work-history':
-                    if (showSkipWorkHistoryModal === false) {
+                    if (!showSkipWorkHistoryModal) {
                         navigate('/work-responsibility');
-                    } else if (showSkipWorkHistoryModal === true) {
+                    } else if (showSkipWorkHistoryModal) {
                         navigate('/skip-work-history');
                     }
                     break;
@@ -120,9 +121,18 @@ const FormValidation = () => {
                 case '/additional-work-history-summary':
                     navigate('/education');
                     break;
+                case '/education':
+                    if (!skipEducation) {
+                        navigate('/education-summary');
+                    } else if (skipEducation) {
+                        navigate('/skills');
+                    }
+                    break;
             }
         }
     });
+
+    // ADD A SKIP EDUCATION FORM STATE
 
     const {
         firstName,
@@ -142,10 +152,10 @@ const FormValidation = () => {
         monthStartWork,
         yearEndWork,
         monthEndWork,
-        bulletPointOne,
-        bulletPointTwo,
-        bulletPointThree,
-        bulletPointFour,
+        workResponsibilityOne,
+        workResponsibilityTwo,
+        workResponsibilityThree,
+        workResponsibilityFour,
         secondYearStartWork,
         secondMonthStartWork,
         secondYearEndWork,
@@ -154,10 +164,10 @@ const FormValidation = () => {
         secondCompany,
         secondCityWork,
         secondStateWork,
-        secondBulletPointOne,
-        secondBulletPointTwo,
-        secondBulletPointThree,
-        secondBulletPointFour,
+        secondWorkResponsibilityOne,
+        secondWorkResponsibilityTwo,
+        secondWorkResponsibilityThree,
+        secondWorkResponsibilityFour,
         yearStartGraduation,
         monthStartGraduation,
         schoolName,
@@ -282,9 +292,26 @@ const FormValidation = () => {
                     path="/education"
                     element={
                         <EducationForm
+                            setSkipEducation={setSkipEducation}
+                            skipEducation={skipEducation}
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
                             setFieldValue={formik.setFieldValue}
+                        />
+                    }
+                />
+                <Route
+                    path="/education-summary"
+                    element={
+                        <EducationSummary handleSubmit={formik.handleSubmit} />
+                    }
+                />
+                <Route
+                    path="/skills"
+                    element={
+                        <SkillsForm
+                            handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
                         />
                     }
                 />
@@ -311,10 +338,18 @@ const FormValidation = () => {
                 companyInput={capitalizeFirstLetterOfEachWord(company)}
                 cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
                 stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
-                bulletPointOneInput={capitaliseFirstLetter(bulletPointOne)}
-                bulletPointTwoInput={capitaliseFirstLetter(bulletPointTwo)}
-                bulletPointThreeInput={capitaliseFirstLetter(bulletPointThree)}
-                bulletPointFourInput={capitaliseFirstLetter(bulletPointFour)}
+                workResponsibilityOneInput={capitaliseFirstLetter(
+                    workResponsibilityOne
+                )}
+                workResponsibilityTwoInput={capitaliseFirstLetter(
+                    workResponsibilityTwo
+                )}
+                workResponsibilityThreeInput={capitaliseFirstLetter(
+                    workResponsibilityThree
+                )}
+                workResponsibilityFourInput={capitaliseFirstLetter(
+                    workResponsibilityFour
+                )}
                 secondYearStartWorkInput={secondYearStartWork}
                 secondMonthStartWorkInput={secondMonthStartWork}
                 secondYearEndWorkInput={secondYearEndWork}
@@ -332,17 +367,17 @@ const FormValidation = () => {
                 secondStateWorkInput={capitalizeFirstLetterOfEachWord(
                     secondStateWork
                 )}
-                secondBulletPointOneInput={capitaliseFirstLetter(
-                    secondBulletPointOne
+                secondWorkResponsibilityOneInput={capitaliseFirstLetter(
+                    secondWorkResponsibilityOne
                 )}
-                secondBulletPointTwoInput={capitaliseFirstLetter(
-                    secondBulletPointTwo
+                secondWorkResponsibilityTwoInput={capitaliseFirstLetter(
+                    secondWorkResponsibilityTwo
                 )}
-                secondBulletPointThreeInput={capitaliseFirstLetter(
-                    secondBulletPointThree
+                secondWorkResponsibilityThreeInput={capitaliseFirstLetter(
+                    secondWorkResponsibilityThree
                 )}
-                secondBulletPointFourInput={capitaliseFirstLetter(
-                    secondBulletPointFour
+                secondWorkResponsibilityFourInput={capitaliseFirstLetter(
+                    secondWorkResponsibilityFour
                 )}
                 yearStartGraduationInput={yearStartGraduation}
                 monthStartGraduationInput={monthStartGraduation}
