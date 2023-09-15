@@ -350,14 +350,6 @@ const CVContent = ({
         !secondHasEndDate && !secondCurrentlyWorkingCheckboxData;
     const secondStartDateIsOmitted = secondHasEndDate && !secondHasStartDate;
 
-    const hasEducationStartDate =
-        yearStartGraduationData && monthStartGraduationData;
-    const educationStartDateIsOmitted = !hasEducationStartDate;
-    const hasNoEducationDatePeriod =
-        educationFormIsSubmitted && educationStartDateIsOmitted;
-    const hasNoEducation =
-        educationFormIsSubmitted & !degreeData && !fieldOfStudyData;
-
     const secondHasNoWorkDatePeriod =
         addAnotherWorkPosition &&
         !isOnAdditionalWorkHistoryPath &&
@@ -372,6 +364,17 @@ const CVContent = ({
         additionalWorkHistoryFormIsSubmitted &&
         !secondJobTitleData &&
         !secondCompanyData;
+
+    const hasEducationStartDate =
+        yearStartGraduationData && monthStartGraduationData;
+    const educationStartDateIsOmitted = !hasEducationStartDate;
+    const hasNoEducationDatePeriod =
+        educationFormIsSubmitted && educationStartDateIsOmitted;
+    const hasNoEducation =
+        educationFormIsSubmitted & !degreeData && !fieldOfStudyData;
+
+    const hasNoSchoolNameAndLocation =
+        educationFormIsSubmitted && !schoolNameData && !schoolLocationData;
 
     const defaultFirstName = 'Afonso';
     const defaultLastName = 'Santos';
@@ -971,16 +974,18 @@ const CVContent = ({
                                     )}
                                 </h6>
                                 <h6 className={institution}>
-                                    {handleAddressGeneration(
-                                        educationFormIsSubmitted,
-                                        schoolNameData,
-                                        schoolLocationData,
-                                        null,
-                                        defaultSchoolAddress,
-                                        schoolNameInput,
-                                        schoolLocationInput,
-                                        null
-                                    )}
+                                    {hasNoSchoolNameAndLocation
+                                        ? ''
+                                        : handleAddressGeneration(
+                                              educationFormIsSubmitted,
+                                              schoolNameData,
+                                              schoolLocationData,
+                                              null,
+                                              defaultSchoolAddress,
+                                              schoolNameInput,
+                                              schoolLocationInput,
+                                              null
+                                          )}
                                 </h6>
                             </div>
                         </div>

@@ -128,6 +128,9 @@ const FormValidation = () => {
                         navigate('/skills');
                     }
                     break;
+                case '/education-summary':
+                    navigate('/skills');
+                    break;
             }
         }
     });

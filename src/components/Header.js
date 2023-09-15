@@ -16,6 +16,22 @@ const Header = () => {
         pathname === '/additional-work-history-summary';
     const isOnEducationPath = pathname === '/education';
     const isOnEducationSummaryPath = pathname === '/education-summary';
+    const isOnSkillsPath = pathname === '/skills';
+
+    const workHistoryIsSubmitted =
+        !isOnHeadingPath &&
+        !isOnWorkHistoryPath &&
+        !isOnWorkResponbilityForm &&
+        !isOnWorkHistorySummary &&
+        !isOnSkipWorkHistoryModal &&
+        !isOnAdditionalWorkHistoryForm &&
+        !isOnAdditionalWorkResponsibilityForm &&
+        !isOnAdditionalWorkHistorySummary;
+    const educationIsSubmitted =
+        workHistoryIsSubmitted &&
+        !isOnEducationPath &&
+        !isOnEducationSummaryPath;
+    const skillsIsSubmitted = educationIsSubmitted && !isOnSkillsPath;
 
     return (
         <header className="flex select-none items-center justify-around p-5">
@@ -47,7 +63,7 @@ const Header = () => {
                             : 'm-2 p-4 text-gray-400'
                     }
                         ${
-                            !isOnWorkHistoryPath && !isOnHeadingPath
+                            workHistoryIsSubmitted
                                 ? 'text-very-dark-yellow-green'
                                 : 'm-2 p-4 text-gray-400'
                         }
@@ -56,15 +72,31 @@ const Header = () => {
                     Work
                 </div>
                 <div
-                    className={
+                    className={`${
                         isOnEducationPath || isOnEducationSummaryPath
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-gray-400'
-                    }
+                    } ${
+                        educationIsSubmitted
+                            ? 'text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
+                    }`}
                 >
                     Education
                 </div>
-                <div className="m-2 p-4 text-gray-400">Skills</div>
+                <div
+                    className={`${
+                        isOnSkillsPath
+                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
+                    } ${
+                        skillsIsSubmitted
+                            ? 'text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
+                    }`}
+                >
+                    Skills
+                </div>
                 <div className="m-2 p-4 text-gray-400">Summary</div>
             </div>
         </header>
