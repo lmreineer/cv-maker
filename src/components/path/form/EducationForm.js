@@ -4,7 +4,6 @@ import Select from 'react-select';
 
 const WorkHistoryForm = ({
     setSkipEducation,
-    skipEducation,
     handleSubmit,
     handleChange,
     setFieldValue
@@ -62,7 +61,7 @@ const WorkHistoryForm = ({
 
     const navigate = useNavigate();
     const navigateBack = () => {
-        navigate('/work-history-summary');
+        navigate('/work-history');
     };
 
     return (

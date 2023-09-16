@@ -17,6 +17,7 @@ const Header = () => {
     const isOnEducationPath = pathname === '/education';
     const isOnEducationSummaryPath = pathname === '/education-summary';
     const isOnSkillsPath = pathname === '/skills';
+    const isOnSummaryPath = pathname === '/summary';
 
     const workHistoryIsSubmitted =
         !isOnHeadingPath &&
@@ -32,6 +33,7 @@ const Header = () => {
         !isOnEducationPath &&
         !isOnEducationSummaryPath;
     const skillsIsSubmitted = educationIsSubmitted && !isOnSkillsPath;
+    const summaryIsSubmitted = skillsIsSubmitted && !isOnSummaryPath;
 
     return (
         <header className="flex select-none items-center justify-around p-5">
@@ -97,7 +99,19 @@ const Header = () => {
                 >
                     Skills
                 </div>
-                <div className="m-2 p-4 text-gray-400">Summary</div>
+                <div
+                    className={`${
+                        isOnSummaryPath
+                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
+                    } ${
+                        summaryIsSubmitted
+                            ? 'text-very-dark-yellow-green'
+                            : 'm-2 p-4 text-gray-400'
+                    }`}
+                >
+                    Summary
+                </div>
             </div>
         </header>
     );

@@ -21,7 +21,7 @@ const SkillsForm = ({ handleSubmit, handleChange }) => {
     });
 
     const navigate = useNavigate();
-    const navigateBack = () => navigate('/work-history');
+    const navigateBack = () => navigate('/education');
 
     const handleEnter = (e) => {
         if (e.key === 'Enter') {

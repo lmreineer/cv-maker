@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const AdditionalWorkHistorySummary = ({
-    handleSubmit,
-    setAddAnotherWorkPosition
-}) => {
+const AdditionalWorkHistorySummary = ({ handleSubmit }) => {
     const getFormData = (formData) => {
         // make values of properties accessible
         const data = JSON.parse(window.localStorage.getItem(formData));
@@ -108,7 +105,7 @@ const AdditionalWorkHistorySummary = ({
     };
 
     const navigate = useNavigate();
-    const navigateBack = () => navigate('/work-responsibility');
+    const navigateBack = () => navigate('/additional-work-history');
 
     return (
         <form

@@ -22,6 +22,11 @@ const CVContent = ({
     summary,
     mainBackgroundContainer,
     skillsList,
+    skillOneInput,
+    skillTwoInput,
+    skillThreeInput,
+    skillFourInput,
+    skillFiveInput,
     stayPeriodContainer,
     workDatePeriodContainer,
     yearStartWorkInput,
@@ -68,26 +73,28 @@ const CVContent = ({
     const isOnWorkHistoryPath = pathname === '/work-history';
     const isOnWorkResponsibilityPath = pathname === '/work-responsibility';
     const isOnWorkHistorySummary = pathname === '/work-history-summary';
-    const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
-    const workResponsibilityFormIsSubmitted =
-        workHistoryFormIsSubmitted && !isOnWorkResponsibilityPath;
-    const workHistorySummaryIsSubmitted =
-        workHistoryFormIsSubmitted &&
-        workResponsibilityFormIsSubmitted &&
-        !isOnWorkHistorySummary &&
-        !isOnWorkResponsibilityPath;
     const isOnAdditionalWorkHistoryPath =
         pathname === '/additional-work-history';
     const isOnAdditionalWorkResponsibilityPath =
         pathname === '/additional-work-responsibility';
+    const isOnEducationPath = pathname === '/education';
+    const isOnSkillsPath = pathname === '/skills';
+
+    const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
+    const workResponsibilityFormIsSubmitted =
+        workHistoryFormIsSubmitted && !isOnWorkResponsibilityPath;
+    const workHistorySummaryIsSubmitted =
+        workResponsibilityFormIsSubmitted &&
+        !isOnWorkHistorySummary &&
+        !isOnWorkResponsibilityPath;
     const additionalWorkHistoryFormIsSubmitted =
         workHistorySummaryIsSubmitted && !isOnAdditionalWorkHistoryPath;
     const additionalWorkResponsibilityFormIsSubmitted =
         additionalWorkHistoryFormIsSubmitted &&
         !isOnAdditionalWorkResponsibilityPath;
-    const isOnEducationPath = pathname === '/education';
     const educationFormIsSubmitted =
         additionalWorkResponsibilityFormIsSubmitted && !isOnEducationPath;
+    const skillsFormIsSubmitted = educationFormIsSubmitted && !isOnSkillsPath;
 
     useEffect(() => {
         if (isOnHeadingPath) {
@@ -174,6 +181,17 @@ const CVContent = ({
                     fieldOfStudyData: fieldOfStudyInput
                 })
             );
+        } else if (isOnSkillsPath) {
+            window.localStorage.setItem(
+                'skillsFormData',
+                JSON.stringify({
+                    skillOneData: skillOneInput,
+                    skillTwoData: skillTwoInput,
+                    skillThreeData: skillThreeInput,
+                    skillFourData: skillFourInput,
+                    skillFiveData: skillFiveInput
+                })
+            );
         }
     }, [
         isOnHeadingPath,
@@ -223,7 +241,13 @@ const CVContent = ({
         schoolNameInput,
         schoolLocationInput,
         degreeInput,
-        fieldOfStudyInput
+        fieldOfStudyInput,
+        isOnSkillsPath,
+        skillOneInput,
+        skillTwoInput,
+        skillThreeInput,
+        skillFourInput,
+        skillFiveInput
     ]);
 
     const getFormData = (formData) => {
@@ -292,6 +316,14 @@ const CVContent = ({
         fieldOfStudyData
     } = getFormData('educationFormData');
 
+    const {
+        skillOneData,
+        skillTwoData,
+        skillThreeData,
+        skillFourData,
+        skillFiveData
+    } = getFormData('skillsFormData');
+
     // handle addAnotherWorkPosition for additional work history and responsibility forms state
     if (workHistorySummaryIsSubmitted) {
         window.localStorage.setItem(
@@ -349,7 +381,6 @@ const CVContent = ({
     const secondIsMissingEndDate =
         !secondHasEndDate && !secondCurrentlyWorkingCheckboxData;
     const secondStartDateIsOmitted = secondHasEndDate && !secondHasStartDate;
-
     const secondHasNoWorkDatePeriod =
         addAnotherWorkPosition &&
         !isOnAdditionalWorkHistoryPath &&
@@ -370,11 +401,18 @@ const CVContent = ({
     const educationStartDateIsOmitted = !hasEducationStartDate;
     const hasNoEducationDatePeriod =
         educationFormIsSubmitted && educationStartDateIsOmitted;
+    const hasNoSchoolNameAndLocation =
+        educationFormIsSubmitted && !schoolNameData && !schoolLocationData;
     const hasNoEducation =
         educationFormIsSubmitted & !degreeData && !fieldOfStudyData;
 
-    const hasNoSchoolNameAndLocation =
-        educationFormIsSubmitted && !schoolNameData && !schoolLocationData;
+    const hasNoSkills =
+        skillsFormIsSubmitted &&
+        !skillOneData &&
+        !skillTwoData &&
+        !skillThreeData &&
+        !skillFourData &&
+        !skillFiveData;
 
     const defaultFirstName = 'Afonso';
     const defaultLastName = 'Santos';
@@ -383,23 +421,31 @@ const CVContent = ({
     const defaultHeadingAddress = 'Rampa São Januário, Praia, Cabo Verde, 7600';
     const defaultJobTitle = 'Marketing Intern';
     const defaultWorkAddress = 'XYZ Company, City, State';
-    const defaultBulletPointOne =
+    const defaultSkillOne =
+        'Proficient in Google Analytics, SEO, and social media marketing tools';
+    const defaultSkillTwo =
+        'Strong analytical skills and ability to interpret market trends';
+    const defaultSkillThree =
+        '    Excellent written and verbal communication skills';
+    const defaultSkillFour = 'Creative thinking and problem-solving abilities';
+    const defaultSkillFive = 'Team player with strong interpersonal skills';
+    const defaultWorkResponsibilityOne =
         'Assisted the marketing team in developing and implementing social media marketing campaigns, resulting in a 20% increase in website traffic.';
-    const defaultBulletPointTwo =
+    const defaultWorkResponsibilityTwo =
         'Conducted market research and competitor analysis to identify new target demographics and improve marketing strategies.';
-    const defaultBulletPointThree =
+    const defaultWorkResponsibilityThree =
         'Created engaging content for social media platforms, increasing follower count by 15%.';
-    const defaultBulletPointFour =
+    const defaultWorkResponsibilityFour =
         'Assisted in organizing and executing marketing events, resulting in a 30% increase in lead generation.';
     const defaultSecondJobTitle = 'Sales Representative';
     const defaultSecondWorkAddress = 'ABC Retail Store, City, State';
-    const defaultSecondBulletPointOne =
+    const defaultSecondWorkResponsibilityOne =
         'Provided exceptional customer service, resulting in a 15% increase in customer satisfaction ratings.';
-    const defaultSecondBulletPointTwo =
+    const defaultSecondWorkResponsibilityTwo =
         'Achieved and exceeded monthly sales targets by 20% through effective product knowledge and persuasive selling techniques.';
-    const defaultSecondBulletPointThree =
+    const defaultSecondWorkResponsibilityThree =
         'Assisted in visual merchandising and store displays to enhance the customer shopping experience.';
-    const defaultSecondBulletPointFour =
+    const defaultSecondWorkResponsibilityFour =
         'Assisted in visual merchandising and store displays to enhance the customer shopping experienceCollaborated with team members to resolve customer complaints and ensure smooth store operations.';
     const defaultDegreeAndFieldOfStudy =
         'Bachelor of Business Administration, Marketing';
@@ -572,22 +618,22 @@ const CVContent = ({
     };
 
     const generateBulletPoint = (
-        workResponsibilityData,
-        workResponsibilityFormOrderIsSubmitted,
-        workResponsibilityInput,
-        defaultBulletPoint
+        bulletPointData,
+        formOrderIsSubmitted,
+        bulletPointInput,
+        defaultWorkResponsibility
     ) => {
         let workResponsibility = '';
 
-        if (workResponsibilityFormOrderIsSubmitted) {
-            if (workResponsibilityData) {
+        if (formOrderIsSubmitted) {
+            if (bulletPointData) {
                 // if workResponsibilityData has is empty, put no value, else, show workResponsibilityData
-                workResponsibility = !workResponsibilityData.trim()
+                workResponsibility = !bulletPointData.trim()
                     ? ''
-                    : workResponsibilityData;
+                    : bulletPointData;
             }
         } else {
-            workResponsibility = workResponsibilityInput || defaultBulletPoint;
+            workResponsibility = bulletPointInput || defaultWorkResponsibility;
         }
 
         return workResponsibility;
@@ -595,16 +641,13 @@ const CVContent = ({
 
     const manageBulletPointStyles = (
         workResponsibility,
-        workResponsibilityFormOrderIsSubmitted
+        formOrderIsSubmitted
     ) => {
         let styles = '';
 
         // if workResponsibility is submitted empty
         if (
-            generateBulletPoint(
-                workResponsibility,
-                workResponsibilityFormOrderIsSubmitted
-            ) === ''
+            generateBulletPoint(workResponsibility, formOrderIsSubmitted) === ''
         ) {
             // add default styles
             styles = { workDescriptionList };
@@ -706,20 +749,80 @@ const CVContent = ({
                 </h6>
             </div>
             <div className={mainBackgroundContainer}>
-                <h6 className={mainBackgroundHeading}>Skills</h6>
-                <ul className={skillsList}>
-                    <li>
-                        Proficient in Google Analytics, SEO, and social media
-                        marketing tools
-                    </li>
-                    <li>
-                        Strong analytical skills and ability to interpret market
-                        trends
-                    </li>
-                    <li>Excellent written and verbal communication skills</li>
-                    <li>Creative thinking and problem-solving abilities</li>
-                    <li>Team player with strong interpersonal skills</li>
-                </ul>
+                {hasNoSkills ? (
+                    ''
+                ) : (
+                    <>
+                        <h6 className={mainBackgroundHeading}>Skills</h6>
+                        <ul className={skillsList}>
+                            <li
+                                className={`${manageBulletPointStyles(
+                                    skillOneData,
+                                    skillsFormIsSubmitted
+                                )} !font-normal`}
+                            >
+                                {generateBulletPoint(
+                                    skillOneData,
+                                    skillsFormIsSubmitted,
+                                    skillOneInput,
+                                    defaultSkillOne
+                                )}
+                            </li>
+                            <li
+                                className={`${manageBulletPointStyles(
+                                    skillTwoData,
+                                    skillsFormIsSubmitted
+                                )} !font-normal`}
+                            >
+                                {generateBulletPoint(
+                                    skillTwoData,
+                                    skillsFormIsSubmitted,
+                                    skillTwoInput,
+                                    defaultSkillTwo
+                                )}
+                            </li>
+                            <li
+                                className={`${manageBulletPointStyles(
+                                    skillThreeData,
+                                    skillsFormIsSubmitted
+                                )} !font-normal`}
+                            >
+                                {generateBulletPoint(
+                                    skillThreeData,
+                                    skillsFormIsSubmitted,
+                                    skillThreeInput,
+                                    defaultSkillThree
+                                )}
+                            </li>
+                            <li
+                                className={`${manageBulletPointStyles(
+                                    skillFourData,
+                                    skillsFormIsSubmitted
+                                )} !font-normal`}
+                            >
+                                {generateBulletPoint(
+                                    skillFourData,
+                                    skillsFormIsSubmitted,
+                                    skillFourInput,
+                                    defaultSkillFour
+                                )}
+                            </li>
+                            <li
+                                className={`${manageBulletPointStyles(
+                                    skillFiveData,
+                                    skillsFormIsSubmitted
+                                )} !font-normal`}
+                            >
+                                {generateBulletPoint(
+                                    skillFiveData,
+                                    skillsFormIsSubmitted,
+                                    skillFiveInput,
+                                    defaultSkillFive
+                                )}
+                            </li>
+                        </ul>
+                    </>
+                )}
                 {hasNoWorkHistory ? (
                     ''
                 ) : (
@@ -783,7 +886,7 @@ const CVContent = ({
                                                 workResponsibilityOneData,
                                                 workResponsibilityFormIsSubmitted,
                                                 workResponsibilityOneInput,
-                                                defaultBulletPointOne
+                                                defaultWorkResponsibilityOne
                                             )}
                                         </li>
                                         <li
@@ -796,7 +899,7 @@ const CVContent = ({
                                                 workResponsibilityTwoData,
                                                 workResponsibilityFormIsSubmitted,
                                                 workResponsibilityTwoInput,
-                                                defaultBulletPointTwo
+                                                defaultWorkResponsibilityTwo
                                             )}
                                         </li>
                                         <li
@@ -809,7 +912,7 @@ const CVContent = ({
                                                 workResponsibilityThreeData,
                                                 workResponsibilityFormIsSubmitted,
                                                 workResponsibilityThreeInput,
-                                                defaultBulletPointThree
+                                                defaultWorkResponsibilityThree
                                             )}
                                         </li>
                                         <li
@@ -822,7 +925,7 @@ const CVContent = ({
                                                 workResponsibilityFourData,
                                                 workResponsibilityFormIsSubmitted,
                                                 workResponsibilityFourInput,
-                                                defaultBulletPointFour
+                                                defaultWorkResponsibilityFour
                                             )}
                                         </li>
                                     </ul>
@@ -892,7 +995,7 @@ const CVContent = ({
                                             secondWorkResponsibilityOneData,
                                             additionalWorkResponsibilityFormIsSubmitted,
                                             secondWorkResponsibilityOneInput,
-                                            defaultSecondBulletPointOne
+                                            defaultSecondWorkResponsibilityOne
                                         )}
                                     </li>
                                     <li
@@ -905,7 +1008,7 @@ const CVContent = ({
                                             secondWorkResponsibilityTwoData,
                                             additionalWorkResponsibilityFormIsSubmitted,
                                             secondWorkResponsibilityTwoInput,
-                                            defaultSecondBulletPointTwo
+                                            defaultSecondWorkResponsibilityTwo
                                         )}
                                     </li>
                                     <li
@@ -918,7 +1021,7 @@ const CVContent = ({
                                             secondWorkResponsibilityThreeData,
                                             additionalWorkResponsibilityFormIsSubmitted,
                                             secondWorkResponsibilityThreeInput,
-                                            defaultSecondBulletPointThree
+                                            defaultSecondWorkResponsibilityThree
                                         )}
                                     </li>
                                     <li
@@ -931,7 +1034,7 @@ const CVContent = ({
                                             secondWorkResponsibilityFourData,
                                             additionalWorkResponsibilityFormIsSubmitted,
                                             secondWorkResponsibilityFourInput,
-                                            defaultSecondBulletPointFour
+                                            defaultSecondWorkResponsibilityFour
                                         )}
                                     </li>
                                 </ul>

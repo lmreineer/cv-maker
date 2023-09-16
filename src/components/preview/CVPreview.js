@@ -45,7 +45,12 @@ const CVPreview = ({
     schoolNameInput,
     schoolLocationInput,
     degreeInput,
-    fieldOfStudyInput
+    fieldOfStudyInput,
+    skillOneInput,
+    skillTwoInput,
+    skillThreeInput,
+    skillFourInput,
+    skillFiveInput
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const toggleClick = () => setIsClicked(!isClicked);
@@ -75,7 +80,12 @@ const CVPreview = ({
                     mainBackgroundHeading="font-bold italic border-b-2 text-base mt-3"
                     summary="text-xs mt-3"
                     mainBackgroundContainer="mt-5"
-                    skillsList="list-disc ml-10 mt-2 text-xs"
+                    skillsList="ml-10 mt-2 text-xs"
+                    skillOneInput={skillOneInput}
+                    skillTwoInput={skillTwoInput}
+                    skillThreeInput={skillThreeInput}
+                    skillFourInput={skillFourInput}
+                    skillFiveInput={skillFiveInput}
                     stayPeriodContainer="flex mt-3"
                     workDatePeriodContainer="w-56 text-xs"
                     yearStartWorkInput={yearStartWorkInput}

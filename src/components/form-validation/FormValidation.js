@@ -16,6 +16,7 @@ import AdditionalWorkHistorySummary from '../path/AdditionalWorkHistorySummary';
 import EducationForm from '../path/form/EducationForm';
 import EducationSummary from '../path/EducationSummary';
 import SkillsForm from '../path/form/SkillsForm';
+import SummaryForm from '../path/form/SummaryForm';
 
 import CVPreview from '../preview/CVPreview';
 
@@ -90,7 +91,12 @@ const FormValidation = () => {
             schoolName: '',
             schoolLocation: '',
             degree: '',
-            fieldOfStudy: ''
+            fieldOfStudy: '',
+            skillOne: '',
+            skillTwo: '',
+            skillThree: '',
+            skillFour: '',
+            skillFive: ''
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
@@ -131,11 +137,12 @@ const FormValidation = () => {
                 case '/education-summary':
                     navigate('/skills');
                     break;
+                case '/skills':
+                    navigate('/summary');
+                    break;
             }
         }
     });
-
-    // ADD A SKIP EDUCATION FORM STATE
 
     const {
         firstName,
@@ -176,7 +183,12 @@ const FormValidation = () => {
         schoolName,
         schoolLocation,
         degree,
-        fieldOfStudy
+        fieldOfStudy,
+        skillOne,
+        skillTwo,
+        skillThree,
+        skillFour,
+        skillFive
     } = formik.values;
 
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
@@ -296,7 +308,6 @@ const FormValidation = () => {
                     element={
                         <EducationForm
                             setSkipEducation={setSkipEducation}
-                            skipEducation={skipEducation}
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
                             setFieldValue={formik.setFieldValue}
@@ -313,6 +324,15 @@ const FormValidation = () => {
                     path="/skills"
                     element={
                         <SkillsForm
+                            handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
+                        />
+                    }
+                />
+                <Route
+                    path="/summary"
+                    element={
+                        <SummaryForm
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
                         />
@@ -392,6 +412,11 @@ const FormValidation = () => {
                 fieldOfStudyInput={capitalizeFirstLetterOfEachWord(
                     fieldOfStudy
                 )}
+                skillOneInput={capitaliseFirstLetter(skillOne)}
+                skillTwoInput={capitaliseFirstLetter(skillTwo)}
+                skillThreeInput={capitaliseFirstLetter(skillThree)}
+                skillFourInput={capitaliseFirstLetter(skillFour)}
+                skillFiveInput={capitaliseFirstLetter(skillFive)}
             />
         </>
     );

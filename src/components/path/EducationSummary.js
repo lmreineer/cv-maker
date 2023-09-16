@@ -45,10 +45,10 @@ const EducationSummary = ({ handleSubmit }) => {
     };
 
     const navigate = useNavigate();
-    const navigateBack = () => navigate('/work-responsibility');
+    const navigateBack = () => navigate('/education');
 
-    const handleAddingWorkPosition = () => {
-        navigate('/additional-work-history');
+    const handleAddingEducation = () => {
+        navigate('/additional-education');
     };
 
     return (
@@ -90,7 +90,7 @@ const EducationSummary = ({ handleSubmit }) => {
                 </div>
                 <button
                     className="mx-3 flex items-center justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
-                    onClick={handleAddingWorkPosition}
+                    onClick={handleAddingEducation}
                 >
                     <span className="material-symbols-outlined mr-2 text-xl font-semibold">
                         add

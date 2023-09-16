@@ -54,7 +54,7 @@ const AdditionalWorkHistoryForm = ({
 
     const navigate = useNavigate();
     const navigateBack = () => {
-        navigate('/');
+        navigate('/work-history-summary');
     };
 
     return (
