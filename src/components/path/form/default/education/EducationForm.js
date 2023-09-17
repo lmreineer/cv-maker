@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Select from 'react-select';
 
-const WorkHistoryForm = ({
+const EducationForm = ({
     setSkipEducation,
     handleSubmit,
     handleChange,
@@ -169,4 +169,4 @@ const WorkHistoryForm = ({
     );
 };
 
-export default WorkHistoryForm;
+export default EducationForm;

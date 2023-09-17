@@ -6,15 +6,16 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import HeadingForm from '../path/form/HeadingForm';
-import WorkHistoryForm from '../path/form/default-work-history/WorkHistoryForm';
-import WorkResponsibilityForm from '../path/form/default-work-history/WorkResponsibilityForm';
+import WorkHistoryForm from '../path/form/default/work-history/WorkHistoryForm';
+import WorkResponsibilityForm from '../path/form/default/work-history/WorkResponsibilityForm';
 import WorkHistorySummary from '../path/WorkHistorySummary';
 import SkipWorkHistoryModal from '../path/SkipWorkHistoryModal';
-import AdditionalWorkHistoryForm from '../path/form/additional-work-history/AdditionalWorkHistoryForm';
-import AdditionalWorkResponsibilityForm from '../path/form/additional-work-history/AdditionalWorkResponsibilityForm';
+import AdditionalWorkHistoryForm from '../path/form/additional/work-history/AdditionalWorkHistoryForm';
+import AdditionalWorkResponsibilityForm from '../path/form/additional/work-history/AdditionalWorkResponsibilityForm';
 import AdditionalWorkHistorySummary from '../path/AdditionalWorkHistorySummary';
-import EducationForm from '../path/form/EducationForm';
+import EducationForm from '../path/form/default/education/EducationForm';
 import EducationSummary from '../path/EducationSummary';
+import AdditionalEducationForm from '../path/form/additional/education/AdditionalEducationForm';
 import SkillsForm from '../path/form/SkillsForm';
 import SummaryForm from '../path/form/SummaryForm';
 
@@ -72,6 +73,11 @@ const FormValidation = () => {
             zipCode: '',
             phone: '',
             email: '',
+            skillOne: '',
+            skillTwo: '',
+            skillThree: '',
+            skillFour: '',
+            skillFive: '',
             jobTitle: '',
             company: '',
             cityWork: '',
@@ -88,15 +94,16 @@ const FormValidation = () => {
             secondWorkResponsibilityTwo: '',
             secondWorkResponsibilityThree: '',
             secondWorkResponsibilityFour: '',
-            schoolName: '',
-            schoolLocation: '',
             degree: '',
             fieldOfStudy: '',
-            skillOne: '',
-            skillTwo: '',
-            skillThree: '',
-            skillFour: '',
-            skillFive: ''
+            schoolName: '',
+            schoolLocation: '',
+            secondYearStartGraduation: '',
+            secondMonthStartGraduation: '',
+            secondDegree: '',
+            secondFieldOfStudy: '',
+            secondSchoolName: '',
+            secondSchoolLocation: ''
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
@@ -127,7 +134,7 @@ const FormValidation = () => {
                 case '/additional-work-history-summary':
                     navigate('/education');
                     break;
-                case '/education':
+                case '/education' || 'additional-education':
                     if (!skipEducation) {
                         navigate('/education-summary');
                     } else if (skipEducation) {
@@ -154,6 +161,11 @@ const FormValidation = () => {
         zipCode,
         phone,
         email,
+        skillOne,
+        skillTwo,
+        skillThree,
+        skillFour,
+        skillFive,
         jobTitle,
         company,
         cityWork,
@@ -180,15 +192,16 @@ const FormValidation = () => {
         secondWorkResponsibilityFour,
         yearStartGraduation,
         monthStartGraduation,
-        schoolName,
-        schoolLocation,
         degree,
         fieldOfStudy,
-        skillOne,
-        skillTwo,
-        skillThree,
-        skillFour,
-        skillFive
+        schoolName,
+        schoolLocation,
+        secondYearStartGraduation,
+        secondMonthStartGraduation,
+        secondDegree,
+        secondFieldOfStudy,
+        secondSchoolName,
+        secondSchoolLocation
     } = formik.values;
 
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
@@ -321,6 +334,17 @@ const FormValidation = () => {
                     }
                 />
                 <Route
+                    path="/additional-education"
+                    element={
+                        <AdditionalEducationForm
+                            setSkipEducation={setSkipEducation}
+                            handleSubmit={formik.handleSubmit}
+                            handleChange={formik.handleChange}
+                            setFieldValue={formik.setFieldValue}
+                        />
+                    }
+                />
+                <Route
                     path="/skills"
                     element={
                         <SkillsForm
@@ -352,6 +376,11 @@ const FormValidation = () => {
                 zipCodeInput={zipCode}
                 phoneInput={phone}
                 emailInput={lowerCaseEachLetter(email)}
+                skillOneInput={capitaliseFirstLetter(skillOne)}
+                skillTwoInput={capitaliseFirstLetter(skillTwo)}
+                skillThreeInput={capitaliseFirstLetter(skillThree)}
+                skillFourInput={capitaliseFirstLetter(skillFour)}
+                skillFiveInput={capitaliseFirstLetter(skillFive)}
                 yearStartWorkInput={yearStartWork}
                 monthStartWorkInput={monthStartWork}
                 yearEndWorkInput={yearEndWork}
@@ -404,19 +433,28 @@ const FormValidation = () => {
                 )}
                 yearStartGraduationInput={yearStartGraduation}
                 monthStartGraduationInput={monthStartGraduation}
-                schoolNameInput={capitalizeFirstLetterOfEachWord(schoolName)}
-                schoolLocationInput={capitalizeFirstLetterOfEachWord(
-                    schoolLocation
-                )}
                 degreeInput={capitalizeFirstLetterOfEachWord(degree)}
                 fieldOfStudyInput={capitalizeFirstLetterOfEachWord(
                     fieldOfStudy
                 )}
-                skillOneInput={capitaliseFirstLetter(skillOne)}
-                skillTwoInput={capitaliseFirstLetter(skillTwo)}
-                skillThreeInput={capitaliseFirstLetter(skillThree)}
-                skillFourInput={capitaliseFirstLetter(skillFour)}
-                skillFiveInput={capitaliseFirstLetter(skillFive)}
+                schoolNameInput={capitalizeFirstLetterOfEachWord(schoolName)}
+                schoolLocationInput={capitalizeFirstLetterOfEachWord(
+                    schoolLocation
+                )}
+                secondYearStartGraduationInput={secondYearStartGraduation}
+                secondMonthStartGraduationInput={secondMonthStartGraduation}
+                secondDegreeInput={capitalizeFirstLetterOfEachWord(
+                    secondDegree
+                )}
+                secondFieldOfStudyInput={capitalizeFirstLetterOfEachWord(
+                    secondFieldOfStudy
+                )}
+                secondSchoolNameInput={capitalizeFirstLetterOfEachWord(
+                    secondSchoolName
+                )}
+                secondSchoolLocationInput={capitalizeFirstLetterOfEachWord(
+                    secondSchoolLocation
+                )}
             />
         </>
     );

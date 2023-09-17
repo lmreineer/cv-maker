@@ -63,10 +63,16 @@ const CVContent = ({
     educationDatePeriodContainer,
     yearStartGraduationInput,
     monthStartGraduationInput,
+    degreeInput,
+    fieldOfStudyInput,
     schoolNameInput,
     schoolLocationInput,
-    degreeInput,
-    fieldOfStudyInput
+    secondYearStartGraduationInput,
+    secondMonthStartGraduationInput,
+    secondDegreeInput,
+    secondFieldOfStudyInput,
+    secondSchoolNameInput,
+    secondSchoolLocationInput
 }) => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
@@ -78,6 +84,8 @@ const CVContent = ({
     const isOnAdditionalWorkResponsibilityPath =
         pathname === '/additional-work-responsibility';
     const isOnEducationPath = pathname === '/education';
+    const isOnEducationSummary = pathname === '/education-summary';
+    const isOnAdditionalEducationPath = pathname === '/additional-education';
     const isOnSkillsPath = pathname === '/skills';
 
     const workHistoryFormIsSubmitted = !isOnHeadingPath && !isOnWorkHistoryPath;
@@ -94,6 +102,12 @@ const CVContent = ({
         !isOnAdditionalWorkResponsibilityPath;
     const educationFormIsSubmitted =
         additionalWorkResponsibilityFormIsSubmitted && !isOnEducationPath;
+    const educationSummaryIsSubmitted =
+        additionalWorkResponsibilityFormIsSubmitted &&
+        !isOnEducationPath &&
+        !isOnEducationSummary;
+    const additionalEducationFormIsSubmitted =
+        educationSummaryIsSubmitted && !isOnAdditionalEducationPath;
     const skillsFormIsSubmitted = educationFormIsSubmitted && !isOnSkillsPath;
 
     useEffect(() => {
@@ -175,10 +189,24 @@ const CVContent = ({
                 JSON.stringify({
                     yearStartGraduationData: yearStartGraduationInput,
                     monthStartGraduationData: monthStartGraduationInput,
-                    schoolNameData: schoolNameInput,
-                    schoolLocationData: schoolLocationInput,
                     degreeData: degreeInput,
-                    fieldOfStudyData: fieldOfStudyInput
+                    fieldOfStudyData: fieldOfStudyInput,
+                    schoolNameData: schoolNameInput,
+                    schoolLocationData: schoolLocationInput
+                })
+            );
+        } else if (isOnAdditionalEducationPath) {
+            window.localStorage.setItem(
+                'additionalEducationFormData',
+                JSON.stringify({
+                    secondYearStartGraduationData:
+                        secondYearStartGraduationInput,
+                    secondMonthStartGraduationData:
+                        secondMonthStartGraduationInput,
+                    secondDegreeData: secondDegreeInput,
+                    secondFieldOfStudyData: secondFieldOfStudyInput,
+                    secondSchoolNameData: secondSchoolNameInput,
+                    secondSchoolLocationData: secondSchoolLocationInput
                 })
             );
         } else if (isOnSkillsPath) {
@@ -238,10 +266,17 @@ const CVContent = ({
         isOnEducationPath,
         yearStartGraduationInput,
         monthStartGraduationInput,
-        schoolNameInput,
-        schoolLocationInput,
         degreeInput,
         fieldOfStudyInput,
+        schoolNameInput,
+        schoolLocationInput,
+        isOnAdditionalEducationPath,
+        secondYearStartGraduationInput,
+        secondMonthStartGraduationInput,
+        secondDegreeInput,
+        secondFieldOfStudyInput,
+        secondSchoolNameInput,
+        secondSchoolLocationInput,
         isOnSkillsPath,
         skillOneInput,
         skillTwoInput,
@@ -310,11 +345,20 @@ const CVContent = ({
     const {
         yearStartGraduationData,
         monthStartGraduationData,
-        schoolNameData,
-        schoolLocationData,
         degreeData,
-        fieldOfStudyData
+        fieldOfStudyData,
+        schoolNameData,
+        schoolLocationData
     } = getFormData('educationFormData');
+
+    const {
+        secondYearStartGraduationData,
+        secondMonthStartGraduationData,
+        secondDegreeData,
+        secondFieldOfStudyData,
+        secondSchoolNameData,
+        secondSchoolLocationData
+    } = getFormData('additionalEducationFormData');
 
     const {
         skillOneData,
@@ -345,6 +389,25 @@ const CVContent = ({
         'addAnotherWorkPositionData'
     );
 
+    // handle addAnotherEducation for additional education and responsibility forms state
+    if (educationSummaryIsSubmitted) {
+        window.localStorage.setItem(
+            'addAnotherEducationData',
+            JSON.stringify({
+                addAnotherEducation: true
+            })
+        );
+    } else {
+        window.localStorage.setItem(
+            'addAnotherEducationData',
+            JSON.stringify({
+                addAnotherEducation: false
+            })
+        );
+    }
+
+    const { addAnotherEducation } = getFormData('addAnotherEducationData');
+
     const hasNoAddress =
         !isOnHeadingPath &&
         !cityHeadingData &&
@@ -373,24 +436,26 @@ const CVContent = ({
     const hasNoWorkHistory =
         workHistoryFormIsSubmitted && !jobTitleData && !companyData;
 
-    const secondHasStartDate =
+    const secondHasWorkStartDate =
         secondYearStartWorkData && secondMonthStartWorkData;
-    const secondHasEndDate = secondYearEndWorkData && secondMonthEndWorkData;
-    const secondIsMissingStartDate =
-        !secondHasStartDate && secondCurrentlyWorkingCheckboxData;
-    const secondIsMissingEndDate =
-        !secondHasEndDate && !secondCurrentlyWorkingCheckboxData;
-    const secondStartDateIsOmitted = secondHasEndDate && !secondHasStartDate;
+    const secondHasWorkEndDate =
+        secondYearEndWorkData && secondMonthEndWorkData;
+    const secondIsMissingWorkStartDate =
+        !secondHasWorkStartDate && secondCurrentlyWorkingCheckboxData;
+    const secondIsMissingWorkEndDate =
+        !secondHasWorkEndDate && !secondCurrentlyWorkingCheckboxData;
+    const secondWorkStartDateIsOmitted =
+        secondHasWorkEndDate && !secondHasWorkStartDate;
     const secondHasNoWorkDatePeriod =
         addAnotherWorkPosition &&
         !isOnAdditionalWorkHistoryPath &&
-        (secondIsMissingStartDate ||
-            secondIsMissingEndDate ||
-            secondStartDateIsOmitted);
+        (secondIsMissingWorkStartDate ||
+            secondIsMissingWorkEndDate ||
+            secondWorkStartDateIsOmitted);
     const secondHasDatesButNotCurrentlyWorking =
         !secondCurrentlyWorkingCheckboxData &&
-        secondHasEndDate &&
-        secondHasStartDate;
+        secondHasWorkEndDate &&
+        secondHasWorkStartDate;
     const hasNoSecondWorkHistory =
         additionalWorkHistoryFormIsSubmitted &&
         !secondJobTitleData &&
@@ -405,6 +470,19 @@ const CVContent = ({
         educationFormIsSubmitted && !schoolNameData && !schoolLocationData;
     const hasNoEducation =
         educationFormIsSubmitted & !degreeData && !fieldOfStudyData;
+
+    const secondHasEducationStartDate =
+        secondYearStartGraduationData && secondMonthStartGraduationData;
+    const secondEducationStartDateIsOmitted = !secondHasEducationStartDate;
+    const secondHasNoEducationDatePeriod =
+        additionalEducationFormIsSubmitted && secondEducationStartDateIsOmitted;
+    const secondHasNoSchoolNameAndLocation =
+        additionalEducationFormIsSubmitted &&
+        !secondSchoolNameData &&
+        !secondSchoolLocationData;
+    const hasNoSecondEducation =
+        additionalEducationFormIsSubmitted & !secondDegreeData &&
+        !secondFieldOfStudyData;
 
     const hasNoSkills =
         skillsFormIsSubmitted &&
@@ -1093,6 +1171,55 @@ const CVContent = ({
                             </div>
                         </div>
                     </>
+                )}
+                {addAnotherEducation &&
+                !hasNoEducation &&
+                !hasNoSecondEducation ? (
+                    <div className={stayPeriodContainer}>
+                        {secondHasNoEducationDatePeriod ? (
+                            ''
+                        ) : (
+                            <div className={educationDatePeriodContainer}>
+                                <h6>
+                                    {generateEducationDatePeriod(
+                                        additionalEducationFormIsSubmitted,
+                                        secondYearStartGraduationData,
+                                        secondMonthStartGraduationData,
+                                        secondYearStartGraduationInput,
+                                        secondMonthStartGraduationInput
+                                    )}
+                                </h6>
+                            </div>
+                        )}
+                        <div className={stayDetailContainer}>
+                            <h6 className={stayDetailHeading}>
+                                {generateTitle(
+                                    additionalEducationFormIsSubmitted,
+                                    secondDegreeData,
+                                    secondDegreeInput,
+                                    null,
+                                    secondFieldOfStudyData,
+                                    secondFieldOfStudyInput
+                                )}
+                            </h6>
+                            <h6 className={institution}>
+                                {secondHasNoSchoolNameAndLocation
+                                    ? ''
+                                    : handleAddressGeneration(
+                                          additionalEducationFormIsSubmitted,
+                                          secondSchoolNameData,
+                                          secondSchoolLocationData,
+                                          null,
+                                          null,
+                                          secondSchoolNameInput,
+                                          secondSchoolLocationInput,
+                                          null
+                                      )}
+                            </h6>
+                        </div>
+                    </div>
+                ) : (
+                    ''
                 )}
             </div>
         </>

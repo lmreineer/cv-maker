@@ -14,6 +14,11 @@ const CVPreview = ({
     zipCodeInput,
     phoneInput,
     emailInput,
+    skillOneInput,
+    skillTwoInput,
+    skillThreeInput,
+    skillFourInput,
+    skillFiveInput,
     yearStartWorkInput,
     monthStartWorkInput,
     yearEndWorkInput,
@@ -42,15 +47,16 @@ const CVPreview = ({
     secondWorkResponsibilityFourInput,
     yearStartGraduationInput,
     monthStartGraduationInput,
-    schoolNameInput,
-    schoolLocationInput,
     degreeInput,
     fieldOfStudyInput,
-    skillOneInput,
-    skillTwoInput,
-    skillThreeInput,
-    skillFourInput,
-    skillFiveInput
+    schoolNameInput,
+    schoolLocationInput,
+    secondYearStartGraduationInput,
+    secondMonthStartGraduationInput,
+    secondDegreeInput,
+    secondFieldOfStudyInput,
+    secondSchoolNameInput,
+    secondSchoolLocationInput
 }) => {
     const [isClicked, setIsClicked] = useState(false);
     const toggleClick = () => setIsClicked(!isClicked);
@@ -134,10 +140,20 @@ const CVPreview = ({
                     educationDatePeriodContainer="w-56 text-xs"
                     yearStartGraduationInput={yearStartGraduationInput}
                     monthStartGraduationInput={monthStartGraduationInput}
-                    schoolNameInput={schoolNameInput}
-                    schoolLocationInput={schoolLocationInput}
                     degreeInput={degreeInput}
                     fieldOfStudyInput={fieldOfStudyInput}
+                    schoolNameInput={schoolNameInput}
+                    schoolLocationInput={schoolLocationInput}
+                    secondYearStartGraduationInput={
+                        secondYearStartGraduationInput
+                    }
+                    secondMonthStartGraduationInput={
+                        secondMonthStartGraduationInput
+                    }
+                    secondDegreeInput={secondDegreeInput}
+                    secondFieldOfStudyInput={secondFieldOfStudyInput}
+                    secondSchoolNameInput={secondSchoolNameInput}
+                    secondSchoolLocationInput={secondSchoolLocationInput}
                 />
             </div>
 
