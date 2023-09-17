@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 
 const Header = () => {
     const pathname = useLocation().pathname;
-    const isOnHeadingPath = pathname === '/';
-    const isOnWorkHistoryPath = pathname === '/work-history';
+    const isOnHeadingForm = pathname === '/';
+    const isOnWorkHistoryForm = pathname === '/work-history';
     const isOnWorkResponbilityForm = pathname === '/work-responsibility';
     const isOnWorkHistorySummary = pathname === '/work-history-summary';
     const isOnSkipWorkHistoryModal = pathname === '/skip-work-history';
@@ -15,13 +15,16 @@ const Header = () => {
     const isOnAdditionalWorkHistorySummary =
         pathname === '/additional-work-history-summary';
     const isOnEducationPath = pathname === '/education';
-    const isOnEducationSummaryPath = pathname === '/education-summary';
+    const isOnEducationSummary = pathname === '/education-summary';
+    const isOnAdditionalEducationForm = pathname === '/additional-education';
+    const isOnAdditionalEducationSummary =
+        pathname === '/additional-education-summary';
     const isOnSkillsPath = pathname === '/skills';
     const isOnSummaryPath = pathname === '/summary';
 
     const workHistoryIsSubmitted =
-        !isOnHeadingPath &&
-        !isOnWorkHistoryPath &&
+        !isOnHeadingForm &&
+        !isOnWorkHistoryForm &&
         !isOnWorkResponbilityForm &&
         !isOnWorkHistorySummary &&
         !isOnSkipWorkHistoryModal &&
@@ -31,7 +34,9 @@ const Header = () => {
     const educationIsSubmitted =
         workHistoryIsSubmitted &&
         !isOnEducationPath &&
-        !isOnEducationSummaryPath;
+        !isOnEducationSummary &&
+        !isOnAdditionalEducationForm &&
+        !isOnAdditionalEducationSummary;
     const skillsIsSubmitted = educationIsSubmitted && !isOnSkillsPath;
     const summaryIsSubmitted = skillsIsSubmitted && !isOnSummaryPath;
 
@@ -45,7 +50,7 @@ const Header = () => {
             <div className="flex rounded-lg">
                 <div
                     className={
-                        isOnHeadingPath
+                        isOnHeadingForm
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-very-dark-yellow-green'
                     }
@@ -54,7 +59,7 @@ const Header = () => {
                 </div>
                 <div
                     className={`${
-                        isOnWorkHistoryPath ||
+                        isOnWorkHistoryForm ||
                         isOnWorkResponbilityForm ||
                         isOnWorkHistorySummary ||
                         isOnSkipWorkHistoryModal ||
@@ -75,7 +80,10 @@ const Header = () => {
                 </div>
                 <div
                     className={`${
-                        isOnEducationPath || isOnEducationSummaryPath
+                        isOnEducationPath ||
+                        isOnEducationSummary ||
+                        isOnAdditionalWorkHistoryForm ||
+                        isOnAdditionalEducationSummary
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-gray-400'
                     } ${

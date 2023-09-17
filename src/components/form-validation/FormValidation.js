@@ -8,14 +8,15 @@ import * as Yup from 'yup';
 import HeadingForm from '../path/form/HeadingForm';
 import WorkHistoryForm from '../path/form/default/work-history/WorkHistoryForm';
 import WorkResponsibilityForm from '../path/form/default/work-history/WorkResponsibilityForm';
-import WorkHistorySummary from '../path/WorkHistorySummary';
+import WorkHistorySummary from '../path/summary/default/WorkHistorySummary';
 import SkipWorkHistoryModal from '../path/SkipWorkHistoryModal';
 import AdditionalWorkHistoryForm from '../path/form/additional/work-history/AdditionalWorkHistoryForm';
 import AdditionalWorkResponsibilityForm from '../path/form/additional/work-history/AdditionalWorkResponsibilityForm';
-import AdditionalWorkHistorySummary from '../path/AdditionalWorkHistorySummary';
+import AdditionalWorkHistorySummary from '../path/summary/additional/AdditionalWorkHistorySummary';
 import EducationForm from '../path/form/default/education/EducationForm';
-import EducationSummary from '../path/EducationSummary';
+import EducationSummary from '../path/summary/default/EducationSummary';
 import AdditionalEducationForm from '../path/form/additional/education/AdditionalEducationForm';
+import AdditionalEducationSummary from '../path/summary/additional/AdditionalEducationSummary';
 import SkillsForm from '../path/form/SkillsForm';
 import SummaryForm from '../path/form/SummaryForm';
 
@@ -134,9 +135,16 @@ const FormValidation = () => {
                 case '/additional-work-history-summary':
                     navigate('/education');
                     break;
-                case '/education' || 'additional-education':
+                case '/education':
                     if (!skipEducation) {
                         navigate('/education-summary');
+                    } else if (skipEducation) {
+                        navigate('/skills');
+                    }
+                    break;
+                case '/additional-education':
+                    if (!skipEducation) {
+                        navigate('/additional-education-summary');
                     } else if (skipEducation) {
                         navigate('/skills');
                     }
@@ -341,6 +349,14 @@ const FormValidation = () => {
                             handleSubmit={formik.handleSubmit}
                             handleChange={formik.handleChange}
                             setFieldValue={formik.setFieldValue}
+                        />
+                    }
+                />
+                <Route
+                    path="/additional-education-summary"
+                    element={
+                        <AdditionalEducationSummary
+                            handleSubmit={formik.handleSubmit}
                         />
                     }
                 />

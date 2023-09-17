@@ -33,17 +33,6 @@ const EducationSummary = ({ handleSubmit }) => {
         return address;
     };
 
-    const {
-        bulletPointOneData,
-        bulletPointTwoData,
-        bulletPointThreeData,
-        bulletPointFourData
-    } = getFormData('workResponsibilityFormData');
-
-    const manageBulletPointStyles = (bulletPoint) => {
-        return bulletPoint ? 'my-3' : 'list-none';
-    };
-
     const navigate = useNavigate();
     const navigateBack = () => navigate('/education');
 
@@ -69,24 +58,6 @@ const EducationSummary = ({ handleSubmit }) => {
                             yearStartGraduationData &&
                             ` (${monthStartGraduationData} ${yearStartGraduationData})`}
                     </p>
-                    <li className={manageBulletPointStyles(bulletPointOneData)}>
-                        {bulletPointOneData}
-                    </li>
-                    <li className={manageBulletPointStyles(bulletPointTwoData)}>
-                        {bulletPointTwoData}
-                    </li>
-                    <li
-                        className={manageBulletPointStyles(
-                            bulletPointThreeData
-                        )}
-                    >
-                        {bulletPointThreeData}
-                    </li>
-                    <li
-                        className={manageBulletPointStyles(bulletPointFourData)}
-                    >
-                        {bulletPointFourData}
-                    </li>
                 </div>
                 <button
                     className="mx-3 flex items-center justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
