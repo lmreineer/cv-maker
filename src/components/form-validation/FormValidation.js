@@ -104,7 +104,8 @@ const FormValidation = () => {
             secondDegree: '',
             secondFieldOfStudy: '',
             secondSchoolName: '',
-            secondSchoolLocation: ''
+            secondSchoolLocation: '',
+            summary: ''
         },
         validationSchema: Yup.object(handleSchema()),
         onSubmit: () => {
@@ -142,6 +143,9 @@ const FormValidation = () => {
                         navigate('/skills');
                     }
                     break;
+                case '/education-summary':
+                    navigate('/skills');
+                    break;
                 case '/additional-education':
                     if (!skipEducation) {
                         navigate('/additional-education-summary');
@@ -149,7 +153,7 @@ const FormValidation = () => {
                         navigate('/skills');
                     }
                     break;
-                case '/education-summary':
+                case '/additional-education-summary':
                     navigate('/skills');
                     break;
                 case '/skills':
@@ -209,7 +213,8 @@ const FormValidation = () => {
         secondDegree,
         secondFieldOfStudy,
         secondSchoolName,
-        secondSchoolLocation
+        secondSchoolLocation,
+        summary
     } = formik.values;
 
     const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
@@ -450,9 +455,7 @@ const FormValidation = () => {
                 yearStartGraduationInput={yearStartGraduation}
                 monthStartGraduationInput={monthStartGraduation}
                 degreeInput={capitalizeFirstLetterOfEachWord(degree)}
-                fieldOfStudyInput={capitalizeFirstLetterOfEachWord(
-                    fieldOfStudy
-                )}
+                fieldOfStudyInput={capitaliseFirstLetter(fieldOfStudy)}
                 schoolNameInput={capitalizeFirstLetterOfEachWord(schoolName)}
                 schoolLocationInput={capitalizeFirstLetterOfEachWord(
                     schoolLocation
@@ -471,6 +474,7 @@ const FormValidation = () => {
                 secondSchoolLocationInput={capitalizeFirstLetterOfEachWord(
                     secondSchoolLocation
                 )}
+                summaryInput={capitaliseFirstLetter(summary)}
             />
         </>
     );

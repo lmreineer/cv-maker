@@ -1,11 +1,31 @@
+import { useEffect, useRef } from 'react';
+import autosize from 'autosize';
+
 import { useNavigate } from 'react-router-dom';
 
 const SummaryForm = ({ handleSubmit, handleChange }) => {
+    const textareaRef1 = useRef(null);
+
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        autosize(textareaRef1.current);
+    });
+
     const navigate = useNavigate();
     const navigateBack = () => navigate('/skills');
 
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            // prevent the addition of a new line in the text field
+            e.preventDefault();
+            handleSubmit(e);
+        }
+    };
+
     return (
         <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="flex w-1/2 flex-col justify-center"
         >
@@ -18,6 +38,8 @@ const SummaryForm = ({ handleSubmit, handleChange }) => {
                     placeholder="Summary"
                     className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
+                    onKeyDown={(e) => handleEnter(e)}
+                    ref={textareaRef1}
                     maxLength={250}
                 />
             </div>
