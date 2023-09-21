@@ -547,7 +547,7 @@ const CVContent = ({
         'Assisted in visual merchandising and store displays to enhance the customer shopping experienceCollaborated with team members to resolve customer complaints and ensure smooth store operations.';
     const defaultDegreeAndFieldOfStudy =
         'Bachelor of Business Administration, Marketing';
-    const defaultSchoolAddress = 'ABC University, City, State';
+    const defaultSchoolAddress = 'ABC University, Location';
 
     const generateTitle = (
         path,
