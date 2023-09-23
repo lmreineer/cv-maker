@@ -22,7 +22,7 @@ import SummaryForm from '../path/form/SummaryForm';
 
 import CVPreview from '../preview/CVPreview';
 
-const FormValidation = () => {
+const FormValidation = ({ setIsOnFinal }) => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
@@ -158,6 +158,9 @@ const FormValidation = () => {
                     break;
                 case '/skills':
                     navigate('/summary');
+                    break;
+                case '/summary':
+                    setIsOnFinal(true);
                     break;
             }
         }
