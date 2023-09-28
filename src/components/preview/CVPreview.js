@@ -65,7 +65,7 @@ const CVPreview = ({
     return (
         <div>
             <div
-                className="my-[3rem] h-[43.3rem] w-[30rem] select-none overflow-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
+                className="my-[3rem] h-[43.3rem] w-[30rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
                 onClick={toggleClick}
             >
                 <CVContent
@@ -169,12 +169,70 @@ const CVPreview = ({
                         firstNameInput={firstNameInput}
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
-                        countryInput={countryInput}
                         cityHeadingInput={cityHeadingInput}
                         stateHeadingInput={stateHeadingInput}
+                        countryInput={countryInput}
                         zipCodeInput={zipCodeInput}
                         phoneInput={phoneInput}
                         emailInput={emailInput}
+                        summaryInput={summaryInput}
+                        skillOneInput={skillOneInput}
+                        skillTwoInput={skillTwoInput}
+                        skillThreeInput={skillThreeInput}
+                        skillFourInput={skillFourInput}
+                        skillFiveInput={skillFiveInput}
+                        yearStartWorkInput={yearStartWorkInput}
+                        monthStartWorkInput={monthStartWorkInput}
+                        yearEndWorkInput={yearEndWorkInput}
+                        monthEndWorkInput={monthEndWorkInput}
+                        jobTitleInput={jobTitleInput}
+                        companyInput={companyInput}
+                        cityWorkInput={cityWorkInput}
+                        stateWorkInput={stateWorkInput}
+                        workResponsibilityOneInput={workResponsibilityOneInput}
+                        workResponsibilityTwoInput={workResponsibilityTwoInput}
+                        workResponsibilityThreeInput={
+                            workResponsibilityThreeInput
+                        }
+                        workResponsibilityFourInput={
+                            workResponsibilityFourInput
+                        }
+                        secondYearStartWorkInput={secondYearStartWorkInput}
+                        secondMonthStartWorkInput={secondMonthStartWorkInput}
+                        secondYearEndWorkInput={secondYearEndWorkInput}
+                        secondMonthEndWorkInput={secondMonthEndWorkInput}
+                        secondJobTitleInput={secondJobTitleInput}
+                        secondCompanyInput={secondCompanyInput}
+                        secondCityWorkInput={secondCityWorkInput}
+                        secondStateWorkInput={secondStateWorkInput}
+                        secondWorkResponsibilityOneInput={
+                            secondWorkResponsibilityOneInput
+                        }
+                        secondWorkResponsibilityTwoInput={
+                            secondWorkResponsibilityTwoInput
+                        }
+                        secondWorkResponsibilityThreeInput={
+                            secondWorkResponsibilityThreeInput
+                        }
+                        secondWorkResponsibilityFourInput={
+                            secondWorkResponsibilityFourInput
+                        }
+                        yearStartGraduationInput={yearStartGraduationInput}
+                        monthStartGraduationInput={monthStartGraduationInput}
+                        degreeInput={degreeInput}
+                        fieldOfStudyInput={fieldOfStudyInput}
+                        schoolNameInput={schoolNameInput}
+                        schoolLocationInput={schoolLocationInput}
+                        secondYearStartGraduationInput={
+                            secondYearStartGraduationInput
+                        }
+                        secondMonthStartGraduationInput={
+                            secondMonthStartGraduationInput
+                        }
+                        secondDegreeInput={secondDegreeInput}
+                        secondFieldOfStudyInput={secondFieldOfStudyInput}
+                        secondSchoolNameInput={secondSchoolNameInput}
+                        secondSchoolLocationInput={secondSchoolLocationInput}
                     />
                 </div>
             )}

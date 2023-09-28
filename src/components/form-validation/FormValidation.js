@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, Route, Routes } from 'react-router-dom';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -19,13 +19,15 @@ import AdditionalEducationForm from '../path/form/additional/education/Additiona
 import AdditionalEducationSummary from '../path/summary/additional/AdditionalEducationSummary';
 import SkillsForm from '../path/form/SkillsForm';
 import SummaryForm from '../path/form/SummaryForm';
+import Final from '../path/Final';
 
 import CVPreview from '../preview/CVPreview';
 
-const FormValidation = ({ setIsOnFinal }) => {
+const FormValidation = () => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
+    const isOnFinalPath = pathname === '/final';
 
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
@@ -61,6 +63,34 @@ const FormValidation = ({ setIsOnFinal }) => {
     };
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isOnFinal) {
+            // add data to localStorage
+            window.localStorage.setItem(
+                'isOnFinalData',
+                JSON.stringify({
+                    isOnFinalPath: true
+                })
+            );
+        } else {
+            window.localStorage.setItem(
+                'isOnFinalData',
+                JSON.stringify({
+                    isOnFinalPath: false
+                })
+            );
+        }
+    }, []);
+
+    const getFormData = (formData) => {
+        // make values of properties accessible
+        const data = JSON.parse(window.localStorage.getItem(formData));
+        // if form data is submitted, return form data
+        return data ? data : '';
+    };
+
+    const { isOnFinal } = getFormData('isOnFinalData');
 
     const formik = useFormik({
         validateOnChange: handleValidateOnChangeValue(),
@@ -160,7 +190,7 @@ const FormValidation = ({ setIsOnFinal }) => {
                     navigate('/summary');
                     break;
                 case '/summary':
-                    setIsOnFinal(true);
+                    navigate('/final');
                     break;
             }
         }
@@ -386,99 +416,110 @@ const FormValidation = ({ setIsOnFinal }) => {
                         />
                     }
                 />
+                <Route path="/final" element={<Final />} />
             </Routes>
 
-            <CVPreview
-                firstNameInput={capitalizeFirstLetterOfEachWord(firstName)}
-                lastNameInput={capitalizeFirstLetterOfEachWord(lastName)}
-                professionInput={capitalizeFirstLetterOfEachWord(profession)}
-                cityHeadingInput={capitalizeFirstLetterOfEachWord(cityHeading)}
-                stateHeadingInput={capitalizeFirstLetterOfEachWord(
-                    stateHeading
-                )}
-                countryInput={capitalizeFirstLetterOfEachWord(country)}
-                zipCodeInput={zipCode}
-                phoneInput={phone}
-                emailInput={lowerCaseEachLetter(email)}
-                skillOneInput={capitaliseFirstLetter(skillOne)}
-                skillTwoInput={capitaliseFirstLetter(skillTwo)}
-                skillThreeInput={capitaliseFirstLetter(skillThree)}
-                skillFourInput={capitaliseFirstLetter(skillFour)}
-                skillFiveInput={capitaliseFirstLetter(skillFive)}
-                yearStartWorkInput={yearStartWork}
-                monthStartWorkInput={monthStartWork}
-                yearEndWorkInput={yearEndWork}
-                monthEndWorkInput={monthEndWork}
-                currentlyWorkingCheckboxValue={currentlyWorkingCheckboxValue}
-                jobTitleInput={capitalizeFirstLetterOfEachWord(jobTitle)}
-                companyInput={capitalizeFirstLetterOfEachWord(company)}
-                cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
-                stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
-                workResponsibilityOneInput={capitaliseFirstLetter(
-                    workResponsibilityOne
-                )}
-                workResponsibilityTwoInput={capitaliseFirstLetter(
-                    workResponsibilityTwo
-                )}
-                workResponsibilityThreeInput={capitaliseFirstLetter(
-                    workResponsibilityThree
-                )}
-                workResponsibilityFourInput={capitaliseFirstLetter(
-                    workResponsibilityFour
-                )}
-                secondYearStartWorkInput={secondYearStartWork}
-                secondMonthStartWorkInput={secondMonthStartWork}
-                secondYearEndWorkInput={secondYearEndWork}
-                secondMonthEndWorkInput={secondMonthEndWork}
-                secondCurrentlyWorkingCheckboxValue={
-                    secondCurrentlyWorkingCheckboxValue
-                }
-                secondJobTitleInput={capitaliseFirstLetter(secondJobTitle)}
-                secondCompanyInput={capitalizeFirstLetterOfEachWord(
-                    secondCompany
-                )}
-                secondCityWorkInput={capitalizeFirstLetterOfEachWord(
-                    secondCityWork
-                )}
-                secondStateWorkInput={capitalizeFirstLetterOfEachWord(
-                    secondStateWork
-                )}
-                secondWorkResponsibilityOneInput={capitaliseFirstLetter(
-                    secondWorkResponsibilityOne
-                )}
-                secondWorkResponsibilityTwoInput={capitaliseFirstLetter(
-                    secondWorkResponsibilityTwo
-                )}
-                secondWorkResponsibilityThreeInput={capitaliseFirstLetter(
-                    secondWorkResponsibilityThree
-                )}
-                secondWorkResponsibilityFourInput={capitaliseFirstLetter(
-                    secondWorkResponsibilityFour
-                )}
-                yearStartGraduationInput={yearStartGraduation}
-                monthStartGraduationInput={monthStartGraduation}
-                degreeInput={capitalizeFirstLetterOfEachWord(degree)}
-                fieldOfStudyInput={capitaliseFirstLetter(fieldOfStudy)}
-                schoolNameInput={capitalizeFirstLetterOfEachWord(schoolName)}
-                schoolLocationInput={capitalizeFirstLetterOfEachWord(
-                    schoolLocation
-                )}
-                secondYearStartGraduationInput={secondYearStartGraduation}
-                secondMonthStartGraduationInput={secondMonthStartGraduation}
-                secondDegreeInput={capitalizeFirstLetterOfEachWord(
-                    secondDegree
-                )}
-                secondFieldOfStudyInput={capitalizeFirstLetterOfEachWord(
-                    secondFieldOfStudy
-                )}
-                secondSchoolNameInput={capitalizeFirstLetterOfEachWord(
-                    secondSchoolName
-                )}
-                secondSchoolLocationInput={capitalizeFirstLetterOfEachWord(
-                    secondSchoolLocation
-                )}
-                summaryInput={capitaliseFirstLetter(summary)}
-            />
+            {!isOnFinalPath && (
+                <CVPreview
+                    firstNameInput={capitalizeFirstLetterOfEachWord(firstName)}
+                    lastNameInput={capitalizeFirstLetterOfEachWord(lastName)}
+                    professionInput={capitalizeFirstLetterOfEachWord(
+                        profession
+                    )}
+                    cityHeadingInput={capitalizeFirstLetterOfEachWord(
+                        cityHeading
+                    )}
+                    stateHeadingInput={capitalizeFirstLetterOfEachWord(
+                        stateHeading
+                    )}
+                    countryInput={capitalizeFirstLetterOfEachWord(country)}
+                    zipCodeInput={zipCode}
+                    phoneInput={phone}
+                    emailInput={lowerCaseEachLetter(email)}
+                    skillOneInput={capitaliseFirstLetter(skillOne)}
+                    skillTwoInput={capitaliseFirstLetter(skillTwo)}
+                    skillThreeInput={capitaliseFirstLetter(skillThree)}
+                    skillFourInput={capitaliseFirstLetter(skillFour)}
+                    skillFiveInput={capitaliseFirstLetter(skillFive)}
+                    yearStartWorkInput={yearStartWork}
+                    monthStartWorkInput={monthStartWork}
+                    yearEndWorkInput={yearEndWork}
+                    monthEndWorkInput={monthEndWork}
+                    currentlyWorkingCheckboxValue={
+                        currentlyWorkingCheckboxValue
+                    }
+                    jobTitleInput={capitalizeFirstLetterOfEachWord(jobTitle)}
+                    companyInput={capitalizeFirstLetterOfEachWord(company)}
+                    cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
+                    stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
+                    workResponsibilityOneInput={capitaliseFirstLetter(
+                        workResponsibilityOne
+                    )}
+                    workResponsibilityTwoInput={capitaliseFirstLetter(
+                        workResponsibilityTwo
+                    )}
+                    workResponsibilityThreeInput={capitaliseFirstLetter(
+                        workResponsibilityThree
+                    )}
+                    workResponsibilityFourInput={capitaliseFirstLetter(
+                        workResponsibilityFour
+                    )}
+                    secondYearStartWorkInput={secondYearStartWork}
+                    secondMonthStartWorkInput={secondMonthStartWork}
+                    secondYearEndWorkInput={secondYearEndWork}
+                    secondMonthEndWorkInput={secondMonthEndWork}
+                    secondCurrentlyWorkingCheckboxValue={
+                        secondCurrentlyWorkingCheckboxValue
+                    }
+                    secondJobTitleInput={capitaliseFirstLetter(secondJobTitle)}
+                    secondCompanyInput={capitalizeFirstLetterOfEachWord(
+                        secondCompany
+                    )}
+                    secondCityWorkInput={capitalizeFirstLetterOfEachWord(
+                        secondCityWork
+                    )}
+                    secondStateWorkInput={capitalizeFirstLetterOfEachWord(
+                        secondStateWork
+                    )}
+                    secondWorkResponsibilityOneInput={capitaliseFirstLetter(
+                        secondWorkResponsibilityOne
+                    )}
+                    secondWorkResponsibilityTwoInput={capitaliseFirstLetter(
+                        secondWorkResponsibilityTwo
+                    )}
+                    secondWorkResponsibilityThreeInput={capitaliseFirstLetter(
+                        secondWorkResponsibilityThree
+                    )}
+                    secondWorkResponsibilityFourInput={capitaliseFirstLetter(
+                        secondWorkResponsibilityFour
+                    )}
+                    yearStartGraduationInput={yearStartGraduation}
+                    monthStartGraduationInput={monthStartGraduation}
+                    degreeInput={capitalizeFirstLetterOfEachWord(degree)}
+                    fieldOfStudyInput={capitaliseFirstLetter(fieldOfStudy)}
+                    schoolNameInput={capitalizeFirstLetterOfEachWord(
+                        schoolName
+                    )}
+                    schoolLocationInput={capitalizeFirstLetterOfEachWord(
+                        schoolLocation
+                    )}
+                    secondYearStartGraduationInput={secondYearStartGraduation}
+                    secondMonthStartGraduationInput={secondMonthStartGraduation}
+                    secondDegreeInput={capitalizeFirstLetterOfEachWord(
+                        secondDegree
+                    )}
+                    secondFieldOfStudyInput={capitalizeFirstLetterOfEachWord(
+                        secondFieldOfStudy
+                    )}
+                    secondSchoolNameInput={capitalizeFirstLetterOfEachWord(
+                        secondSchoolName
+                    )}
+                    secondSchoolLocationInput={capitalizeFirstLetterOfEachWord(
+                        secondSchoolLocation
+                    )}
+                    summaryInput={capitaliseFirstLetter(summary)}
+                />
+            )}
         </>
     );
 };
