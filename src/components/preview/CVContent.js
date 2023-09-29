@@ -110,7 +110,8 @@ const CVContent = ({
         !isOnEducationSummary;
     const additionalEducationFormIsSubmitted =
         educationSummaryIsSubmitted && !isOnAdditionalEducationForm;
-    const skillsFormIsSubmitted = educationFormIsSubmitted && !isOnSkillsForm;
+    const skillsFormIsSubmitted =
+        educationSummaryIsSubmitted && !isOnSkillsForm;
     const summaryFormIsSubmitted = skillsFormIsSubmitted && !isOnSummaryForm;
 
     useEffect(() => {
@@ -505,7 +506,7 @@ const CVContent = ({
         !skillFourData &&
         !skillFiveData;
 
-    const hasNoSummary = !isOnSummaryForm;
+    const hasNoSummary = summaryFormIsSubmitted && !summaryData;
 
     const hasNoMainBackground =
         hasNoWorkHistory && hasNoEducation && hasNoSkills;
@@ -845,7 +846,7 @@ const CVContent = ({
                     <h6 className={mainBackgroundHeading}>Summary</h6>
                     <h6 className={summary}>
                         {generateTitle(
-                            !isOnSummaryForm,
+                            summaryFormIsSubmitted,
                             summaryData,
                             summaryInput,
                             defaultSummary

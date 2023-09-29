@@ -1,6 +1,7 @@
 import CVContent from './CVContent';
 
 const CVModal = ({
+    modalSizing,
     firstNameInput,
     lastNameInput,
     professionInput,
@@ -56,8 +57,10 @@ const CVModal = ({
     secondSchoolLocationInput
 }) => {
     return (
-        <div className="absolute left-2/4 top-2/4 w-7/12 translate-x-[-50%] translate-y-[-50%] select-none overflow-y-auto break-all rounded bg-zinc-200 p-10">
-            <div className="bg-white p-10">
+        <div
+            className={`${modalSizing} select-none overflow-y-auto break-all rounded bg-zinc-200 p-10`}
+        >
+            <div className="h-max bg-white p-10">
                 <CVContent
                     textContainer="h-full rounded p-10 overflow-auto bg-white"
                     fullName="font-bold text-5xl"

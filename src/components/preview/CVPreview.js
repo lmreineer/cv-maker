@@ -65,7 +65,7 @@ const CVPreview = ({
     return (
         <div>
             <div
-                className="my-[3rem] h-[43.3rem] w-[30rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
+                className="my-[3rem] h-previewHeight w-[30rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
                 onClick={toggleClick}
             >
                 <CVContent
@@ -166,6 +166,7 @@ const CVPreview = ({
                         onClick={toggleClick}
                     ></div>
                     <CVModal
+                        modalSizing="absolute left-2/4 top-2/4 h-5/6 w-7/12 translate-x-[-50%] translate-y-[-50%]"
                         firstNameInput={firstNameInput}
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
