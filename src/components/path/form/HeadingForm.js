@@ -9,40 +9,44 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                     Contact Information:
                 </h1>
                 <div className="flex">
-                    <input
-                        type="text"
-                        name="firstName"
-                        placeholder="First Name"
-                        onChange={handleChange}
-                        className={
-                            formikErrors.firstName && touched.firstName
-                                ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={15}
-                    />
-                    {formikErrors.firstName && touched.firstName && (
-                        <p className="ml-4 text-red-800">
-                            {formikErrors.firstName}
-                        </p>
-                    )}
-                    <input
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name"
-                        onChange={handleChange}
-                        className={
-                            formikErrors.lastName && touched.lastName
-                                ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={15}
-                    />
-                    {formikErrors.lastName && touched.lastName && (
-                        <p className="ml-4 text-red-800">
-                            {formikErrors.lastName}
-                        </p>
-                    )}
+                    <div>
+                        <input
+                            type="text"
+                            name="firstName"
+                            placeholder="First Name"
+                            onChange={handleChange}
+                            className={
+                                formikErrors.firstName && touched.firstName
+                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={15}
+                        />
+                        {formikErrors.firstName && touched.firstName && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.firstName}
+                            </p>
+                        )}
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            name="lastName"
+                            placeholder="Last Name"
+                            onChange={handleChange}
+                            className={
+                                formikErrors.lastName && touched.lastName
+                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={15}
+                        />
+                        {formikErrors.lastName && touched.lastName && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.lastName}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 <div className="flex">
                     <input
@@ -100,20 +104,22 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         maxLength={40}
                     />
                 </div>
-                <div className="flex">
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="Email"
-                        id="email"
-                        onChange={handleChange}
-                        className={
-                            formikErrors.email && touched.email
-                                ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={40}
-                    />
+                <div>
+                    <div className="flex">
+                        <input
+                            type="text"
+                            name="email"
+                            placeholder="Email"
+                            id="email"
+                            onChange={handleChange}
+                            className={
+                                formikErrors.email && touched.email
+                                    ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={40}
+                        />
+                    </div>
                     {formikErrors.email && touched.email && (
                         <p className="ml-4 text-red-800">
                             {formikErrors.email}

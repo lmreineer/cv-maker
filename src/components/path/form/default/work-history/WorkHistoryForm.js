@@ -83,54 +83,58 @@ const WorkHistoryForm = ({
                     Work History:
                 </h1>
                 <div className="flex">
-                    <input
-                        type="text"
-                        name="jobTitle"
-                        placeholder="Job Title"
-                        onChange={(e) => {
-                            handleChange(e);
-                            handleSkipWorkHistoryModal(e.target.value);
-                        }}
-                        className={
-                            inputIsOmitted(jobTitleValues) &&
+                    <div>
+                        <input
+                            type="text"
+                            name="jobTitle"
+                            placeholder="Job Title"
+                            onChange={(e) => {
+                                handleChange(e);
+                                handleSkipWorkHistoryModal(e.target.value);
+                            }}
+                            className={
+                                inputIsOmitted(jobTitleValues) &&
+                                formikErrors.jobTitle &&
+                                touched.jobTitle
+                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={40}
+                        />
+                        {inputIsOmitted(jobTitleValues) &&
                             formikErrors.jobTitle &&
-                            touched.jobTitle
-                                ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={40}
-                    />
-                    {inputIsOmitted(jobTitleValues) &&
-                        formikErrors.jobTitle &&
-                        touched.jobTitle && (
-                            <p className="ml-4 text-red-800">
-                                {formikErrors.jobTitle}
-                            </p>
-                        )}
-                    <input
-                        type="text"
-                        name="company"
-                        placeholder="Company"
-                        onChange={(e) => {
-                            handleChange(e);
-                            handleSkipWorkHistoryModal(e.target.value);
-                        }}
-                        className={
-                            inputIsOmitted(companyValues) &&
+                            touched.jobTitle && (
+                                <p className="ml-4 text-red-800">
+                                    {formikErrors.jobTitle}
+                                </p>
+                            )}
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            name="company"
+                            placeholder="Company"
+                            onChange={(e) => {
+                                handleChange(e);
+                                handleSkipWorkHistoryModal(e.target.value);
+                            }}
+                            className={
+                                inputIsOmitted(companyValues) &&
+                                formikErrors.company &&
+                                touched.company
+                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={40}
+                        />
+                        {inputIsOmitted(companyValues) &&
                             formikErrors.company &&
-                            touched.company
-                                ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={40}
-                    />
-                    {inputIsOmitted(companyValues) &&
-                        formikErrors.company &&
-                        touched.company && (
-                            <p className="ml-4 text-red-800">
-                                {formikErrors.company}
-                            </p>
-                        )}
+                            touched.company && (
+                                <p className="ml-4 text-red-800">
+                                    {formikErrors.company}
+                                </p>
+                            )}
+                    </div>
                 </div>
                 <div>
                     <input

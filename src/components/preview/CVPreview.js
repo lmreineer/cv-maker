@@ -63,7 +63,7 @@ const CVPreview = ({
     const toggleClick = () => setIsClicked(!isClicked);
 
     return (
-        <div className="my-12">
+        <div className="my-10">
             <div
                 className="h-full w-[30rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
                 onClick={toggleClick}
