@@ -77,75 +77,67 @@ const WorkHistoryForm = ({
         <>
             <form
                 onSubmit={handleSubmit}
-                className="flex w-2/4 flex-col justify-center"
+                className="flex flex-col justify-center"
             >
-                <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+                <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
                 <div className="flex">
-                    <div className="w-full">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                name="jobTitle"
-                                placeholder="Job Title"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipWorkHistoryModal(e.target.value);
-                                }}
-                                className={
-                                    inputIsOmitted(jobTitleValues) &&
-                                    formikErrors.jobTitle &&
-                                    touched.jobTitle
-                                        ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                        : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                                }
-                                maxLength={40}
-                            />
-                        </div>
-                        {inputIsOmitted(jobTitleValues) &&
+                    <input
+                        type="text"
+                        name="jobTitle"
+                        placeholder="Job Title"
+                        onChange={(e) => {
+                            handleChange(e);
+                            handleSkipWorkHistoryModal(e.target.value);
+                        }}
+                        className={
+                            inputIsOmitted(jobTitleValues) &&
                             formikErrors.jobTitle &&
-                            touched.jobTitle && (
-                                <p className="ml-4 text-red-800">
-                                    {formikErrors.jobTitle}
-                                </p>
-                            )}
-                    </div>
-                    <div className="w-full">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                name="company"
-                                placeholder="Company"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipWorkHistoryModal(e.target.value);
-                                }}
-                                className={
-                                    inputIsOmitted(companyValues) &&
-                                    formikErrors.company &&
-                                    touched.company
-                                        ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                        : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                                }
-                                maxLength={40}
-                            />
-                        </div>
-                        {inputIsOmitted(companyValues) &&
+                            touched.jobTitle
+                                ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                        }
+                        maxLength={40}
+                    />
+                    {inputIsOmitted(jobTitleValues) &&
+                        formikErrors.jobTitle &&
+                        touched.jobTitle && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.jobTitle}
+                            </p>
+                        )}
+                    <input
+                        type="text"
+                        name="company"
+                        placeholder="Company"
+                        onChange={(e) => {
+                            handleChange(e);
+                            handleSkipWorkHistoryModal(e.target.value);
+                        }}
+                        className={
+                            inputIsOmitted(companyValues) &&
                             formikErrors.company &&
-                            touched.company && (
-                                <p className="ml-4 text-red-800">
-                                    {formikErrors.company}
-                                </p>
-                            )}
-                    </div>
+                            touched.company
+                                ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                        }
+                        maxLength={40}
+                    />
+                    {inputIsOmitted(companyValues) &&
+                        formikErrors.company &&
+                        touched.company && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.company}
+                            </p>
+                        )}
                 </div>
-                <div className="flex">
+                <div>
                     <input
                         type="text"
                         name="cityWork"
                         placeholder="City"
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={(e) => {
                             handleChange(e);
                             handleSkipWorkHistoryModal(e.target.value);
@@ -156,7 +148,7 @@ const WorkHistoryForm = ({
                         type="text"
                         name="stateWork"
                         placeholder="State / Country"
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={(e) => {
                             handleChange(e);
                             handleSkipWorkHistoryModal(e.target.value);

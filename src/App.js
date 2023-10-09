@@ -3,10 +3,10 @@ import Main from './components/Main.js';
 
 const App = () => {
     return (
-        <>
+        <div className="h-screen">
             <Header />
             <Main />
-        </>
+        </div>
     );
 };
 

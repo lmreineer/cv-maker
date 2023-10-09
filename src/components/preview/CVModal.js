@@ -58,9 +58,9 @@ const CVModal = ({
 }) => {
     return (
         <div
-            className={`${modalSizing} select-none overflow-y-auto break-all rounded bg-zinc-200 p-10`}
+            className={`${modalSizing} select-none overflow-y-auto break-all rounded-lg bg-zinc-200`}
         >
-            <div className="h-max bg-white p-10">
+            <div className="h-full bg-white p-10">
                 <CVContent
                     textContainer="h-full rounded p-10 overflow-auto bg-white"
                     fullName="font-bold text-5xl"
@@ -78,7 +78,7 @@ const CVModal = ({
                     phoneInput={phoneInput}
                     emailInput={emailInput}
                     summaryContainer="mt-10"
-                    mainBackgroundHeading="font-bold italic border-b-2 text-xl mt-10"
+                    mainBackgroundHeading="font-bold border-b-2 text-xl mt-10 italic"
                     summary="text-xl mt-5"
                     summaryInput={summaryInput}
                     mainBackgroundContainer="mt-5"
@@ -88,7 +88,7 @@ const CVModal = ({
                     skillThreeInput={skillThreeInput}
                     skillFourInput={skillFourInput}
                     skillFiveInput={skillFiveInput}
-                    stayPeriodContainer="flex mt-5"
+                    stayPeriodContainer="mt-5 flex"
                     workDatePeriodContainer="text-lg w-96"
                     yearStartWorkInput={yearStartWorkInput}
                     monthStartWorkInput={monthStartWorkInput}
@@ -133,7 +133,7 @@ const CVModal = ({
                     secondWorkResponsibilityFourInput={
                         secondWorkResponsibilityFourInput
                     }
-                    educationDatePeriodContainer="text-lg"
+                    educationDatePeriodContainer="text-lg w-96"
                     yearStartGraduationInput={yearStartGraduationInput}
                     monthStartGraduationInput={monthStartGraduationInput}
                     degreeInput={degreeInput}

@@ -82,7 +82,6 @@ const Header = () => {
                     className={`${
                         isOnEducationPath ||
                         isOnEducationSummary ||
-                        isOnAdditionalWorkHistoryForm ||
                         isOnAdditionalEducationSummary
                             ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                             : 'm-2 p-4 text-gray-400'

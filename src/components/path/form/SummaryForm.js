@@ -27,22 +27,20 @@ const SummaryForm = ({ handleSubmit, handleChange }) => {
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex w-1/2 flex-col justify-center"
+            className="flex flex-col justify-center"
         >
-            <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Summary:
             </h1>
-            <div className="flex flex-col justify-center">
-                <textarea
-                    name="summary"
-                    placeholder="Summary"
-                    className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                    onChange={handleChange}
-                    onKeyDown={(e) => handleEnter(e)}
-                    ref={textareaRef1}
-                    maxLength={250}
-                />
-            </div>
+            <textarea
+                name="summary"
+                placeholder="Summary"
+                className="m-3 h-14 w-[616px] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                onChange={handleChange}
+                onKeyDown={(e) => handleEnter(e)}
+                ref={textareaRef1}
+                maxLength={250}
+            />
             <div className="flex justify-around">
                 <input
                     type="button"

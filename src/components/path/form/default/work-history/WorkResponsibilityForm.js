@@ -33,16 +33,16 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex w-1/2 flex-col justify-center"
+            className="flex w-[616px] flex-col justify-center"
         >
-            <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Work Responsibilities:
             </h1>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col">
                 <textarea
                     name="workResponsibilityOne"
                     placeholder="Work Responsibility 1"
-                    className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    className="m-3 h-14 resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef1}
@@ -51,7 +51,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                 <textarea
                     name="workResponsibilityTwo"
                     placeholder="Work Responsibility 2"
-                    className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    className="m-3 h-14 resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef2}
@@ -60,7 +60,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                 <textarea
                     name="workResponsibilityThree"
                     placeholder="Work Responsibility 3"
-                    className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    className="m-3 h-14 resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef3}
@@ -69,7 +69,7 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
                 <textarea
                     name="workResponsibilityFour"
                     placeholder="Work Responsibility 4"
-                    className="m-3 h-[3.6rem] resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    className="m-3 h-14 resize-none break-all rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                     onChange={handleChange}
                     onKeyDown={(e) => handleEnter(e)}
                     ref={textareaRef4}

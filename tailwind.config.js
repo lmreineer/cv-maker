@@ -15,9 +15,6 @@ module.exports = {
             },
             boxShadow: {
                 'all-sides-light': '0 0 4px rgba(0, 0, 0, 0.2)'
-            },
-            spacing: {
-                previewHeight: '43.3rem'
             }
         }
     },

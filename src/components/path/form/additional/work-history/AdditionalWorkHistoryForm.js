@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 
 import Select from 'react-select';
@@ -61,56 +59,45 @@ const AdditionalWorkHistoryForm = ({
         <>
             <form
                 onSubmit={handleSubmit}
-                className="flex w-2/4 flex-col justify-center"
+                className="flex flex-col justify-center"
             >
-                <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+                <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Work History:
                 </h1>
                 <div className="flex">
-                    <div className="w-full">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                name="secondJobTitle"
-                                placeholder="Job Title"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    // handleEmptySubmission(e);
-                                }}
-                                className={
-                                    'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                                }
-                                maxLength={40}
-                            />
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                name="secondCompany"
-                                placeholder="Company"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    // handleEmptySubmission(e);
-                                }}
-                                className={
-                                    'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                                }
-                                maxLength={40}
-                            />
-                        </div>
-                    </div>
+                    <input
+                        type="text"
+                        name="secondJobTitle"
+                        placeholder="Job Title"
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                        className={
+                            'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                        }
+                        maxLength={40}
+                    />
+                    <input
+                        type="text"
+                        name="secondCompany"
+                        placeholder="Company"
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                        className={
+                            'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                        }
+                        maxLength={40}
+                    />
                 </div>
-                <div className="flex">
+                <div>
                     <input
                         type="text"
                         name="secondCityWork"
                         placeholder="City"
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={(e) => {
                             handleChange(e);
-                            // handleEmptySubmission(e.target.value);
                         }}
                         maxLength={40}
                     />
@@ -118,10 +105,9 @@ const AdditionalWorkHistoryForm = ({
                         type="text"
                         name="secondStateWork"
                         placeholder="State / Country"
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         onChange={(e) => {
                             handleChange(e);
-                            // handleEmptySubmission(e.target.value);
                         }}
                         maxLength={40}
                     />

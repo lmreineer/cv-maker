@@ -110,12 +110,12 @@ const AdditionalWorkHistorySummary = ({ handleSubmit }) => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex w-1/2 flex-col justify-center"
+            className="flex w-[616px] flex-col justify-center"
         >
-            <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Work History:
             </h1>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col">
                 <div className="break-all rounded-t-lg border border-dark-yellow-green p-4">
                     <p className="font-medium">
                         {jobTitleData && companyData

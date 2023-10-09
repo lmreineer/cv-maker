@@ -68,9 +68,9 @@ const AdditionalEducationForm = ({
         <>
             <form
                 onSubmit={handleSubmit}
-                className="flex w-2/4 flex-col justify-center"
+                className="flex flex-col justify-center"
             >
-                <h1 className="mb-10 mt-16 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+                <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Education:
                 </h1>
                 <div className="flex">
@@ -82,7 +82,7 @@ const AdditionalEducationForm = ({
                             handleChange(e);
                             handleSkipEducation(e);
                         }}
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         maxLength={40}
                     />
                     <input
@@ -93,41 +93,33 @@ const AdditionalEducationForm = ({
                             handleChange(e);
                             handleSkipEducation(e);
                         }}
-                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         maxLength={40}
                     />
                 </div>
-                <div className="flex">
-                    <div className="w-full">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                name="secondSchoolName"
-                                placeholder="School Name"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipEducation(e);
-                                }}
-                                className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                                maxLength={40}
-                            />
-                        </div>
-                    </div>
-                    <div className="w-full">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                name="secondSchoolLocation"
-                                placeholder="School Location"
-                                onChange={(e) => {
-                                    handleChange(e);
-                                    handleSkipEducation(e);
-                                }}
-                                className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                                maxLength={40}
-                            />
-                        </div>
-                    </div>
+                <div>
+                    <input
+                        type="text"
+                        name="secondSchoolName"
+                        placeholder="School Name"
+                        onChange={(e) => {
+                            handleChange(e);
+                            handleSkipEducation(e);
+                        }}
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        maxLength={40}
+                    />
+                    <input
+                        type="text"
+                        name="secondSchoolLocation"
+                        placeholder="School Location"
+                        onChange={(e) => {
+                            handleChange(e);
+                            handleSkipEducation(e);
+                        }}
+                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        maxLength={40}
+                    />
                 </div>
                 <div className="flex">
                     <Select
