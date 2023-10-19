@@ -81,7 +81,7 @@ const FormValidation = () => {
                 })
             );
         }
-    }, []);
+    });
 
     const getFormData = (formData) => {
         // make values of properties accessible

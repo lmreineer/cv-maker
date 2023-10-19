@@ -57,7 +57,7 @@ const EducationSummary = ({ handleSubmit }) => {
                     </p>
                 </div>
                 <button
-                    className="mx-3 items-center justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
+                    className="mx-3 flex items-center justify-center rounded-lg border-2 border-dashed border-dark-yellow-green p-4"
                     onClick={handleAddingEducation}
                 >
                     <span className="material-symbols-outlined mr-2 text-xl font-semibold">
