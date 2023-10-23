@@ -1,9 +1,9 @@
 import FormValidation from './form-validation/FormValidation';
 
-const Main = () => {
+const Main = ({ componentRef }) => {
     return (
         <div className="h-min-[794px] flex justify-around bg-main px-40">
-            <FormValidation />
+            <FormValidation componentRef={componentRef} />
         </div>
     );
 };

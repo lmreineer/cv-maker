@@ -23,7 +23,7 @@ import Final from '../path/Final';
 
 import CVPreview from '../preview/CVPreview';
 
-const FormValidation = () => {
+const FormValidation = ({ componentRef }) => {
     const pathname = useLocation().pathname;
     const isOnHeadingPath = pathname === '/';
     const isOnWorkHistoryPath = pathname === '/work-history';
@@ -416,7 +416,10 @@ const FormValidation = () => {
                         />
                     }
                 />
-                <Route path="/final" element={<Final />} />
+                <Route
+                    path="/final"
+                    element={<Final componentRef={componentRef} />}
+                />
             </Routes>
 
             {!isOnFinalPath && (

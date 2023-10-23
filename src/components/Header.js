@@ -1,7 +1,10 @@
 import headerLogo from '../assets/headerLogo.svg';
 import { useLocation } from 'react-router-dom';
 
-const Header = () => {
+import { useState, useEffect } from 'react';
+import ReactToPrint from 'react-to-print';
+
+const Header = ({ componentRef }) => {
     const pathname = useLocation().pathname;
     const isOnHeadingForm = pathname === '/';
     const isOnWorkHistoryForm = pathname === '/work-history';
@@ -40,6 +43,36 @@ const Header = () => {
     const skillsIsSubmitted = educationIsSubmitted && !isOnSkillsPath;
     const summaryIsSubmitted = skillsIsSubmitted && !isOnSummaryPath;
 
+    const [pageWidth, setPageWidth] = useState(210); // default to A4 width in millimeters
+    const [pageHeight, setPageHeight] = useState(297); // default to A4 height in millimeters
+
+    useEffect(() => {
+        // use a short delay to ensure the component has been rendered and dimensions are available
+        const delay = 100;
+        const timer = setTimeout(() => {
+            if (componentRef.current) {
+                const contentWidth = componentRef.current.offsetWidth;
+                const contentHeight = componentRef.current.offsetHeight;
+                setPageWidth(contentWidth / 3.779527559); // convert pixels to millimeters
+                setPageHeight(contentHeight / 3.779527559); // convert pixels to millimeters
+            }
+        }, delay);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    const pageStyle = `
+    @page {
+        size: ${pageWidth}mm ${pageHeight}mm;
+      }
+      @media print {
+        body {
+          width: ${pageWidth}mm;
+          height: ${pageHeight}mm;
+        }
+      }
+    `;
+
     return (
         <header className="flex select-none items-center justify-around p-5">
             <img
@@ -47,79 +80,95 @@ const Header = () => {
                 alt="CV Maker"
                 className="pointer-events-none w-48"
             />
-            <div className="flex rounded-lg">
-                <div
-                    className={
-                        isOnHeadingForm
-                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-very-dark-yellow-green'
-                    }
-                >
-                    Heading
-                </div>
-                <div
-                    className={`${
-                        isOnWorkHistoryForm ||
-                        isOnWorkResponbilityForm ||
-                        isOnWorkHistorySummary ||
-                        isOnSkipWorkHistoryModal ||
-                        isOnAdditionalWorkHistoryForm ||
-                        isOnAdditionalWorkResponsibilityForm ||
-                        isOnAdditionalWorkHistorySummary
-                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    }
+            {!summaryIsSubmitted ? (
+                <div className="flex rounded-lg">
+                    <div
+                        className={
+                            isOnHeadingForm
+                                ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-very-dark-yellow-green'
+                        }
+                    >
+                        Heading
+                    </div>
+                    <div
+                        className={`${
+                            isOnWorkHistoryForm ||
+                            isOnWorkResponbilityForm ||
+                            isOnWorkHistorySummary ||
+                            isOnSkipWorkHistoryModal ||
+                            isOnAdditionalWorkHistoryForm ||
+                            isOnAdditionalWorkResponsibilityForm ||
+                            isOnAdditionalWorkHistorySummary
+                                ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        }
                         ${
                             workHistoryIsSubmitted
                                 ? 'text-very-dark-yellow-green'
                                 : 'm-2 p-4 text-gray-400'
                         }
                             `}
-                >
-                    Work
+                    >
+                        Work
+                    </div>
+                    <div
+                        className={`${
+                            isOnEducationPath ||
+                            isOnEducationSummary ||
+                            isOnAdditionalWorkHistoryForm ||
+                            isOnAdditionalEducationSummary
+                                ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        } ${
+                            educationIsSubmitted
+                                ? 'text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        }`}
+                    >
+                        Education
+                    </div>
+                    <div
+                        className={`${
+                            isOnSkillsPath
+                                ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        } ${
+                            skillsIsSubmitted
+                                ? 'text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        }`}
+                    >
+                        Skills
+                    </div>
+                    <div
+                        className={`${
+                            isOnSummaryPath
+                                ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        } ${
+                            summaryIsSubmitted
+                                ? 'text-very-dark-yellow-green'
+                                : 'm-2 p-4 text-gray-400'
+                        }`}
+                    >
+                        Summary
+                    </div>
                 </div>
-                <div
-                    className={`${
-                        isOnEducationPath ||
-                        isOnEducationSummary ||
-                        isOnAdditionalEducationSummary
-                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    } ${
-                        educationIsSubmitted
-                            ? 'text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    }`}
-                >
-                    Education
+            ) : (
+                <div className="flex flex-col justify-center">
+                    <ReactToPrint
+                        trigger={() => (
+                            <button className="w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green">
+                                Keep a copy
+                            </button>
+                        )}
+                        content={() => componentRef.current}
+                        pageStyle={pageStyle}
+                        documentTitle="resume"
+                    />
                 </div>
-                <div
-                    className={`${
-                        isOnSkillsPath
-                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    } ${
-                        skillsIsSubmitted
-                            ? 'text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    }`}
-                >
-                    Skills
-                </div>
-                <div
-                    className={`${
-                        isOnSummaryPath
-                            ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    } ${
-                        summaryIsSubmitted
-                            ? 'text-very-dark-yellow-green'
-                            : 'm-2 p-4 text-gray-400'
-                    }`}
-                >
-                    Summary
-                </div>
-            </div>
+            )}
         </header>
     );
 };

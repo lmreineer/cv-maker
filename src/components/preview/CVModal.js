@@ -1,9 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
-import ReactToPrint from 'react-to-print';
-
 import CVContent from './CVContent';
 
 const CVModal = ({
+    componentRef,
     modalSizing,
     firstNameInput,
     lastNameInput,
@@ -59,37 +57,6 @@ const CVModal = ({
     secondSchoolNameInput,
     secondSchoolLocationInput
 }) => {
-    const componentRef = useRef();
-    const [pageWidth, setPageWidth] = useState(210); // Default to A4 width in millimeters
-    const [pageHeight, setPageHeight] = useState(297); // Default to A4 height in millimeters
-
-    useEffect(() => {
-        // Use a short delay to ensure the component has been rendered and dimensions are available
-        const delay = 100;
-        const timer = setTimeout(() => {
-            if (componentRef.current) {
-                const contentWidth = componentRef.current.offsetWidth;
-                const contentHeight = componentRef.current.offsetHeight;
-                setPageWidth(contentWidth / 3.779527559); // Convert pixels to millimeters
-                setPageHeight(contentHeight / 3.779527559); // Convert pixels to millimeters
-            }
-        }, delay);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    const pageStyle = `
-    @page {
-        size: ${pageWidth}mm ${pageHeight}mm;
-      }
-      @media print {
-        body {
-          width: ${pageWidth}mm;
-          height: ${pageHeight}mm;
-        }
-      }
-    `;
-
     return (
         <>
             <div
@@ -192,12 +159,6 @@ const CVModal = ({
                     />
                 </div>
             </div>
-            <ReactToPrint
-                trigger={() => <button>Download</button>}
-                content={() => componentRef.current}
-                pageStyle={pageStyle}
-                documentTitle="resume"
-            />
         </>
     );
 };

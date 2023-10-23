@@ -525,7 +525,7 @@ const CVContent = ({
     const defaultSkillTwo =
         'Strong analytical skills and ability to interpret market trends';
     const defaultSkillThree =
-        '    Excellent written and verbal communication skills';
+        'Excellent written and verbal communication skills';
     const defaultSkillFour = 'Creative thinking and problem-solving abilities';
     const defaultSkillFive = 'Team player with strong interpersonal skills';
     const defaultWorkResponsibilityOne =
