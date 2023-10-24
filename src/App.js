@@ -6,7 +6,7 @@ const App = () => {
     const componentRef = useRef();
 
     return (
-        <div className="h-screen">
+        <div className="h-min-screen">
             <Header componentRef={componentRef} />
             <Main componentRef={componentRef} />
         </div>

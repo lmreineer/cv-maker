@@ -59,7 +59,7 @@ const Header = ({ componentRef }) => {
         }, delay);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [componentRef]);
 
     const pageStyle = `
     @page {
