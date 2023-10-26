@@ -62,7 +62,14 @@ const FormValidation = ({ componentRef }) => {
         }
     };
 
-    const navigate = useNavigate();
+    const getFormData = (formData) => {
+        // make values of properties accessible
+        const data = JSON.parse(window.localStorage.getItem(formData));
+        // if form data is submitted, return form data
+        return data ? data : '';
+    };
+
+    const { isOnFinal } = getFormData('isOnFinalData');
 
     useEffect(() => {
         if (isOnFinal) {
@@ -83,14 +90,7 @@ const FormValidation = ({ componentRef }) => {
         }
     });
 
-    const getFormData = (formData) => {
-        // make values of properties accessible
-        const data = JSON.parse(window.localStorage.getItem(formData));
-        // if form data is submitted, return form data
-        return data ? data : '';
-    };
-
-    const { isOnFinal } = getFormData('isOnFinalData');
+    const navigate = useNavigate();
 
     const formik = useFormik({
         validateOnChange: handleValidateOnChangeValue(),
@@ -191,6 +191,9 @@ const FormValidation = ({ componentRef }) => {
                     break;
                 case '/summary':
                     navigate('/final');
+
+                    // reload the page to finalize the process of sizing the modal which is to be downloaded
+                    window.location.reload();
                     break;
             }
         }

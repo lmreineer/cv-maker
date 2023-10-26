@@ -1,7 +1,8 @@
-import headerLogo from '../assets/headerLogo.svg';
 import { useLocation } from 'react-router-dom';
+import headerLogo from '../assets/headerLogo.svg';
 
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
+
 import ReactToPrint from 'react-to-print';
 
 const Header = ({ componentRef }) => {
@@ -46,35 +47,27 @@ const Header = ({ componentRef }) => {
     const [pageWidth, setPageWidth] = useState(210); // default to A4 width in millimeters
     const [pageHeight, setPageHeight] = useState(297); // default to A4 height in millimeters
 
-    useEffect(() => {
-        // use a short delay to ensure the component has been rendered and dimensions are available
-        const delay = 100;
-        const timer = setTimeout(() => {
-            if (componentRef.current) {
-                const contentWidth = componentRef.current.offsetWidth;
-                const contentHeight = componentRef.current.offsetHeight;
-                setPageWidth(contentWidth / 3.779527559); // convert pixels to millimeters
-                setPageHeight(contentHeight / 3.779527559); // convert pixels to millimeters
-            }
-        }, delay);
-
-        return () => clearTimeout(timer);
+    useLayoutEffect(() => {
+        // calculate the dimensions after the component has been rendered
+        if (componentRef.current) {
+            const contentWidth = componentRef.current.offsetWidth;
+            const contentHeight = componentRef.current.offsetHeight;
+            setPageWidth(contentWidth / 3.779527559); // convert pixels to millimeters
+            setPageHeight(contentHeight / 3.779527559); // convert pixels to millimeters
+        }
     }, [componentRef]);
 
     const pageStyle = `
-    @page {
+      @page {
         size: ${pageWidth}mm ${pageHeight}mm;
-      }
-      @media print {
-        body {
-          width: ${pageWidth}mm;
-          height: ${pageHeight}mm;
-        }
       }
     `;
 
     return (
-        <header className="flex select-none items-center justify-around p-5">
+        <header
+            id="asd"
+            className="flex select-none items-center justify-around p-5"
+        >
             <img
                 src={headerLogo}
                 alt="CV Maker"
@@ -159,7 +152,7 @@ const Header = ({ componentRef }) => {
                 <div className="flex flex-col justify-center">
                     <ReactToPrint
                         trigger={() => (
-                            <button className="w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green">
+                            <button className="w-56 rounded-lg bg-yellow-green p-6 transition hover:cursor-pointer hover:bg-dark-yellow-green">
                                 Keep a copy
                             </button>
                         )}

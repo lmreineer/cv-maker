@@ -62,7 +62,11 @@ const CVModal = ({
             <div
                 className={`${modalSizing} select-none overflow-y-auto break-all rounded-lg bg-zinc-200`}
             >
-                <div ref={componentRef} className="min-h-[710px] bg-white p-10">
+                <div
+                    id="asd"
+                    ref={componentRef}
+                    className="min-h-[714px] bg-white p-10"
+                >
                     <CVContent
                         textContainer="h-full rounded p-10 overflow-auto bg-white"
                         fullName="font-bold text-5xl"
