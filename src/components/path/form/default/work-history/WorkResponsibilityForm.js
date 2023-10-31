@@ -33,12 +33,12 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex flex-col justify-center"
+            className="flex min-w-[616px] flex-col justify-center"
         >
             <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Work Responsibilities:
+                Let's list your responsibilities
             </h1>
-            <div className="flex w-[616px] flex-col">
+            <div className="flex flex-col justify-center">
                 <textarea
                     name="workResponsibilityOne"
                     placeholder="Work Responsibility 1"

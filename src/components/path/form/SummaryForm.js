@@ -30,7 +30,7 @@ const SummaryForm = ({ handleSubmit, handleChange }) => {
             className="flex flex-col justify-center"
         >
             <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Summary:
+                Your summary
             </h1>
             <textarea
                 name="summary"

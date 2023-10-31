@@ -35,12 +35,12 @@ const SkillsForm = ({ handleSubmit, handleChange }) => {
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex flex-col justify-center"
+            className="flex min-w-[616px] flex-col justify-center"
         >
             <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Skills:
+                Let's list your skills
             </h1>
-            <div className="flex w-[616px] flex-col">
+            <div className="flex flex-col justify-center">
                 <textarea
                     name="skillOne"
                     placeholder="Skill 1"

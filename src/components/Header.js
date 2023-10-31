@@ -61,6 +61,13 @@ const Header = ({ componentRef }) => {
       @page {
         size: ${pageWidth}mm ${pageHeight}mm;
       }
+      
+      @media print {
+        body {
+          width: ${pageWidth}mm;
+          height: ${pageHeight}mm;
+        }
+      }
     `;
 
     return (
@@ -109,7 +116,6 @@ const Header = ({ componentRef }) => {
                         className={`${
                             isOnEducationPath ||
                             isOnEducationSummary ||
-                            isOnAdditionalWorkHistoryForm ||
                             isOnAdditionalEducationSummary
                                 ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                                 : 'm-2 p-4 text-gray-400'

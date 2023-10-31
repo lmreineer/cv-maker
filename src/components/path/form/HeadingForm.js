@@ -6,10 +6,10 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                 className="flex flex-col justify-center"
             >
                 <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                    Contact Information:
+                    What are your contact details?
                 </h1>
-                <div className="flex">
-                    <div>
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
                         <input
                             type="text"
                             name="firstName"
@@ -28,7 +28,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                             </p>
                         )}
                     </div>
-                    <div>
+                    <div className="flex w-full flex-col">
                         <input
                             type="text"
                             name="lastName"
@@ -58,41 +58,49 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         maxLength={40}
                     />
                 </div>
-                <div>
-                    <input
-                        type="text"
-                        name="cityHeading"
-                        placeholder="City"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
-                        maxLength={40}
-                    />
-                    <input
-                        type="text"
-                        name="stateHeading"
-                        placeholder="State"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
-                        maxLength={40}
-                    />
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="cityHeading"
+                            placeholder="City"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={handleChange}
+                            maxLength={40}
+                        />
+                    </div>
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="stateHeading"
+                            placeholder="State"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={handleChange}
+                            maxLength={40}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <input
-                        type="text"
-                        name="country"
-                        placeholder="Country"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
-                        maxLength={40}
-                    />
-                    <input
-                        type="tel"
-                        name="zipCode"
-                        placeholder="ZIP Code"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={handleChange}
-                        maxLength={40}
-                    />
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="country"
+                            placeholder="Country"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={handleChange}
+                            maxLength={40}
+                        />
+                    </div>
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="tel"
+                            name="zipCode"
+                            placeholder="ZIP Code"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={handleChange}
+                            maxLength={40}
+                        />
+                    </div>
                 </div>
                 <div className="flex">
                     <input

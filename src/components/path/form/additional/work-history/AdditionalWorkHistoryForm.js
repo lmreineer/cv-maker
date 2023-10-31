@@ -62,55 +62,63 @@ const AdditionalWorkHistoryForm = ({
                 className="flex flex-col justify-center"
             >
                 <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                    Work History:
+                    Your another work
                 </h1>
-                <div className="flex">
-                    <input
-                        type="text"
-                        name="secondJobTitle"
-                        placeholder="Job Title"
-                        onChange={(e) => {
-                            handleChange(e);
-                        }}
-                        className={
-                            'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={40}
-                    />
-                    <input
-                        type="text"
-                        name="secondCompany"
-                        placeholder="Company"
-                        onChange={(e) => {
-                            handleChange(e);
-                        }}
-                        className={
-                            'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                        }
-                        maxLength={40}
-                    />
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="secondJobTitle"
+                            placeholder="Job Title"
+                            onChange={(e) => {
+                                handleChange(e);
+                            }}
+                            className={
+                                'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={40}
+                        />
+                    </div>
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="secondCompany"
+                            placeholder="Company"
+                            onChange={(e) => {
+                                handleChange(e);
+                            }}
+                            className={
+                                'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                            }
+                            maxLength={40}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <input
-                        type="text"
-                        name="secondCityWork"
-                        placeholder="City"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={(e) => {
-                            handleChange(e);
-                        }}
-                        maxLength={40}
-                    />
-                    <input
-                        type="text"
-                        name="secondStateWork"
-                        placeholder="State / Country"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={(e) => {
-                            handleChange(e);
-                        }}
-                        maxLength={40}
-                    />
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="secondCityWork"
+                            placeholder="City"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={(e) => {
+                                handleChange(e);
+                            }}
+                            maxLength={40}
+                        />
+                    </div>
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="secondStateWork"
+                            placeholder="State / Country"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={(e) => {
+                                handleChange(e);
+                            }}
+                            maxLength={40}
+                        />
+                    </div>
                 </div>
                 <div className="flex">
                     <Select

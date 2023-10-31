@@ -43,7 +43,7 @@ const EducationSummary = ({ handleSubmit }) => {
     return (
         <form onSubmit={handleSubmit} className="flex flex-col justify-center">
             <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                Education:
+                Education summary:
             </h1>
             <div className="flex w-[616px] flex-col">
                 <div className="m-3 break-all rounded-lg border border-dark-yellow-green p-4">

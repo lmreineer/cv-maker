@@ -80,10 +80,10 @@ const WorkHistoryForm = ({
                 className="flex flex-col justify-center"
             >
                 <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                    Work History:
+                    Your most recent work
                 </h1>
-                <div className="flex">
-                    <div>
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
                         <input
                             type="text"
                             name="jobTitle"
@@ -109,7 +109,7 @@ const WorkHistoryForm = ({
                                 </p>
                             )}
                     </div>
-                    <div>
+                    <div className="flex w-full flex-col">
                         <input
                             type="text"
                             name="company"
@@ -136,29 +136,33 @@ const WorkHistoryForm = ({
                             )}
                     </div>
                 </div>
-                <div>
-                    <input
-                        type="text"
-                        name="cityWork"
-                        placeholder="City"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={(e) => {
-                            handleChange(e);
-                            handleSkipWorkHistoryModal(e.target.value);
-                        }}
-                        maxLength={40}
-                    />
-                    <input
-                        type="text"
-                        name="stateWork"
-                        placeholder="State / Country"
-                        className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                        onChange={(e) => {
-                            handleChange(e);
-                            handleSkipWorkHistoryModal(e.target.value);
-                        }}
-                        maxLength={40}
-                    />
+                <div className="flex justify-center">
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="cityWork"
+                            placeholder="City"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={(e) => {
+                                handleChange(e);
+                                handleSkipWorkHistoryModal(e.target.value);
+                            }}
+                            maxLength={40}
+                        />
+                    </div>
+                    <div className="flex w-full flex-col">
+                        <input
+                            type="text"
+                            name="stateWork"
+                            placeholder="State / Country"
+                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                            onChange={(e) => {
+                                handleChange(e);
+                                handleSkipWorkHistoryModal(e.target.value);
+                            }}
+                            maxLength={40}
+                        />
+                    </div>
                 </div>
                 <div className="flex">
                     <Select
