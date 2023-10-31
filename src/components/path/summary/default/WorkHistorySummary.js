@@ -54,10 +54,10 @@ const WorkHistorySummary = ({ handleSubmit }) => {
             workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
         } else {
             if (hasDatesButNotCurrentlyWorking) {
-                workDatePeriod += `${yearStartWorkDataOrder || ''} ${
-                    -monthStartWorkDataOrder || ''
-                } ${-yearEndWorkDataOrder || ''} ${
-                    -monthEndWorkDataOrder || ''
+                workDatePeriod += `${yearStartWorkDataOrder || ''}-${
+                    monthStartWorkDataOrder || ''
+                } - ${yearEndWorkDataOrder || ''}-${
+                    monthEndWorkDataOrder || ''
                 }`;
             }
         }

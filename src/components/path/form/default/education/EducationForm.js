@@ -8,8 +8,10 @@ const EducationForm = ({
     handleChange,
     setFieldValue
 }) => {
-    const handleSkipEducation = (e) => {
-        e !== '' ? setSkipEducation(false) : setSkipEducation(true);
+    const handleSkipEducation = (str) => {
+        str.trim().length !== 0
+            ? setSkipEducation(false)
+            : setSkipEducation(true);
     };
 
     // generate options for react-select inputs
@@ -80,7 +82,7 @@ const EducationForm = ({
                         placeholder="Degree"
                         onChange={(e) => {
                             handleChange(e);
-                            handleSkipEducation(e);
+                            handleSkipEducation(e.target.value);
                         }}
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         maxLength={40}
@@ -91,7 +93,7 @@ const EducationForm = ({
                         placeholder="Field of Study"
                         onChange={(e) => {
                             handleChange(e);
-                            handleSkipEducation(e);
+                            handleSkipEducation(e.target.value);
                         }}
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         maxLength={40}
@@ -104,7 +106,7 @@ const EducationForm = ({
                         placeholder="School Name"
                         onChange={(e) => {
                             handleChange(e);
-                            handleSkipEducation(e);
+                            handleSkipEducation(e.target.value);
                         }}
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         maxLength={40}
@@ -115,7 +117,7 @@ const EducationForm = ({
                         placeholder="School Location"
                         onChange={(e) => {
                             handleChange(e);
-                            handleSkipEducation(e);
+                            handleSkipEducation(e.target.value);
                         }}
                         className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
                         maxLength={40}

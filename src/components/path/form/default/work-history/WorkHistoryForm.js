@@ -15,8 +15,8 @@ const WorkHistoryForm = ({
     companyValues,
     setFieldValue
 }) => {
-    const handleSkipWorkHistoryModal = (e) => {
-        e !== ''
+    const handleSkipWorkHistoryModal = (str) => {
+        str.trim().length !== 0
             ? setShowSkipWorkHistoryModal(false)
             : setShowSkipWorkHistoryModal(true);
     };
@@ -24,7 +24,7 @@ const WorkHistoryForm = ({
     // check if main input is omitted after inputting other secondary inputs
     const inputIsOmitted = (omittedInput) => {
         // main input is omitted but secondary inputs are inputted
-        return omittedInput === '' && !showSkipWorkHistoryModal;
+        return omittedInput.trim().length === 0 && !showSkipWorkHistoryModal;
     };
 
     // generate options for react-select inputs

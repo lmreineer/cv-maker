@@ -671,9 +671,9 @@ const CVContent = ({
 
         if (path) {
             if (currentlyWorkingCheckboxDataOrder) {
-                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
+                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder} - Current`;
             } else if (hasDatesButNotCurrentlyWorkingOrder) {
-                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-${yearEndWorkDataOrder}-${monthEndWorkDataOrder}`;
+                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder} - ${yearEndWorkDataOrder}-${monthEndWorkDataOrder}`;
             }
         } else if (
             currentlyWorkingCheckboxValueOrder ||
@@ -683,12 +683,12 @@ const CVContent = ({
         ) {
             workDatePeriod += `${yearStartWorkInputOrder || '2020'}-${
                 monthStartWorkInputOrder || '04'
-            }-Current`;
+            } - Current`;
             // else, display year and month inputs on work history section
         } else {
             workDatePeriod += `${yearStartWorkInputOrder || '2020'}-${
                 monthStartWorkInputOrder || '04'
-            }-${yearEndWorkInputOrder || '2023'}-${
+            } - ${yearEndWorkInputOrder || '2023'}-${
                 monthEndWorkInputOrder || '06'
             }`;
         }

@@ -60,7 +60,7 @@ const AdditionalEducationSummary = ({ handleSubmit }) => {
                             ` (${monthStartGraduationData} ${yearStartGraduationData})`}
                     </p>
                 </div>
-                <div className="rounded-b-lg border border-t-0 border-dark-yellow-green p-4">
+                <div className="break-all rounded-b-lg border border-t-0 border-dark-yellow-green p-4">
                     <p className="font-medium">{secondSchoolNameData}</p>
                     <p>{secondSchoolLocationData}</p>
                     <p>
