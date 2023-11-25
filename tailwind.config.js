@@ -15,6 +15,9 @@ module.exports = {
             },
             boxShadow: {
                 'all-sides-light': '0 0 4px rgba(0, 0, 0, 0.2)'
+            },
+            screens: {
+                'mobile-s': '320px'
             }
         }
     },

@@ -65,7 +65,7 @@ const CVPreview = ({
     return (
         <div className="my-10">
             <div
-                className="h-[714px] w-[30rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
+                className="h-[714px] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
                 onClick={toggleClick}
             >
                 <CVContent
@@ -159,7 +159,7 @@ const CVPreview = ({
                 />
             </div>
 
-            {isClicked && (
+            {isClicked && window.innerWidth > 375 && (
                 <div>
                     <div
                         className="fixed inset-0 bg-modal-overlay"

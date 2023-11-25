@@ -71,22 +71,21 @@ const Header = ({ componentRef }) => {
     `;
 
     return (
-        <header
-            id="asd"
-            className="flex select-none items-center justify-around p-5"
-        >
-            <img
-                src={headerLogo}
-                alt="CV Maker"
-                className="pointer-events-none w-48"
-            />
+        <header className="flex w-full select-none flex-col items-center p-5 sm:w-screen sm:flex-row sm:justify-around">
+            <div className="justify-center">
+                <img
+                    src={headerLogo}
+                    alt="CV Maker"
+                    className="pointer-events-none my-6 w-48"
+                />
+            </div>
             {!summaryIsSubmitted ? (
-                <div className="flex rounded-lg">
+                <div className="w-full rounded-lg text-center sm:flex">
                     <div
                         className={
                             isOnHeadingForm
                                 ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                                : 'm-2 p-4 text-very-dark-yellow-green'
+                                : 'm-2 p-2 text-very-dark-yellow-green'
                         }
                     >
                         Heading
