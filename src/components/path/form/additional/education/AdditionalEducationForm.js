@@ -53,10 +53,19 @@ const AdditionalEducationForm = ({
             paddingLeft: '1rem',
             height: '3.75rem',
             borderRadius: '0.5rem',
+            overflow: 'hidden',
+            wordBreak: 'break-all',
             '&:hover': {
                 border: '2px solid #7B8B5E'
             }
         })
+    };
+
+    const maximizeTextLength = (inputValue) => {
+        const maxLength = 4;
+        return inputValue.length <= maxLength
+            ? inputValue
+            : inputValue.substr(0, maxLength);
     };
 
     const navigate = useNavigate();
@@ -65,110 +74,96 @@ const AdditionalEducationForm = ({
     };
 
     return (
-        <>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col justify-center"
-            >
-                <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                    Your another education
-                </h1>
-                <div className="flex justify-center">
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondDegree"
-                            placeholder="Degree"
-                            onChange={(e) => {
-                                handleChange(e);
-                                handleSkipEducation(e);
-                            }}
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            maxLength={40}
-                        />
-                    </div>
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondFieldOfStudy"
-                            placeholder="Field of Study"
-                            onChange={(e) => {
-                                handleChange(e);
-                                handleSkipEducation(e);
-                            }}
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            maxLength={40}
-                        />
-                    </div>
-                </div>
-                <div className="flex justify-center">
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondSchoolName"
-                            placeholder="School Name"
-                            onChange={(e) => {
-                                handleChange(e);
-                                handleSkipEducation(e);
-                            }}
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            maxLength={40}
-                        />
-                    </div>
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondSchoolLocation"
-                            placeholder="School Location"
-                            onChange={(e) => {
-                                handleChange(e);
-                                handleSkipEducation(e);
-                            }}
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            maxLength={40}
-                        />
-                    </div>
-                </div>
-                <div className="flex">
-                    <Select
-                        name="secondYearStartGraduation"
-                        placeholder="Graduation Start Year"
-                        options={generateYearStartOptions()}
-                        styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('secondYearStartGraduation', e.value);
-                            handleSkipEducation(e.value);
-                        }}
-                    />
-                    <Select
-                        name="secondMonthStartGraduation"
-                        placeholder="Graduation Start Month"
-                        options={generateMonthStartOptions()}
-                        styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue(
-                                'secondMonthStartGraduation',
-                                e.value
-                            );
-                            handleSkipEducation(e.value);
-                        }}
-                    />
-                </div>
-                <div className="flex justify-around">
-                    <input
-                        type="button"
-                        className="my-10 w-56 rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
-                        onClick={navigateBack}
-                        value="Back"
-                    />
-                    <input
-                        type="submit"
-                        className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
-                        value="Continue"
-                    />
-                </div>
-            </form>
-        </>
+        <form onSubmit={handleSubmit}>
+            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+                Your another education
+            </h1>
+            <div className="flex">
+                <input
+                    type="text"
+                    name="secondDegree"
+                    placeholder="Degree"
+                    onChange={(e) => {
+                        handleChange(e);
+                        handleSkipEducation(e);
+                    }}
+                    className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    maxLength={40}
+                />
+                <input
+                    type="text"
+                    name="secondFieldOfStudy"
+                    placeholder="Field of Study"
+                    onChange={(e) => {
+                        handleChange(e);
+                        handleSkipEducation(e);
+                    }}
+                    className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    maxLength={40}
+                />
+            </div>
+            <div className="flex">
+                <input
+                    type="text"
+                    name="secondSchoolName"
+                    placeholder="School Name"
+                    onChange={(e) => {
+                        handleChange(e);
+                        handleSkipEducation(e);
+                    }}
+                    className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    maxLength={40}
+                />
+                <input
+                    type="text"
+                    name="secondSchoolLocation"
+                    placeholder="School Location"
+                    onChange={(e) => {
+                        handleChange(e);
+                        handleSkipEducation(e);
+                    }}
+                    className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    maxLength={40}
+                />
+            </div>
+            <div className="flex">
+                <Select
+                    name="secondYearStartGraduation"
+                    placeholder="Graduation Start Year"
+                    options={generateYearStartOptions()}
+                    styles={customStyles}
+                    onChange={(e) => {
+                        setFieldValue('secondYearStartGraduation', e.value);
+                        handleSkipEducation(e.value);
+                    }}
+                    onInputChange={maximizeTextLength}
+                />
+                <Select
+                    name="secondMonthStartGraduation"
+                    placeholder="Graduation Start Month"
+                    options={generateMonthStartOptions()}
+                    styles={customStyles}
+                    onChange={(e) => {
+                        setFieldValue('secondMonthStartGraduation', e.value);
+                        handleSkipEducation(e.value);
+                    }}
+                    onInputChange={maximizeTextLength}
+                />
+            </div>
+            <div className="flex justify-around">
+                <input
+                    type="button"
+                    className="m-3 my-10 w-full rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
+                    onClick={navigateBack}
+                    value="Back"
+                />
+                <input
+                    type="submit"
+                    className="m-3 my-10 w-full rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
+                    value="Continue"
+                />
+            </div>
+        </form>
     );
 };
 

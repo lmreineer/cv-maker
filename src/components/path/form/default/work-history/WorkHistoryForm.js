@@ -62,6 +62,13 @@ const WorkHistoryForm = ({
         })
     };
 
+    const maximizeTextLength = (inputValue) => {
+        const maxLength = 4;
+        return inputValue.length <= maxLength
+            ? inputValue
+            : inputValue.substr(0, maxLength);
+    };
+
     const handleCheckedState = () => {
         currentlyWorkingCheckboxValue
             ? setCurrentlyWorkingCheckboxValue(false)
@@ -74,16 +81,13 @@ const WorkHistoryForm = ({
     };
 
     return (
-        <>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col justify-center"
-            >
-                <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
-                    Your most recent work
-                </h1>
-                <div className="flex justify-center">
-                    <div className="flex w-full flex-col">
+        <form onSubmit={handleSubmit}>
+            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+                Your most recent work
+            </h1>
+            <div className="flex">
+                <div>
+                    <div className="flex">
                         <input
                             type="text"
                             name="jobTitle"
@@ -96,20 +100,22 @@ const WorkHistoryForm = ({
                                 inputIsOmitted(jobTitleValues) &&
                                 formikErrors.jobTitle &&
                                 touched.jobTitle
-                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                                    ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
                             maxLength={40}
                         />
-                        {inputIsOmitted(jobTitleValues) &&
-                            formikErrors.jobTitle &&
-                            touched.jobTitle && (
-                                <p className="ml-4 text-red-800">
-                                    {formikErrors.jobTitle}
-                                </p>
-                            )}
                     </div>
-                    <div className="flex w-full flex-col">
+                    {inputIsOmitted(jobTitleValues) &&
+                        formikErrors.jobTitle &&
+                        touched.jobTitle && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.jobTitle}
+                            </p>
+                        )}
+                </div>
+                <div>
+                    <div className="flex">
                         <input
                             type="text"
                             name="company"
@@ -122,124 +128,124 @@ const WorkHistoryForm = ({
                                 inputIsOmitted(companyValues) &&
                                 formikErrors.company &&
                                 touched.company
-                                    ? 'm-3 rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
-                                    : 'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                                    ? 'm-3 w-full rounded-lg border-2 border-red-700 p-4 outline-0 focus:border-red-700'
+                                    : 'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
                             }
                             maxLength={40}
                         />
-                        {inputIsOmitted(companyValues) &&
-                            formikErrors.company &&
-                            touched.company && (
-                                <p className="ml-4 text-red-800">
-                                    {formikErrors.company}
-                                </p>
-                            )}
                     </div>
+                    {inputIsOmitted(companyValues) &&
+                        formikErrors.company &&
+                        touched.company && (
+                            <p className="ml-4 text-red-800">
+                                {formikErrors.company}
+                            </p>
+                        )}
                 </div>
-                <div className="flex justify-center">
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="cityWork"
-                            placeholder="City"
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            onChange={(e) => {
-                                handleChange(e);
-                                handleSkipWorkHistoryModal(e.target.value);
-                            }}
-                            maxLength={40}
-                        />
-                    </div>
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="stateWork"
-                            placeholder="State / Country"
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            onChange={(e) => {
-                                handleChange(e);
-                                handleSkipWorkHistoryModal(e.target.value);
-                            }}
-                            maxLength={40}
-                        />
-                    </div>
-                </div>
-                <div className="flex">
-                    <Select
-                        name="yearStartWork"
-                        placeholder="Year Start"
-                        options={generateOptions(70, 2023)}
-                        styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('yearStartWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
-                    />
-                    <Select
-                        name="monthStartWork"
-                        placeholder="Month Start"
-                        options={generateOptions(11, 12)}
-                        styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('monthStartWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
-                    />
-                </div>
-                <div className="flex">
-                    <Select
-                        name="yearEndWork"
-                        placeholder="Year End"
-                        options={generateOptions(70, 2023)}
-                        styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('yearEndWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
-                        isDisabled={currentlyWorkingCheckboxValue}
-                    />
-                    <Select
-                        name="monthEndWork"
-                        placeholder="Month End"
-                        options={generateOptions(11, 12)}
-                        styles={customStyles}
-                        onChange={(e) => {
-                            setFieldValue('monthEndWork', e.value);
-                            handleSkipWorkHistoryModal(e.value);
-                        }}
-                        isDisabled={currentlyWorkingCheckboxValue}
-                    />
-                </div>
-                <div className="flex">
-                    <label className="m-4 flex select-none text-base hover:cursor-pointer">
-                        <input
-                            type="checkbox"
-                            name="currentlyWorkingCheckbox"
-                            className="mr-3 w-4 hover:cursor-pointer"
-                            checked={currentlyWorkingCheckboxValue}
-                            onChange={(e) => {
-                                handleCheckedState();
-                                handleSkipWorkHistoryModal(e.target.value);
-                            }}
-                        />
-                        I currently work here
-                    </label>
-                </div>
-                <div className="flex justify-around">
+            </div>
+            <div className="flex">
+                <input
+                    type="text"
+                    name="cityWork"
+                    placeholder="City"
+                    className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    onChange={(e) => {
+                        handleChange(e);
+                        handleSkipWorkHistoryModal(e.target.value);
+                    }}
+                    maxLength={40}
+                />
+                <input
+                    type="text"
+                    name="stateWork"
+                    placeholder="State / Country"
+                    className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                    onChange={(e) => {
+                        handleChange(e);
+                        handleSkipWorkHistoryModal(e.target.value);
+                    }}
+                    maxLength={40}
+                />
+            </div>
+            <div className="flex">
+                <Select
+                    name="yearStartWork"
+                    placeholder="Year Start"
+                    options={generateOptions(70, 2023)}
+                    styles={customStyles}
+                    onChange={(e) => {
+                        setFieldValue('yearStartWork', e.value);
+                        handleSkipWorkHistoryModal(e.value);
+                    }}
+                    onInputChange={maximizeTextLength}
+                />
+                <Select
+                    name="monthStartWork"
+                    placeholder="Month Start"
+                    options={generateOptions(11, 12)}
+                    styles={customStyles}
+                    onChange={(e) => {
+                        setFieldValue('monthStartWork', e.value);
+                        handleSkipWorkHistoryModal(e.value);
+                    }}
+                    onInputChange={maximizeTextLength}
+                />
+            </div>
+            <div className="flex">
+                <Select
+                    name="yearEndWork"
+                    placeholder="Year End"
+                    options={generateOptions(70, 2023)}
+                    styles={customStyles}
+                    onChange={(e) => {
+                        setFieldValue('yearEndWork', e.value);
+                        handleSkipWorkHistoryModal(e.value);
+                    }}
+                    onInputChange={maximizeTextLength}
+                    isDisabled={currentlyWorkingCheckboxValue}
+                />
+                <Select
+                    name="monthEndWork"
+                    placeholder="Month End"
+                    options={generateOptions(11, 12)}
+                    styles={customStyles}
+                    onChange={(e) => {
+                        setFieldValue('monthEndWork', e.value);
+                        handleSkipWorkHistoryModal(e.value);
+                    }}
+                    onInputChange={maximizeTextLength}
+                    isDisabled={currentlyWorkingCheckboxValue}
+                />
+            </div>
+            <div className="flex">
+                <label className="m-4 flex select-none text-base hover:cursor-pointer">
                     <input
-                        type="button"
-                        className="my-10 w-56 rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
-                        onClick={navigateBack}
-                        value="Back"
+                        type="checkbox"
+                        name="currentlyWorkingCheckbox"
+                        className="mr-3 w-4 hover:cursor-pointer"
+                        checked={currentlyWorkingCheckboxValue}
+                        onChange={(e) => {
+                            handleCheckedState();
+                            handleSkipWorkHistoryModal(e.target.value);
+                        }}
                     />
-                    <input
-                        type="submit"
-                        className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
-                        value="Continue"
-                    />
-                </div>
-            </form>
-        </>
+                    I currently work here
+                </label>
+            </div>
+            <div className="flex justify-around">
+                <input
+                    type="button"
+                    className="m-3 my-10 w-full rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
+                    onClick={navigateBack}
+                    value="Back"
+                />
+                <input
+                    type="submit"
+                    className="m-3 my-10 w-full rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
+                    value="Continue"
+                />
+            </div>
+        </form>
     );
 };
 

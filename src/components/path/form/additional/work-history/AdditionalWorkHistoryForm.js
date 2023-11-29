@@ -44,6 +44,13 @@ const AdditionalWorkHistoryForm = ({
         })
     };
 
+    const maximizeTextLength = (inputValue) => {
+        const maxLength = 4;
+        return inputValue.length <= maxLength
+            ? inputValue
+            : inputValue.substr(0, maxLength);
+    };
+
     const handleCheckedState = () => {
         secondCurrentlyWorkingCheckboxValue === true
             ? setSecondCurrentlyWorkingCheckboxValue(false)
@@ -57,68 +64,57 @@ const AdditionalWorkHistoryForm = ({
 
     return (
         <>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col justify-center"
-            >
+            <form onSubmit={handleSubmit}>
                 <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Your another work
                 </h1>
-                <div className="flex justify-center">
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondJobTitle"
-                            placeholder="Job Title"
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                            className={
-                                'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                            }
-                            maxLength={40}
-                        />
-                    </div>
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondCompany"
-                            placeholder="Company"
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                            className={
-                                'm-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
-                            }
-                            maxLength={40}
-                        />
-                    </div>
+                <div className="flex">
+                    <input
+                        type="text"
+                        name="secondJobTitle"
+                        placeholder="Job Title"
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                        className={
+                            'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                        }
+                        maxLength={40}
+                    />
+                    <input
+                        type="text"
+                        name="secondCompany"
+                        placeholder="Company"
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                        className={
+                            'm-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green'
+                        }
+                        maxLength={40}
+                    />
                 </div>
-                <div className="flex justify-center">
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondCityWork"
-                            placeholder="City"
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                            maxLength={40}
-                        />
-                    </div>
-                    <div className="flex w-full flex-col">
-                        <input
-                            type="text"
-                            name="secondStateWork"
-                            placeholder="State / Country"
-                            className="m-3 rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                            maxLength={40}
-                        />
-                    </div>
+                <div className="flex">
+                    <input
+                        type="text"
+                        name="secondCityWork"
+                        placeholder="City"
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                        maxLength={40}
+                    />
+                    <input
+                        type="text"
+                        name="secondStateWork"
+                        placeholder="State / Country"
+                        className="m-3 w-full rounded-lg border-2 p-4 outline-0 focus:border-dark-yellow-green"
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                        maxLength={40}
+                    />
                 </div>
                 <div className="flex">
                     <Select
@@ -129,6 +125,7 @@ const AdditionalWorkHistoryForm = ({
                         onChange={(e) =>
                             setFieldValue('secondYearStartWork', e.value)
                         }
+                        onInputChange={maximizeTextLength}
                     />
                     <Select
                         name="secondMonthStartWork"
@@ -138,6 +135,7 @@ const AdditionalWorkHistoryForm = ({
                         onChange={(e) =>
                             setFieldValue('secondMonthStartWork', e.value)
                         }
+                        onInputChange={maximizeTextLength}
                     />
                 </div>
                 <div className="flex">
@@ -149,6 +147,7 @@ const AdditionalWorkHistoryForm = ({
                         onChange={(e) =>
                             setFieldValue('secondYearEndWork', e.value)
                         }
+                        onInputChange={maximizeTextLength}
                         isDisabled={secondCurrentlyWorkingCheckboxValue}
                     />
                     <Select
@@ -159,6 +158,7 @@ const AdditionalWorkHistoryForm = ({
                         onChange={(e) =>
                             setFieldValue('secondMonthEndWork', e.value)
                         }
+                        onInputChange={maximizeTextLength}
                         isDisabled={secondCurrentlyWorkingCheckboxValue}
                     />
                 </div>
@@ -177,13 +177,13 @@ const AdditionalWorkHistoryForm = ({
                 <div className="flex justify-around">
                     <input
                         type="button"
-                        className="my-10 w-56 rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
+                        className="m-3 my-10 w-full rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
                         onClick={navigateBack}
                         value="Back"
                     />
                     <input
                         type="submit"
-                        className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
+                        className="m-3 my-10 w-full rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
                         value="Continue"
                     />
                 </div>

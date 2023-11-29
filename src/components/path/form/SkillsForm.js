@@ -32,15 +32,11 @@ const SkillsForm = ({ handleSubmit, handleChange }) => {
     };
 
     return (
-        <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="flex min-w-[616px] flex-col justify-center"
-        >
+        <form ref={formRef} onSubmit={handleSubmit}>
             <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Let's list your skills
             </h1>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col">
                 <textarea
                     name="skillOne"
                     placeholder="Skill 1"
@@ -90,13 +86,13 @@ const SkillsForm = ({ handleSubmit, handleChange }) => {
             <div className="flex justify-around">
                 <input
                     type="button"
-                    className="my-10 w-56 rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
+                    className="m-3 my-10 w-full rounded-lg bg-gray-300 p-5 transition hover:cursor-pointer hover:bg-gray-400"
                     onClick={navigateBack}
                     value="Back"
                 />
                 <input
                     type="submit"
-                    className="my-10 w-56 rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
+                    className="m-3 my-10 w-full rounded-lg bg-yellow-green p-5 transition hover:cursor-pointer hover:bg-dark-yellow-green"
                     value="Continue"
                 />
             </div>

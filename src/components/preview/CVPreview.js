@@ -63,7 +63,7 @@ const CVPreview = ({
     const toggleClick = () => setIsClicked(!isClicked);
 
     return (
-        <div className="my-10">
+        <div className="m-10 sm:m-10">
             <div
                 className="h-[714px] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
                 onClick={toggleClick}
@@ -160,7 +160,7 @@ const CVPreview = ({
             </div>
 
             {isClicked && window.innerWidth > 375 && (
-                <div>
+                <>
                     <div
                         className="fixed inset-0 bg-modal-overlay"
                         onClick={toggleClick}
@@ -235,7 +235,7 @@ const CVPreview = ({
                         secondSchoolNameInput={secondSchoolNameInput}
                         secondSchoolLocationInput={secondSchoolLocationInput}
                     />
-                </div>
+                </>
             )}
         </div>
     );
