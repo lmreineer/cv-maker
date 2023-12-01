@@ -134,7 +134,6 @@ const AdditionalEducationForm = ({
                     styles={customStyles}
                     onChange={(e) => {
                         setFieldValue('secondYearStartGraduation', e.value);
-                        handleSkipEducation(e.value);
                     }}
                     onInputChange={maximizeTextLength}
                 />
@@ -145,7 +144,6 @@ const AdditionalEducationForm = ({
                     styles={customStyles}
                     onChange={(e) => {
                         setFieldValue('secondMonthStartGraduation', e.value);
-                        handleSkipEducation(e.value);
                     }}
                     onInputChange={maximizeTextLength}
                 />

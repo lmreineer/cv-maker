@@ -71,8 +71,8 @@ const Header = ({ componentRef }) => {
     `;
 
     return (
-        <header className="flex w-full select-none flex-col items-center p-5 sm:flex-row sm:justify-around">
-            <div className="justify-center">
+        <header className="flex w-full select-none flex-col items-center justify-around p-5 sm:flex-row">
+            <div className="flex">
                 <img
                     src={headerLogo}
                     alt="CV Maker"
@@ -80,12 +80,12 @@ const Header = ({ componentRef }) => {
                 />
             </div>
             {!summaryIsSubmitted ? (
-                <div className="w-full rounded-lg text-center sm:flex">
+                <div className="w-full rounded-lg text-center sm:flex sm:w-max">
                     <div
                         className={
                             isOnHeadingForm
                                 ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                                : 'm-2 p-2 text-very-dark-yellow-green'
+                                : 'm-2 p-2 text-very-dark-yellow-green sm:flex sm:flex-wrap sm:content-center'
                         }
                     >
                         Heading
@@ -101,13 +101,11 @@ const Header = ({ componentRef }) => {
                             isOnAdditionalWorkHistorySummary
                                 ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
                                 : 'm-2 p-4 text-gray-400'
-                        }
-                        ${
+                        } ${
                             workHistoryIsSubmitted
                                 ? 'text-very-dark-yellow-green'
                                 : 'm-2 p-4 text-gray-400'
-                        }
-                            `}
+                        }`}
                     >
                         Work
                     </div>
