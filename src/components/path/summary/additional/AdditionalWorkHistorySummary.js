@@ -79,7 +79,9 @@ const AdditionalWorkHistorySummary = ({ handleSubmit }) => {
         let workDatePeriod = '';
 
         if (currentlyWorkingCheckboxDataOrder) {
-            workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
+            if (yearStartWorkDataOrder && monthStartWorkDataOrder) {
+                workDatePeriod += `${yearStartWorkDataOrder}-${monthStartWorkDataOrder}-Current`;
+            }
         } else {
             if (hasDatesButNotCurrentlyWorkingOrder) {
                 workDatePeriod += `${yearStartWorkDataOrder || ''}-${

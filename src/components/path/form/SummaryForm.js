@@ -25,7 +25,7 @@ const SummaryForm = ({ handleSubmit, handleChange }) => {
 
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
-            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+            <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Your summary
             </h1>
             <div className="flex flex-col">

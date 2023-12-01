@@ -33,7 +33,7 @@ const SkillsForm = ({ handleSubmit, handleChange }) => {
 
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
-            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+            <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Let's list your skills
             </h1>
             <div className="flex flex-col">

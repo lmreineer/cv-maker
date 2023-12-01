@@ -1,11 +1,11 @@
 const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
     return (
         <form onSubmit={handleSubmit}>
-            <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
+            <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Your contact details
             </h1>
             <div className="flex">
-                <div>
+                <div className="w-full">
                     <div className="flex">
                         <input
                             type="text"
@@ -26,7 +26,7 @@ const HeadingForm = ({ handleSubmit, handleChange, formikErrors, touched }) => {
                         </p>
                     )}
                 </div>
-                <div>
+                <div className="w-full">
                     <div className="flex">
                         <input
                             type="text"
