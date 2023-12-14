@@ -166,7 +166,7 @@ const CVPreview = ({
                         onClick={toggleClick}
                     ></div>
                     <CVModal
-                        modalSizing="p-10 absolute max-h-[50rem] min-h-[42.4rem] left-2/4 top-2/4 w-7/12 translate-x-[-50%] translate-y-[-50%]"
+                        modalSizing="p-10 fixed h-5/6 left-1/2 top-1/2 w-7/12 translate-x-[-50%] translate-y-[-50%]"
                         firstNameInput={firstNameInput}
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}
