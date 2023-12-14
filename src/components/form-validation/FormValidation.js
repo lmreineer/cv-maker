@@ -274,7 +274,7 @@ const FormValidation = ({ componentRef }) => {
     const lowerCaseEachLetter = (input) => input.toLowerCase();
 
     return (
-        <>
+        <div className="justify-evenly bg-main md:flex">
             <Routes>
                 <Route
                     path="/"
@@ -526,7 +526,7 @@ const FormValidation = ({ componentRef }) => {
                     summaryInput={capitaliseFirstLetter(summary)}
                 />
             )}
-        </>
+        </div>
     );
 };
 

@@ -18,6 +18,9 @@ module.exports = {
             },
             screens: {
                 'mobile-s': '320px'
+            },
+            minWidth: {
+                96: '24rem'
             }
         }
     },

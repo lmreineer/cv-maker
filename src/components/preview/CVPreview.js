@@ -63,9 +63,9 @@ const CVPreview = ({
     const toggleClick = () => setIsClicked(!isClicked);
 
     return (
-        <div className="m-10 sm:m-10">
+        <div className="flex flex-col justify-center p-10">
             <div
-                className="h-[714px] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer"
+                className="max-h-[43.4rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer md:min-w-96 md:max-w-[36rem]"
                 onClick={toggleClick}
             >
                 <CVContent
@@ -159,14 +159,14 @@ const CVPreview = ({
                 />
             </div>
 
-            {isClicked && window.innerWidth > 375 && (
+            {isClicked && window.innerWidth >= 768 && (
                 <>
                     <div
                         className="fixed inset-0 bg-modal-overlay"
                         onClick={toggleClick}
                     ></div>
                     <CVModal
-                        modalSizing="p-10 absolute left-2/4 top-2/4 h-5/6 w-7/12 translate-x-[-50%] translate-y-[-50%]"
+                        modalSizing="p-10 absolute max-h-[50rem] min-h-[42.4rem] left-2/4 top-2/4 w-7/12 translate-x-[-50%] translate-y-[-50%]"
                         firstNameInput={firstNameInput}
                         lastNameInput={lastNameInput}
                         professionInput={professionInput}

@@ -71,12 +71,12 @@ const Header = ({ componentRef }) => {
     `;
 
     return (
-        <header className="flex w-full select-none flex-col items-center justify-around p-5 sm:flex-row">
-            <div className="flex">
+        <header className="flex w-full select-none flex-col items-center justify-around p-4 md:flex-row">
+            <div className="m-5">
                 <img
                     src={headerLogo}
                     alt="CV Maker"
-                    className="pointer-events-none my-6 w-48"
+                    className="pointer-events-none w-[11.5rem]"
                 />
             </div>
             {!summaryIsSubmitted ? (
