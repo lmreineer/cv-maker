@@ -45,7 +45,7 @@ const AdditionalEducationSummary = ({ handleSubmit }) => {
     const navigate = useNavigate();
     const navigateBack = () => navigate('/additional-education');
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center">
             <h1 className="my-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Education summary:
             </h1>

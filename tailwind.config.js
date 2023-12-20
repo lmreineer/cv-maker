@@ -21,6 +21,10 @@ module.exports = {
             },
             minWidth: {
                 96: '24rem'
+            },
+            screens: {
+                tall: { raw: '(min-height: 1024px)' },
+                short: { raw: '(max-height: 1024px)' }
             }
         }
     },

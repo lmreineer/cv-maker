@@ -30,7 +30,11 @@ const WorkResponsibilityForm = ({ handleSubmit, handleChange }) => {
     };
 
     return (
-        <form ref={formRef} onSubmit={handleSubmit}>
+        <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex flex-col justify-center"
+        >
             <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Let's list your responsibilities
             </h1>

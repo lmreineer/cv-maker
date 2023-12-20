@@ -64,7 +64,10 @@ const AdditionalWorkHistoryForm = ({
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form
+                onSubmit={handleSubmit}
+                className="flex flex-col justify-center"
+            >
                 <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Your another work
                 </h1>

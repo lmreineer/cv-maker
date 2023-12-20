@@ -63,9 +63,9 @@ const CVPreview = ({
     const toggleClick = () => setIsClicked(!isClicked);
 
     return (
-        <div className="flex flex-col justify-center p-10">
+        <div className="flex justify-center p-10 md:px-3">
             <div
-                className="max-h-[43.4rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer md:min-w-96 md:max-w-[36rem]"
+                className="h-[43.4rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer md:min-w-96 md:tall:w-screen md:short:max-w-[36rem]"
                 onClick={toggleClick}
             >
                 <CVContent
@@ -159,7 +159,7 @@ const CVPreview = ({
                 />
             </div>
 
-            {isClicked && window.innerWidth >= 768 && (
+            {isClicked && window.innerWidth > 768 && (
                 <>
                     <div
                         className="fixed inset-0 bg-modal-overlay"

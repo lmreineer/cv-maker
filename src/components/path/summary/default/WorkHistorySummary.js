@@ -86,7 +86,10 @@ const WorkHistorySummary = ({ handleSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            onSubmit={handleSubmit}
+            className="flex flex-col justify-center md:w-[36rem]"
+        >
             <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                 Work history summary:
             </h1>

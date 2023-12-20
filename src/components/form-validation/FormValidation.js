@@ -274,7 +274,11 @@ const FormValidation = ({ componentRef }) => {
     const lowerCaseEachLetter = (input) => input.toLowerCase();
 
     return (
-        <div className="justify-evenly bg-main md:flex">
+        <div
+            className={`justify-evenly bg-main ${
+                !isOnFinalPath ? 'md:flex md:tall:block' : 'flex'
+            }`}
+        >
             <Routes>
                 <Route
                     path="/"

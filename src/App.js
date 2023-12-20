@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import Header from './components/Header.js';
-import Main from './components/Main.js';
+import FormValidation from './components/form-validation/FormValidation.js';
 
 const App = () => {
     const componentRef = useRef();
@@ -8,7 +8,7 @@ const App = () => {
     return (
         <>
             <Header componentRef={componentRef} />
-            <Main componentRef={componentRef} />
+            <FormValidation componentRef={componentRef} />
         </>
     );
 };
