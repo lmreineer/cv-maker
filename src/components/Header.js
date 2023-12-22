@@ -71,7 +71,7 @@ const Header = ({ componentRef }) => {
     `;
 
     return (
-        <header className="flex w-full select-none flex-col items-center justify-around p-4 md:flex-row">
+        <header className="flex w-full select-none flex-col items-center justify-around bg-white p-4 md:flex-row">
             <div className="m-5">
                 <img
                     src={headerLogo}

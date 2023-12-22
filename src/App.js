@@ -6,10 +6,10 @@ const App = () => {
     const componentRef = useRef();
 
     return (
-        <>
+        <div className="h-screen bg-main">
             <Header componentRef={componentRef} />
             <FormValidation componentRef={componentRef} />
-        </>
+        </div>
     );
 };
 
