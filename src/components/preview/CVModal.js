@@ -62,7 +62,7 @@ const CVModal = ({
         <div
             className={`${modalSizing} select-none overflow-y-auto break-all rounded-lg bg-zinc-200`}
         >
-            <div ref={componentRef} className="bg-white p-10">
+            <div ref={componentRef} className={`${contentStyle} bg-white p-10`}>
                 <CVContent
                     textContainer="h-full rounded p-10 overflow-auto bg-white"
                     fullName="font-bold text-5xl"

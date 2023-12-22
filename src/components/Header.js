@@ -59,12 +59,12 @@ const Header = ({ componentRef }) => {
 
     const pageStyle = `
       @page {
-        size: ${pageWidth}mm ${pageHeight}mm;
+        size: 153mm ${pageHeight}mm;
       }
       
       @media print {
         body {
-          width: ${pageWidth}mm;
+          width: 153mm;
           height: ${pageHeight}mm;
         }
       }
