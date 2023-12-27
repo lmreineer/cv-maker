@@ -65,7 +65,7 @@ const CVPreview = ({
     return (
         <div className="flex flex-col justify-center p-10 md:px-3">
             <div
-                className="h-[43.3rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer md:min-w-96 md:short:max-w-[36rem] maxsm:short:w-fit maxsm:short:max-w-full"
+                className="h-[43.3rem] select-none overflow-y-auto break-all rounded-lg border-2 bg-white p-10 hover:cursor-pointer md:min-w-96 md:short:max-w-[36rem] maxsm:short:max-w-full"
                 onClick={toggleClick}
             >
                 <CVContent

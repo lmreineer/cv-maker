@@ -275,7 +275,7 @@ const FormValidation = ({ componentRef }) => {
 
     return (
         <div
-            className={`justify-evenly bg-main md:tall:h-screen ${
+            className={`justify-evenly bg-main ${
                 !isOnFinalPath ? 'md:flex md:tall:block' : 'flex items-center'
             }`}
         >

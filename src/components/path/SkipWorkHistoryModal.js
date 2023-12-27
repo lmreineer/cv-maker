@@ -10,8 +10,8 @@ const SkipWorkHistoryModal = () => {
     };
 
     return (
-        <div className="flex flex-col">
-            <div className="rounded-lg bg-white">
+        <div className="m-10 mb-0 flex flex-col justify-center md:m-0">
+            <div className="rounded-lg bg-white px-10 shadow-sm">
                 <h1 className="m-10 text-center font-cabin text-4xl font-semibold tracking-wider text-very-dark-yellow-green">
                     Skip work history?
                 </h1>
