@@ -4,6 +4,7 @@ import headerLogo from '../assets/headerLogo.svg';
 import { useState, useLayoutEffect } from 'react';
 
 import ReactToPrint from 'react-to-print';
+import '../styles/print.css';
 
 const Header = ({ componentRef }) => {
     const pathname = useLocation().pathname;
