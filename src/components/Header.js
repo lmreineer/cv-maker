@@ -58,15 +58,17 @@ const Header = ({ componentRef }) => {
         }
     }, [componentRef]);
 
+    console.log(pageHeight);
+
     const pageStyle = `
       @page {
-        size: 153mm ${pageHeight}mm;
+        size: 153mm ${pageHeight < 297 ? '297' : pageHeight}mm;
       }
       
       @media print {
         body {
           width: 153mm;
-          height: ${pageHeight}mm;
+          height: ${pageHeight < 297 ? '297' : pageHeight}mm;
         }
       }
     `;
