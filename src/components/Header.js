@@ -57,8 +57,6 @@ const Header = ({ componentRef }) => {
         }
     }, [componentRef]);
 
-    console.log(pageHeight);
-
     const pageStyle = `
       @page {
         size: 150mm ${pageHeight < 297 ? '297' : pageHeight}mm;
