@@ -4,7 +4,6 @@ import headerLogo from '../assets/headerLogo.svg';
 import { useState, useLayoutEffect } from 'react';
 
 import ReactToPrint from 'react-to-print';
-import '../styles/print.css';
 
 const Header = ({ componentRef }) => {
     const pathname = useLocation().pathname;
@@ -155,10 +154,14 @@ const Header = ({ componentRef }) => {
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col justify-center">
+                <div className="flex w-fit flex-col justify-center">
+                    <p className="mb-5 text-center font-cabin italic opacity-80 sm:hidden">
+                        When printing, choose the "Save as PDF" option for the
+                        destination.
+                    </p>
                     <ReactToPrint
                         trigger={() => (
-                            <button className="w-56 rounded-lg bg-yellow-green p-6 transition hover:cursor-pointer hover:bg-dark-yellow-green">
+                            <button className="rounded-lg bg-yellow-green p-6 transition hover:cursor-pointer hover:bg-dark-yellow-green sm:w-56">
                                 Keep a copy
                             </button>
                         )}

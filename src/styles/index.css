@@ -19,3 +19,14 @@
 .css-1fdsijx-ValueContainer {
     padding: 0 !important;
 }
+
+@media print {
+    /* hide headers and footers */
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+    }
+}
