@@ -5,7 +5,7 @@ import { useState, useLayoutEffect } from 'react';
 
 import ReactToPrint from 'react-to-print';
 
-const Header = ({ componentRef }) => {
+export default function Header({ componentRef }) {
     const pathname = useLocation().pathname;
     const isOnHeadingForm = pathname === '/';
     const isOnWorkHistoryForm = pathname === '/work-history';
@@ -85,7 +85,7 @@ const Header = ({ componentRef }) => {
                         className={
                             isOnHeadingForm
                                 ? 'm-2 rounded-xl bg-yellow-green p-4 text-very-dark-yellow-green'
-                                : 'm-2 p-2 text-very-dark-yellow-green sm:flex sm:flex-wrap sm:content-center'
+                                : 'm-2 p-4 text-very-dark-yellow-green sm:flex sm:flex-wrap sm:content-center'
                         }
                     >
                         Heading
@@ -171,6 +171,4 @@ const Header = ({ componentRef }) => {
             )}
         </header>
     );
-};
-
-export default Header;
+}
