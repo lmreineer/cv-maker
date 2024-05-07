@@ -1,9 +1,9 @@
 import { useLocation } from 'react-router-dom';
-import headerLogo from '../assets/headerLogo.svg';
-
 import { useState, useLayoutEffect } from 'react';
 
 import ReactToPrint from 'react-to-print';
+
+import headerLogo from '../assets/headerLogo.svg';
 
 export default function Header({ componentRef }) {
     const { pathname } = useLocation();
@@ -17,7 +17,7 @@ export default function Header({ componentRef }) {
         // Calculate the dimensions after the component has been rendered
         if (componentRef.current) {
             const contentHeight = componentRef.current.offsetHeight;
-            setPageHeight(contentHeight / 3.779527559); // convert pixels to millimeters
+            setPageHeight(contentHeight / 3.779527559); // Convert pixels to millimeters
         }
     }, [componentRef]);
 

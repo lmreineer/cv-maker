@@ -1,50 +1,49 @@
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Route, Routes } from 'react-router-dom';
-
-import { useState, useEffect } from 'react';
-
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import HeadingForm from '../path/form/HeadingForm';
-import WorkHistoryForm from '../path/form/default/work-history/WorkHistoryForm';
-import WorkResponsibilityForm from '../path/form/default/work-history/WorkResponsibilityForm';
-import WorkHistorySummary from '../path/summary/default/WorkHistorySummary';
-import SkipWorkHistoryModal from '../path/SkipWorkHistoryModal';
-import AdditionalWorkHistoryForm from '../path/form/additional/work-history/AdditionalWorkHistoryForm';
-import AdditionalWorkResponsibilityForm from '../path/form/additional/work-history/AdditionalWorkResponsibilityForm';
-import AdditionalWorkHistorySummary from '../path/summary/additional/AdditionalWorkHistorySummary';
-import EducationForm from '../path/form/default/education/EducationForm';
-import EducationSummary from '../path/summary/default/EducationSummary';
-import AdditionalEducationForm from '../path/form/additional/education/AdditionalEducationForm';
-import AdditionalEducationSummary from '../path/summary/additional/AdditionalEducationSummary';
-import SkillsForm from '../path/form/SkillsForm';
-import SummaryForm from '../path/form/SummaryForm';
-import Final from '../path/Final';
-
-import CVPreview from '../preview/CVPreview';
+import {
+    HeadingForm,
+    WorkHistoryForm,
+    WorkResponsibilityForm,
+    WorkHistorySummary,
+    SkipWorkHistoryModal,
+    AdditionalWorkHistoryForm,
+    AdditionalWorkResponsibilityForm,
+    AdditionalWorkHistorySummary,
+    EducationForm,
+    EducationSummary,
+    AdditionalEducationForm,
+    AdditionalEducationSummary,
+    SkillsForm,
+    SummaryForm,
+    Final,
+    CVPreview
+} from './components';
 
 const FormValidation = ({ componentRef }) => {
-    const pathname = useLocation().pathname;
-    const isOnHeadingPath = pathname === '/';
-    const isOnWorkHistoryPath = pathname === '/work-history';
-    const isOnFinalPath = pathname === '/final';
-
     const [showSkipWorkHistoryModal, setShowSkipWorkHistoryModal] =
         useState(true);
     const [skipEducation, setSkipEducation] = useState(true);
+    const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
+        useState(false);
+    const [
+        secondCurrentlyWorkingCheckboxValue,
+        setSecondCurrentlyWorkingCheckboxValue
+    ] = useState(false);
 
-    // manage showing of errors on heading form
+    // React router hooks
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
+
     const handleValidateOnChangeValue = () => {
-        if (isOnHeadingPath) {
-            return true;
-        } else {
-            return false;
-        }
+        return pathname === '/';
     };
 
-    const handleSchema = () => {
-        if (isOnHeadingPath) {
-            return {
+    const handleValidationSchema = () => {
+        // If the current URL is at the first or heading form
+        if (pathname === '/') {
+            return Yup.object({
                 firstName: Yup.string()
                     .trim()
                     .required('First name is required'),
@@ -53,44 +52,33 @@ const FormValidation = ({ componentRef }) => {
                     .trim()
                     .required('Email is required')
                     .email('Email is invalid')
-            };
-        } else if (isOnWorkHistoryPath && !showSkipWorkHistoryModal) {
-            return {
+            });
+            // Else if the current URL is at the work history form and skip work history modal is not shown
+        } else if (pathname === '/work-history' && !showSkipWorkHistoryModal) {
+            return Yup.object({
                 jobTitle: Yup.string().trim().required('Job title is required'),
                 company: Yup.string().trim().required('Company is required')
-            };
+            });
         }
     };
 
-    const getFormData = (formData) => {
-        // make values of properties accessible
-        const data = JSON.parse(window.localStorage.getItem(formData));
-        // if form data is submitted, return form data
-        return data ? data : '';
+    const paths = {
+        heading: '/',
+        workHistory: '/work-history',
+        workResponsibility: '/work-responsibility',
+        workHistorySummary: '/work-history-summary',
+        skipWorkHistory: '/skip-work-history',
+        additionalWorkHistory: '/additional-work-history',
+        additionalWorkResponsibility: '/additional-work-responsibility',
+        additionalWorkHistorySummary: '/additional-work-history-summary',
+        education: '/education',
+        educationSummary: '/education-summary',
+        additionalEducation: '/additional-education',
+        additionalEducationSummary: '/additional-education-summary',
+        skills: '/skills',
+        summary: '/summary',
+        final: '/final'
     };
-
-    const { isOnFinal } = getFormData('isOnFinalData');
-
-    useEffect(() => {
-        if (isOnFinal) {
-            // add data to localStorage
-            window.localStorage.setItem(
-                'isOnFinalData',
-                JSON.stringify({
-                    isOnFinalPath: true
-                })
-            );
-        } else {
-            window.localStorage.setItem(
-                'isOnFinalData',
-                JSON.stringify({
-                    isOnFinalPath: false
-                })
-            );
-        }
-    });
-
-    const navigate = useNavigate();
 
     const formik = useFormik({
         validateOnChange: handleValidateOnChangeValue(),
@@ -137,64 +125,39 @@ const FormValidation = ({ componentRef }) => {
             secondSchoolLocation: '',
             summary: ''
         },
-        validationSchema: Yup.object(handleSchema()),
+        validationSchema: handleValidationSchema(),
         onSubmit: () => {
-            // eslint-disable-next-line default-case
-            switch (pathname) {
-                case '/':
-                    navigate('/work-history');
-                    break;
-                case '/work-history':
-                    if (!showSkipWorkHistoryModal) {
-                        navigate('/work-responsibility');
-                    } else if (showSkipWorkHistoryModal) {
-                        navigate('/skip-work-history');
-                    }
-                    break;
-                case '/work-responsibility':
-                    navigate('/work-history-summary');
-                    break;
-                case '/work-history-summary':
-                    navigate('/education');
-                    break;
-                case '/additional-work-history':
-                    navigate('/additional-work-responsibility');
-                    break;
-                case '/additional-work-responsibility':
-                    navigate('/additional-work-history-summary');
-                    break;
-                case '/additional-work-history-summary':
-                    navigate('/education');
-                    break;
-                case '/education':
-                    if (!skipEducation) {
-                        navigate('/education-summary');
-                    } else if (skipEducation) {
-                        navigate('/skills');
-                    }
-                    break;
-                case '/education-summary':
-                    navigate('/skills');
-                    break;
-                case '/additional-education':
-                    if (!skipEducation) {
-                        navigate('/additional-education-summary');
-                    } else if (skipEducation) {
-                        navigate('/skills');
-                    }
-                    break;
-                case '/additional-education-summary':
-                    navigate('/skills');
-                    break;
-                case '/skills':
-                    navigate('/summary');
-                    break;
-                case '/summary':
-                    navigate('/final');
+            // Define a mapping of pathnames to destination pathnames
+            const pathMap = {
+                '/': '/work-history',
+                '/work-history': showSkipWorkHistoryModal
+                    ? '/skip-work-history'
+                    : '/work-responsibility',
+                '/work-responsibility': '/work-history-summary',
+                '/work-history-summary': '/education',
+                '/additional-work-history': '/additional-work-responsibility',
+                '/additional-work-responsibility':
+                    '/additional-work-history-summary',
+                '/additional-work-history-summary': '/education',
+                '/education': skipEducation ? '/skills' : '/education-summary',
+                '/education-summary': '/skills',
+                '/additional-education': skipEducation
+                    ? '/skills'
+                    : '/additional-education-summary',
+                '/additional-education-summary': '/skills',
+                '/skills': '/summary',
+                '/summary': '/final'
+            };
 
-                    // reload the page to finalize the process of sizing the modal which is to be downloaded
-                    window.location.reload();
-                    break;
+            // Determine the destination based on the current pathname
+            const destinationPath = pathMap[pathname];
+
+            // Navigate to the destination pathname
+            navigate(destinationPath);
+
+            // Reload the page if the final destination is reached
+            if (destinationPath === '/final') {
+                window.location.reload();
             }
         }
     });
@@ -253,283 +216,209 @@ const FormValidation = ({ componentRef }) => {
         summary
     } = formik.values;
 
-    const [currentlyWorkingCheckboxValue, setCurrentlyWorkingCheckboxValue] =
-        useState(false);
-    const [
-        secondCurrentlyWorkingCheckboxValue,
-        setSecondCurrentlyWorkingCheckboxValue
-    ] = useState(false);
-
-    const capitaliseFirstLetter = (input) => {
-        return input.charAt(0).toUpperCase() + input.slice(1);
+    const cvPreviewProps = {
+        firstNameInput: firstName,
+        lastNameInput: lastName,
+        professionInput: profession,
+        cityHeadingInput: cityHeading,
+        stateHeadingInput: stateHeading,
+        countryInput: country,
+        zipCodeInput: zipCode,
+        phoneInput: phone,
+        emailInput: email,
+        skillOneInput: skillOne,
+        skillTwoInput: skillTwo,
+        skillThreeInput: skillThree,
+        skillFourInput: skillFour,
+        skillFiveInput: skillFive,
+        yearStartWorkInput: yearStartWork,
+        monthStartWorkInput: monthStartWork,
+        yearEndWorkInput: yearEndWork,
+        monthEndWorkInput: monthEndWork,
+        currentlyWorkingCheckboxValue: currentlyWorkingCheckboxValue,
+        jobTitleInput: jobTitle,
+        companyInput: company,
+        cityWorkInput: cityWork,
+        stateWorkInput: stateWork,
+        workResponsibilityOneInput: workResponsibilityOne,
+        workResponsibilityTwoInput: workResponsibilityTwo,
+        workResponsibilityThreeInput: workResponsibilityThree,
+        workResponsibilityFourInput: workResponsibilityFour,
+        secondYearStartWorkInput: secondYearStartWork,
+        secondMonthStartWorkInput: secondMonthStartWork,
+        secondYearEndWorkInput: secondYearEndWork,
+        secondMonthEndWorkInput: secondMonthEndWork,
+        secondCurrentlyWorkingCheckboxValue:
+            secondCurrentlyWorkingCheckboxValue,
+        secondJobTitleInput: secondJobTitle,
+        secondCompanyInput: secondCompany,
+        secondCityWorkInput: secondCityWork,
+        secondStateWorkInput: secondStateWork,
+        secondWorkResponsibilityOneInput: secondWorkResponsibilityOne,
+        secondWorkResponsibilityTwoInput: secondWorkResponsibilityTwo,
+        secondWorkResponsibilityThreeInput: secondWorkResponsibilityThree,
+        secondWorkResponsibilityFourInput: secondWorkResponsibilityFour,
+        yearStartGraduationInput: yearStartGraduation,
+        monthStartGraduationInput: monthStartGraduation,
+        degreeInput: degree,
+        fieldOfStudyInput: fieldOfStudy,
+        schoolNameInput: schoolName,
+        schoolLocationInput: schoolLocation,
+        secondYearStartGraduationInput: secondYearStartGraduation,
+        secondMonthStartGraduationInput: secondMonthStartGraduation,
+        secondDegreeInput: secondDegree,
+        secondFieldOfStudyInput: secondFieldOfStudy,
+        secondSchoolNameInput: secondSchoolName,
+        secondSchoolLocationInput: secondSchoolLocation,
+        summaryInput: summary
     };
 
-    const capitalizeFirstLetterOfEachWord = (input) => {
-        // capitalize first letter of each word
-        return input.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-            letter.toUpperCase()
+    // Destructure formik props
+    const {
+        values,
+        handleSubmit,
+        handleChange,
+        errors,
+        touched,
+        setFieldValue
+    } = formik;
+
+    const renderRoute = (path, component) => (
+        <Route path={path} element={component} />
+    );
+
+    useEffect(() => {
+        const { isOnFinalFormData } =
+            JSON.parse(window.localStorage.getItem('isOnFinalFormData')) || {};
+        window.localStorage.setItem(
+            'isOnFinalFormData',
+            JSON.stringify({ isOnFinalFormPath: !!isOnFinalFormData })
         );
-    };
-
-    const lowerCaseEachLetter = (input) => input.toLowerCase();
+    }, [pathname]);
 
     return (
         <div
             className={`justify-evenly bg-main ${
-                !isOnFinalPath ? 'md:flex md:tall:block' : 'flex items-center'
+                pathname !== '/final'
+                    ? 'md:flex md:tall:block'
+                    : 'flex items-center'
             }`}
         >
             <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <HeadingForm
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                            formikErrors={formik.errors}
-                            touched={formik.touched}
-                        />
-                    }
-                />
-                <Route
-                    path="/work-history"
-                    element={
-                        <WorkHistoryForm
-                            setShowSkipWorkHistoryModal={
-                                setShowSkipWorkHistoryModal
-                            }
-                            showSkipWorkHistoryModal={showSkipWorkHistoryModal}
-                            currentlyWorkingCheckboxValue={
-                                currentlyWorkingCheckboxValue
-                            }
-                            setCurrentlyWorkingCheckboxValue={
-                                setCurrentlyWorkingCheckboxValue
-                            }
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                            jobTitleValues={jobTitle}
-                            formikErrors={formik.errors}
-                            touched={formik.touched}
-                            companyValues={company}
-                            setFieldValue={formik.setFieldValue}
-                        />
-                    }
-                />
-                <Route
-                    path="/work-responsibility"
-                    element={
-                        <WorkResponsibilityForm
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                        />
-                    }
-                />
-                <Route
-                    path="/work-history-summary"
-                    element={
-                        <WorkHistorySummary
-                            handleSubmit={formik.handleSubmit}
-                        />
-                    }
-                />
-                <Route
-                    path="/skip-work-history"
-                    element={<SkipWorkHistoryModal />}
-                />
-                <Route
-                    path="/additional-work-history"
-                    element={
-                        <AdditionalWorkHistoryForm
-                            secondCurrentlyWorkingCheckboxValue={
-                                secondCurrentlyWorkingCheckboxValue
-                            }
-                            setSecondCurrentlyWorkingCheckboxValue={
-                                setSecondCurrentlyWorkingCheckboxValue
-                            }
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                            setFieldValue={formik.setFieldValue}
-                        />
-                    }
-                />
-                <Route
-                    path="/additional-work-responsibility"
-                    element={
-                        <AdditionalWorkResponsibilityForm
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                        />
-                    }
-                />
-                <Route
-                    path="/additional-work-history-summary"
-                    element={
-                        <AdditionalWorkHistorySummary
-                            handleSubmit={formik.handleSubmit}
-                        />
-                    }
-                />
-                <Route
-                    path="/education"
-                    element={
-                        <EducationForm
-                            setSkipEducation={setSkipEducation}
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                            setFieldValue={formik.setFieldValue}
-                        />
-                    }
-                />
-                <Route
-                    path="/education-summary"
-                    element={
-                        <EducationSummary handleSubmit={formik.handleSubmit} />
-                    }
-                />
-                <Route
-                    path="/additional-education"
-                    element={
-                        <AdditionalEducationForm
-                            setSkipEducation={setSkipEducation}
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                            setFieldValue={formik.setFieldValue}
-                        />
-                    }
-                />
-                <Route
-                    path="/additional-education-summary"
-                    element={
-                        <AdditionalEducationSummary
-                            handleSubmit={formik.handleSubmit}
-                        />
-                    }
-                />
-                <Route
-                    path="/skills"
-                    element={
-                        <SkillsForm
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                        />
-                    }
-                />
-                <Route
-                    path="/summary"
-                    element={
-                        <SummaryForm
-                            handleSubmit={formik.handleSubmit}
-                            handleChange={formik.handleChange}
-                        />
-                    }
-                />
-                <Route
-                    path="/final"
-                    element={<Final componentRef={componentRef} />}
-                />
+                {renderRoute(
+                    paths.heading,
+                    <HeadingForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        formikErrors={errors}
+                        touched={touched}
+                    />
+                )}
+                {renderRoute(
+                    paths.workHistory,
+                    <WorkHistoryForm
+                        setShowSkipWorkHistoryModal={
+                            setShowSkipWorkHistoryModal
+                        }
+                        showSkipWorkHistoryModal={showSkipWorkHistoryModal}
+                        currentlyWorkingCheckboxValue={
+                            currentlyWorkingCheckboxValue
+                        }
+                        setCurrentlyWorkingCheckboxValue={
+                            setCurrentlyWorkingCheckboxValue
+                        }
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        jobTitleValues={values.jobTitle}
+                        formikErrors={errors}
+                        touched={touched}
+                        companyValues={values.company}
+                        setFieldValue={setFieldValue}
+                    />
+                )}
+                {renderRoute(
+                    paths.workResponsibility,
+                    <WorkResponsibilityForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                    />
+                )}
+                {renderRoute(
+                    paths.workHistorySummary,
+                    <WorkHistorySummary handleSubmit={handleSubmit} />
+                )}
+                {renderRoute(paths.skipWorkHistory, <SkipWorkHistoryModal />)}
+                {renderRoute(
+                    paths.additionalWorkHistory,
+                    <AdditionalWorkHistoryForm
+                        secondCurrentlyWorkingCheckboxValue={
+                            secondCurrentlyWorkingCheckboxValue
+                        }
+                        setSecondCurrentlyWorkingCheckboxValue={
+                            setSecondCurrentlyWorkingCheckboxValue
+                        }
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                    />
+                )}
+                {renderRoute(
+                    paths.additionalWorkResponsibility,
+                    <AdditionalWorkResponsibilityForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                    />
+                )}
+                {renderRoute(
+                    paths.additionalWorkHistorySummary,
+                    <AdditionalWorkHistorySummary handleSubmit={handleSubmit} />
+                )}
+                {renderRoute(
+                    paths.education,
+                    <EducationForm
+                        setSkipEducation={setSkipEducation}
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                    />
+                )}
+                {renderRoute(
+                    paths.educationSummary,
+                    <EducationSummary handleSubmit={handleSubmit} />
+                )}
+                {renderRoute(
+                    paths.additionalEducation,
+                    <AdditionalEducationForm
+                        setSkipEducation={setSkipEducation}
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                    />
+                )}
+                {renderRoute(
+                    paths.additionalEducationSummary,
+                    <AdditionalEducationSummary handleSubmit={handleSubmit} />
+                )}
+                {renderRoute(
+                    paths.skills,
+                    <SkillsForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                    />
+                )}
+                {renderRoute(
+                    paths.summary,
+                    <SummaryForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                    />
+                )}
+                {renderRoute(
+                    paths.final,
+                    <Final componentRef={componentRef} />
+                )}
             </Routes>
-
-            {!isOnFinalPath && (
-                <CVPreview
-                    firstNameInput={capitalizeFirstLetterOfEachWord(firstName)}
-                    lastNameInput={capitalizeFirstLetterOfEachWord(lastName)}
-                    professionInput={capitalizeFirstLetterOfEachWord(
-                        profession
-                    )}
-                    cityHeadingInput={capitalizeFirstLetterOfEachWord(
-                        cityHeading
-                    )}
-                    stateHeadingInput={capitalizeFirstLetterOfEachWord(
-                        stateHeading
-                    )}
-                    countryInput={capitalizeFirstLetterOfEachWord(country)}
-                    zipCodeInput={zipCode}
-                    phoneInput={phone}
-                    emailInput={lowerCaseEachLetter(email)}
-                    skillOneInput={capitaliseFirstLetter(skillOne)}
-                    skillTwoInput={capitaliseFirstLetter(skillTwo)}
-                    skillThreeInput={capitaliseFirstLetter(skillThree)}
-                    skillFourInput={capitaliseFirstLetter(skillFour)}
-                    skillFiveInput={capitaliseFirstLetter(skillFive)}
-                    yearStartWorkInput={yearStartWork}
-                    monthStartWorkInput={monthStartWork}
-                    yearEndWorkInput={yearEndWork}
-                    monthEndWorkInput={monthEndWork}
-                    currentlyWorkingCheckboxValue={
-                        currentlyWorkingCheckboxValue
-                    }
-                    jobTitleInput={capitalizeFirstLetterOfEachWord(jobTitle)}
-                    companyInput={capitalizeFirstLetterOfEachWord(company)}
-                    cityWorkInput={capitalizeFirstLetterOfEachWord(cityWork)}
-                    stateWorkInput={capitalizeFirstLetterOfEachWord(stateWork)}
-                    workResponsibilityOneInput={capitaliseFirstLetter(
-                        workResponsibilityOne
-                    )}
-                    workResponsibilityTwoInput={capitaliseFirstLetter(
-                        workResponsibilityTwo
-                    )}
-                    workResponsibilityThreeInput={capitaliseFirstLetter(
-                        workResponsibilityThree
-                    )}
-                    workResponsibilityFourInput={capitaliseFirstLetter(
-                        workResponsibilityFour
-                    )}
-                    secondYearStartWorkInput={secondYearStartWork}
-                    secondMonthStartWorkInput={secondMonthStartWork}
-                    secondYearEndWorkInput={secondYearEndWork}
-                    secondMonthEndWorkInput={secondMonthEndWork}
-                    secondCurrentlyWorkingCheckboxValue={
-                        secondCurrentlyWorkingCheckboxValue
-                    }
-                    secondJobTitleInput={capitaliseFirstLetter(secondJobTitle)}
-                    secondCompanyInput={capitalizeFirstLetterOfEachWord(
-                        secondCompany
-                    )}
-                    secondCityWorkInput={capitalizeFirstLetterOfEachWord(
-                        secondCityWork
-                    )}
-                    secondStateWorkInput={capitalizeFirstLetterOfEachWord(
-                        secondStateWork
-                    )}
-                    secondWorkResponsibilityOneInput={capitaliseFirstLetter(
-                        secondWorkResponsibilityOne
-                    )}
-                    secondWorkResponsibilityTwoInput={capitaliseFirstLetter(
-                        secondWorkResponsibilityTwo
-                    )}
-                    secondWorkResponsibilityThreeInput={capitaliseFirstLetter(
-                        secondWorkResponsibilityThree
-                    )}
-                    secondWorkResponsibilityFourInput={capitaliseFirstLetter(
-                        secondWorkResponsibilityFour
-                    )}
-                    yearStartGraduationInput={yearStartGraduation}
-                    monthStartGraduationInput={monthStartGraduation}
-                    degreeInput={capitalizeFirstLetterOfEachWord(degree)}
-                    fieldOfStudyInput={capitaliseFirstLetter(fieldOfStudy)}
-                    schoolNameInput={capitalizeFirstLetterOfEachWord(
-                        schoolName
-                    )}
-                    schoolLocationInput={capitalizeFirstLetterOfEachWord(
-                        schoolLocation
-                    )}
-                    secondYearStartGraduationInput={secondYearStartGraduation}
-                    secondMonthStartGraduationInput={secondMonthStartGraduation}
-                    secondDegreeInput={capitalizeFirstLetterOfEachWord(
-                        secondDegree
-                    )}
-                    secondFieldOfStudyInput={capitalizeFirstLetterOfEachWord(
-                        secondFieldOfStudy
-                    )}
-                    secondSchoolNameInput={capitalizeFirstLetterOfEachWord(
-                        secondSchoolName
-                    )}
-                    secondSchoolLocationInput={capitalizeFirstLetterOfEachWord(
-                        secondSchoolLocation
-                    )}
-                    summaryInput={capitaliseFirstLetter(summary)}
-                />
-            )}
+            {pathname !== '/final' && <CVPreview {...cvPreviewProps} />}
         </div>
     );
 };
